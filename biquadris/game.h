@@ -17,7 +17,7 @@ class Game : public subject <map<int,int>> {
     int hi;
 
     public:
-    map<int,int>
+    map<int,int> 
     void setScore1(Integer); // set player1's score
     void setScore2(Integer); // set player2's score
     void setHiScore(Integer); // set highest score
