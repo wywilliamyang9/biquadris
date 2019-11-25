@@ -13,6 +13,7 @@ template <typename StateType> class Subject {
     public:
     void attach(Observer<StateType> *o);
     virtual ~Observer() = default;
+    virtual StateType getinfo() const;
 };
 
 #endif
