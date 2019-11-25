@@ -4,6 +4,7 @@
 #include "specialAction.h"
 #include "level.h"
 #include "graphicDisplay.h"
+#include "specialAction.h"
 #include <vector>
 #include <fstream>
 
@@ -17,7 +18,16 @@ class Board {
     fstream filesream;
 
     public:
-    int clearRow(); // clears filled rows, 
-}
+    std::istream setFile(String);
+
+    void processSpecialActions(); // applies specialActions
+    void ApplySpecialActions(GraphicActions);
+    void ApplySpecialActions(AddHeavyAction);
+    void ApplySpecialActions(ForceBlockAction);
+
+    void SpawnBlock(); // spawn a new block
+    void moveBlocks(); // move the block until it drops
+    int clearRow(); // clears filled rows, returns # of clear rows
+};
 
 #endif
