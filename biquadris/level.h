@@ -1,8 +1,9 @@
 #ifndef _LEVEL_
 #define _LEVEL_
 #include "block.h"
+#include "subject.h"
 
-class Level  {
+class Level : Subject <char> {
     int level;
     char nextBlock;
     int heavy;

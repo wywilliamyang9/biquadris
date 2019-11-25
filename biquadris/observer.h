@@ -3,7 +3,7 @@
 
 template <typename StateType> class Subject;
 
-template <typename StateType> class Observer {
+class Observer {
     public:
     virtual void notify(Subject<StateType> &caller) = 0;
     virtual ~Observer() = default;
