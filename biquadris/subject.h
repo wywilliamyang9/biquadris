@@ -7,13 +7,11 @@ template <typename StateType> class Subject {
     std::vector<Observer<StateType>*> observers;
     StateType state;
 
-    protected:
-    void setState(StateType newS);
-
     public:
     void attach(Observer<StateType> *o);
+    void notifyObservers();
     virtual ~Observer() = default;
-    virtual StateType getinfo() const;
+    virtual StateType getinfo() const = 0;
 };
 
 #endif
