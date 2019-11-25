@@ -1,21 +1,22 @@
 #ifndef _CELL_
 #define _CELL_
-
+#include "coordinates.h"
 
 class Cell : public Subject <Coordinates> {
-    Observer<
+    Observer observers;
+
     char value;
     bool blinded;
     Coordinates coordinates;
 
     public:
-    Cell (Coordinates);
+    Coordinates getinfo() const override;
 
     void blindCell();
     void unblindCell();
     void setValue();
     void getValue();
 
-    Coordinates getinfo() const override;
+    Cell (Coordinates);
 };
 #endif

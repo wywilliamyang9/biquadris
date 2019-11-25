@@ -3,17 +3,21 @@
 #include "board.h"
 #include <String>
 #include <iostream>
+#include "subject.h"
+#include "observer.h"
 
-class Game {
+class Game : public subject <vector<int>> {
+    Observer observers;
+
     Board board1;
     Board board2;
-    int score1;
-    int score2;
-    int hi;
+    // player scores: 0 is player1, 1 is player2, 2 is hi
+    vector<int> scores;
+
     public:
-    void setScore1(Integer); // set player1's score
-    void setScore2(Integer); // set player2's score
-    void setHiScore(Integer); // set highest score
+    // sets scores
+    vector<int> getinfo() const override;
+    void setScores(vector<int>); // set player1's score
     String Play(); // play until game ends; returns winner name
 };
 
