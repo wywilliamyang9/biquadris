@@ -6,3 +6,4 @@ class SpecialAction {
     virtual ~SpecialAction;
 };
 #endif
+e

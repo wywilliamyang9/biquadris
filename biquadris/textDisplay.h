@@ -12,11 +12,10 @@ class TextDisplay : public Observer {
     // notified when "next block" is changed.
     void notify(Subject<char> &caller) override;
     // notified when scores have changed 
-    void notify(Subject<int> &caller) override;
+    void notify(Subject<vector<int>> &caller) override;
     
     TextDisplay();
     ~TextDisplay();
 };
-
 
 #endif
