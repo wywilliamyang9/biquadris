@@ -4,6 +4,8 @@
 #include <string>
 #include "board.h"
 
+using namespace std;
+
 Game::Game(bool textOnly, int seed, string scriptFile1, string scriptFile2, int startLevel)
 :textOnly{textOnly}, seed{seed}, scriptFile1{scriptFile1}, scriptFile2{scriptFile2}, startLevel{startLevel}{
     td = new TextDisplay(n);
