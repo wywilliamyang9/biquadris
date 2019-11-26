@@ -4,6 +4,7 @@
 #include "window.h"
 #include "subject.h"
 #include "coordinates.h"
+#include "info.h"
 
 class TextDisplay : public Observer {
     vector<vector<char>> theDisplay;
@@ -13,7 +14,7 @@ class TextDisplay : public Observer {
     public:
     TextDisplay();
     // notified when "next block" is changed.
-    void notify(Subject<char> &whoNotified) override;
+    void notify(Subject<Info> &whoNotified) override;
     // notified when scores have changed 
     void notify(Subject<vector<int>> &whoNotified) override;
 
