@@ -5,9 +5,11 @@
 #include "level.h"
 #include "graphicDisplay.h"
 #include "specialAction.h"
+#include "commandInterpreter.h"
 #include <vector>
 #include <fstream>
 #include <memory>
+#include <sstream>
 
 class Board {
     Board* opponent;
@@ -19,6 +21,7 @@ class Board {
     fstream fileInput;
     int currlvl;
     int score;
+    CommandInterpreter cmdDic;
 
     public:
     int getScore();
