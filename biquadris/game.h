@@ -8,10 +8,12 @@
 #include <memory>
 
 class Game : public subject <vector<int>> {
+    std::unique_ptr<TextDisplay> td = nullptr;
+    std::unique_ptr<GraphicalDisplay> gd = nullptr;
     Observer observers;
 
-    std::auto_ptr<Board> board1;
-    std::auto_ptr<Board> board2;
+    std::unique_ptr<Board> board1;
+    std::unique_ptr<Board> board2;
     // player scores: 0 is player1, 1 is player2, 2 is hi
     std::vector<int> scores;
     bool textOnly;
