@@ -49,8 +49,11 @@ void Board::addSpecialAction(SpecialAction sa) {
     specialActions.emplace_back(sa);
 }
 
-void Board::moveBlock() {
-    Block currBlock = level->generateNextBlock();
+unique_ptr<Block> SpawnBlock() {
+    return level->generateNextBlock();
+}
+
+void Board::moveBlock(unique_ptr<Block> newBlock) {
     for (int i = 0; i < 4; ++i) {
         currBlock.getinfo()
     }
