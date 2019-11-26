@@ -60,3 +60,24 @@ void Board::moveBlock() {
     }
 }
 
+string Board::play(){
+    Player* currplayer = board1;
+    while (true) {
+        processSpecialActions();
+        SpawnBlock();
+        moveBlock();
+        int linesCleared = clearRows();
+        setScore(linesCleared);
+        if (currplayer = board1){
+            currplayer = board2;
+        } else {
+            currplayer = board1;
+        }
+        if (linesCleared >= 2){
+            string specialAction;
+            cin >> specialAction;
+            addSpecialAction(SpecialAction(specialAction));
+        }
+    }
+}
+

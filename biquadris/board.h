@@ -36,8 +36,8 @@ class Board {
     void addSpecialAction(SpecialAction);
 
     void SpawnBlock(); // spawn a new block
-    void moveBlocks(); // move the block until it drops
-    int clearRow(); // clears filled rows, returns # of clear rows
+    void moveBlock(); // move the block until it drops
+    int clearRows(); // clears filled rows, returns # of clear rows
 };
 
 #endif

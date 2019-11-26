@@ -28,7 +28,7 @@ class Game : public subject <vector<int>> {
     // sets scores
     vector<int> getinfo() const override;
     void setScores(int player, int score); // set score
-    std::string Play(); // play until game ends; returns winner name
+    std::string play(); // play until game ends; returns winner name
 };
 
 

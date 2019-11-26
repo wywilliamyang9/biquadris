@@ -2,6 +2,7 @@
 #include <memory>
 #include <vector>
 #include <string>
+#include "board.h"
 
 Game::Game(bool textOnly, int seed, string scriptFile1, string scriptFile2, int startLevel)
 :textOnly{textOnly}, seed{seed}, scriptFile1{scriptFile1}, scriptFile2{scriptFile2}, startLevel{startLevel}{
@@ -31,6 +32,14 @@ vector<int> Game::getinfo(){
     return scores;
 }
 
-string Game::Play(){
-    
+string Game::play(){
+    Player* currplayer = board1;
+    while (true) {
+        currplayer->play();
+        if (currplayer = board1){
+            currplayer = board2;
+        } else {
+            currplayer = board1;
+        }
+    }
 }
