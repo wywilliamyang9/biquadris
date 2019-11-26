@@ -1,15 +1,9 @@
 #include "game.h"
 
-void Game::setScore1(Integer newScore) {
-    score1 = newScore;
-}
-void Game::setScore2(Integer newScore) {
-    score2 = newScore;
-}
-void Game::setHiScore(Integer newScore) {
-    hi = newScore;
-}
 
-String Play() {
 
-}
+Game(bool textOnly, int seed, string scriptFile1, string scriptFile2, int startLevel);
+// sets scores
+vector<int> getinfo() const override;
+void setScores(int player, int score); // set player1's score
+string Play();
