@@ -8,7 +8,7 @@ int main(int argc, char *argv[]){
         string tmparg = argv[i];
         if (tmparg == "-seed"){
             string seed = argv[i+1];
-            stringstream temp(str_num);
+            stringstream temp(seed);
             if (!(temp >> width)){
                 seed =0;
             }

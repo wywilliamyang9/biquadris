@@ -9,6 +9,7 @@ class Level : Subject <char> {
     int level;
     int heavy;
     char nextBlock;
+    int seed;
 
     public:
     char getinfo() const override;
