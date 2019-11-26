@@ -1,8 +1,9 @@
 #include "game.h"
-#include 
+#include <memory>
+#include <vector>
 #include <string>
 
-Game(bool textOnly, int seed, string scriptFile1, string scriptFile2, int startLevel)
+Game::Game(bool textOnly, int seed, string scriptFile1, string scriptFile2, int startLevel)
 :textOnly{textOnly}, seed{seed}, scriptFile1{scriptFile1}, scriptFile2{scriptFile2}, startLevel{startLevel}{
     td = new TextDisplay(n);
     attach(td);
@@ -19,7 +20,7 @@ Game(bool textOnly, int seed, string scriptFile1, string scriptFile2, int startL
     }
 }
 
-vector<int> getinfo(){
+vector<int> Game::getinfo(){
     score[0] = board1->getScore();
     score[1] = board2->getScore();
     if (score[0] > score[2]){
@@ -30,6 +31,6 @@ vector<int> getinfo(){
     return scores;
 }
 
-string Play(){
+string Game::Play(){
     
 }

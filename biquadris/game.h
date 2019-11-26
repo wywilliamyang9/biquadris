@@ -1,7 +1,8 @@
 #ifndef _GAME_
 #define _GAME_
 #include "board.h"
-#include <String>
+#include <string>
+#include <vector>
 #include <iostream>
 #include "subject.h"
 #include "observer.h"
