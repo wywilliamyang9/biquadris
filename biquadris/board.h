@@ -10,12 +10,12 @@
 #include <memory>
 
 class Board {
-    unique_ptr<Board> opponent;
+    Board* opponent;
     Vector<Vector<Cell>> board;
     Vector<SpecialAction> specialActions;
     unique_ptr<Level> level;
-    unique_ptr<GraphicDisplay> graphicDisplay;
-    unique_ptr<TextDisplay> textDisplay;
+    GraphicDisplay* graphicDisplay;
+    TextDisplay* textDisplay;
     fstream fileInput;
     int currlvl;
     int score;
