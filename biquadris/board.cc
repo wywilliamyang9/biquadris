@@ -49,13 +49,13 @@ void Board::addSpecialAction(SpecialAction sa) {
     specialActions.emplace_back(sa);
 }
 
-unique_ptr<Block> SpawnBlock() {
+Block* Board::SpawnBlock() {
     return level->generateNextBlock();
 }
 
-void Board::moveBlock(unique_ptr<Block> newBlock) {
+void Board::moveBlock(Block* newBlock) {
     for (int i = 0; i < 4; ++i) {
-        currBlock.getinfo()
+        newBlock.getCells(): Vector<Cell>
     }
     String cmd;
     while (cin >> cmd) {
