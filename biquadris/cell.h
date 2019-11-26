@@ -2,7 +2,7 @@
 #define _CELL_
 #include "coordinates.h"
 
-class Cell : public Subject <Coordinates> {
+class Cell : public Subject <Info> {
     Observer observers;
 
     char value;

@@ -8,8 +8,9 @@
 
 class TextDisplay : public Observer {
     vector<vector<char>> theDisplay;
-    const int gridWidth;
-    const int gridHeight;
+    const int gridWidth = 11;
+    const int gridHeight = 15;
+    std::vector<int> scores;
 
     public:
     TextDisplay();

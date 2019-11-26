@@ -8,7 +8,7 @@
 #include "observer.h"
 #include <memory>
 
-class Game : public subject <vector<int>> {
+class Game : public Subject <vector<int>> {
     std::unique_ptr<TextDisplay> td = nullptr;
     std::unique_ptr<GraphicalDisplay> gd = nullptr;
     Observer observers;

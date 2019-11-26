@@ -2,9 +2,10 @@
 #define __INFO_H__
 #include <cstddef>
 #include "colour.h"
+#include "coordinates.h"
 
 struct Info {
-  size_t row, col;
+  coordinates coord;
   Colour colour;
 };
 
