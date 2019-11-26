@@ -1,9 +1,35 @@
 #include "game.h"
+#include 
+#include <string>
 
+Game(bool textOnly, int seed, string scriptFile1, string scriptFile2, int startLevel)
+:textOnly{textOnly}, seed{seed}, scriptFile1{scriptFile1}, scriptFile2{scriptFile2}, startLevel{startLevel}{
+    td = new TextDisplay(n);
+    attach(td);
+    if (!textOnly){
+        gd = new GraphicalDisplay();
+        attach(gd);
+    }
+    board1 = new Board(td, gd, textOnly, seed, scriptFile1, startLevel);
+    board2 = new Board(td, gd, textOnly, seed, scriptFile2, startLevel);
+    board1->setOpponent(board2);
+    board2->setOpponent(board1);
+    for(int i = 0; i < 3; i++){
+        score[i] = 0;
+    }
+}
 
+vector<int> getinfo(){
+    score[0] = board1->getScore();
+    score[1] = board2->getScore();
+    if (score[0] > score[2]){
+        score[2] = score[0];
+    } else if (score[1] > score[2]){
+        score[2] = score[1];
+    }
+    return scores;
+}
 
-Game(bool textOnly, int seed, string scriptFile1, string scriptFile2, int startLevel);
-// sets scores
-vector<int> getinfo() const override;
-void setScores(int player, int score); // set player1's score
-string Play();
+string Play(){
+    
+}
