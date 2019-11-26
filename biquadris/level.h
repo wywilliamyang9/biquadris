@@ -12,6 +12,8 @@ class Level : Subject <char> {
     int seed;
 
     public:
+    Level(int startLevel);
+
     char getinfo() const override;
 
     void forceBlock(char); // when special action "Force" is applied

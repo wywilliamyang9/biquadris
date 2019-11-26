@@ -10,17 +10,22 @@
 #include <memory>
 
 class Board {
-    auto_ptr<Board> opponent;
+    unique_ptr<Board> opponent;
     Vector<Vector<Cell>> board;
     Vector<SpecialAction> specialActions;
-    auto_ptr<Level> level;
-    auto_ptr<GraphicDisplay> graphicDisplay;
-    auto_ptr<TextDisplay> textDisplay;
+    unique_ptr<Level> level;
+    unique_ptr<GraphicDisplay> graphicDisplay;
+    unique_ptr<TextDisplay> textDisplay;
     fstream fileInput;
     int currlvl;
+    int score;
 
     public:
+    int getScore();
+    void setScore(int);
+
     Board::Board();
+    void setOpponent(Board*);
     
     std::istream setFile(String);
 
