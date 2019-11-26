@@ -7,8 +7,8 @@ class CommandInterpreter {
     std::map<string, Commands> cmdDictionary
     public:
     CommandInterpreter();
-    void addNewCMD(String,Command);
-    void removeCMD(String, Command);
+    void addNewCMD(std::String,Command);
+    void removeCMD(std::String);
 }
 
 #endif

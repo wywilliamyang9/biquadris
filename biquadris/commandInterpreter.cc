@@ -85,8 +85,28 @@ CommandInterpreter::CommandInterpreter() {
     cmdDictionary["restart"] = Command::Restart;
 
     cmdDictionary["b"] = Command::Blind;
-    cmdDictionary["bl"] = Command::Restart;
-    cmdDictionary["bli"] = Command::Restart;
-    cmdDictionary["blin"] = Command::Restart;
-    cmdDictionary["blind"] = Command::Restart;
+    cmdDictionary["bl"] = Command::Blind;
+    cmdDictionary["bli"] = Command::Blind;
+    cmdDictionary["blin"] = Command::Blind;
+    cmdDictionary["blind"] = Command::Blind;
+
+    cmdDictionary["h"] = Command::Heavy;
+    cmdDictionary["he"] = Command::Heavy;
+    cmdDictionary["hea"] = Command::Heavy;
+    cmdDictionary["heav"] = Command::Heavy;
+    cmdDictionary["heavy"] = Command::Heavy;
+
+    cmdDictionary["f"] = Command::Force;
+    cmdDictionary["fo"] = Command::Force;
+    cmdDictionary["for"] = Command::Force;
+    cmdDictionary["forc"] = Command::Force;
+    cmdDictionary["force"] = Command::Force;
+}
+
+void CommandInterpreter::addNewCMD(string s,Command cmd){
+    cmdDictionary[s] = cmd;
+}
+
+void CommandInterpreter::removeCMD(string s){
+    cmdDictionary.erase(s);
 }
