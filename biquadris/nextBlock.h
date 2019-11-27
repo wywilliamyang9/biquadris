@@ -2,9 +2,10 @@
 #define __NEXTBLOCK_H__
 #include <cstddef>
 #include <vector>
+#include "colour.h"
 
 struct NextBlock {
-    char type;
+    Colour colour;
     int boardnum;
 };
 
