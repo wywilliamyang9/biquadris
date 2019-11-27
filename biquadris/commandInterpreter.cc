@@ -110,3 +110,6 @@ void CommandInterpreter::addNewCMD(string s,Command cmd){
 void CommandInterpreter::removeCMD(string s){
     cmdDictionary.erase(s);
 }
+bool checkCMD(std::string s){return cmdDictionary.count(s); } // returns true if is a valid cmd
+Command interpretCMD(std::string s){return cmdDictionary[s];}
+

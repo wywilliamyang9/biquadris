@@ -14,7 +14,7 @@ class Block {
     void moveLeft(int);
     void moveRight(int);
     void drop();
-    virtual void CWRotate() = 0;
-    virtual void CounterCWRotate() = 0;
+    virtual void CWRotate(int) = 0;
+    virtual void CounterCWRotate(int) = 0;
 };
 #endif

@@ -19,6 +19,7 @@ class Board {
     fstream fileInput;
     int currlvl;
     int score;
+    unique_ptr<CommandInterpreter> cmdDictionary;
 
     public:
     int getScore();
@@ -38,6 +39,9 @@ class Board {
     Block* SpawnBlock(); // spawn a new block
     void moveBlock(); // move the block until it drops
     int clearRows(); // clears filled rows, returns # of clear rows
+
+    void levelUp();
+    void levelDown();
 };
 
 #endif

@@ -3,7 +3,7 @@ using namespace std;
 
 // default ctor, requires manual set of opponent and filestream.
 Board::Board(TextDisplay *td, GraphicDisplay *gd, bool textOnly, int seed, String scriptFile, int startLevel) : 
-level {new Level(startLevel)}, 
+level {new Level(startLevel)}, cmdDictionary{new CommandInterpreter}
 {
     graphicDisplay ()
     for (int i = 0; i < 18; ++i) { // row
@@ -49,17 +49,52 @@ void Board::addSpecialAction(SpecialAction sa) {
     specialActions.emplace_back(sa);
 }
 
+// level checks win/lose conditions upon spawn.
 Block* Board::SpawnBlock() {
     return level->generateNextBlock();
 }
 
-void Board::moveBlock(Block* newBlock) {
-    for (int i = 0; i < 4; ++i) {
-        newBlock.getCells(): Vector<Cell>
-    }
+// moves the block until it drops
+bool Board::moveBlock(Block* newBlock) {
     String cmd;
+    char cmdCount;
     while (cin >> cmd) {
+        cmdCount = '1';
+        // check if there's a num at the front; process the num
+        if (!(cmdDictionary->checkCMD(cmd))) {
+            sstream ss {cmd};
+            ss >> cmdCount;
+            ss >> cmd;
+            // if the command is not valid, continue.
+            if (!(cmdDictionary->checkCMD(cmd))) continue;
+        }
 
+        // repeat the command for cmdCount times.
+        // the following cmds are invalid: sequence,I,J,L,O,S,Z,T,Blind,Heavy,Force
+        if (cmdDictionary->interpretCMD(cmd) == Command::Left) {
+            newBlock->moveLeft(cmdCount);
+        } else if (cmdDictionary->interpretCMD(cmd) == Command::Right) {
+            newBlock->moveRight(cmdCount);
+        } else if (cmdDictionary->interpretCMD(cmd) == Command::Down) {
+            newBlock->moveDown(cmdCount);
+        } else if (cmdDictionary->interpretCMD(cmd) == Command::ClockWise) {
+            newBlock->CWRotate(cmdCount);        
+        } else if (cmdDictionary->interpretCMD(cmd) == Command::CounterClockWise) {
+            newBlock->CounterCWRotate(cmdCount);        
+        } else if (cmdDictionary->interpretCMD(cmd) == Command::Drop) {
+            newBlock->drop(cmdCount);       
+        } else if (cmdDictionary->interpretCMD(cmd) == Command::LevelUp) {
+            levelUp();
+        } else if (cmdDictionary->interpretCMD(cmd) == Command::LevelDown) {
+            levelDown();
+        } else if (cmdDictionary->interpretCMD(cmd) == Command::NoRandom) {
+            level->setRandom(false);
+        } else if (cmdDictionary->interpretCMD(cmd) == Command::Random) {
+            level->setRandom(true);
+        } else if (cmdDictionary->interpretCMD(cmd) == Command::Restart) {
+            // when it returns false, game knows it needs to restart
+            return false;
+        } else if (cmdDictionary->interpretCMD(cmd) == Command::LevelUp) {
     }
 }
 
