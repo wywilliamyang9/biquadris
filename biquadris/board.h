@@ -24,7 +24,7 @@ class Board {
     unique_ptr<Block> currBlock;
     int seed;
     int textOnly;
-    
+
     public:
     int getScore();
     void setScore(int);
@@ -41,6 +41,7 @@ class Board {
     bool play();
     Block* SpawnBlock(); // spawn a new block
     void moveBlock(); // move the block until it drops
+    bool dropCheck(const Block&); // checks if a block has reached ground.
     int clearRows(); // clears filled rows, returns # of clear rows
 
     void levelUp();

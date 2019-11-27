@@ -127,6 +127,7 @@ bool Board::moveBlock(Block* newBlock) {
 
 int clearRows() {
     int rowsCleared = 0;
+    // scans from top
     for (int i = 0; i < 18; ++j) {
         int fullCount = 0;
         for (int j = 0; j < 12; ++j) {
@@ -134,13 +135,18 @@ int clearRows() {
             if (board.at(i).at(j).getValue() != 'e') fullCount++; 
         }
         if (fullCount == 12) {
-            for (int k = 1; k <= i; ++k) {
-                
+            // from current row to row 1 (not row 0), move cells down by 1
+            for (int k = i; k > 0; --k) {
+                for (int l = 0; l < 12; ++l) {
+                    board.at(k).at(l).setValue(board.at(k).at(l-1).getValue());
+                }
             }
+            // makes row 0 blank
+            rowsCleared++;
         }
     }
+    return rowsCleared;
 }
-
 
 bool Board::dropCheck(const Block& block) {
     vector<Cells>& cells = block.getCells();
@@ -155,5 +161,32 @@ bool Board::dropCheck(const Block& block) {
     return false;
 }
 
+void Board::levelUp() {
+    if (score == 0) {
+        level.reset(new level{1});
+    } else if (score == 1) {
+        level.reset(new level{2});
+    } else if (score == 2) {
+        level.reset(new level{3});
+    } else if (score == 3) {
+        level.reset(new level{4});
+    } else {
+        return;
+    }
+    return;
+}
 
-
+void Board::levelDown() {
+    if (score == 1) {
+        level.reset(new level{0});
+    } else if (score == 2) {
+        level.reset(new level{1});
+    } else if (score == 3) {
+        level.reset(new level{2});
+    } else if (score == 4) {
+        level.reset(new level{3});
+    } else {
+        return;
+    }
+    return;
+}
