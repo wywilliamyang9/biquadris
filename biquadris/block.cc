@@ -38,6 +38,7 @@ void Block::moveDown(Board & playerBoard) {
             newCells.emplace_back(newCell);
         }
     }
+    cells = newCells;
 }
 void moveLeft();
 void moveRight();

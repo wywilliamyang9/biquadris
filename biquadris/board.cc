@@ -4,9 +4,26 @@ using namespace std;
 // default ctor, requires manual set of opponent and filestream.
 Board::Board(int boardnum, TextDisplay *td, GraphicDisplay *gd, bool textOnly, int seed,
     String scriptFile, int startLevel) : boardnum{boardnum}, seed {seed}, 
-level {new Level(startLevel)}, cmdDictionary{new CommandInterpreter},
+    cmdDictionary{new CommandInterpreter},
 graphicDisplay {gd}, textDisplay {td}, fileInput {scriptFile}, textOnly{textOnly},
 currlvl {startLevel}, score{0}, seed{seed} {
+    if (startLevel == 0) {
+        currlvl = 0;
+        level.reset(new level0);
+    } else if (currlvl == 1) {
+        currlvl = 1;
+        level.reset(new level1);
+    } else if (currlvl == 2) {
+        currlvl = 2;
+        level.reset(new level2);
+    } else if (currlvl == 3) {
+        currlvl = 3;
+        level.reset(new level3);
+    } else {
+        currlvl = 4;
+        level.reset(new level4);
+
+
     for (int i = 0; i < 18; ++i) { // row
         vector<Cell> newRow;
         for (j = 0; j < 12; ++j) { // column
@@ -17,6 +34,9 @@ currlvl {startLevel}, score{0}, seed{seed} {
         }
         board.emplace_back (newRow);
     }
+
+    attach(textDisplay);
+    if (!textOnly) attach(graphicDisplay);
 }
 
 int getScore() {
@@ -169,16 +189,16 @@ bool Board::dropCheck(const Block& block) {
 void Board::levelUp() {
     if (currlvl == 0) {
         currlvl = 1;
-        level.reset(new level{1});
+        level.reset(new level1);
     } else if (currlvl == 1) {
         currlvl = 2;
-        level.reset(new level{2});
+        level.reset(new level2);
     } else if (currlvl == 2) {
         currlvl = 3;
-        level.reset(new level{3});
+        level.reset(new level3);
     } else if (currlvl == 3) {
         currlvl = 4;
-        level.reset(new level{4});
+        level.reset(new level4);
     } else {
         return;
     }
@@ -188,16 +208,16 @@ void Board::levelUp() {
 void Board::levelDown() {
     if (currlvl == 1) {
         currlvl = 0;
-        level.reset(new level{0});
+        level.reset(new level0);
     } else if (currlvl == 2) {
         currlvl = 1;
-        level.reset(new level{1});
+        level.reset(new level1);
     } else if (currlvl == 3) {
         currlvl = 2;
-        level.reset(new level{2});
+        level.reset(new level2);
     } else if (currlvl == 4) {
         currlvl = 4;
-        level.reset(new level{3});
+        level.reset(new level3);
     } else {
         return;
     }
@@ -207,3 +227,4 @@ void Board::levelDown() {
 int Board::getLevel(){
     return currlvl;
 }
+
