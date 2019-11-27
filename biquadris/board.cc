@@ -90,7 +90,7 @@ String Board::play(){
     // if the restart cmd is taken, return false to Game.
     if (!moveBlock()) return "restart!";
     setScore(level->calculateScore(clearRows()));
-    return true;
+    return "continue!";
 }
 
 // level checks win/lose conditions upon spawn.
