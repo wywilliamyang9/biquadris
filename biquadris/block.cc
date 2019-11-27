@@ -12,9 +12,10 @@ colour {colour}  {
 void Block::moveDown(Board & playerBoard) {
     bool canMove = 1;
     vector<vector<char>>& board = playerBoard.getBoard();
+
+    //check if it can go 1 row down.
     for (int i = 0; i < 4; ++i) {
         Coordinates curCoord = cells.at(i).getInfo().coordinates;
-        //check if it can go 1 row down.
         if board.at(curCoord.row+1).at(curCoord.col).getInfo().colour
         != Colour::White) canMove = 0;
     }
