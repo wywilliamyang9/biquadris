@@ -5,12 +5,20 @@
 #include "level.h"
 #include "graphicDisplay.h"
 #include "specialAction.h"
+<<<<<<< HEAD
+#include "commandInterpreter.h"
+#include <vector>
+#include <fstream>
+#include <memory>
+#include <sstream>
+=======
 #include "info.h"
 #include "colour.h"
 #include <vector>
 #include <fstream>
 #include <memory>
 #include "nextBlock.h"
+>>>>>>> master
 
 class Board : public Subject <NextBlock> {
     int boardnum;
@@ -23,10 +31,14 @@ class Board : public Subject <NextBlock> {
     fstream fileInput;
     int currlvl;
     int score;
+<<<<<<< HEAD
+    CommandInterpreter cmdDic;
+=======
     unique_ptr<CommandInterpreter> cmdDictionary;
     unique_ptr<Block> currBlock;
     int seed;
     int textOnly;
+>>>>>>> master
 
     public:
     int getScore();

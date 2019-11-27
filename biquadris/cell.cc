@@ -13,13 +13,16 @@ void Cell::setinfo(cosnt Info& info) {
     colour = info.colour;
     blinded = info.blinded;
 }
-
-void blindCell() {
+void Cell::setCurrBlock(bool b){
+    currBlock = b;
+}
+bool Cell::getCurrBlock(){return currBlock;}
+void Cell::blindCell() {
     blinded = true;
     notifyObservers();
 }
 
-void unblindCell(){
+void Cell::unblindCell(){
     blinded = false;
     notifyObservers();
 }
