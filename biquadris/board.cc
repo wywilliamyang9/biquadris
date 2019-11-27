@@ -28,7 +28,7 @@ currlvl {startLevel}, score{0}, seed{seed} {
 
     for (int i = 0; i < 18; ++i) { // row
         vector<Cell> newRow;
-        for (j = 0; j < 12; ++j) { // column
+        for (j = 0; j < 11; ++j) { // column
             Cell newCell {i,j, boardnum};
             if (!textOnly) newCell.attach(graphicDisplay);
             newCell.attach(textDisplay);
@@ -156,14 +156,14 @@ int clearRows() {
     // scans from top
     for (int i = 0; i < 18; ++j) {
         int fullCount = 0;
-        for (int j = 0; j < 12; ++j) {
+        for (int j = 0; j < 11; ++j) {
             // if the value is not empty, fullCount ++
             if (board.at(i).at(j).getinfo().colour != Colour::White) fullCount++; 
         }
-        if (fullCount == 12) {
+        if (fullCount == 11) {
             // from current row to row 1 (not row 0), move cells down by 1
             for (int k = i; k > 0; --k) {
-                for (int l = 0; l < 12; ++l) {
+                for (int l = 0; l < 11; ++l) {
                     board.at(k).at(l).setinfo(board.at(k).at(l-1).getinfo());
                 }
             }

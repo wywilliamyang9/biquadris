@@ -38,10 +38,43 @@ void Block::moveDown(Board & playerBoard) {
             // get new cell
             newCells.emplace_back(newCell);
         }
+        cells = newCells;
     }
-    cells = newCells;
 }
-void moveLeft();
+
+void moveLeft(){
+    bool canMove = 1;
+    vector<vector<char>>& board = playerBoard.getBoard();
+
+    //check if it can go to left by 1 column.
+    for (int i = 0; i < 4; ++i) {
+        Coordinates curCoord = cells.at(i).getInfo().coordinates;
+        if (curCoord.col == 0 // if already first col
+        || board.at(curCoord.row).at(curCoord.col-1).getInfo().colour
+        != Colour::White) canMove = 0;
+    }
+
+    if (canMove) {
+        vector<Cells> newCells;
+        for (int i = 0; i < 4; ++i) {
+            Cell& oldCell = cells.at(i);
+            Cell& newCell = board.at(currCoord.row).at(currCoord.col-1);
+            // Change target cell (one cell down)
+            newCell.setInfo(
+                newCell.getinfo().coordinates,
+                oldCell.getinfo().colour, // only changes colour
+                newCell.getinfo().blinded);
+
+            // change current cell
+            oldCell.setInfo(oldCell.getinfo().coordinates,
+            Colour::White, oldCell.getinfo().blinded);
+
+            // get new cell
+            newCells.emplace_back(newCell);
+        }
+        cells = newCells;
+    }
+}
 void moveRight();
 void drop();
 
