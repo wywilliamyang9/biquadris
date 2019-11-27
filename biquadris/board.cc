@@ -27,6 +27,10 @@ void setScore(int newScore) {
     score = newScore;
 }
 
+Vector<Vector<Cell>>& getBoard() {
+    return board;
+}
+
 void Board::setOpponent (Board* newOpponent) {
     oopponent = newOpponent;
 }

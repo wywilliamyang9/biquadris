@@ -1,6 +1,6 @@
 #include "cell.h"
 Cell::Cell(int r,int c): blinded{false},  
-colour {Colour::White}{
+colour {Colour::White}, type {'e'}{
     coordinates = Coordinates{r,c};
 }
 

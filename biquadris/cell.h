@@ -6,6 +6,7 @@
 class Cell : public Subject <Info> {
     Observer observers;
     Colour colour;
+    char type; // if empty, 'e'
     bool blinded;
     Coordinates coordinates;
 

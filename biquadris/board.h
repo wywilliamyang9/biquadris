@@ -29,6 +29,7 @@ class Board {
     public:
     int getScore();
     void setScore(int);
+    Vector<Vector<Cell>>& getBoard();
 
     Board::Board();
     void setOpponent(Board*);
