@@ -12,9 +12,10 @@ class TextDisplay : public Observer {
     vector<vector<char>> board1;
     vector<vector<char>> board2;
     const int gridWidth = 11;
-    const int gridHeight = 15;
+    const int gridHeight = 18;
     std::vector<int> scores;
     std::vector<int> levels;
+    std::vector<char> nextblock;
     void printLevel();
     void printHighScore();
     void printScore();
