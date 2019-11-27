@@ -4,7 +4,7 @@
 #include "colour.h"
 #include "coordinates.h"
 class Block {
-    vector<vector<Cell>> cells;
+    vector<Cell> cells;
     char type;
     int heavy;
     Colour colour;

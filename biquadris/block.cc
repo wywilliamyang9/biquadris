@@ -22,18 +22,20 @@ void Block::moveDown(Board & playerBoard) {
     if (canMove) {
         vector<Cells> newCells;
         for (int i = 0; i < 4; ++i) {
+            Cell& oldCell = cells.at(i);
+            Cell& newCell = board.at(currCoord.row+1).at(currCoord.col);
             // Change target cell (one cell down)
-            Info currInfo = cells.at(i).getinfo();
-            Coordinates currCoord= currInfo.coordinates;
-            board.at(currCoord.row+1).at(currCoord.col).setInfo(
-            board.at(currCoord.row+1).at(currCoord.col).getinfo().coordinates,
-            currInfo.colour, // only changes colour
-            board.at(currCoord.row+1).at(currCoord.col).getinfo().blinded);
+            newCell.setInfo(
+                newCell.getinfo().coordinates,
+                oldCell.getinfo().colour, // only changes colour
+                newCell.getinfo().blinded);
 
             // change current cell
-            cells.at(i).setInfo(cells.at(i).getinfo().coordinates,
-            Colour::White, cells.at(i).getinfo().blinded);
-            newCells.emplace_back
+            oldCell.setInfo(oldCell.getinfo().coordinates,
+            Colour::White, oldCell.getinfo().blinded);
+
+            // get new cell
+            newCells.emplace_back(newCell);
         }
     }
 }
