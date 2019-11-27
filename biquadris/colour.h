@@ -10,4 +10,5 @@ Green, Blue, Purple, LightBlue, White}
 //Green = S
 //Purple = T
 //Red = Z
+//White = empty
 #endif

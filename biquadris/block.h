@@ -1,20 +1,23 @@
 #ifndef _BLOCK_
 #define _BLOCK_
 #include <vector>
-#include <Colour>
-
+#include "colour.h"
+#include "coordinates.h"
 class Block {
-    vector<vector<Cell>> cells;
+    vector<Cell> cells;
     char type;
     int heavy;
     Colour colour;
 
     public:
-    void moveDown(int);
-    void moveLeft(int);
-    void moveRight(int);
-    void drop();
-    virtual void CWRotate() = 0;
-    virtual void CounterCWRotate() = 0;
+    Block (Cell&, Cell&, Cell&, Cell&,
+        char type, int heavy, Colour);
+
+    void moveDown(Board &);
+    void moveLeft(Board &);
+    void moveRight(Board &);
+    void drop(Board &);
+    virtual void CWRotate(Board &) = 0;
+    virtual void CounterCWRotate(Board &) = 0;
 };
 #endif

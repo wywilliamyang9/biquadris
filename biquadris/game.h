@@ -7,8 +7,9 @@
 #include "subject.h"
 #include "observer.h"
 #include <memory>
+#include "state.h"
 
-class Game : public Subject <vector<int>> {
+class Game : public Subject <State> {
     std::unique_ptr<TextDisplay> td = nullptr;
     std::unique_ptr<GraphicalDisplay> gd = nullptr;
     Observer observers;
@@ -17,6 +18,8 @@ class Game : public Subject <vector<int>> {
     std::unique_ptr<Board> board2;
     // player scores: 0 is player1, 1 is player2, 2 is hi
     std::vector<int> scores;
+    // player levels: 0 is player1, 1 is player2
+    std::vector<int> levels;
     bool textOnly;
     int seed;
     std::string scriptFile1;
@@ -26,7 +29,7 @@ class Game : public Subject <vector<int>> {
     public:
     Game(bool textOnly, int seed, string scriptFile1, string scriptFile2, int startLevel);
     // sets scores
-    vector<int> getinfo() const override;
+    State getInfo() const override;
     void setScores(int player, int score); // set score
     std::string play(); // play until game ends; returns winner name
 };
