@@ -85,21 +85,21 @@ void Board::addSpecialAction(SpecialAction sa) {
     specialActions.emplace_back(sa);
 }
 
-bool Board::play(){
-    spawnBlock();
+String Board::play(){
+    if (!spawnBlock()) return "lost!";
     // if the restart cmd is taken, return false to Game.
-    if (!moveBlock()) return false;
+    if (!moveBlock()) return "restart!";
     setScore(level->calculateScore(clearRows()));
     return true;
 }
 
 // level checks win/lose conditions upon spawn.
-void Board::SpawnBlock() {
+String Board::SpawnBlock() {
     currBlock = level->generateNextBlock();
 }
 
 // moves the block until it drops
-bool Board::moveBlock(Block* newBlock) {
+String Board::moveBlock(Block* newBlock) {
     String cmd;
     char cmdCount;
     while (cin >> cmd) {
