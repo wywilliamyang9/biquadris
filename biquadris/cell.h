@@ -6,12 +6,12 @@
 class Cell : public Subject <Info> {
     Observer observers;
     Colour colour;
-    char type; // if empty, 'e'
     bool blinded;
     Coordinates coordinates;
+    int boardnum;
 
     public:
-    Cell(int r,int c);
+    Cell(int r,int c, int boardnum);
 
     Info getinfo() const override;
     void setInfo (const Info&);

@@ -48,6 +48,46 @@ void TextDisplay::notify(Subject<vector<int>> &whoNotified) override{
     scores[2] = currinfo[2];
 }
 
-std::ostream &operator<<(std::ostream &out, const TextDisplay &td){
+void TextView::print() {
+	printLevel();
+	printScore();
+	cout << "-----------   -----------" << endl;
+	printBoards();
+	cout << "-----------   -----------" << endl;
+	printNext();
+}
 
+void TextView::printLevel() {
+	cout << "Level: " << model->getBoardOne()->getLvl();
+	cout << "      ";
+    cout << "Level: " << model->getBoardTwo()->getLvl() << endl;
+}
+void TextView::printScore() {
+	cout << "Score: " << model->getBoardOne()->getScore();
+	cout << "      ";
+	cout << "Score: " << model->getBoardTwo()->getScore() << endl;
+}
+void TextView::printBoards() {
+	
+	for (int i = 17; i >= 0; i--) {
+		for (int j = 0; j < 25; j++) {
+			if (j < 11) {
+				cout << model->getBoardOne()->getType(j, i);
+			}
+			else if (j < 14) {
+				cout << " ";
+			}
+			else {
+				cout << model->getBoardTwo()->getType(j-14, i);
+			}
+		}
+		cout << endl;
+	
+	}
+	
+}
+void TextView::printNext() {
+	cout << "Next:         Next:" << endl;
+	cout << model->getBoardOne()->getNextType();
+	cout << "             " << model->getBoardTwo()->getNextType() << endl;
 }

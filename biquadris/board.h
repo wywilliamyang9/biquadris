@@ -10,8 +10,10 @@
 #include <vector>
 #include <fstream>
 #include <memory>
+#include "nextBlock.h"
 
-class Board {
+class Board : public Subject <NextBlock> {
+    int boardnum;
     Board* opponent;
     Vector<Vector<Cell>> board;
     Vector<SpecialAction> specialActions;
@@ -31,7 +33,8 @@ class Board {
     void setScore(int);
     Vector<Vector<Cell>>& getBoard();
 
-    Board::Board();
+    Board::Board(int boardnum, TextDisplay *td, GraphicDisplay *gd, bool textOnly, int seed,
+    String scriptFile, int startLevel);
     void setOpponent(Board*);
     
     void processSpecialActions(); // applies specialActions
@@ -48,6 +51,7 @@ class Board {
 
     void levelUp();
     void levelDown();
+    int getLevel();
 };
 
 #endif

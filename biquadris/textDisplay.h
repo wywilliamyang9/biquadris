@@ -5,21 +5,29 @@
 #include "subject.h"
 #include "coordinates.h"
 #include "info.h"
+#include "state.h"
+#include <vector>
 
 class TextDisplay : public Observer {
-    vector<vector<char>> theDisplay;
+    vector<vector<char>> board1;
+    vector<vector<char>> board2;
     const int gridWidth = 11;
     const int gridHeight = 15;
     std::vector<int> scores;
-
+    std::vector<int> levels;
+    void printLevel();
+    void printHighScore();
+    void printScore();
+    void printBoard();
+    void printNextBlock();
     public:
     TextDisplay();
     // notified when "next block" is changed.
     void notify(Subject<Info> &whoNotified) override;
     // notified when scores have changed 
-    void notify(Subject<vector<int>> &whoNotified) override;
+    void notify(Subject<State> &whoNotified) override;
 
-    friend std::ostream &operator<<(std::ostream &out, const TextDisplay &td);
+    void print();
 };
 
 #endif

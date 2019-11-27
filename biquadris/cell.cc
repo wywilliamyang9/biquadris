@@ -1,11 +1,11 @@
 #include "cell.h"
 Cell::Cell(int r,int c): blinded{false},  
-colour {Colour::White}, type {'e'}{
+colour {Colour::White}, boardnum{boardnum}{
     coordinates = Coordinates{r,c};
 }
 
 Info Cell::getinfo() {
-    return Info {coordinates, colour, blinded};
+    return Info {coordinates, colour, blinded, boardnum};
 }
 
 void Cell::setinfo(cosnt Info& info) {
