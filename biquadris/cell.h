@@ -1,16 +1,17 @@
 #ifndef _CELL_
 #define _CELL_
 #include "coordinates.h"
+#include "info.h"
 
 class Cell : public Subject <Info> {
     Observer observers;
 
-    char value;
+    char value; // 'e' when empty.
     bool blinded;
     Coordinates coordinates;
 
     public:
-    Coordinates getinfo() const override;
+    Info getinfo() const override;
 
     void blindCell();
     void unblindCell();

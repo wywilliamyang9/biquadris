@@ -2,10 +2,11 @@
 using namespace std;
 
 // default ctor, requires manual set of opponent and filestream.
-Board::Board(TextDisplay *td, GraphicDisplay *gd, bool textOnly, int seed, String scriptFile, int startLevel) : 
-level {new Level(startLevel)}, cmdDictionary{new CommandInterpreter}
-{
-    graphicDisplay ()
+Board::Board(TextDisplay *td, GraphicDisplay *gd, bool textOnly, int seed,
+    String scriptFile, int startLevel) : seed {seed}, 
+level {new Level(startLevel)}, cmdDictionary{new CommandInterpreter},
+graphicDisplay {gd}, textDisplay {td}, fileInput {scriptFile}, textOnly{textOnly},
+currlvl {startLevel}, score{0}, seed{seed} {
     for (int i = 0; i < 18; ++i) { // row
         vector<Cell> newRow;
         for (j = 0; j < 12; ++j) { // column
@@ -18,9 +19,18 @@ level {new Level(startLevel)}, cmdDictionary{new CommandInterpreter}
     }
 }
 
-void Board::setOpponent (Board* opponent) {
-    opponent.reset()
+int getScore() {
+    return score;
 }
+
+void setScore(int newScore) {
+    score = newScore;
+}
+
+void Board::setOpponent (Board* newOpponent) {
+    oopponent = newOpponent;
+}
+
 void Board::processSpecialActions() {
     while (!(specialActions.size())) {
         applySpecialActions(specialActions.back());
@@ -49,9 +59,17 @@ void Board::addSpecialAction(SpecialAction sa) {
     specialActions.emplace_back(sa);
 }
 
+bool Board::play(){
+    spawnBlock();
+    // if the restart cmd is taken, return false to Game.
+    if (!moveBlock()) return false;
+    setScore(level->calculateScore(clearRows()));
+    return true;
+}
+
 // level checks win/lose conditions upon spawn.
-Block* Board::SpawnBlock() {
-    return level->generateNextBlock();
+void Board::SpawnBlock() {
+    currBlock = level->generateNextBlock();
 }
 
 // moves the block until it drops
@@ -71,51 +89,71 @@ bool Board::moveBlock(Block* newBlock) {
 
         // repeat the command for cmdCount times.
         // the following cmds are invalid: sequence,I,J,L,O,S,Z,T,Blind,Heavy,Force
-        if (cmdDictionary->interpretCMD(cmd) == Command::Left) {
-            newBlock->moveLeft(cmdCount);
-        } else if (cmdDictionary->interpretCMD(cmd) == Command::Right) {
-            newBlock->moveRight(cmdCount);
-        } else if (cmdDictionary->interpretCMD(cmd) == Command::Down) {
-            newBlock->moveDown(cmdCount);
-        } else if (cmdDictionary->interpretCMD(cmd) == Command::ClockWise) {
-            newBlock->CWRotate(cmdCount);        
-        } else if (cmdDictionary->interpretCMD(cmd) == Command::CounterClockWise) {
-            newBlock->CounterCWRotate(cmdCount);        
-        } else if (cmdDictionary->interpretCMD(cmd) == Command::Drop) {
-            newBlock->drop(cmdCount);       
-        } else if (cmdDictionary->interpretCMD(cmd) == Command::LevelUp) {
-            levelUp();
-        } else if (cmdDictionary->interpretCMD(cmd) == Command::LevelDown) {
-            levelDown();
-        } else if (cmdDictionary->interpretCMD(cmd) == Command::NoRandom) {
-            level->setRandom(false);
-        } else if (cmdDictionary->interpretCMD(cmd) == Command::Random) {
-            level->setRandom(true);
-        } else if (cmdDictionary->interpretCMD(cmd) == Command::Restart) {
-            // when it returns false, game knows it needs to restart
-            return false;
-        } else if (cmdDictionary->interpretCMD(cmd) == Command::LevelUp) {
+        for (int i = 0; i < cmdCount; i++) {
+            if (cmdDictionary->interpretCMD(cmd) == Command::Left) {
+                newBlock->moveLeft();
+                if (dropCheck(newBlock)) return true;
+            } else if (cmdDictionary->interpretCMD(cmd) == Command::Right) {
+                newBlock->moveRight();
+                if (dropCheck(newBlock)) return true;
+            } else if (cmdDictionary->interpretCMD(cmd) == Command::Down) {
+                newBlock->moveDown();
+                if (dropCheck(newBlock)) return true;
+            } else if (cmdDictionary->interpretCMD(cmd) == Command::ClockWise) {
+                newBlock->CWRotate();    
+                if (dropCheck(newBlock)) return true;    
+            } else if (cmdDictionary->interpretCMD(cmd) == Command::CounterClockWise) {
+                newBlock->CounterCWRotate();   
+                if (dropCheck(newBlock)) return true;     
+            } else if (cmdDictionary->interpretCMD(cmd) == Command::Drop) {
+                newBlock->drop();
+                return true;
+            } else if (cmdDictionary->interpretCMD(cmd) == Command::LevelUp) {
+                levelUp();
+            } else if (cmdDictionary->interpretCMD(cmd) == Command::LevelDown) {
+                levelDown();
+            } else if (cmdDictionary->interpretCMD(cmd) == Command::NoRandom) {
+                level->setRandom(false);
+            } else if (cmdDictionary->interpretCMD(cmd) == Command::Random) {
+                level->setRandom(true);
+            } else if (cmdDictionary->interpretCMD(cmd) == Command::Restart) {
+                // when it returns false, game knows it needs to restart
+                return false;
+            }
+        }
+    }
+    return true;
+}
+
+int clearRows() {
+    int rowsCleared = 0;
+    for (int i = 0; i < 18; ++j) {
+        int fullCount = 0;
+        for (int j = 0; j < 12; ++j) {
+            // if the value is not empty, fullCount ++
+            if (board.at(i).at(j).getValue() != 'e') fullCount++; 
+        }
+        if (fullCount == 12) {
+            for (int k = 1; k <= i; ++k) {
+                
+            }
+        }
     }
 }
 
-string Board::play(){
-    Player* currplayer = board1;
-    while (true) {
-        processSpecialActions();
-        SpawnBlock();
-        moveBlock();
-        int linesCleared = clearRows();
-        setScore(linesCleared);
-        if (currplayer = board1){
-            currplayer = board2;
-        } else {
-            currplayer = board1;
-        }
-        if (linesCleared >= 2){
-            string specialAction;
-            cin >> specialAction;
-            addSpecialAction(SpecialAction(specialAction));
+
+bool Board::dropCheck(const Block& block) {
+    vector<Cells>& cells = block.getCells();
+    for (int j = 0; j < 4; ++j) {
+        Cell& currCell = cells.at(i);
+        Info& currInfo = currCell.getinfo();
+        if (currInfo.coord.col == 17) return true;
+        if (board.at(currInfo.coord.row).at(currInfo.coord.col+1).getValue() != 'e') {
+            return true;
         }
     }
+    return false;
 }
+
+
 
