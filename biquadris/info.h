@@ -7,6 +7,7 @@
 struct Info {
   coordinates coord;
   Colour colour;
+  bool blinded;
 };
 
 #endif

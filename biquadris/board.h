@@ -6,6 +6,7 @@
 #include "graphicDisplay.h"
 #include "specialAction.h"
 #include "info.h"
+#include "colour.h"
 #include <vector>
 #include <fstream>
 #include <memory>

@@ -132,13 +132,13 @@ int clearRows() {
         int fullCount = 0;
         for (int j = 0; j < 12; ++j) {
             // if the value is not empty, fullCount ++
-            if (board.at(i).at(j).getValue() != 'e') fullCount++; 
+            if (board.at(i).at(j).getinfo().colour != Colour::White) fullCount++; 
         }
         if (fullCount == 12) {
             // from current row to row 1 (not row 0), move cells down by 1
             for (int k = i; k > 0; --k) {
                 for (int l = 0; l < 12; ++l) {
-                    board.at(k).at(l).setValue(board.at(k).at(l-1).getValue());
+                    board.at(k).at(l).setinfo(board.at(k).at(l-1).getinfo());
                 }
             }
             // makes row 0 blank
@@ -154,7 +154,8 @@ bool Board::dropCheck(const Block& block) {
         Cell& currCell = cells.at(i);
         Info& currInfo = currCell.getinfo();
         if (currInfo.coord.col == 17) return true;
-        if (board.at(currInfo.coord.row).at(currInfo.coord.col+1).getValue() != 'e') {
+        if (board.at(currInfo.coord.row).at(currInfo.coord.col+1).getinfo().colour
+            != Colour::White) {
             return true;
         }
     }
