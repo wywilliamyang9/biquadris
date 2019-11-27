@@ -57,7 +57,7 @@ void TextDisplay::notify(Subject<Info> &whoNotified) override{
 }
 
 void TextDisplay::notify(Subject<State> &whoNotified) override{
-    vector<int> currinfo{whoNotified.getInfo()};
+    State currinfo{whoNotified.getInfo()};
     scores[0] = currinfo.scores[0];
     scores[1] = currinfo.scores[1];
     scores[2] = currinfo.scores[2];
@@ -66,12 +66,12 @@ void TextDisplay::notify(Subject<State> &whoNotified) override{
 }
 
 void TextDisplay::notify(Subject<NextBlock> &whoNotified) override{
-    vector<int> currinfo{whoNotified.getInfo()};
-    scores[0] = currinfo.scores[0];
-    scores[1] = currinfo.scores[1];
-    scores[2] = currinfo.scores[2];
-    levels[0] = currinfo.levels[0];
-    levels[1] = currinfo.levels[1];
+    NextBlock currinfo{whoNotified.getInfo()};
+    if (currinfo.boardnum == 1){
+        nextblock[0] = convertColour(currinfo.colour);
+    } else if (currinfo.boardnum == 2){
+        nextblock[1] = convertColour(currinfo.colour);
+    }
 }
 
 void TextView::print() {
@@ -103,16 +103,14 @@ void TextView::printScore() {
 }
 
 void TextView::printBoards() {
-	for (int i = 15; i >= 0; i--) {
-		for (int j = 0; j < 23; j++) {
-			if (j < 11) {
+	for (int i = 0; i <= gridHeight; i--) {
+		for (int j = 0; j < ((gridWidth * 2) + 1); j++) {
+			if (j < gridWidth) {
 				cout << board1[i][j];
-			}
-			else if (j == 11) {
+			} else if (j == gridWidth) {
 				cout << " ";
-			}
-			else {
-				cout << board2[i][j-11];
+			} else {
+				cout << board2[i][j-gridWidth];
 			}
 		}
 		cout << endl;
@@ -120,8 +118,41 @@ void TextView::printBoards() {
 	}
 	
 }
+
+string printBlock(char type, int line){
+    if (type == 'J' && line == 1){
+        return "J   ";
+    } else if (type == 'J' && line == 2){
+        return "JJJ ";
+    } else if (type == 'I' && line == 1){
+        return "    ";
+    } else if (type == 'I' && line == 2){
+        return "IIII";
+    } else if (type == 'L' && line == 1){
+        return "  L ";
+    } else if (type == 'L' && line == 2){
+        return "LLL ";
+    } else if (type == 'O' && line == 1){
+        return "OO  ";
+    } else if (type == 'O' && line == 2){
+        return "OO  ";
+    } else if (type == 'S' && line == 1){
+        return " SS ";
+    } else if (type == 'S' && line == 2){
+        return "SS  ";
+    } else if (type == 'Z' && line == 1){
+        return "ZZ  ";
+    } else if (type == 'Z' && line == 2){
+        return " ZZ ";
+    } else if (type == 'T' && line == 1){
+        return "TTT ";
+    } else if (type == 'T' && line == 2){
+        return " T  ";
+    }
+}
+
 void TextView::printNext() {
 	cout << "Next:       Next:" << endl;
-	cout << model->getBoardOne()->getNextType();
-	cout << "             " << model->getBoardTwo()->getNextType() << endl;
+    cout << printBlock(nextblock[0], 1) << "        " << printBlock(nextblock[1], 1) << endl;
+    cout << printBlock(nextblock[0], 2) << "        " << printBlock(nextblock[1], 2) << endl;
 }
