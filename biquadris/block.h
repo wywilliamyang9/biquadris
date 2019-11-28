@@ -4,7 +4,7 @@
 #include "colour.h"
 #include "coordinates.h"
 class Block {
-    vector<Cell> cells;
+    vector<Cell&> cells;
     int heavy;
     Colour colour;
     int state;
@@ -12,7 +12,7 @@ class Block {
     Block (Cell&, Cell&, Cell&, Cell&,
          int heavy, Colour);
 
-    vector<Cell>& getCells();
+    vector<Cell&> getCells();
     void setCells(const vector<Cell>&);
     Colour getcolour();
 

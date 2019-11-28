@@ -25,7 +25,7 @@ class Board : public Subject <NextBlock> {
     unique_ptr<Level> level;
     GraphicDisplay* graphicDisplay;
     TextDisplay* textDisplay;
-    fstream fileInput;
+    std::string fileInput;
     int currlvl;
     int score;
     Colour nextBlockColour;

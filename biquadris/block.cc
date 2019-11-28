@@ -1,6 +1,6 @@
 #include "block.cc"
 
-vector<Cell>& Block::getCells() {
+vector<Cell&> Block::getCells() {
     return cells;
 }
 void Block::setCells(const vector<Cell>& newCells){

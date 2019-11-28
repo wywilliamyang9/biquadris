@@ -209,6 +209,27 @@ int clearRows() {
             rowsCleared++;
         }
     }
+    if (rowsCleared > 1) {
+        cout << "Select a Special Action." << endl;
+        string cmd;
+        while (cin >> cmd) {
+            if (cmdDictionary->interpretCMD(cmd) == Command::Blind) {
+                opponent.addSpecialAction(BlindAction{});
+                break;
+            } else if (cmdDictionary->interpretCMD(cmd) == Command::Force) {
+                char type;
+                cin >> type;
+                opponent.addSpecialAction(ForceBlockAction{type});
+                break;
+            } else if (cmdDictionary->interpretCMD(cmd) == Command::Heavy) {
+                opponent.addSpecialAction(AddHeavyAction{});
+                break;
+            } else {
+                cout << "Invalid Action, select a Special Action." << endl;
+                continue;
+            }
+        }
+    }
     return rowsCleared;
 }
 
