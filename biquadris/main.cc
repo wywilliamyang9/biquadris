@@ -1,6 +1,7 @@
 #include "game.h"
 #include <iostream>
 #include <string>
+using namespace std;
 
 int main(int argc, char *argv[]){
     argc = argc - 1;
@@ -14,27 +15,27 @@ int main(int argc, char *argv[]){
         if (tmparg == "-seed"){
             string tmp = argv[i+1];
             stringstream temp(tmp);
-            if (!(temp >> width)){
+            if (!(temp >> seed)){
             }
             i++;
         } else if (tmparg == "-text"){
-            textonly = true;
+            textOnly = true;
         } else if (tmparg == "-scriptfile1"){
             string tmp = argv[i+1];
             stringstream temp(tmp);
-            if (!(temp >> scriptfile1)){
+            if (!(temp >> scriptFile1)){
             }
             i++;
         } else if (tmparg == "-seed"){
             string tmp = argv[i+1];
             stringstream temp(tmp);
-            if (!(temp >> scriptfile2)){
+            if (!(temp >> scriptFile2)){
             }
             i++;
         } else if (tmparg == "-startlevel"){
             string tmp = argv[i+1];
             stringstream temp(tmp);
-            if (!(temp >> startlevel)){
+            if (!(temp >> startLevel)){
             }
             i++;
         }
