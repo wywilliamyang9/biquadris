@@ -294,7 +294,7 @@ int Board::getLevel(){
 }
 
 bool Board::newBlockCheck(Colour colour) {
-    if (convertColour(newBlockInfo.colour) == 
+    if (colour == 'I'
 }
 
 unique_ptr<Block> Board::createBlock(){
