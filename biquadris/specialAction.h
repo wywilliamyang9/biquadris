@@ -3,6 +3,6 @@
 
 class SpecialAction {
     public:
-    virtual ~SpecialAction;
+    virtual ~SpecialAction();
 };
 #endif
