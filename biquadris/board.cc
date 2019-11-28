@@ -79,8 +79,8 @@ void Board::applySpecialActions(AddHeavyAction ha) {
 }
 // when Special Action is a Force Action
 void Board::applySpecialActions(ForceBlockAction fa) {
-    char newBlock = fa.getForceBlock();
-    level->forceBlock(newBlock);
+    Colour newBlockColour = fa.getForceBlock();
+    level->forceBlock(newBlockColour);
 }
 // to add a new special action
 void Board::addSpecialAction(SpecialAction sa) {
@@ -103,7 +103,7 @@ String Board::play(){
 }
 
 // level checks win/lose conditions upon spawn.
-bool Board::SpawnBlock() {
+bool Board::spawnBlock() {
     // generateNextBlock gives the new block
     currBlock = level->generateNextBlock();
     // checks if the new block can be placed on the board
@@ -113,7 +113,27 @@ bool Board::SpawnBlock() {
     return true;
 }
 bool Board::placeBlock() {
-    
+    vector<Cell>& cells = currBlock->getCells();
+    for (int i = 0; i < 4; ++i) {
+        int row = cells.at(i).getinfo().coordinates.row;
+        int col = cells.at(i).getinfo().coordinates.col;
+        if (board.at(row).at(col).getinfo().colour != Colour::White){
+            return false;
+        }
+    }
+
+    // if it passes the check
+    cells.clear();
+    for (int i = 0; i < 4; ++i) {
+        int row = cells.at(i).getinfo().coordinates.row;
+        int col = cells.at(i).getinfo().coordinates.col;
+        Cell & onBoardCell = board.at(row).at(col);
+        onBoardCell.setInfo(Coordinates{row, col},
+        currBlock.getColour(), onBoardCell.getinfo().blinded,
+        onBoardCell.getinfo().boardnum);
+        cells.emplace_back (onBoardCell);
+    }
+    return true;
 }
 // moves the block until it drops
 string Board::moveBlock(Block* newBlock) {

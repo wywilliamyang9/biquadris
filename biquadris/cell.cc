@@ -12,7 +12,9 @@ void Cell::setinfo(cosnt Info& info) {
     coordinates = info.coordiantes;
     colour = info.colour;
     blinded = info.blinded;
+    boardnum = info.boardnum;
 }
+
 void Cell::setCurrBlock(bool b){
     currBlock = b;
 }
