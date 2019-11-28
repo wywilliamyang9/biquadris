@@ -303,12 +303,43 @@ bool Board::newBlockCheck(Colour colour) {
             return false;
         }
     } else if (colour == 'J') {
-        if (board.at(3).at(0).getColour() != Colour::White
+        if (board.at(2).at(0).getColour() != Colour::White
         || board.at(3).at(1).getColour() != Colour::White    
         || board.at(3).at(2).getColour() != Colour::White  
-        || board.at(3).at(3).getColour() != Colour::White) {
+        || board.at(3).at(0).getColour() != Colour::White) {
+            return false;
+    } else if (colour == 'L') {
+        if (board.at(2).at(2).getColour() != Colour::White
+        || board.at(3).at(1).getColour() != Colour::White    
+        || board.at(3).at(2).getColour() != Colour::White  
+        || board.at(3).at(0).getColour() != Colour::White) {
+            return false;
+    } else if (colour == 'O') {
+        if (board.at(2).at(0).getColour() != Colour::White
+        || board.at(2).at(1).getColour() != Colour::White    
+        || board.at(3).at(1).getColour() != Colour::White  
+        || board.at(3).at(0).getColour() != Colour::White) {
+            return false;
+    } else if (colour == 'S') {
+        if (board.at(2).at(2).getColour() != Colour::White
+        || board.at(2).at(1).getColour() != Colour::White    
+        || board.at(3).at(1).getColour() != Colour::White  
+        || board.at(3).at(0).getColour() != Colour::White) {
+            return false;
+    } else if (colour == 'Z') {
+        if (board.at(2).at(0).getColour() != Colour::White
+        || board.at(2).at(1).getColour() != Colour::White    
+        || board.at(3).at(1).getColour() != Colour::White  
+        || board.at(3).at(2).getColour() != Colour::White) {
+            return false;
+    } else if (colour == 'T') {
+        if (board.at(2).at(0).getColour() != Colour::White
+        || board.at(2).at(1).getColour() != Colour::White    
+        || board.at(2).at(2).getColour() != Colour::White  
+        || board.at(3).at(1).getColour() != Colour::White) {
             return false;
     }
+    return true;
 }
 
 unique_ptr<Block> Board::createBlock(){
