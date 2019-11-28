@@ -11,7 +11,7 @@ template <typename StateType> class Subject {
     public:
     void attach(Observer<StateType> *o);
     void notifyObservers();
-    virtual ~Observer() = default;
+    virtual ~Subject() = default;
     virtual StateType getinfo() const = 0;
 };
 

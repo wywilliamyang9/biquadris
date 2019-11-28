@@ -1,2 +1,3 @@
-#include "specialActions.h"
+#include "specialAction.h"
+SpecialAction::~SpecialAction() {}
 
