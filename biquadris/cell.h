@@ -19,7 +19,7 @@ class Cell : public Subject <Info> {
     void setCurrBlock(bool);
     bool getCurrBlock();
     void setColour(Colour);
-    
+    Colour getColour();
 
     void blindCell();
     void unblindCell();
