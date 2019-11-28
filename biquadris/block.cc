@@ -1,5 +1,15 @@
 #include "block.cc"
 
+vector<Cell>& Block::getCells() {
+    return cells;
+}
+void Block::setCells(const vector<Cell>& newCells){
+    cells.clear();
+    cells = newCells;
+}
+Colour Block::getColour() {
+    return colour;
+}
 Block::Block(Cell& c1, Cell& c2, Cell& c3, Cell& c4,
 char type, int heavy, Colour colour): type {type}, heavy {heavy},
 colour {colour}  {

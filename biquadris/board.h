@@ -53,7 +53,7 @@ class Board : public Subject <NextBlock> {
     void addSpecialAction(SpecialAction);
 
     std::string play();
-    bool SpawnBlock(); // spawn a new block
+    bool spawnBlock(); // spawn a new block
     bool placeBlock(); // place the newly spawned block
     std::string moveBlock(); // move the block until it drops
     bool dropCheck(const Block&); // checks if a block has reached ground.
