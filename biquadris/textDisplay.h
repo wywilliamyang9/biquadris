@@ -8,7 +8,8 @@
 #include "state.h"
 #include <vector>
 
-class TextDisplay : public Observer {
+class TextDisplay : public Observer<Info>,
+public Observer<State>, public Observer<NextBlock> {
     std::vector<std::vector<char>> board1;
     std::vector<std::vector<char>> board2;
     const int gridWidth = 11;
@@ -27,6 +28,7 @@ class TextDisplay : public Observer {
     void notify(Subject<Info> &whoNotified) override;
     // notified when scores have changed 
     void notify(Subject<State> &whoNotified) override;
+    void notify(Subject<NextBlock> &whoNotified) override;
 
     void print();
 };

@@ -29,7 +29,7 @@ void Block::moveDownByOne(Board& playerBoard) {
 		Coordinates curCoord = cells.at(i)->getinfo().coord;
 		if (playerBoard.getBoard().at(curCoord.row + 1).at(curCoord.col).getinfo().colour
 			!= Colour::White
-			&& playerBoard.getBoard().at(curCoord.row + 1).at(curCoord.col).getCurrBlock
+			&& playerBoard.getBoard().at(curCoord.row + 1).at(curCoord.col).getCurrBlock()
 			== false) canMove = 0;
 	}
 
@@ -72,7 +72,7 @@ void Block::moveLeft(Board& playerBoard) {
 	}
 
 	if (canMove) {
-		vector<Cell&> newCells;
+		vector<Cell*> newCells;
 		for (int i = 0; i < 4; ++i) {
 			Cell* oldCell = cells.at(i);
 			Coordinates currCoord = oldCell->getinfo().coord;
@@ -105,11 +105,11 @@ void Block::moveRight(Board& playerBoard) {
 	}
 
 	if (canMove) {
-		vector<Cell&> newCells;
+		vector<Cell*> newCells;
 		for (int i = 0; i < 4; ++i) {
 			Cell* oldCell = cells.at(i);
 			Coordinates currCoord = oldCell->getinfo().coord;
-			Cell* newCell = playerBoard.getBoard().at(currCoord.row).at(currCoord.col + 1);
+			Cell* newCell = &(playerBoard.getBoard().at(currCoord.row).at(currCoord.col + 1));
 			// Change target cell (one cell down)
 			newCell->setColour(oldCell->getinfo().colour);
 			newCell->setCurrBlock(true);
@@ -118,7 +118,7 @@ void Block::moveRight(Board& playerBoard) {
 			oldCell->setColour(Colour::White);
 			newCell->setCurrBlock(false);
 			// get new cell
-			newCells->emplace_back(newCell);
+			newCells.emplace_back(newCell);
 		}
 		for (int i = 0; i < heavy; ++i) moveDownByOne(playerBoard);
 		cells = newCells;
