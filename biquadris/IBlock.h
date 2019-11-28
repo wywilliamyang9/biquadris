@@ -4,7 +4,7 @@
 
 class IBlock: public Block {
     public:
-    IBlock (Cell&, Cell&, Cell&, Cell&,
+    IBlock (Cell*, Cell*, Cell*, Cell*,
         int heavy, Colour);
 
     void CWRotate(Board &)override;
