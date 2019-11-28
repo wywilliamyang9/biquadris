@@ -1,7 +1,7 @@
 #ifndef _COORDINATES_
 #define _COORDINATES_
 
-struct coordinates {
+struct Coordinates {
     int row;
     int col; 
 };

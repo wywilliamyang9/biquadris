@@ -1,15 +1,15 @@
 #include "cell.h"
-Cell::Cell(int r,int c): blinded{false},  
+Cell::Cell(int r,int c, int boardnum): blinded{false},
 colour {Colour::White}, boardnum{boardnum}{
     coordinates = Coordinates{r,c};
 }
 
-Info Cell::getinfo() {
+Info Cell::getinfo() const {
     return Info {coordinates, colour, blinded, boardnum};
 }
 
-void Cell::setinfo(cosnt Info& info) {
-    coordinates = info.coordiantes;
+void Cell::setInfo(const Info& info) {
+    coordinates = info.coord;
     colour = info.colour;
     blinded = info.blinded;
     boardnum = info.boardnum;
@@ -27,5 +27,12 @@ void Cell::blindCell() {
 void Cell::unblindCell(){
     blinded = false;
     notifyObservers();
+}
+
+void Cell::setColour(Colour colour) {
+	this->colour = colour;
+}
+Colour Cell::getColour() {
+	return colour;
 }
 

@@ -8,10 +8,6 @@ template <typename StateType>
 void Subject<StateType>::notifyObservers() {
   for (auto &ob : observers) ob->notify(*this);
 }
-
 template <typename StateType>
-void Subject<StateType>::setState(StateType newS) { state = newS; }
+StateType Subject<StateType>::getinfo() const { return state; }
 
-template <typename StateType>
-StateType Subject<StateType>::getState() const { return state; }
-#endif

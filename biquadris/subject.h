@@ -1,5 +1,6 @@
-#ifndef _OBSERVER_
-#define _OBSERVER_
+#ifndef _SUBJECT_
+#define _SUBJECT_
+#include <vector>
 
 template <typename StateType> class Observer;
 

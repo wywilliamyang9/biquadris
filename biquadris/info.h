@@ -5,7 +5,7 @@
 #include "coordinates.h"
 
 struct Info {
-  coordinates coord;
+  Coordinates coord;
   Colour colour;
   bool blinded;
   int boardnum;
