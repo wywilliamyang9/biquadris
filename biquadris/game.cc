@@ -9,10 +9,10 @@ using namespace std;
 
 Game::Game(bool textOnly, int seed, string scriptFile1, string scriptFile2, int startLevel)
 :textOnly{textOnly}, seed{seed}, scriptFile1{scriptFile1}, scriptFile2{scriptFile2}, startLevel{startLevel}{
-    td = new TextDisplay();
+    td = make_unique(new TextDisplay());
     attach(td);
     if (!textOnly){
-        gd = new GraphicalDisplay();
+        gd = make_unique(new GraphicalDisplay());
         attach(gd);
     }
     board1 = new Board(1， td, gd, textOnly, seed, scriptFile1, startLevel);
