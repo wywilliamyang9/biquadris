@@ -1,6 +1,5 @@
 #ifndef _LEVEL_
 #define _LEVEL_
-#include "block.h"
 #include "colour.h"
 #include <string>
 #include "subject.h"
@@ -9,7 +8,7 @@ class Level{
     int level;
     int heavy = 0;
     Colour nextBlock;
-    Block* currBlock;
+    Colour currBlock;
     int seed;
     int blocknum;
 
