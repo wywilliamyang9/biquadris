@@ -2,6 +2,7 @@
 #define _LEVEL_
 #include "block.h"
 #include "colour.h"
+#include <string>
 #include "subject.h"
 
 class Level{
@@ -20,6 +21,7 @@ class Level{
     Block* createBlock(Colour type);
     virtual Block* generateNextBlock() = 0; // spawn next block
     Colour getNextBlock();
+    virtual void setSequence(std::string filename) = 0;
     virtual int calculateScore(int rowSCleared) = 0; // calculates got score
 };
 #endif

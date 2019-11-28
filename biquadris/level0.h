@@ -5,7 +5,9 @@
 
 clase Level0 : public Level{
     string scriptFile;
-    
+    public:
+    Level0(string scriptFile);
+    virtual
 }
 
 
