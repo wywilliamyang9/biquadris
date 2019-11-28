@@ -11,8 +11,7 @@ class CommandInterpreter {
     bool checkCMD(std::string); // returns true if is a valid cmd
     Command interpretCMD(std::string);
     void addNewCMD(std::string,Command);
-    void removeCMD(std::string);
-    
-}
+    void removeCMD(std::string);  
+};
 
 #endif

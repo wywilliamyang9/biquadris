@@ -17,7 +17,7 @@ class Block {
          int heavy, Colour);
 
     std::vector<Cell*> getCells();
-    void setCells(const std::vector<Cell&>);
+    void setCells(const std::vector<Cell*>);
     Colour getColour();
 
     void moveDown(Board& playerBoard);

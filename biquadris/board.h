@@ -1,6 +1,5 @@
 #ifndef _BOARD_
 #define _BOARD_
-#include "specialAction.h"
 #include "level.h"
 //#include "graphicDisplay.h"
 #include "specialAction.h"
@@ -18,14 +17,14 @@
 #include "forceBlockAction.h"
 #include "addHeavyAction.h"
 #include "blindAction.h"
-
+#include "textDisplay.h"
 class Block;
 class Board : public Subject <NextBlock> {
     int boardnum;
     Board* opponent;
     std::vector<std::vector<Cell>> board;
     std::vector<SpecialAction> specialActions;
-    unique_ptr<Level> level;
+    std::unique_ptr<Level> level;
     //GraphicDisplay* graphicDisplay;
     TextDisplay* textDisplay;
     std::string fileInput;
@@ -33,8 +32,8 @@ class Board : public Subject <NextBlock> {
     int score;
     Colour nextBlockColour;
     CommandInterpreter cmdDic;
-    unique_ptr<CommandInterpreter> cmdDictionary;
-    unique_ptr<Block> currBlock;
+    std::unique_ptr<CommandInterpreter> cmdDictionary;
+    std::unique_ptr<Block> currBlock;
     int seed;
     int textOnly;
 
@@ -45,7 +44,7 @@ class Board : public Subject <NextBlock> {
     void setScore(int);
     std::vector<std::vector<Cell>>& getBoard();
 
-    Board::Board(int boardnum, TextDisplay *td,/* GraphicDisplay *gd,*/ bool textOnly, int seed,
+    Board(int boardnum, TextDisplay *td,/* GraphicDisplay *gd,*/ bool textOnly, int seed,
     std::string scriptFile, int startLevel);
     void setOpponent(Board*);
     
