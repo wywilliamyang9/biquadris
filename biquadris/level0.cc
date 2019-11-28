@@ -29,7 +29,11 @@ BlockInfo Level0::generateNextBlock(){
 }
 
 void Level0::setSequence(std::string filename){
-    sequence = filename;
+    scriptFile = filename;
+    sequence = sequence.open(filename);
+    string type;
+    sequence >> type;
+    nextBlock = convertString(type);
 }
 
 int Level0::calculateScore(int rowsCleared){
