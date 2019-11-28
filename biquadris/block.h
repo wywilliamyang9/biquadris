@@ -5,18 +5,17 @@
 #include "coordinates.h"
 class Block {
     vector<Cell> cells;
-    char type;
     int heavy;
     Colour colour;
-
+    int state;
     public:
     Block (Cell&, Cell&, Cell&, Cell&,
-        char type, int heavy, Colour);
+         int heavy, Colour);
 
     vector<Cell>& getCells();
     void setCells(const vector<Cell>&);
     Colour getcolour();
-    
+
     void moveDown(Board &);
     void moveLeft(Board &);
     void moveRight(Board &);
