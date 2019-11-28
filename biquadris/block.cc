@@ -59,7 +59,7 @@ void Block::moveDown(Board & playerBoard) {
 }
 
 void Block::moveLeft(Board & playerBoard){
-    bool canfMove = 1;
+    bool canMove = 1;
     vector<vector<char>>& board = playerBoard.getBoard();
 
     //check if it can go to left by 1 column.
@@ -67,7 +67,7 @@ void Block::moveLeft(Board & playerBoard){
         Coordinates curCoord = cells.at(i).getInfo().coordinates;
         if (curCoord.col == 0 // if already first col
         || (board.at(curCoord.row).at(curCoord.col-1).getInfo().colour
-        != Colour::White && (board.at(curCoord.row).at(curCoord.col-1).getcurrBlock()
+        != Colour::White && (board.at(curCoord.row).at(curCoord.col-1).getCurrBlock()
         == false))) canMove = 0;
     }
 

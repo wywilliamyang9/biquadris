@@ -131,6 +131,7 @@ bool Board::placeBlock() {
         onBoardCell.setInfo(Coordinates{row, col},
         currBlock.getColour(), onBoardCell.getinfo().blinded,
         onBoardCell.getinfo().boardnum);
+        onBoardCell.setCurrBlock(true);
         cells.emplace_back (onBoardCell);
     }
     return true;
