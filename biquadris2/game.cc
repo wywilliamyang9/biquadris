@@ -27,7 +27,7 @@ Game::Game(bool textOnly, int seed, string scriptFile1, string scriptFile2, int 
     }
 }
 
-State Game::getInfo(){
+State Game::getInfo() const{
     score[0] = board1->getScore();
     score[1] = board2->getScore();
     if (score[0] > score[2]){

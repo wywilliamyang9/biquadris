@@ -10,8 +10,8 @@
 #include "state.h"
 
 class Game : public Subject <State> {
-    std::unique_ptr<TextDisplay> td = nullptr;
-    std::unique_ptr<GraphicalDisplay> gd = nullptr;
+    std::unique_ptr<TextDisplay> td;
+    std::unique_ptr<GraphicalDisplay> gd;
     Observer observers;
 
     std::unique_ptr<Board> board1;
