@@ -6,10 +6,10 @@ NextBlock Board::getinfo() {
 }
 
 // default ctor, requires manual set of opponent and filestream.
-Board::Board(int boardnum, TextDisplay *td, GraphicDisplay *gd, bool textOnly, int seed,
+Board::Board(int boardnum, TextDisplay *td, /*GraphicDisplay *gd,*/ bool textOnly, int seed,
     string scriptFile, int startLevel) : boardnum{boardnum}, seed {seed}, 
     cmdDictionary{new CommandInterpreter},
-graphicDisplay {gd}, textDisplay {td}, fileInput {scriptFile}, textOnly{textOnly},
+ /*graphicDisplay {gd},*/ textDisplay {td}, fileInput {scriptFile}, textOnly{textOnly},
 currlvl {startLevel}, score{0}, seed{seed} {
     if (startLevel == 0) {
         currlvl = 0;
@@ -32,7 +32,7 @@ currlvl {startLevel}, score{0}, seed{seed} {
         vector<Cell> newRow;
         for (j = 0; j < 11; ++j) { // column
             Cell newCell {i,j, boardnum};
-            if (!textOnly) newCell.attach(graphicDisplay);
+            //if (!textOnly) newCell.attach(graphicDisplay);
             newCell.attach(textDisplay);
             newRow.emplace_Back(newCell);
         }
@@ -40,7 +40,7 @@ currlvl {startLevel}, score{0}, seed{seed} {
     }
 
     attach(textDisplay);
-    if (!textOnly) attach(graphicDisplay);
+    //if (!textOnly) attach(graphicDisplay);
 }
 
 int getScore() {

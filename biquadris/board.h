@@ -3,7 +3,7 @@
 #include "block.h"
 #include "specialAction.h"
 #include "level.h"
-#include "graphicDisplay.h"
+//#include "graphicDisplay.h"
 #include "specialAction.h"
 #include "commandInterpreter.h"
 #include <vector>
@@ -26,7 +26,7 @@ class Board : public Subject <NextBlock> {
     std::vector<std::vector<Cell>> board;
     std::vector<SpecialAction> specialActions;
     unique_ptr<Level> level;
-    GraphicDisplay* graphicDisplay;
+    //GraphicDisplay* graphicDisplay;
     TextDisplay* textDisplay;
     std::string fileInput;
     int currlvl;
@@ -45,7 +45,7 @@ class Board : public Subject <NextBlock> {
     void setScore(int);
     std::vector<std::vector<Cell>>& getBoard();
 
-    Board::Board(int boardnum, TextDisplay *td, GraphicDisplay *gd, bool textOnly, int seed,
+    Board::Board(int boardnum, TextDisplay *td,/* GraphicDisplay *gd,*/ bool textOnly, int seed,
     std::string scriptFile, int startLevel);
     void setOpponent(Board*);
     

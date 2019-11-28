@@ -11,10 +11,15 @@ Game::Game(bool textOnly, int seed, string scriptFile1, string scriptFile2, int 
 :textOnly{textOnly}, seed{seed}, scriptFile1{scriptFile1}, scriptFile2{scriptFile2}, startLevel{startLevel}{
     td = make_unique(new TextDisplay());
     attach(td);
+<<<<<<< HEAD
     if (!textOnly){
         gd = make_unique(new GraphicalDisplay());
+=======
+    /*if (!textOnly){
+        gd = new GraphicalDisplay();
+>>>>>>> 91792bef4cd3daed14c276a8e9c1c701f68b1a84
         attach(gd);
-    }
+    }*/
     board1 = new Board(1， td, gd, textOnly, seed, scriptFile1, startLevel);
     board2 = new Board(2，td, gd, textOnly, seed, scriptFile2, startLevel);
     board1->setOpponent(board2);
