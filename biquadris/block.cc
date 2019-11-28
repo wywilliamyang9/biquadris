@@ -2,10 +2,10 @@
 #include "board.h"
 
 using namespace std;
-vector<Cell&> Block::getCells() {
+vector<Cell*> Block::getCells() {
 	return cells;
 }
-void Block::setCells(const vector<Cell&> newCells) {
+void Block::setCells(const vector<Cell*> newCells) {
 	cells.clear();
 	cells = newCells;
 }
@@ -13,7 +13,7 @@ Colour Block::getColour() {
 	return colour;
 }
 
-Block::Block(Cell& c1, Cell& c2, Cell& c3, Cell& c4,
+Block::Block(Cell* c1, Cell* c2, Cell* c3, Cell* c4,
 	int heavy, Colour colour) : heavy{ heavy },
 	colour{ colour }, state{ 1 } {
 	cells.emplace_back(c1);
@@ -35,19 +35,19 @@ void Block::moveDownByOne(Board& playerBoard) {
 	}
 
 	if (canMove) {
-		vector<Cell&> newCells;
+		vector<Cell*> newCells;
 		
 		for (int i = 0; i < 4; ++i) {
-			Cell& oldCell = cells.at(i);
+			Cell* oldCell = cells.at(i);
 			Coordinates currCoord = oldCell.getinfo().coord;
-			Cell& newCell = board.at(currCoord.row + 1).at(currCoord.col);
+			Cell* newCell = &(board.at(currCoord.row + 1).at(currCoord.col));
 			// Change target cell (one cell down)
-			newCell.setColour(oldCell.getinfo().colour);
-			newCell.setCurrBlock(true);
+			newCell->setColour(oldCell.getinfo().colour);
+			newCell->setCurrBlock(true);
 
 			// change current cell
-			oldCell.setColour(Colour::White);
-			oldCell.setCurrBlock(false);
+			oldCell->setColour(Colour::White);
+			oldCell->setCurrBlock(false);
 			// get new cell
 			newCells.emplace_back(newCell);
 		}

@@ -8,7 +8,7 @@
 
 class Board;
 class Block {
-    std::vector<Cell&> cells;
+    std::vector<Cell*> cells;
     int heavy;
     Colour colour;
     int state;
@@ -16,7 +16,7 @@ class Block {
     Block (Cell&, Cell&, Cell&, Cell&,
          int heavy, Colour);
 
-    std::vector<Cell&> getCells();
+    std::vector<Cell*> getCells();
     void setCells(const std::vector<Cell&>);
     Colour getColour();
 
