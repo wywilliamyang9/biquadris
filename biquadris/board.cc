@@ -3,6 +3,10 @@
 #include "board.h"
 using namespace std;
 
+NextBlock Board::getinfo() {
+    return NextBlock {boardNextColour,boardNum};
+}
+
 // default ctor, requires manual set of opponent and filestream.
 Board::Board(int boardnum, TextDisplay *td, GraphicDisplay *gd, bool textOnly, int seed,
     String scriptFile, int startLevel) : boardnum{boardnum}, seed {seed}, 
@@ -101,10 +105,18 @@ String Board::play(){
 }
 
 // level checks win/lose conditions upon spawn.
-String Board::SpawnBlock() {
+bool Board::SpawnBlock() {
+    // generateNextBlock gives the new block
     currBlock = level->generateNextBlock();
+    // checks if the new block can be placed on the board
+    if (!(placeBlock())) return false;
+    nextBlockColour = level->getNextBlock();
+    notifyObservers();   
+    return true;
 }
-
+bool Board::placeBlock() {
+    
+}
 // moves the block until it drops
 string Board::moveBlock(Block* newBlock) {
     String cmd;

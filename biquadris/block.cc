@@ -44,42 +44,8 @@ void Block::moveDownByOne(Board & playerBoard) {
 }
 
 void Block::moveDown(Board & playerBoard) {
-    bool canMove = 1;
-    vector<vector<char>>& board = playerBoard.getBoard();
-
-    //check if it can go 1 row down.
-    for (int i = 0; i < 4; ++i) {
-        Coordinates curCoord = cells.at(i).getInfo().coordinates;
-        if (board.at(curCoord.row+1).at(curCoord.col).getInfo().colour
-        != Colour::White
-        && board.at(curCoord.row+1).at(curCoord.col).getCurrBlock
-        == false) canMove = 0;
-    }
-
-    if (canMove) {
-        vector<Cells> newCells;
-        for (int i = 0; i < 4; ++i) {
-            Cell& oldCell = cells.at(i);
-            Cell& newCell = board.at(currCoord.row+1).at(currCoord.col);
-            // Change target cell (one cell down)
-            newCell.setInfo(
-                newCell.getinfo().coordinates,
-                oldCell.getinfo().colour, // only changes colour
-                newCell.getinfo().blinded);
-
-            // change current cell
-            oldCell.setInfo(oldCell.getinfo().coordinates,
-            Colour::White, oldCell.getinfo().blinded);
-
-            // get new cell
-            newCells.emplace_back(newCell);
-        }
-        // process heavy
-        for (int i = 0; i < heavy; ++i) {
-            moveDownByOne(playerBoard);
-        }
-        cells = newCells;
-    }
+    moveDownByOne();
+    for (int i = 0; i < heavy; ++i) moveDownByOne(playerBoard);
 }
 
 void Block::moveLeft(Board & playerBoard){
@@ -113,10 +79,13 @@ void Block::moveLeft(Board & playerBoard){
             // get new cell
             newCells.emplace_back(newCell);
         }
+        for (int i = 0; i < heavy; ++i) moveDownByOne(playerBoard);
         cells = newCells;
     }
 }
-void moveRight();
+void Block::moveRight(Board & playerBoard){
+
+
 void drop();
 
 };

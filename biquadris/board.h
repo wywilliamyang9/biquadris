@@ -31,6 +31,7 @@ class Board : public Subject <NextBlock> {
     fstream fileInput;
     int currlvl;
     int score;
+    Colour nextBlockColour;
 <<<<<<< HEAD
     CommandInterpreter cmdDic;
 =======
@@ -41,12 +42,14 @@ class Board : public Subject <NextBlock> {
 >>>>>>> master
 
     public:
+    NextBlock getinfo();
+
     int getScore();
     void setScore(int);
     Vector<Vector<Cell>>& getBoard();
 
     Board::Board(int boardnum, TextDisplay *td, GraphicDisplay *gd, bool textOnly, int seed,
-    String scriptFile, int startLevel);
+    std::string scriptFile, int startLevel);
     void setOpponent(Board*);
     
     void processSpecialActions(); // applies specialActions
@@ -55,9 +58,10 @@ class Board : public Subject <NextBlock> {
     void applySpecialActions(ForceBlockAction);
     void addSpecialAction(SpecialAction);
 
-    bool play();
-    Block* SpawnBlock(); // spawn a new block
-    void moveBlock(); // move the block until it drops
+    std::string play();
+    bool SpawnBlock(); // spawn a new block
+    bool placeBlock(); // place the newly spawned block
+    std::string moveBlock(); // move the block until it drops
     bool dropCheck(const Block&); // checks if a block has reached ground.
     int clearRows(); // clears filled rows, returns # of clear rows
 
