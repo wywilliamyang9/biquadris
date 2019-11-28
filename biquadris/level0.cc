@@ -2,6 +2,7 @@
 #include "block.h"
 #include <fstream>
 #include "colour.h"
+#include "blockinfo.h"
 #include <string>
 
 using namespace std;
@@ -15,7 +16,7 @@ Level{seed, blocknum}, scriptFile{scriptFile}{
     nextBlock = convertString(type);
 }
 
-Block* Level0::generateNextBlock(){
+BlockInfo Level0::generateNextBlock(){
     currBlock = nextBlock;
     string type;
     if (!(sequence >> type)){
@@ -24,7 +25,7 @@ Block* Level0::generateNextBlock(){
         sequence >> type;
     }
     nextBlock = convertString(type);
-    return currBlock;
+    return BlockInfo{currBlock, heavy};
 }
 
 void Level0::setSequence(std::string filename){
