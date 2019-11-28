@@ -5,20 +5,17 @@
 #include "level.h"
 #include "graphicDisplay.h"
 #include "specialAction.h"
-<<<<<<< HEAD
 #include "commandInterpreter.h"
 #include <vector>
 #include <fstream>
 #include <memory>
 #include <sstream>
-=======
 #include "info.h"
 #include "colour.h"
 #include <vector>
 #include <fstream>
 #include <memory>
 #include "nextBlock.h"
->>>>>>> master
 
 class Board : public Subject <NextBlock> {
     int boardnum;
@@ -32,14 +29,11 @@ class Board : public Subject <NextBlock> {
     int currlvl;
     int score;
     Colour nextBlockColour;
-<<<<<<< HEAD
     CommandInterpreter cmdDic;
-=======
     unique_ptr<CommandInterpreter> cmdDictionary;
     unique_ptr<Block> currBlock;
     int seed;
     int textOnly;
->>>>>>> master
 
     public:
     NextBlock getinfo();

@@ -1,5 +1,3 @@
-<<<<<<< HEAD
-=======
 #include "board.h"
 using namespace std;
 
@@ -249,4 +247,3 @@ int Board::getLevel(){
     return currlvl;
 }
 
->>>>>>> master
