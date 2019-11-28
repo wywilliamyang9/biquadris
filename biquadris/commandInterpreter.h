@@ -4,7 +4,7 @@
 #include "command.h"
 #include <string>
 class CommandInterpreter {
-    std::map<std::string, Commands> cmdDictionary
+    std::map<std::string, Command> cmdDictionary;
     public:
     CommandInterpreter();
 
