@@ -1,6 +1,6 @@
 #ifndef _LEVEL0_
 #define _LEVEL0_
-#include "blockinfo.h"
+#include "blockInfo.h"
 #include  "level.h"
 #include <string>
 
