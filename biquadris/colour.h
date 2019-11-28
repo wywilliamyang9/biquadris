@@ -1,5 +1,6 @@
 ﻿#ifndef _COLOUR_
 #define _COLOUR_
+#include <string>
 
 enum class Colour {
 	Red, Orange, Yellow,
@@ -30,6 +31,26 @@ char convertColour(Colour colour){
         return 'T';
     } else if (colour == Colour::White){
         return ' ';
+    }
+}
+
+Colour convertString(std::string type){
+    if (type == "Z"){
+        return Colour::Red;
+    } else if (type == "L"){
+        return Colour::Orange;
+    } else if (type == "I"){
+        return Colour::LightBlue;
+    } else if (type == "J"){
+        return Colour::Blue;
+    } else if (type == "O"){
+        return Colour::Yellow;
+    } else if (type == "S"){
+        return Colour::Green;
+    } else if (type == "T"){
+        return Colour::Purple;
+    } else if (type == " "){
+        return Colour::White;
     }
 }
 

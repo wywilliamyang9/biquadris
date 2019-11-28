@@ -2,7 +2,6 @@
 #define _LEVEL0_
 #include  "level.h"
 #include <string>
-#include <fstream>
 
 clase Level0 : public Level{
     std::string scriptFile;
