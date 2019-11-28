@@ -16,6 +16,9 @@
 #include <fstream>
 #include <memory>
 #include "nextBlock.h"
+#include "forceBlockAction.h"
+#include "addHeavyAction.h"
+#include "blindAction.h"
 
 class Board : public Subject <NextBlock> {
     int boardnum;
