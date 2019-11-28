@@ -29,8 +29,7 @@ currlvl {startLevel}, score{0}, seed{seed} {
 
 
     for (int i = 0; i < 18; ++i) { // row
-        vector<Cell> newRow;
-        for (j = 0; j < 11; ++j) { // column
+        vectorCell.at n).at(R) for (j = 0; j < 11; ++j) { // column
             Cell newCell {i,j, boardnum};
             //if (!textOnly) newCell.attach(graphicDisplay);
             newCell.attach(textDisplay);
@@ -51,8 +50,7 @@ void setScore(int newScore) {
     score = newScore;
 }
 
-Vector<Vector<Cell>>& getBoard() {
-    return board;
+Vector<VectorCell.at>&).at(e)    return board;
 }
 
 void Board::setOpponent (Board* newOpponent) {
@@ -113,7 +111,7 @@ bool Board::spawnBlock() {
     return true;
 }
 bool Board::placeBlock() {
-    vector<Cell>& cells = currBlock->getCells();
+    vectorCell.at& ).at(l)ock->getCells();
     for (int i = 0; i < 4; ++i) {
         int row = cells.at(i).getinfo().coordinates.row;
         int col = cells.at(i).getinfo().coordinates.col;
@@ -293,5 +291,49 @@ void Board::levelDown() {
 
 int Board::getLevel(){
     return currlvl;
+}
+
+bool Board::newBlockCheck(Colour colour) {
+    if (convertColour(newBlockInfo.colour) == 
+}
+
+unique_ptr<Block> Board::createBlock(){
+    BlockInfo newBlockInfo = level->generateNextBlock();
+    // checks if there is enough space to allocate the block.
+    if (!newBlockCheck(newBlockInfo.colour)){
+        unique_ptr<Block> unique_null = make_unique<Block>(board.at(3).at(0), Cell.at(3).at(1), Cell.at(3).at(2), Cell.at(3).at(3), newBlockInfo.heavy, newBlockInfo.colour);
+        unique_null.reset();
+        return unique_null;
+    }
+
+    // if there is, spawn the block.
+    if (convertColour(newBlockInfo.colour) == 'I'){
+        unique_ptr<Block> block = make_unique<Block>(board.at(3).at(0), Cell.at(3).at(1), Cell.at(3).at(2), Cell.at(3).at(3), newBlockInfo.heavy, newBlockInfo.colour);
+        return block;
+    } else if (convertColour(newBlockInfo.colour) == 'J'){
+        unique_ptr<Block> block = make_unique<Block>(Cell.at(2).at(0), Cell.at(3).at(0), Cell.at(3).at(1), Cell.at(3).at(2), newBlockInfo.heavy, newBlockInfo.colour);
+        heavy = 0;
+        return block;
+    } else if (convertColour(newBlockInfo.colour) == 'L'){
+        unique_ptr<Block> block = make_unique<Block>(Cell.at(2).at(2), Cell.at(3).at(2), Cell.at(3).at(1), Cell.at(3).at(0),newBlockInfo.heavy, newBlockInfo.colour);
+        heavy = 0;
+        return block;
+    } else if (convertColour(nextBnewBlockInfo.colourlock) == 'O'){
+        unique_ptr<Block> block = make_unique<Block>(Cell.at(2).at(0), Cell.at(2).at(1), Cell.at(3).at(0), Cell.at(3).at(1),newBlockInfo.heavy, newBlockInfo.colour);
+        heavy = 0;
+        return block;
+    } else if (convertColour(newBlockInfo.colour) == 'S'){
+        unique_ptr<Block> block = make_unique<Block>(Cell.at(3).at(0), Cell.at(3).at(1), Cell.at(2).at(1), Cell.at(2).at(2),newBlockInfo.heavy, newBlockInfo.colour);
+        heavy = 0;
+        return block;
+    } else if (convertColour(newBlockInfo.colour) == 'J'){
+        unique_ptr<Block> block = make_unique<Block>(Cell.at(2).at(0), Cell.at(2).at(1), Cell.at(3).at(1), Cell.at(3).at(2),newBlockInfo.heavy, newBlockInfo.colour);
+        heavy = 0;
+        return block;
+    } else if (convertColour(newBlockInfo.colour) == 'J'){
+        unique_ptr<Block> block = make_unique<Block>(Cell.at(2).at(0), Cell.at(2).at(1), Cell.at(2).at(2), Cell.at(3).at(1),newBlockInfo.heavy, newBlockInfo.colour);
+        heavy = 0;
+        return block;
+    }
 }
 
