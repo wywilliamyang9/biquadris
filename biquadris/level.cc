@@ -5,7 +5,9 @@
 
 using namespace std;
 
-Level::Level(int seed, int blocknum): seed{seed}, blocknum{blocknum){}
+Level::Level(int seed, int blocknum): seed{seed}, blocknum{blocknum){
+    srand(seed);
+}
 
 void Level::forceBlock(Colour forcedBlock){
     nextBlock = forceBlock;
