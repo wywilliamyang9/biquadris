@@ -8,10 +8,11 @@
 #include "observer.h"
 #include <memory>
 #include "state.h"
+#include "textDisplay.h"
 
 class Game : public Subject <State> {
     std::unique_ptr<TextDisplay> td;
-    std::unique_ptr<GraphicalDisplay> gd;
+    //std::unique_ptr<GraphicalDisplay> gd;
     Observer observers;
 
     std::unique_ptr<Board> board1;

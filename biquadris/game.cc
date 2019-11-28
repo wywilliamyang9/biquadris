@@ -11,10 +11,10 @@ Game::Game(bool textOnly, int seed, string scriptFile1, string scriptFile2, int 
 :textOnly{textOnly}, seed{seed}, scriptFile1{scriptFile1}, scriptFile2{scriptFile2}, startLevel{startLevel}{
     td = new TextDisplay();
     attach(td);
-    if (!textOnly){
+    /*if (!textOnly){
         gd = new GraphicalDisplay();
         attach(gd);
-    }
+    }*/
     board1 = new Board(1， td, gd, textOnly, seed, scriptFile1, startLevel);
     board2 = new Board(2，td, gd, textOnly, seed, scriptFile2, startLevel);
     board1->setOpponent(board2);
