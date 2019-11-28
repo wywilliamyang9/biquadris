@@ -18,6 +18,8 @@ class Cell : public Subject <Info> {
     void setInfo (const Info&);
     void setCurrBlock(bool);
     bool getCurrBlock();
+    void setColour(Colour);
+    
 
     void blindCell();
     void unblindCell();

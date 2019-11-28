@@ -2,7 +2,7 @@
 IBlock::IBlock (Cell& c1, Cell& c2, Cell& c3, Cell& c4,
 int heavy, Colour colour): Block{c1,c2,c3,c4,heavy,colour} {}
 
-void CWRotate(Board & playerBoard) {
+void IBlock::CWRotate(Board & playerBoard) {
     vector<vector<Cells>>& board = playerBoard.getBoard();
     if (state == 1) {
         Info i0 = cells.at(0).getinfo();
@@ -152,6 +152,6 @@ void CWRotate(Board & playerBoard) {
     for (int i = 0; i < heavy; ++i) moveDownByOne(playerBoard);
 }
 
-void CounterCWRotate(Board &playerBoard) {
+void IBlock::CounterCWRotate(Board &playerBoard) {
     CWRotate(playerBoard);
 }

@@ -1,10 +1,10 @@
 #ifndef _OBLOCK_
-#define _IBLOCK_
+#define _OBLOCK_
 #include "block.h"
 
-class IBlock: public Block {
+class OBlock: public Block {
     public:
-    IBlock (Cell&, Cell&, Cell&, Cell&,
+    OBlock (Cell&, Cell&, Cell&, Cell&,
         int heavy, Colour);
 
     void CWRotate(Board &)override;
