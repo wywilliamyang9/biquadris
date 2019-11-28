@@ -1,5 +1,6 @@
 #include "textdisplay.h"
 #include "info.h"
+#include <iostream>
 #include "colour.h"
 #include <vector>
 

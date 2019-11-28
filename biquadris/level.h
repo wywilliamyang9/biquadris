@@ -22,6 +22,6 @@ class Level{
     virtual Block* generateNextBlock() = 0; // spawn next block
     Colour getNextBlock();
     virtual void setSequence(std::string filename) = 0;
-    virtual int calculateScore(int rowSCleared) = 0; // calculates got score
+    virtual int calculateScore(int rowsCleared) = 0; // calculates got score
 };
 #endif
