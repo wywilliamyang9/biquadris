@@ -1,6 +1,5 @@
 #ifndef _BOARD_
 #define _BOARD_
-#include "block.h"
 #include "specialAction.h"
 #include "level.h"
 //#include "graphicDisplay.h"
@@ -20,6 +19,7 @@
 #include "addHeavyAction.h"
 #include "blindAction.h"
 
+class Block;
 class Board : public Subject <NextBlock> {
     int boardnum;
     Board* opponent;
