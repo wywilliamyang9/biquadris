@@ -23,8 +23,8 @@
 class Board : public Subject <NextBlock> {
     int boardnum;
     Board* opponent;
-    Vector<Vector<Cell>> board;
-    Vector<SpecialAction> specialActions;
+    std::vector<std::vector<Cell>> board;
+    std::vector<SpecialAction> specialActions;
     unique_ptr<Level> level;
     GraphicDisplay* graphicDisplay;
     TextDisplay* textDisplay;
@@ -43,7 +43,7 @@ class Board : public Subject <NextBlock> {
 
     int getScore();
     void setScore(int);
-    Vector<Vector<Cell>>& getBoard();
+    std::vector<std::vector<Cell>>& getBoard();
 
     Board::Board(int boardnum, TextDisplay *td, GraphicDisplay *gd, bool textOnly, int seed,
     std::string scriptFile, int startLevel);

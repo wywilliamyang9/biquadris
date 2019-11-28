@@ -7,7 +7,7 @@ NextBlock Board::getinfo() {
 
 // default ctor, requires manual set of opponent and filestream.
 Board::Board(int boardnum, TextDisplay *td, GraphicDisplay *gd, bool textOnly, int seed,
-    String scriptFile, int startLevel) : boardnum{boardnum}, seed {seed}, 
+    string scriptFile, int startLevel) : boardnum{boardnum}, seed {seed}, 
     cmdDictionary{new CommandInterpreter},
 graphicDisplay {gd}, textDisplay {td}, fileInput {scriptFile}, textOnly{textOnly},
 currlvl {startLevel}, score{0}, seed{seed} {
@@ -87,7 +87,7 @@ void Board::addSpecialAction(SpecialAction sa) {
     specialActions.emplace_back(sa);
 }
 
-String Board::play(){
+string Board::play(){
     if (!spawnBlock()) return "lost!";
     // if the restart cmd is taken, return false to Game.
     string moveResult = moveBlock();

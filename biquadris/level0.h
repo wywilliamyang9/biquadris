@@ -4,9 +4,9 @@
 #include <string>
 
 clase Level0 : public Level{
-    string scriptFile;
+    std::string scriptFile;
     public:
-    Level0(string scriptFile);
+    Level0(std::string scriptFile);
     virtual
 }
 

@@ -9,8 +9,8 @@
 #include <vector>
 
 class TextDisplay : public Observer {
-    vector<vector<char>> board1;
-    vector<vector<char>> board2;
+    std::vector<std::vector<char>> board1;
+    std::vector<std::vector<char>> board2;
     const int gridWidth = 11;
     const int gridHeight = 18;
     std::vector<int> scores;
