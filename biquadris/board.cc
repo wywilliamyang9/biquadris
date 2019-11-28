@@ -13,19 +13,19 @@ graphicDisplay {gd}, textDisplay {td}, fileInput {scriptFile}, textOnly{textOnly
 currlvl {startLevel}, score{0}, seed{seed} {
     if (startLevel == 0) {
         currlvl = 0;
-        level.reset(new level0);
+        level.reset(new Level0);
     } else if (currlvl == 1) {
         currlvl = 1;
-        level.reset(new level1);
+        level.reset(new Level1);
     } else if (currlvl == 2) {
         currlvl = 2;
-        level.reset(new level2);
+        level.reset(new Level2);
     } else if (currlvl == 3) {
         currlvl = 3;
-        level.reset(new level3);
+        level.reset(new Level3);
     } else {
         currlvl = 4;
-        level.reset(new level4);
+        level.reset(new Level4);
 
 
     for (int i = 0; i < 18; ++i) { // row
@@ -229,16 +229,16 @@ bool Board::dropCheck(const Block& block) {
 void Board::levelUp() {
     if (currlvl == 0) {
         currlvl = 1;
-        level.reset(new level1);
+        level.reset(new Level1);
     } else if (currlvl == 1) {
         currlvl = 2;
-        level.reset(new level2);
+        level.reset(new Level2);
     } else if (currlvl == 2) {
         currlvl = 3;
-        level.reset(new level3);
+        level.reset(new Level3);
     } else if (currlvl == 3) {
         currlvl = 4;
-        level.reset(new level4);
+        level.reset(new Level4);
     } else {
         return;
     }
@@ -248,16 +248,16 @@ void Board::levelUp() {
 void Board::levelDown() {
     if (currlvl == 1) {
         currlvl = 0;
-        level.reset(new level0);
+        level.reset(new Level0);
     } else if (currlvl == 2) {
         currlvl = 1;
-        level.reset(new level1);
+        level.reset(new Level1);
     } else if (currlvl == 3) {
         currlvl = 2;
-        level.reset(new level2);
+        level.reset(new Level2);
     } else if (currlvl == 4) {
         currlvl = 4;
-        level.reset(new level3);
+        level.reset(new Level3);
     } else {
         return;
     }

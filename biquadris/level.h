@@ -10,8 +10,10 @@ class Level{
     Colour nextBlock;
     Block* currBlock;
     int seed;
+    int blocknum;
 
     public:
+    Level(int seed, int blocknum);
     void forceBlock(Colour type); // when special action "Force" is applied
     void addHeavy(); // when special action "Heavy" is applied
     int getLevel(); // returns current level
