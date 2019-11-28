@@ -16,7 +16,7 @@ Level{seed, blocknum}, scriptFile{scriptFile}{
 }
 
 Block* Level0::generateNextBlock(){
-    currBlock = createBlock(nextBlock);
+    currBlock = nextBlock;
     string type;
     if (!(sequence >> type)){
         sequence.clear();
