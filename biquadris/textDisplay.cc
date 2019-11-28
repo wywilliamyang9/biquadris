@@ -1,4 +1,4 @@
-#include "textdisplay.h"
+#include "textDisplay.h"
 #include "info.h"
 #include <iostream>
 #include "colour.h"
