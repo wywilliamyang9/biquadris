@@ -1,7 +1,7 @@
 #ifndef _COMMANDINTERPRETER_
 #define _COMMANDINTERPRETER_
 #include <map>
-#include "commands.h"
+#include "command.h"
 #include <string>
 class CommandInterpreter {
     std::map<std::string, Commands> cmdDictionary
