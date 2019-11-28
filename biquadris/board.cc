@@ -88,7 +88,14 @@ void Board::addSpecialAction(SpecialAction sa) {
 String Board::play(){
     if (!spawnBlock()) return "lost!";
     // if the restart cmd is taken, return false to Game.
-    if (!moveBlock()) return "restart!";
+    string moveResult = moveBlock();
+    if (moveResult == "continue!"){
+        return "continue!";
+    } else if (moveResult == "restart!") {
+        return "restart!";
+    } else {
+        return "eof!";
+    }
     setScore(level->calculateScore(clearRows()));
     return "continue!";
 }
@@ -99,7 +106,7 @@ String Board::SpawnBlock() {
 }
 
 // moves the block until it drops
-String Board::moveBlock(Block* newBlock) {
+string Board::moveBlock(Block* newBlock) {
     String cmd;
     char cmdCount;
     while (cin >> cmd) {
@@ -118,22 +125,22 @@ String Board::moveBlock(Block* newBlock) {
         for (int i = 0; i < cmdCount; i++) {
             if (cmdDictionary->interpretCMD(cmd) == Command::Left) {
                 newBlock->moveLeft();
-                if (dropCheck(newBlock)) return true;
+                if (dropCheck(newBlock)) return "continue!";
             } else if (cmdDictionary->interpretCMD(cmd) == Command::Right) {
                 newBlock->moveRight();
-                if (dropCheck(newBlock)) return true;
+                if (dropCheck(newBlock)) return "continue!";
             } else if (cmdDictionary->interpretCMD(cmd) == Command::Down) {
                 newBlock->moveDown();
-                if (dropCheck(newBlock)) return true;
+                if (dropCheck(newBlock)) return "continue!";
             } else if (cmdDictionary->interpretCMD(cmd) == Command::ClockWise) {
                 newBlock->CWRotate();    
-                if (dropCheck(newBlock)) return true;    
+                if (dropCheck(newBlock)) return "continue!";    
             } else if (cmdDictionary->interpretCMD(cmd) == Command::CounterClockWise) {
                 newBlock->CounterCWRotate();   
-                if (dropCheck(newBlock)) return true;     
+                if (dropCheck(newBlock)) return "continue!";     
             } else if (cmdDictionary->interpretCMD(cmd) == Command::Drop) {
                 newBlock->drop();
-                return true;
+                return "continue!";
             } else if (cmdDictionary->interpretCMD(cmd) == Command::LevelUp) {
                 levelUp();
             } else if (cmdDictionary->interpretCMD(cmd) == Command::LevelDown) {
@@ -144,11 +151,11 @@ String Board::moveBlock(Block* newBlock) {
                 level->setRandom(true);
             } else if (cmdDictionary->interpretCMD(cmd) == Command::Restart) {
                 // when it returns false, game knows it needs to restart
-                return false;
-            }
+                return "restart!";
+            } else if 
         }
     }
-    return true;
+    return "eof!";
 }
 
 int clearRows() {
