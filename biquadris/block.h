@@ -4,8 +4,8 @@
 #include "colour.h"
 #include "coordinates.h"
 #include "cell.h"
-#include "block.h"
 #include "board.h"
+
 class Block {
     std::vector<Cell&> cells;
     int heavy;

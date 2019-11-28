@@ -4,8 +4,9 @@
 #include "window.h"
 #include "subject.h"
 #include "coordinates.h"
+#include "state.h"
 
-class GraphicDisplay : public Observer {
+class GraphicDisplay : public Observer<State> {
     Xwindow* window;
 
     public:
