@@ -1,4 +1,6 @@
 #include "block.h"
+#include "board.h"
+
 using namespace std;
 vector<Cell&> Block::getCells() {
 	return cells;
