@@ -40,10 +40,22 @@ State Game::getInfo(){
     return State{scores, levels};
 }
 
-string Game::play(){
+void Game::play(){
     Player* currplayer = board1;
     while (true) {
-        currplayer->play();
+        string gamestate = currplayer->play();
+        if (gamestate == "restart!"){
+            currplayer = board1;
+            reset();
+        } else if (gamestate == "lost!"){
+            if (currplayer = board1){
+                cout << "Player 2 wins";
+            } else {
+                cout << "Player 1 wins"
+            }
+        } else if (gamestate == "eof!"){
+            break;
+        }
         if (currplayer = board1){
             currplayer = board2;
         } else {
@@ -52,3 +64,11 @@ string Game::play(){
     }
 }
 
+void Game::reset(){
+    board1.reset(new Board(1， td, gd, textOnly, seed, scriptFile1, startLevel));
+    board2.reset(new Board(2，td, gd, textOnly, seed, scriptFile2, startLevel));
+    scores[0] = 0;
+    scores[1] = 0;
+    levels[0] = startLevel;
+    levels[1] = startLevel;
+}

@@ -32,9 +32,7 @@ class Game : public Subject <State> {
     State getInfo() const override;
     void setScores(int player, int score); // set score
     std::string play(); // play until game ends; returns winner name
+    void reset();
 };
 
-
-
-
-#endif
+#enif
