@@ -1,4 +1,5 @@
 #include "board.h"
+#include "block.h"
 using namespace std;
 
 NextBlock Board::getinfo() {
@@ -294,7 +295,20 @@ int Board::getLevel(){
 }
 
 bool Board::newBlockCheck(Colour colour) {
-    if (colour == 'I'
+    if (colour == 'I') {
+        if (board.at(3).at(0).getColour() != Colour::White
+        || board.at(3).at(1).getColour() != Colour::White    
+        || board.at(3).at(2).getColour() != Colour::White  
+        || board.at(3).at(3).getColour() != Colour::White) {
+            return false;
+        }
+    } else if (colour == 'J') {
+        if (board.at(3).at(0).getColour() != Colour::White
+        || board.at(3).at(1).getColour() != Colour::White    
+        || board.at(3).at(2).getColour() != Colour::White  
+        || board.at(3).at(3).getColour() != Colour::White) {
+            return false;
+    }
 }
 
 unique_ptr<Block> Board::createBlock(){

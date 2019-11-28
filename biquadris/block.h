@@ -13,7 +13,7 @@ class Block {
     Colour colour;
     int state;
     public:
-    Block (Cell&, Cell&, Cell&, Cell&,
+    Block (Cell*, Cell*, Cell*, Cell*,
          int heavy, Colour);
 
     std::vector<Cell*> getCells();
