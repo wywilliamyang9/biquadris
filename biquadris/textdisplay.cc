@@ -5,26 +5,6 @@
 
 using namespace std;
 
-char convertColour(Colour colour){
-    if (colour == Colour::Red){
-        return 'Z';
-    } else if (colour == Colour::Orange){
-        return 'L';
-    } else if (colour == Colour::LightBlue){
-        return 'I';
-    } else if (colour == Colour::Blue){
-        return 'J';
-    } else if (colour == Colour::Yellow){
-        return 'O';
-    } else if (colour == Colour::Green){
-        return 'S';
-    } else if (colour == Colour::Purple){
-        return 'T';
-    } else if (colour == Colour::White){
-        return ' ';
-    }
-}
-
 TextDisplay::TextDisplay(){
     theDisplay.clear();
     for (int i = 0; i < gridHeight; ++i){
