@@ -15,7 +15,7 @@ class Level{
     void forceBlock(Colour type); // when special action "Force" is applied
     void addHeavy(); // when special action "Heavy" is applied
     int getLevel(); // returns current level
-    Block* createBlock(Colour type);`
+    Block* createBlock(Colour type);
     virtual Block* generateNextBlock() = 0; // spawn next block
     Colour getNextBlock();
     virtual int calculateScore(int rowSCleared) = 0; // calculates got score
