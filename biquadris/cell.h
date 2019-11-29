@@ -6,7 +6,7 @@
 #include "observer.h"
 #include "subject.h"
 
-class Cell : public Subject <Info> {
+class Cell : public Subject {
     Colour colour;
     bool blinded;
     Coordinates coordinates;
@@ -25,10 +25,5 @@ class Cell : public Subject <Info> {
 
     void blindCell();
     void unblindCell();
-
-
-
-    void attach(Observer<Info> *o) override;
-
 };
 #endif

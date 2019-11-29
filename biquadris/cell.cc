@@ -35,7 +35,3 @@ void Cell::setColour(Colour colour) {
 Colour Cell::getColour() {
 	return colour;
 }
-
-void Cell::attach(Observer<Info> *o) {
-    observers.emplace_back(o);
-}

@@ -1,21 +1,21 @@
 #ifndef _SUBJECT_
 #define _SUBJECT_
 #include <vector>
+#include "info.h"
+class Observer;
 
-template <typename StateType> class Observer;
-
-template <typename StateType> class Subject {
+class Subject {
     protected:
-    std::vector<Observer<StateType>*> observers;
-    StateType state;
+    std::vector<Observer*> observers;
+    Info state;
 
     public:
     //void attach(Observer<StateType> *o);
-    virtual void attach(Observer<StateType> *o);
+    void attach(Observer *o);
 
     void notifyObservers();
     virtual ~Subject() = default;
-    virtual StateType getinfo() const = 0;
+    virtual Info getinfo() const = 0;
 };
 
 #endif

@@ -1,13 +1,12 @@
 #include "subject.h"
-template <typename StateType>
-void Subject<StateType>::attach(Observer<StateType> *o) {
+
+void Subject::attach(Observer *o) {
   observers.emplace_back(o);
 }
 
-template <typename StateType>
-void Subject<StateType>::notifyObservers() {
+void Subject::notifyObservers() {
   for (auto &ob : observers) ob->notify(*this);
 }
-template <typename StateType>
-StateType Subject<StateType>::getinfo() const { return state; }
+
+Info Subject::getinfo() const { return state; }
 
