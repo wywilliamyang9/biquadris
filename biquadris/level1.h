@@ -1,7 +1,7 @@
 #ifndef _LEVEL1_
 #define _LEVEL1_
 #include "blockInfo.h"
-#include  "level.h"
+#include "level.h"
 #include <string>
 #include <fstream>
 
