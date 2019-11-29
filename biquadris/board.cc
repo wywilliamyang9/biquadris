@@ -59,8 +59,29 @@ void Board::setOpponent (Board* newOpponent) {
 
 void Board::processSpecialActions() {
     while (!(specialActions.size())) {
-		specialActions.back().applySpecialAction(*this);
-        specialActions.pop_back();        
+		if (specialActions.back() == SpecialAction::Heavy) {
+            level->addHeavy();
+        } else if  (specialActions.back() == SpecialAction::Blind) {
+            for (int i = 2; i < 12; ++i) {
+		        for (int j = 2; j < 9; ++j) {
+			    board.at(i).at(j).blindCell();
+                }
+            }
+		} else if  (specialActions.back() == SpecialAction::ForceI) {
+            level->forceBlock(convertString("I"));
+		}  else if  (specialActions.back() == SpecialAction::ForceJ) {
+            level->forceBlock(convertString("J"));
+		} else if  (specialActions.back() == SpecialAction::ForceL) {
+            level->forceBlock(convertString("L"));
+		} else if  (specialActions.back() == SpecialAction::ForceO) {
+            level->forceBlock(convertString("O"));
+		} else if  (specialActions.back() == SpecialAction::ForceS) {
+            level->forceBlock(convertString("S"));
+		} else if  (specialActions.back() == SpecialAction::ForceZ) {
+            level->forceBlock(convertString("Z"));
+		} else if  (specialActions.back() == SpecialAction::ForceT) {
+            level->forceBlock(convertString("T"));
+		} 
     }
 }
 
@@ -208,37 +229,37 @@ int Board::clearRows() {
         string cmd;
         while (cin >> cmd) {
             if (cmdDictionary->interpretCMD(cmd) == Command::Blind) {
-                opponent->addSpecialAction(BlindAction{});
+                opponent->addSpecialAction(SpecialAction::Blind);
                 break;
             } else if (cmdDictionary->interpretCMD(cmd) == Command::Force) {
                 char type;
                 cin >> type;
-				Colour newColour;
+				SpecialAction newColour;
 				if (type == 'I') {
-					newColour = Colour::LightBlue;
+					newColour = SpecialAction::ForceI;
 				}
 				else if (type == 'J') {
-					newColour = Colour::Blue;
+					newColour = SpecialAction::ForceJ;
 				}
 				else if (type == 'L') {
-					newColour = Colour::Orange;
+					newColour = SpecialAction::ForceL;
 				}
 				else if (type == 'O') {
-					newColour = Colour::Yellow;
+					newColour = SpecialAction::ForceO;
 				}
 				else if (type == 'S') {
-					newColour = Colour::Green;
+					newColour = SpecialAction::ForceS;
 				}
 				else if (type == 'T') {
-					newColour = Colour::Purple;
+					newColour = SpecialAction::ForceT;
 				}
 				else if (type == 'Z') {
-					newColour = Colour::Red;
+					newColour = SpecialAction::ForceZ;
 				}
-                opponent->addSpecialAction(ForceBlockAction{ newColour });
+                opponent->addSpecialAction(newColour);
                 break;
             } else if (cmdDictionary->interpretCMD(cmd) == Command::Heavy) {
-                opponent->addSpecialAction(AddHeavyAction{});
+                opponent->addSpecialAction(SpecialAction::Heavy);
                 break;
             } else {
                 cout << "Invalid Action, select a Special Action." << endl;

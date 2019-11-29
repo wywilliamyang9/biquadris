@@ -15,9 +15,6 @@
 #include "info.h"
 #include "colour.h"
 #include "nextBlock.h"
-#include "forceBlockAction.h"
-#include "addHeavyAction.h"
-#include "blindAction.h"
 #include "textDisplay.h"
 #include "cell.h"
 #include <iostream>
