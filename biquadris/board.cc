@@ -1,3 +1,4 @@
+#define DEBUG
 #include "board.h"
 #include "block.h"
 #include "subject.h"
@@ -91,6 +92,9 @@ void Board::addSpecialAction(SpecialAction sa) {
 }
 
 string Board::play(){
+#ifdef DEBUG
+    cout << "Board::play() starts"<<endl;
+#endif
 	currBlock = createBlock();
 	if (!currBlock) return "lost!";
 	string moveResult = moveBlock();

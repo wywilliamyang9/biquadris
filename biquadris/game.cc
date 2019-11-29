@@ -1,3 +1,5 @@
+#define DEBUG
+
 #include "game.h"
 #include <memory>
 #include <vector>
@@ -9,13 +11,16 @@ using namespace std;
 Game::Game(bool textOnly, int seed, string scriptFile1, string scriptFile2, int startLevel)
 :textOnly{textOnly}, seed{seed}, scriptFile1{scriptFile1}, scriptFile2{scriptFile2}, startLevel{startLevel},
 td{ new TextDisplay{} } {
+#ifdef DEBUG
+    cout << "Game ctor starts"<<endl;
+#endif
 	//td = make_unique(new TextDisplay());
 	//attach(&(*td));
 	/*if (!textOnly){
 		gd = new GraphicalDisplay();
 		attach(gd);
 	}*/
-
+    
 	board1.reset(new Board{ 1,td.get(), /*gd,*/ textOnly, seed, scriptFile1, startLevel });
 	board2.reset(new Board{2,td.get(), /*gd,*/ textOnly, seed, scriptFile2, startLevel});
     board1->setOpponent(&*board2);
@@ -26,6 +31,9 @@ td{ new TextDisplay{} } {
     for(int i = 0; i < 2; i++){
 		levels.emplace_back(0);
 	}
+#ifdef DEBUG
+    cout << "Game ctor ends"<<endl;
+#endif
 }
 
 void Game::updateInfo() {
@@ -44,6 +52,9 @@ void Game::updateInfo() {
 }
 
 void Game::play(){
+#ifdef DEBUG
+    cout << "Game::play() starts"<<endl;
+#endif
     Board* currplayer = board1.get();
     while (true) {
         string gamestate = currplayer->play();
