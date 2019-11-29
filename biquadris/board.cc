@@ -7,10 +7,6 @@ Level* Board::getLevelptr() {
 	return &(*level);
 }
 
-NextBlock Board::getinfo()const {
-    return NextBlock { nextBlockColour,boardnum};
-}
-
 // default ctor, requires manual set of opponent and filestream.
 Board::Board(int boardnum, TextDisplay *td, /*GraphicDisplay *gd,*/ bool textOnly, int seed,
     string scriptFile, int startLevel) : boardnum{boardnum}, seed {seed}, 
@@ -401,12 +397,10 @@ unique_ptr<Block> Board::createBlock() {
 		level->clearHeavy();
 		return block;
     }*/
+    Colour nextBlockColour = level->getNextBlock();
+    textDisplay->updateNextBlock(NextBlock{nextBlockColour, boardnum});
 }
 
 vector<vector<Cell>>& Board::getBoard() {
     return board;
-}
-
-void Board::attach (Observer<NextBlock>*o){
-    observers.emplace_back (o);
 }

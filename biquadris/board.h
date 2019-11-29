@@ -26,7 +26,7 @@
 class Block;
 
 
-class Board : public Subject <NextBlock> {
+class Board {
     int boardnum;
     Board* opponent;
     std::vector<std::vector<Cell>> board;
@@ -45,7 +45,6 @@ class Board : public Subject <NextBlock> {
     int textOnly;
 
     public:
-    NextBlock getinfo() const override;
 	Level* getLevelptr();
 
     int getScore();
@@ -70,11 +69,6 @@ class Board : public Subject <NextBlock> {
     void levelUp();
     void levelDown();
     int getLevel();
-
-
-
-
-    void attach (Observer<NextBlock>*)override;
 };
 
 #endif

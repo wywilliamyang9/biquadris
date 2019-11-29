@@ -8,3 +8,4 @@ void BlindAction::applySpecialAction(Board& playerBoard) {
 		}
 	}
 }
+//	BlindAction::~BlindAction(){}
