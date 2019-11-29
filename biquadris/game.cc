@@ -3,7 +3,6 @@
 #include <vector>
 #include <string>
 #include "board.h"
-#include "state.h"
 
 using namespace std;
 
@@ -79,11 +78,4 @@ void Game::reset(){
     levels[1] = startLevel;
 }
 
-
-
-
-
-void Game::attach (Observer<State>*o){
-    observers.emplace_back (o);
-}
 

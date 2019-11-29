@@ -4,10 +4,7 @@
 #include <string>
 #include <vector>
 #include <iostream>
-#include "subject.h"
-#include "observer.h"
 #include <memory>
-#include "state.h"
 #include "textDisplay.h"
 
 class Game{
