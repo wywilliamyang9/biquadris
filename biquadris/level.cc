@@ -5,25 +5,25 @@
 
 using namespace std;
 
-Level::Level(int seed) : seed{ seed }{
-    srand(seed);
+Level::Level(int seed) : seed{ seed } {
+	srand(seed);
 }
 void Level::clearHeavy() {
 	heavy = 0;
 }
-void Level::forceBlock(Colour forcedBlock){
-    nextBlock = forcedBlock;
+void Level::forceBlock(Colour forcedBlock) {
+	nextBlock = forcedBlock;
 }
 
-void Level::addHeavy(){
-    heavy++;
+void Level::addHeavy() {
+	heavy++;
 }
 
-int Level::getLevel(){
-    return level;
+int Level::getLevel() {
+	return level;
 }
 
-Colour Level::getNextBlock(){
-    return nextBlock;
+Colour Level::getNextBlock() {
+	return nextBlock;
 }
 
