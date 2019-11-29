@@ -20,7 +20,7 @@ TextDisplay::TextDisplay(){
     }
 }
 
-void TextDisplay::notify(Subject<Info> &whoNotified) {
+void TextDisplay::notify(Subject &whoNotified) {
     Info currinfo{whoNotified.getinfo()};
     if (currinfo.boardnum == 1){
         if (currinfo.blinded){

@@ -1,2 +1,2 @@
-level.o: level.cc level.h colour.h subject.h blockInfo.h block.h \
- coordinates.h cell.h info.h observer.h
+level.o: level.cc level.h colour.h subject.h info.h coordinates.h \
+ blockInfo.h block.h cell.h observer.h
