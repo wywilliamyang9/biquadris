@@ -2,7 +2,7 @@
 #include "block.h"
 #include <fstream>
 #include "colour.h"
-#include "blockinfo.h"
+#include "blockInfo.h"
 #include <string>
 
 using namespace std;

@@ -3,8 +3,8 @@
 #include "blockInfo.h"
 #include  "level.h"
 #include <string>
-
-clase Level0 : public Level{
+#include <fstream>
+class Level0 : public Level{
     std::string scriptFile;
     std::fstream sequence;
     public:
@@ -12,7 +12,7 @@ clase Level0 : public Level{
     BlockInfo generateNextBlock() override;
     void setSequence(std::string filename) override;
     int calculateScore(int rowsCleared) override;
-}
+};
 
 
 #endif

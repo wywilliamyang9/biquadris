@@ -5,5 +5,5 @@
 struct BlockInfo {
     int heavy;
     Colour colour;
-}
+};
 #endif
