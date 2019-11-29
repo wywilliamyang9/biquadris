@@ -4,7 +4,6 @@
 #include "subject.h"
 #include "coordinates.h"
 #include "info.h"
-#include "state.h"
 #include <vector>
 #include "nextBlock.h"
 #include "observer.h"
