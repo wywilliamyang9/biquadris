@@ -42,7 +42,6 @@ currlvl {startLevel}, score{0} {
         board.emplace_back (newRow);
     }
 
-    attach(td); // subject <...>
     //if (!textOnly) attach(graphicDisplay);
 }
 
