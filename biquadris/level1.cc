@@ -23,23 +23,17 @@ Colour Level1::chooseNext() {
 	int num = rand() % 12;
 	if (num == 0) {
 		return convertString("S");
-	}
-	else if (num == 1) {
+	} else if (num == 1) {
 		return convertString("Z");
-	}
-	else if (num == 2 || num == 3) {
+	} else if (num == 2 || num == 3) {
 		return convertString("I");
-	}
-	else if (num == 4 || num == 5) {
+	} else if (num == 4 || num == 5) {
 		return convertString("J");
-	}
-	else if (num == 6 || num == 7) {
+	} else if (num == 6 || num == 7) {
 		return convertString("L");
-	}
-	else if (num == 8 || num == 9) {
+	} else if (num == 8 || num == 9) {
 		return convertString("O");
-	}
-	else if (num == 10 || num == 11) {
+	} else {
 		return convertString("T");
 	}
 }
