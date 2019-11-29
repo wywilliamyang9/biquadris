@@ -62,7 +62,7 @@ void Game::play(){
             currplayer = board1.get();
             reset();
         } else if (gamestate == "lost!"){
-            if (currplayer = board1.get()){
+            if (currplayer == board1.get()){
                 cout << "Player 2 wins";
             } else {
 				cout << "Player 1 wins";
@@ -71,12 +71,13 @@ void Game::play(){
         } else if (gamestate == "eof!"){
             break;
         }
-        if (currplayer = board1.get()){
+        if (currplayer == board1.get()){
             currplayer = board2.get();
         } else {
-            currplayer = board1.get();
+            currplayer == board1.get();
         }
         updateInfo();
+        td->print();
     }
 }
 
