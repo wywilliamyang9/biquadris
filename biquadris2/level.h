@@ -6,20 +6,21 @@
 #include "blockInfo.h"
 class Block;
 class Level{
-    int level;
-    int heavy = 0;
-
-    int seed;
-    int blocknum;
-
     protected:
+
+	int level;
+	int heavy = 0;
+
+	int seed;
+
     Colour nextBlock;
     Colour currBlock;
 
     public:
-    Level(int seed, int blocknum);
+    Level(int seed);
     void forceBlock(Colour type); // when special action "Force" is applied
     void addHeavy(); // when special action "Heavy" is applied
+	void clearHeavy(); // sets heavy to 0
     int getLevel(); // returns current level
     Block* createBlock(Colour type);
     virtual BlockInfo generateNextBlock() = 0; // spawn next block
