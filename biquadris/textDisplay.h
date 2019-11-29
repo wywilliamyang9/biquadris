@@ -1,15 +1,19 @@
 #ifndef _GRAPHICDISPLAY_
 #define _GRAPHICDISPLAY_
-#include "board.h"
-#include "window.h"
+//#include "window.h"
 #include "subject.h"
 #include "coordinates.h"
 #include "info.h"
 #include "state.h"
 #include <vector>
-
-class TextDisplay : public Observer<Info>,
-public Observer<State>, public Observer<NextBlock> {
+#include "nextBlock.h"
+#include "observer.h"
+class Board;
+class TextDisplay : 
+	public Observer<Info>,
+	public Observer<State>,
+	public Observer<NextBlock> 
+{
     std::vector<std::vector<char>> board1;
     std::vector<std::vector<char>> board2;
     const int gridWidth = 11;
@@ -20,7 +24,7 @@ public Observer<State>, public Observer<NextBlock> {
     void printLevel();
     void printHighScore();
     void printScore();
-    void printBoard();
+    void printBoards();
     void printNextBlock();
     public:
     TextDisplay();

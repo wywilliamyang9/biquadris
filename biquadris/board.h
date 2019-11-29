@@ -1,6 +1,9 @@
 #ifndef _BOARD_
 #define _BOARD_
 #include "level.h"
+#include "level0.h"
+#include "level1.h"
+
 //#include "graphicDisplay.h"
 #include "specialAction.h"
 #include "commandInterpreter.h"
@@ -18,6 +21,9 @@
 #include "addHeavyAction.h"
 #include "blindAction.h"
 #include "textDisplay.h"
+#include "cell.h"
+#include <iostream>
+#include <sstream>
 class Block;
 class Board : public Subject <NextBlock> {
     int boardnum;
@@ -38,7 +44,8 @@ class Board : public Subject <NextBlock> {
     int textOnly;
 
     public:
-    NextBlock getinfo();
+    NextBlock getinfo() const override;
+	Level* getLevelptr();
 
     int getScore();
     void setScore(int);
@@ -49,16 +56,14 @@ class Board : public Subject <NextBlock> {
     void setOpponent(Board*);
     
     void processSpecialActions(); // applies specialActions
-    void applySpecialActions(BlindAction);
-    void applySpecialActions(AddHeavyAction);
-    void applySpecialActions(ForceBlockAction);
     void addSpecialAction(SpecialAction);
 
     std::string play();
-    bool spawnBlock(); // spawn a new block
-    bool placeBlock(); // place the newly spawned block
+	std::unique_ptr<Block> createBlock();
+	bool newBlockCheck(Colour colour);
+    //bool placeBlock(); // place the newly spawned block
     std::string moveBlock(); // move the block until it drops
-    bool dropCheck(const Block&); // checks if a block has reached ground.
+    bool dropCheck(); // checks if a block has reached ground.
     int clearRows(); // clears filled rows, returns # of clear rows
 
     void levelUp();

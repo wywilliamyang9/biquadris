@@ -13,7 +13,7 @@
 class Game : public Subject <State> {
     std::unique_ptr<TextDisplay> td;
     //std::unique_ptr<GraphicalDisplay> gd;
-    Observer observers;
+    //Observer<State> observers;
 
     std::unique_ptr<Board> board1;
     std::unique_ptr<Board> board2;
@@ -28,12 +28,14 @@ class Game : public Subject <State> {
     int startLevel;
 
     public:
-    Game(bool textOnly, int seed, string scriptFile1, string scriptFile2, int startLevel);
+    Game(bool textOnly, int seed, std::string scriptFile1, std::string scriptFile2, int startLevel);
     // sets scores
-    State getInfo() const override;
+    State getinfo() const override;
+	void updateInfo();
+
     void setScores(int player, int score); // set score
     std::string play(); // play until game ends; returns winner name
     void reset();
 };
 
-#enif
+#endif

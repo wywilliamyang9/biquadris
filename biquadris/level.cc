@@ -5,12 +5,14 @@
 
 using namespace std;
 
-Level::Level(int seed, int blocknum): seed{seed}, blocknum{blocknum){
+Level::Level(int seed) : seed{ seed }{
     srand(seed);
 }
-
+void Level::clearHeavy() {
+	heavy = 0;
+}
 void Level::forceBlock(Colour forcedBlock){
-    nextBlock = forceBlock;
+    nextBlock = forcedBlock;
 }
 
 void Level::addHeavy(){

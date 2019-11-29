@@ -1,4 +1,5 @@
 #include "commandInterpreter.h"
+using namespace std;
 
 CommandInterpreter::CommandInterpreter() {
     cmdDictionary["lef"] = Command::Left;
@@ -71,7 +72,7 @@ CommandInterpreter::CommandInterpreter() {
 
     cmdDictionary["I"] = Command::I;
     cmdDictionary["J"] = Command::J;
-    cmdDictionary["K"] = Command::K;
+    cmdDictionary["L"] = Command::L;
     cmdDictionary["O"] = Command::O;
     cmdDictionary["S"] = Command::S;
     cmdDictionary["Z"] = Command::Z;
@@ -110,6 +111,6 @@ void CommandInterpreter::addNewCMD(string s,Command cmd){
 void CommandInterpreter::removeCMD(string s){
     cmdDictionary.erase(s);
 }
-bool checkCMD(std::string s){return cmdDictionary.count(s); } // returns true if is a valid cmd
-Command interpretCMD(std::string s){return cmdDictionary[s];}
+bool CommandInterpreter::checkCMD(std::string s){return cmdDictionary.count(s); } // returns true if is a valid cmd
+Command CommandInterpreter::interpretCMD(std::string s){return cmdDictionary[s];}
 

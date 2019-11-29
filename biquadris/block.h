@@ -8,10 +8,12 @@
 
 class Board;
 class Block {
-    std::vector<Cell*> cells;
-    int heavy;
-    Colour colour;
-    int state;
+protected:
+	std::vector<Cell*> cells;
+	int heavy;
+	Colour colour;
+	int state;
+
     public:
     Block (Cell*, Cell*, Cell*, Cell*,
          int heavy, Colour);

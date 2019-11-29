@@ -8,8 +8,8 @@
 using namespace std;
 
 
-Level0::Level0(int seed, int blocknum, std::string scriptFile): 
-Level{seed, blocknum}, scriptFile{scriptFile}{
+Level0::Level0(int seed, std::string scriptFile): 
+Level{seed}, scriptFile{scriptFile}{
     sequence.open(scriptFile);
     string type;
     sequence >> type;
@@ -25,14 +25,12 @@ BlockInfo Level0::generateNextBlock(){
         sequence >> type;
     }
     nextBlock = convertString(type);
-    int temp = heavy;
-    heavy = 0;
-    return BlockInfo{currBlock, temp};
+    return BlockInfo{heavy,currBlock };
 }
 
 void Level0::setSequence(std::string filename){
     scriptFile = filename;
-    sequence = sequence.open(filename);
+    sequence.open(filename);
     string type;
     sequence >> type;
     nextBlock = convertString(type);

@@ -3,11 +3,11 @@
 #include <iostream>
 #include "colour.h"
 #include <vector>
-
+#include "board.h"
 using namespace std;
 
 TextDisplay::TextDisplay(){
-    theDisplay.clear();
+    //theDisplay.clear();
     for (int i = 0; i < gridHeight; ++i){
         vector<char> temp1;
         vector<char> temp2;
@@ -15,13 +15,13 @@ TextDisplay::TextDisplay(){
             temp1.emplace_back(' ');
             temp2.emplace_back(' ');
         }
-        board1.emplace_back(temp);
-        board2.emplace_back(temp);
+        board1.emplace_back(temp1);
+        board2.emplace_back(temp2);
     }
 }
 
-void TextDisplay::notify(Subject<Info> &whoNotified) override{
-    Info currinfo{whoNotified.getInfo()};
+void TextDisplay::notify(Subject<Info> &whoNotified) {
+    Info currinfo{whoNotified.getinfo()};
     if (currinfo.boardnum == 1){
         if (currinfo.blinded){
             board1[currinfo.coord.row][currinfo.coord.col] = '?';
@@ -37,8 +37,8 @@ void TextDisplay::notify(Subject<Info> &whoNotified) override{
     }
 }
 
-void TextDisplay::notify(Subject<State> &whoNotified) override{
-    State currinfo{whoNotified.getInfo()};
+void TextDisplay::notify(Subject<State> &whoNotified) {
+    State currinfo{whoNotified.getinfo()};
     scores[0] = currinfo.scores[0];
     scores[1] = currinfo.scores[1];
     scores[2] = currinfo.scores[2];
@@ -46,8 +46,8 @@ void TextDisplay::notify(Subject<State> &whoNotified) override{
     levels[1] = currinfo.levels[1];
 }
 
-void TextDisplay::notify(Subject<NextBlock> &whoNotified) override{
-    NextBlock currinfo{whoNotified.getInfo()};
+void TextDisplay::notify(Subject<NextBlock> &whoNotified) {
+    NextBlock currinfo{whoNotified.getinfo()};
     if (currinfo.boardnum == 1){
         nextblock[0] = convertColour(currinfo.colour);
     } else if (currinfo.boardnum == 2){
@@ -55,36 +55,36 @@ void TextDisplay::notify(Subject<NextBlock> &whoNotified) override{
     }
 }
 
-void TextView::print() {
+void TextDisplay::print() {
 	printLevel();
     printHighScore();
 	printScore();
 	cout << "-----------   -----------" << endl;
 	printBoards();
 	cout << "-----------   -----------" << endl;
-	printNext();
+	printNextBlock();
 }
 
-void TextView::printLevel() {
+void TextDisplay::printLevel() {
 	cout << "LEVEL: " << levels[0];
 	cout << "    ";
     cout << "LEVEL: " << levels[1] << endl;
 }
 
-void TextView::printHighScore() {
+void TextDisplay::printHighScore() {
 	cout << "HISCORE: " << scores[3];
 	cout << "  ";
 	cout << "HISCORE: " << scores[3] << endl;
 }
 
-void TextView::printScore() {
+void TextDisplay::printScore() {
 	cout << "SCORE: " << scores[0];
 	cout << "    ";
 	cout << "SCORE: " << scores[1] << endl;
 }
 
-void TextView::printBoards() {
-	for (int i = 0; i <= gridHeight; i--) {
+void TextDisplay::printBoards() {
+	for (int i = 0; i <= gridHeight; i++) {
 		for (int j = 0; j < ((gridWidth * 2) + 1); j++) {
 			if (j < gridWidth) {
 				cout << board1[i][j];
@@ -130,9 +130,10 @@ string printBlock(char type, int line){
     } else if (type == 'T' && line == 2){
         return " T  ";
     }
+	return "";
 }
 
-void TextView::printNext() {
+void TextDisplay::printNextBlock() {
 	cout << "Next:       Next:" << endl;
     cout << printBlock(nextblock[0], 1) << "        " << printBlock(nextblock[1], 1) << endl;
     cout << printBlock(nextblock[0], 2) << "        " << printBlock(nextblock[1], 2) << endl;
