@@ -81,3 +81,12 @@ void Game::reset(){
     levels[0] = startLevel;
     levels[1] = startLevel;
 }
+
+
+
+
+
+void Game::attach (Observer<State>*o){
+    observers.emplace_back (o);
+}
+

@@ -29,13 +29,13 @@ void IBlock::CWRotate(Board & playerBoard) {
         
         vector<Cell*> newCells;
         newCells.emplace_back(
-            playerBoard.getBoard().at(i0.coord.row-3).at(i0.coord.col));
+            &(playerBoard.getBoard().at(i0.coord.row-3).at(i0.coord.col)));
         newCells.emplace_back(
-            playerBoard.getBoard().at(i1.coord.row-2).at(i1.coord.col-1));
+            &(playerBoard.getBoard().at(i1.coord.row-2).at(i1.coord.col-1)));
         newCells.emplace_back(
-            playerBoard.getBoard().at(i2.coord.row-1).at(i2.coord.col-2));
+            &(playerBoard.getBoard().at(i2.coord.row-1).at(i2.coord.col-2)));
         newCells.emplace_back(
-            playerBoard.getBoard().at(i3.coord.row).at(i3.coord.col-3));
+            &(playerBoard.getBoard().at(i3.coord.row).at(i3.coord.col-3)));
         
         cells.clear();
         cells = newCells;
@@ -67,13 +67,13 @@ void IBlock::CWRotate(Board & playerBoard) {
 
         vector<Cell*> newCells;
         newCells.emplace_back(
-            playerBoard.getBoard().at(i0.coord.row+3).at(i0.coord.col));
+            &(playerBoard.getBoard().at(i0.coord.row+3).at(i0.coord.col)));
         newCells.emplace_back(
-            playerBoard.getBoard().at(i1.coord.row+2).at(i1.coord.col+1));
+            &(playerBoard.getBoard().at(i1.coord.row+2).at(i1.coord.col+1)));
         newCells.emplace_back(
-            playerBoard.getBoard().at(i2.coord.row+1).at(i2.coord.col+2));
+            &(playerBoard.getBoard().at(i2.coord.row+1).at(i2.coord.col+2)));
         newCells.emplace_back(
-            playerBoard.getBoard().at(i3.coord.row).at(i3.coord.col+3));
+            &(playerBoard.getBoard().at(i3.coord.row).at(i3.coord.col+3)));
         
         cells.clear();
         cells = newCells;

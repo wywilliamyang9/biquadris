@@ -5,17 +5,15 @@
 #include "level1.h"
 
 //#include "graphicDisplay.h"
+#include "subject.h"
+#include "observer.h"
 #include "specialAction.h"
 #include "commandInterpreter.h"
 #include <vector>
 #include <fstream>
 #include <memory>
-#include <sstream>
 #include "info.h"
 #include "colour.h"
-#include <vector>
-#include <fstream>
-#include <memory>
 #include "nextBlock.h"
 #include "forceBlockAction.h"
 #include "addHeavyAction.h"
@@ -24,7 +22,10 @@
 #include "cell.h"
 #include <iostream>
 #include <sstream>
+#include "IBlock.h" 
 class Block;
+
+
 class Board : public Subject <NextBlock> {
     int boardnum;
     Board* opponent;
@@ -69,6 +70,11 @@ class Board : public Subject <NextBlock> {
     void levelUp();
     void levelDown();
     int getLevel();
+
+
+
+
+    void attach (Observer<NextBlock>*)override;
 };
 
 #endif

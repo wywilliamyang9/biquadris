@@ -4,6 +4,9 @@
 #include  "level.h"
 #include <string>
 #include <fstream>
+#include "colour.h"
+
+
 class Level0 : public Level {
 	std::string scriptFile;
 	std::fstream sequence;

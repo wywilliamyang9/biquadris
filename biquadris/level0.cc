@@ -1,7 +1,7 @@
 #include "level0.h"
 #include "block.h"
 #include <fstream>
-#include "colour.h"
+
 #include "blockInfo.h"
 #include <string>
 
@@ -42,4 +42,4 @@ int Level0::calculateScore(int rowsCleared) {
 	return linesClearScore;
 }
 
-void setRandom() {}
+void Level0::setRandom() {}

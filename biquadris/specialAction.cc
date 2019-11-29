@@ -1,4 +1,4 @@
 #include "specialAction.h"
-SpecialAction::~SpecialAction() {}
+//SpecialAction::~SpecialAction() {}
 
 void SpecialAction::applySpecialAction(Board& b) {}

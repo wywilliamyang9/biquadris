@@ -36,6 +36,13 @@ class Game : public Subject <State> {
     void setScores(int player, int score); // set score
     std::string play(); // play until game ends; returns winner name
     void reset();
+
+
+
+    void attach (Observer<State>*o) override;
 };
+
+
+
 
 #endif

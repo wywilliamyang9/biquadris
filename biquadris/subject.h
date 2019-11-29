@@ -5,11 +5,14 @@
 template <typename StateType> class Observer;
 
 template <typename StateType> class Subject {
+    protected:
     std::vector<Observer<StateType>*> observers;
     StateType state;
 
     public:
-    void attach(Observer<StateType> *o);
+    //void attach(Observer<StateType> *o);
+    virtual void attach(Observer<StateType> *o);
+
     void notifyObservers();
     virtual ~Subject() = default;
     virtual StateType getinfo() const = 0;

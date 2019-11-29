@@ -4,7 +4,7 @@
 class Board;
 class SpecialAction {
     public:
-    virtual ~SpecialAction();
+    //virtual ~SpecialAction();
 	virtual void applySpecialAction(Board&);
 };
 #endif

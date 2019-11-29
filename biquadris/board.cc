@@ -1,5 +1,6 @@
 #include "board.h"
 #include "block.h"
+#include "subject.h"
 using namespace std;
 
 Level* Board::getLevelptr() {
@@ -21,7 +22,7 @@ currlvl {startLevel}, score{0} {
 		level.reset(new Level0{seed, scriptFile});
     } else if (currlvl == 1) {
         currlvl = 1;
-		level.reset(new Level1{ seed, scriptFile });
+		level.reset(new Level1{ seed});
     } /*else if (currlvl == 2) {
         currlvl = 2;
         level.reset(new Level2);
@@ -39,13 +40,13 @@ currlvl {startLevel}, score{0} {
 			for (int j = 0; j < 11; ++j) { // column
             Cell newCell {i,j, boardnum};
             //if (!textOnly) newCell.attach(graphicDisplay);
-            newCell.attach(textDisplay);
+            newCell.attach(td); // subject <Info>
             newRow.emplace_back(newCell);
         }
         board.emplace_back (newRow);
     }
 
-    attach(textDisplay);
+    attach(td); // subject <...>
     //if (!textOnly) attach(graphicDisplay);
 }
 
@@ -268,7 +269,7 @@ bool Board::dropCheck() {
 void Board::levelUp() {
     if (currlvl == 0) {
         currlvl = 1;
-		level.reset(new Level1{ seed, fileInput });
+		level.reset(new Level1{ seed });
     } /*else if (currlvl == 1) {
         currlvl = 2;
         level.reset(new Level2);
@@ -290,7 +291,7 @@ void Board::levelDown() {
         level.reset(new Level0{ seed, fileInput });
     } else if (currlvl == 2) {
         currlvl = 1;
-        level.reset(new Level1{ seed, fileInput });
+        level.reset(new Level1{ seed});
     } /*else if (currlvl == 3) {
         currlvl = 2;
         level.reset(new Level2);
@@ -366,39 +367,46 @@ unique_ptr<Block> Board::createBlock() {
     BlockInfo newBlockInfo = level->generateNextBlock();
     // checks if there is enough space to allocate the block.
     if (!newBlockCheck(newBlockInfo.colour)){
-        unique_ptr<Block> unique_null = make_unique<Block>(board.at(3).at(0), board.at(3).at(1), board.at(3).at(2), board.at(3).at(3), newBlockInfo.heavy, newBlockInfo.colour);
+        unique_ptr<Block> unique_null = make_unique<IBlock>(&board.at(3).at(0), &board.at(3).at(1), &board.at(3).at(2), &board.at(3).at(3), newBlockInfo.heavy, newBlockInfo.colour);
         unique_null.reset();
         return unique_null;
     }
 
     // if there is, spawn the block.
     if (convertColour(newBlockInfo.colour) == 'I'){
-        unique_ptr<Block> block = make_unique<Block>(board.at(3).at(0), board.at(3).at(1), board.at(3).at(2), board.at(3).at(3), newBlockInfo.heavy, newBlockInfo.colour);
+        unique_ptr<Block> block = make_unique<IBlock>(&board.at(3).at(0), &board.at(3).at(1), &board.at(3).at(2), &board.at(3).at(3), newBlockInfo.heavy, newBlockInfo.colour);
         return block;
-    } else if (convertColour(newBlockInfo.colour) == 'J'){
-        unique_ptr<Block> block = make_unique<Block>(board.at(2).at(0), board.at(3).at(0), board.at(3).at(1), board.at(3).at(2), newBlockInfo.heavy, newBlockInfo.colour);
+    } /*else if (convertColour(newBlockInfo.colour) == 'J'){
+        unique_ptr<Block> block = make_unique<JBlock>(&board.at(2).at(0), &board.at(3).at(0), &board.at(3).at(1), &board.at(3).at(2), newBlockInfo.heavy, newBlockInfo.colour);
         level->clearHeavy();
         return block;
     } else if (convertColour(newBlockInfo.colour) == 'L'){
-        unique_ptr<Block> block = make_unique<Block>(board.at(2).at(2), board.at(3).at(2), board.at(3).at(1), board.at(3).at(0),newBlockInfo.heavy, newBlockInfo.colour);
+        unique_ptr<Block> block = make_unique<LBlock>(&board.at(2).at(2), &board.at(3).at(2), &board.at(3).at(1), &board.at(3).at(0),newBlockInfo.heavy, newBlockInfo.colour);
 		level->clearHeavy();
 		return block;
     } else if (convertColour(newBlockInfo.colour) == 'O'){
-        unique_ptr<Block> block = make_unique<Block>(board.at(2).at(0), board.at(2).at(1), board.at(3).at(0), board.at(3).at(1),newBlockInfo.heavy, newBlockInfo.colour);
+        unique_ptr<Block> block = make_unique<OBlock>(&board.at(2).at(0), &board.at(2).at(1), &board.at(3).at(0), &board.at(3).at(1),newBlockInfo.heavy, newBlockInfo.colour);
 		level->clearHeavy();
 		return block;
     } else if (convertColour(newBlockInfo.colour) == 'S'){
-        unique_ptr<Block> block = make_unique<Block>(board.at(3).at(0), board.at(3).at(1), board.at(2).at(1), board.at(2).at(2),newBlockInfo.heavy, newBlockInfo.colour);
+        unique_ptr<Block> block = make_unique<SBlock>(&board.at(3).at(0), &board.at(3).at(1), &board.at(2).at(1), &board.at(2).at(2),newBlockInfo.heavy, newBlockInfo.colour);
 		level->clearHeavy();
 		return block;
-    } else if (convertColour(newBlockInfo.colour) == 'J'){
-        unique_ptr<Block> block = make_unique<Block>(board.at(2).at(0), board.at(2).at(1), board.at(3).at(1), board.at(3).at(2),newBlockInfo.heavy, newBlockInfo.colour);
+    } else if (convertColour(newBlockInfo.colour) == 'Z'){
+        unique_ptr<Block> block = make_unique<JBlock>(&board.at(2).at(0), &board.at(2).at(1), &board.at(3).at(1), &board.at(3).at(2),newBlockInfo.heavy, newBlockInfo.colour);
 		level->clearHeavy();
 		return block;
-    } else if (convertColour(newBlockInfo.colour) == 'J'){
-        unique_ptr<Block> block = make_unique<Block>(board.at(2).at(0), board.at(2).at(1), board.at(2).at(2), board.at(3).at(1),newBlockInfo.heavy, newBlockInfo.colour);
+    } else if (convertColour(newBlockInfo.colour) == 'T'){
+        unique_ptr<Block> block = make_unique<JBlock>(&board.at(2).at(0), &board.at(2).at(1), &board.at(2).at(2), &board.at(3).at(1),newBlockInfo.heavy, newBlockInfo.colour);
 		level->clearHeavy();
 		return block;
-    }
+    }*/
 }
 
+vector<vector<Cell>>& Board::getBoard() {
+    return board;
+}
+
+void Board::attach (Observer<NextBlock>*o){
+    observers.emplace_back (o);
+}

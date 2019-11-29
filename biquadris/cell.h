@@ -25,5 +25,10 @@ class Cell : public Subject <Info> {
 
     void blindCell();
     void unblindCell();
+
+
+
+    void attach(Observer<Info> *o) override;
+
 };
 #endif
