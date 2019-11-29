@@ -28,6 +28,6 @@ class Level{
     virtual void setSequence(std::string filename) = 0;
     virtual int calculateScore(int rowsCleared) = 0; // calculates got score
 
-    void setRandom()=0;
+    void setRandom() = 0;
 };
 #endif

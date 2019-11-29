@@ -12,6 +12,7 @@ class Level0 : public Level{
     BlockInfo generateNextBlock() override;
     void setSequence(std::string filename) override;
     int calculateScore(int rowsCleared) override;
+    void setRandom() override;
 };
 
 

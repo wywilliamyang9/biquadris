@@ -42,3 +42,4 @@ int Level0::calculateScore(int rowsCleared){
     return linesClearScore;
 }
 
+void setRandom(){}

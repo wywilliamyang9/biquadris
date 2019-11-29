@@ -2,14 +2,14 @@
 #include "block.h"
 #include <fstream>
 #include "colour.h"
-#include "blockinfo.h"
+#include "blockInfo.h"
 #include <string>
 
 using namespace std;
 
 
-Level1::Level1(int seed, int blocknum, bool readFromFile,std::string scriptFile = ""): 
-Level{seed, blocknum}, readFromFile{readFromFile}{
+Level1::Level1(int seed, bool readFromFile, std::string scriptFile): 
+Level{seed}, readFromFile{readFromFile}{
     if (readFromFile){
         this->scriptFile = scriptFile;
         sequence.open(scriptFile);
@@ -51,16 +51,25 @@ BlockInfo Level1::generateNextBlock(){
     } else {	
         nextBlock = chooseNext();	
     }	
-    return BlockInfo{currBlock, heavy};
+    return BlockInfo{heavy, currBlock};
 }
 
 void Level1::setSequence(std::string filename){
-    sequence = filename;
+    readFromFile = true;
+    scriptFile = filename;
+    sequence.open(filename);
+    string type;
+    sequence >> type;
+    nextBlock = convertString(type);
 }
 
 int Level1::calculateScore(int rowsCleared){
     int linesClearScore = rowsCleared + level;
     linesClearScore = linesClearScore * linesClearScore;
     return linesClearScore;
+}
+
+void setRandom(){
+    readFromFile = false;
 }
 
