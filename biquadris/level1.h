@@ -9,7 +9,7 @@ class Level1 : public Level {
 	bool readFromFile;
 	std::fstream sequence;
 public:
-	Level1(int seed, bool readFromFile = false,std::string scriptFile = "");
+	Level1(int seed, bool readFromFile = false, std::string scriptFile = "");
 	Colour chooseNext();
 	BlockInfo generateNextBlock() override;
 	void setSequence(std::string filename) override;
