@@ -11,7 +11,7 @@ Game::Game(bool textOnly, int seed, string scriptFile1, string scriptFile2, int 
 :textOnly{textOnly}, seed{seed}, scriptFile1{scriptFile1}, scriptFile2{scriptFile2}, startLevel{startLevel},
 td{ new TextDisplay{} } {
 	//td = make_unique(new TextDisplay());
-	attach(&(*td));
+	//attach(&(*td));
 	/*if (!textOnly){
 		gd = new GraphicalDisplay();
 		attach(gd);
@@ -29,11 +29,6 @@ td{ new TextDisplay{} } {
 	}
 }
 
-State Game::getinfo() const{
-
-    return State{scores, levels};
-}
-
 void Game::updateInfo() {
 	scores.at(0) = board1->getScore();
 	scores.at(1) = board2->getScore();
@@ -45,8 +40,11 @@ void Game::updateInfo() {
 	}
 	levels[0] = board1->getLevel();
 	levels[1] = board2->getLevel();
+    td->updateScore(scores);
+    td->updateLevel(levels);
 }
-string Game::play(){
+
+void Game::play(){
     Board* currplayer = board1.get();
     while (true) {
         string gamestate = currplayer->play();
@@ -56,11 +54,10 @@ string Game::play(){
         } else if (gamestate == "lost!"){
             if (currplayer = board1.get()){
                 cout << "Player 2 wins";
-				return "Player 2";
             } else {
 				cout << "Player 1 wins";
-				return "Player 1";
             }
+            reset();
         } else if (gamestate == "eof!"){
             break;
         }
@@ -69,8 +66,8 @@ string Game::play(){
         } else {
             currplayer = board1.get();
         }
+        updateInfo();
     }
-	return "No Winner!";
 }
 
 void Game::reset(){

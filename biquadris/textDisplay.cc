@@ -37,23 +37,25 @@ void TextDisplay::notify(Subject<Info> &whoNotified) {
     }
 }
 
-void TextDisplay::notify(Subject<State> &whoNotified) {
-    State currinfo{whoNotified.getinfo()};
-    scores[0] = currinfo.scores[0];
-    scores[1] = currinfo.scores[1];
-    scores[2] = currinfo.scores[2];
-    levels[0] = currinfo.levels[0];
-    levels[1] = currinfo.levels[1];
-}
-
-void TextDisplay::notify(Subject<NextBlock> &whoNotified) {
-    NextBlock currinfo{whoNotified.getinfo()};
-    if (currinfo.boardnum == 1){
-        nextblock[0] = convertColour(currinfo.colour);
-    } else if (currinfo.boardnum == 2){
-        nextblock[1] = convertColour(currinfo.colour);
+updateNextBlock(NextBlock nextBlockinfo){
+    if (nextBlockinfo.boardnum == 1){
+        nextblock[0] = convertColour(nextBlockinfo.colour);
+    } else if (nextBlockinfo.boardnum == 2){
+        nextblock[1] = convertColour(nextBlockinfo.colour);
     }
 }
+
+updateScore(vector<int> newScores){
+    scores[0] = newScores[0];
+    scores[1] = newScores[1];
+    scores[2] = newScores[2];
+}
+
+updateLevel(vector<int> newLevels){
+    levels[0] = newLevels[0];
+    levels[1] = newLevels[1];
+}
+
 
 void TextDisplay::print() {
 	printLevel();

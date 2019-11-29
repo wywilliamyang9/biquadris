@@ -9,11 +9,7 @@
 #include "nextBlock.h"
 #include "observer.h"
 class Board;
-class TextDisplay : 
-	public Observer<Info>,
-	public Observer<State>,
-	public Observer<NextBlock> 
-{
+class TextDisplay : public Observer<Info>{
     std::vector<std::vector<char>> board1;
     std::vector<std::vector<char>> board2;
     const int gridWidth = 11;
@@ -28,11 +24,10 @@ class TextDisplay :
     void printNextBlock();
     public:
     TextDisplay();
-    // notified when "next block" is changed.
     void notify(Subject<Info> &whoNotified) override;
-    // notified when scores have changed 
-    void notify(Subject<State> &whoNotified) override;
-    void notify(Subject<NextBlock> &whoNotified) override;
+    updateNextBlock(NextBlock nextBlock info);
+    updateScore(vector<int> scores);
+    updateLevel(vector<int> levels);
 
     void print();
 };

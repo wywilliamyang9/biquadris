@@ -10,7 +10,7 @@
 #include "state.h"
 #include "textDisplay.h"
 
-class Game : public Subject <State> {
+class Game{
     std::unique_ptr<TextDisplay> td;
     //std::unique_ptr<GraphicalDisplay> gd;
     //Observer<State> observers;
@@ -30,16 +30,11 @@ class Game : public Subject <State> {
     public:
     Game(bool textOnly, int seed, std::string scriptFile1, std::string scriptFile2, int startLevel);
     // sets scores
-    State getinfo() const override;
 	void updateInfo();
 
     void setScores(int player, int score); // set score
-    std::string play(); // play until game ends; returns winner name
+    void play(); // play until game ends; returns winner name
     void reset();
-
-
-
-    void attach (Observer<State>*o) override;
 };
 
 
