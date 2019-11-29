@@ -25,7 +25,9 @@ BlockInfo Level0::generateNextBlock(){
         sequence >> type;
     }
     nextBlock = convertString(type);
-    return BlockInfo{currBlock, heavy};
+    int temp = heavy;
+    heavy = 0;
+    return BlockInfo{currBlock, temp};
 }
 
 void Level0::setSequence(std::string filename){
