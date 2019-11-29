@@ -24,9 +24,9 @@ class TextDisplay : public Observer<Info>{
     public:
     TextDisplay();
     void notify(Subject<Info> &whoNotified) override;
-    updateNextBlock(NextBlock nextBlock info);
-    updateScore(vector<int> scores);
-    updateLevel(vector<int> levels);
+    void updateNextBlock(NextBlock nextBlockInfo);
+    void updateScore(std::vector<int> scores);
+    void updateLevel(std::vector<int> levels);
 
     void print();
 };

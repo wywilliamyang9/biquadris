@@ -37,21 +37,21 @@ void TextDisplay::notify(Subject<Info> &whoNotified) {
     }
 }
 
-updateNextBlock(NextBlock nextBlockinfo){
-    if (nextBlockinfo.boardnum == 1){
-        nextblock[0] = convertColour(nextBlockinfo.colour);
-    } else if (nextBlockinfo.boardnum == 2){
-        nextblock[1] = convertColour(nextBlockinfo.colour);
+void TextDisplay::updateNextBlock(NextBlock nextBlockInfo){
+    if (nextBlockInfo.boardnum == 1){
+        nextblock[0] = convertColour(nextBlockInfo.colour);
+    } else if (nextBlockInfo.boardnum == 2){
+        nextblock[1] = convertColour(nextBlockInfo.colour);
     }
 }
 
-updateScore(vector<int> newScores){
+void TextDisplay::updateScore(vector<int> newScores){
     scores[0] = newScores[0];
     scores[1] = newScores[1];
     scores[2] = newScores[2];
 }
 
-updateLevel(vector<int> newLevels){
+void TextDisplay::updateLevel(vector<int> newLevels){
     levels[0] = newLevels[0];
     levels[1] = newLevels[1];
 }
