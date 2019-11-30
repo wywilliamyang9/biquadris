@@ -501,7 +501,7 @@ unique_ptr<Block> Board::createBlock() {
     // if there is, spawn the block.
     //if (convertColour(newBlockInfo.colour) == 'I'){
         unique_ptr<Block> block = make_unique<IBlock>(&board.at(3).at(0), &board.at(3).at(1), &board.at(3).at(2), &board.at(3).at(3), newBlockInfo.heavy, newBlockInfo.colour);
-        
+
     //} 
 
         #ifdef DEBUG
