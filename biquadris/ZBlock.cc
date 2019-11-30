@@ -33,7 +33,10 @@ void ZBlock::CWRotate(Board & playerBoard) {
             playerBoard.getBoard().at(i2.coord.row-1).at(i2.coord.col-1));
         newCells.emplace_back(
             playerBoard.getBoard().at(i3.coord.row).at(i3.coord.col-2));
-        
+        for (int i = 0; i < 4; ++i) {
+            cells.at(i).setCurrBlock(false);
+            newCells.at(i).setCurrBlock(true);
+        }
         cells.clear();
         cells = newCells;
         state = 2;
@@ -68,7 +71,10 @@ void ZBlock::CWRotate(Board & playerBoard) {
             playerBoard.getBoard().at(i2.coord.row+1).at(i2.coord.col+1));
         newCells.emplace_back(
             playerBoard.getBoard().at(i3.coord.row).at(i3.coord.col+2));
-        
+        for (int i = 0; i < 4; ++i) {
+            cells.at(i).setCurrBlock(false);
+            newCells.at(i).setCurrBlock(true);
+        }
         cells.clear();
         cells = newCells;
         state = 1;
