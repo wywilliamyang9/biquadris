@@ -542,23 +542,23 @@ unique_ptr<Block> Board::createBlock() {
         level->clearHeavy();
 
     } else if (convertColour(newBlockInfo.colour) == 'L'){
-        block.reset(new LBlock{&board.at(2).at(2), &board.at(3).at(2), &board.at(3).at(1), &board.at(3).at(0),newBlockInfo.heavy, newBlockInfo.colour});
+        block.reset(new LBlock{&board.at(2).at(2), &board.at(3).at(2), &board.at(3).at(1), &board.at(3).at(0), newBlockInfo.heavy, newBlockInfo.colour});
 		level->clearHeavy();
 
     } else if (convertColour(newBlockInfo.colour) == 'O'){
-        block.reset(new OBlock{&board.at(2).at(0), &board.at(2).at(1), &board.at(3).at(0), &board.at(3).at(1),newBlockInfo.heavy, newBlockInfo.colour});
+        block.reset(new OBlock{&board.at(2).at(0), &board.at(2).at(1), &board.at(3).at(0), &board.at(3).at(1), newBlockInfo.heavy, newBlockInfo.colour});
 		level->clearHeavy();
 
     } else if (convertColour(newBlockInfo.colour) == 'S'){
-        block.reset(new SBlock{&board.at(3).at(0), &board.at(3).at(1), &board.at(2).at(1), &board.at(2).at(2),newBlockInfo.heavy, newBlockInfo.colour});
+        block.reset(new SBlock{&board.at(3).at(0), &board.at(3).at(1), &board.at(2).at(1), &board.at(2).at(2), newBlockInfo.heavy, newBlockInfo.colour});
 		level->clearHeavy();
 
     } else if (convertColour(newBlockInfo.colour) == 'Z'){
-        block.reset(new ZBlock{&board.at(2).at(0), &board.at(2).at(1), &board.at(3).at(1), &board.at(3).at(2),newBlockInfo.heavy, newBlockInfo.colour});
+        block.reset(new ZBlock{&board.at(2).at(0), &board.at(2).at(1), &board.at(3).at(1), &board.at(3).at(2), newBlockInfo.heavy, newBlockInfo.colour});
 		level->clearHeavy();
 
     } else if (convertColour(newBlockInfo.colour) == 'T'){
-        block.reset(new TBlock{&board.at(2).at(0), &board.at(2).at(1), &board.at(2).at(2), &board.at(3).at(1),newBlockInfo.heavy, newBlockInfo.colour});
+        block.reset(new TBlock{&board.at(2).at(0), &board.at(2).at(1), &board.at(2).at(2), &board.at(3).at(1), newBlockInfo.heavy, newBlockInfo.colour});
 		level->clearHeavy();
     }
     for (int i = 0; i < 4; ++i) {
