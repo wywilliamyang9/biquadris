@@ -1,4 +1,5 @@
 #define DEBUG
+//#define DEBUG2
 #include "board.h"
 #include "block.h"
 #include "subject.h"
@@ -349,15 +350,48 @@ int Board::clearRows() {
 }
 
 bool Board::dropCheck() {
+
+#ifdef DEBUG
+    for (int i = 0; i < 18; ++i) {
+        for (int j = 0; j < 11; ++j) {
+            cout << board.at(i).at(j).getCurrBlock();
+        }
+        cout << endl;
+    }
+#endif
     for (int j = 0; j < 4; ++j) {
         Info currInfo = currBlock->getCells().at(j)->getinfo();
-        if (currInfo.coord.row == 17) return true;
+        if (currInfo.coord.row == 17) {
+            for (int i = 0; i < 4; ++i) {
+                currBlock->getCells().at(i)->setCurrBlock(false);
+            }
+            return true;
+        }
+#ifdef DEBUG
+    cout << "-----------------not 17" << endl;
+#endif
+#ifdef DEBUG
+    cout <<"nextrow is " <<  currInfo.coord.row+1 << endl;
+#endif
+#ifdef DEBUG
+    cout <<"getCurrBlock is " <<  (board.at(currInfo.coord.row+1).
+            at(currInfo.coord.col).getCurrBlock()) << endl;
+#endif
         if (board.at(currInfo.coord.row+1).at(currInfo.coord.col).getinfo().colour
             != Colour::White
             && !(board.at(currInfo.coord.row+1).
             at(currInfo.coord.col).getCurrBlock())) {
+#ifdef DEBUG
+    cout << "----------------- next filled" << endl;
+#endif
+            for (int i = 0; i < 4; ++i) {
+                currBlock->getCells().at(i)->setCurrBlock(false);
+            }
             return true;
         }
+#ifdef DEBUG
+    cout << "-----------------not next filled" << endl;
+#endif
     }
     return false;
 }
