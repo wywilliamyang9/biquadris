@@ -2,6 +2,7 @@
 #define _SUBJECT_
 #include <vector>
 #include "info.h"
+#include <iostream>
 class Observer;
 
 class Subject {

@@ -1,3 +1,5 @@
+#define DEBUG
+
 #include "textDisplay.h"
 #include "info.h"
 #include <iostream>
@@ -15,12 +17,23 @@ TextDisplay::TextDisplay(){
             temp1.emplace_back(' ');
             temp2.emplace_back(' ');
         }
+        
         board1.emplace_back(temp1);
         board2.emplace_back(temp2);
     }
+    for(int i = 0; i < 3; i++){
+		scores.emplace_back(0);
+    }
+    for(int i = 0; i < 2; i++){
+		levels.emplace_back(0);
+        nextblock.emplace_back('A');
+	}
 }
 
 void TextDisplay::notify(Subject &whoNotified) {
+#ifdef DEBUG
+    cout << "TextDisplay::notify() starts"<<endl;
+#endif
     Info currinfo{whoNotified.getinfo()};
     if (currinfo.boardnum == 1){
         if (currinfo.blinded){
@@ -58,6 +71,9 @@ void TextDisplay::updateLevel(vector<int> newLevels){
 
 
 void TextDisplay::print() {
+#ifdef DEBUG
+    cout << "TextDisplay::print() starts"<<endl;
+#endif
 	printLevel();
     printHighScore();
 	printScore();
@@ -65,6 +81,9 @@ void TextDisplay::print() {
 	printBoards();
 	cout << "-----------   -----------" << endl;
 	printNextBlock();
+#ifdef DEBUG
+    cout << "TextDisplay::print() ends"<<endl;
+#endif
 }
 
 void TextDisplay::printLevel() {
@@ -86,7 +105,7 @@ void TextDisplay::printScore() {
 }
 
 void TextDisplay::printBoards() {
-	for (int i = 0; i <= gridHeight; i++) {
+	for (int i = 0; i < gridHeight; i++) {
 		for (int j = 0; j < ((gridWidth * 2) + 1); j++) {
 			if (j < gridWidth) {
 				cout << board1[i][j];

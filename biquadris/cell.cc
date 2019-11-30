@@ -13,6 +13,7 @@ void Cell::setInfo(const Info& info) {
     colour = info.colour;
     blinded = info.blinded;
     boardnum = info.boardnum;
+    notifyObservers();
 }
 
 void Cell::setCurrBlock(bool b){
@@ -31,6 +32,7 @@ void Cell::unblindCell(){
 
 void Cell::setColour(Colour colour) {
 	this->colour = colour;
+    notifyObservers();
 }
 Colour Cell::getColour() {
 	return colour;
