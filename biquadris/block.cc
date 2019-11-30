@@ -73,7 +73,13 @@ cout << this->getCells().at(3)->getinfo().coord.row << " " << this->getCells().a
 
 void Block::moveDown(Board& playerBoard) {
 	moveDownByOne(playerBoard);
+#ifdef DEBUG
+cout << "heavy is " << heavy << endl;
+#endif
 	for (int i = 0; i < heavy; ++i) moveDownByOne(playerBoard);
+#ifdef DEBUG
+cout << "Block::moveDown ends" << heavy << endl;
+#endif
 }
 
 void Block::moveLeft(Board& playerBoard) {
