@@ -1,5 +1,5 @@
-#define DEBUG
-
+//#define DEBUG
+#define DEBUG2
 #include "block.h"
 #include "board.h"
 
@@ -97,21 +97,20 @@ void Block::moveLeft(Board& playerBoard) {
 	if (canMove) {
 		vector<Cell*> newCells;
 		for (int i = 0; i < 4; ++i) {
-			Cell* oldCell = cells.at(i);
-			Coordinates currCoord = oldCell->getinfo().coord;
-			Cell* newCell = &(playerBoard.getBoard().at(currCoord.row).at(currCoord.col - 1));
-			// Change target cell (one cell down)
-			newCell->setColour(oldCell->getinfo().colour);
-			newCell->setCurrBlock(true);
-
-			// change current cell
-			oldCell->setColour(Colour::White);
-			newCell->setCurrBlock(false);
-			// get new cell
+			Coordinates oldCellCoord = cells.at(i)->getinfo().coord;
+			Cell* newCell = &(playerBoard.getBoard().at(oldCellCoord.row).at(oldCellCoord.col - 1));
 			newCells.emplace_back(newCell);
 		}
-		for (int i = 0; i < heavy; ++i) moveDownByOne(playerBoard);
+		for (int i = 0; i < 4; ++i) {
+			cells.at(i)->setColour(Colour::White);
+			cells.at(i)->setCurrBlock(false);
+		}
+		for (int i = 0; i < 4; ++i) {
+			newCells.at(i)->setColour(colour);
+			newCells.at(i)->setCurrBlock(true);
+		}
 		cells = newCells;
+		for (int i = 0; i < heavy; ++i) moveDownByOne(playerBoard);
 	}
 }
 
@@ -120,8 +119,11 @@ void Block::moveRight(Board& playerBoard) {
 
 	//check if it can go to left by 1 column.
 	for (int i = 0; i < 4; ++i) {
+#ifdef DEBUG2
+cout << "go down check: i is " << i << endl;
+#endif
 		Coordinates curCoord = cells.at(i)->getinfo().coord;
-		if (curCoord.col == 17 // if already first col
+		if (curCoord.col == 10 // if already last col
 			|| (playerBoard.getBoard().at(curCoord.row).at(curCoord.col + 1).getinfo().colour
 				!= Colour::White && (playerBoard.getBoard().at(curCoord.row).at(curCoord.col + 1).getCurrBlock()
 					== false))) canMove = 0;
@@ -130,21 +132,23 @@ void Block::moveRight(Board& playerBoard) {
 	if (canMove) {
 		vector<Cell*> newCells;
 		for (int i = 0; i < 4; ++i) {
-			Cell* oldCell = cells.at(i);
-			Coordinates currCoord = oldCell->getinfo().coord;
-			Cell* newCell = &(playerBoard.getBoard().at(currCoord.row).at(currCoord.col + 1));
-			// Change target cell (one cell down)
-			newCell->setColour(oldCell->getinfo().colour);
-			newCell->setCurrBlock(true);
-
-			// change current cell
-			oldCell->setColour(Colour::White);
-			newCell->setCurrBlock(false);
-			// get new cell
+			Coordinates oldCellCoord = cells.at(i)->getinfo().coord;
+			Cell* newCell = &(playerBoard.getBoard().at(oldCellCoord.row).at(oldCellCoord.col + 1));
 			newCells.emplace_back(newCell);
 		}
-		for (int i = 0; i < heavy; ++i) moveDownByOne(playerBoard);
+
+		// clean oldCells
+		for (int i = 0; i < 4; ++i) {
+			cells.at(i)->setColour(Colour::White);
+			cells.at(i)->setCurrBlock(false);
+		}
+		// update new Cells
+		for (int i = 0; i < 4; ++i) {
+			newCells.at(i)->setColour(colour);
+			newCells.at(i)->setCurrBlock(true);
+		}
 		cells = newCells;
+		for (int i = 0; i < heavy; ++i) moveDownByOne(playerBoard);
 	}
 }
 
