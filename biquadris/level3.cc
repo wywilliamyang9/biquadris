@@ -55,6 +55,7 @@ BlockInfo Level3::generateNextBlock() {
 	else {
 		nextBlock = chooseNext();
 	}
+	heavy++;
 	return BlockInfo{ heavy, currBlock };
 }
 
