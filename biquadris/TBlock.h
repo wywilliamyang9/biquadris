@@ -1,5 +1,5 @@
-#ifndef _LBLOCK_
-#define _LBLOCK_
+#ifndef _TBLOCK_
+#define _TBLOCK_
 #include "block.h"
 #include "cell.h"
 

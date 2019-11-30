@@ -531,49 +531,40 @@ unique_ptr<Block> Board::createBlock() {
         unique_null.reset();
         return unique_null;
     }
-
+    unique_ptr<Block> block;
     // if there is, spawn the block.
-    //if (convertColour(newBlockInfo.colour) == 'I'){
-        unique_ptr<Block> block = make_unique<IBlock>(&board.at(3).at(0), &board.at(3).at(1), &board.at(3).at(2), &board.at(3).at(3), newBlockInfo.heavy, newBlockInfo.colour);
-
-    //} 
-
-        #ifdef DEBUG
-        cout << block->getCells().at(0)->getinfo().coord.row << " " << block->getCells().at(0)->getinfo().coord.col << endl;
-        cout << block->getCells().at(1)->getinfo().coord.row << " " << block->getCells().at(1)->getinfo().coord.col << endl;
-        cout << block->getCells().at(2)->getinfo().coord.row << " " << block->getCells().at(2)->getinfo().coord.col << endl;
-        cout << block->getCells().at(3)->getinfo().coord.row << " " << block->getCells().at(3)->getinfo().coord.col << endl;
-    
-        #endif
-    /*else if (convertColour(newBlockInfo.colour) == 'J'){
-        unique_ptr<Block> block = make_unique<JBlock>(&board.at(2).at(0), &board.at(3).at(0), &board.at(3).at(1), &board.at(3).at(2), newBlockInfo.heavy, newBlockInfo.colour);
+    if (convertColour(newBlockInfo.colour) == 'I'){
+        block.reset(new IBlock{&board.at(3).at(0), &board.at(3).at(1), &board.at(3).at(2), &board.at(3).at(3), newBlockInfo.heavy, newBlockInfo.colour});
         level->clearHeavy();
-        return block;
+    } 
+    else if (convertColour(newBlockInfo.colour) == 'J'){
+        block.reset(new JBlock{&board.at(2).at(0), &board.at(3).at(0), &board.at(3).at(1), &board.at(3).at(2), newBlockInfo.heavy, newBlockInfo.colour});
+        level->clearHeavy();
+
     } else if (convertColour(newBlockInfo.colour) == 'L'){
-        unique_ptr<Block> block = make_unique<LBlock>(&board.at(2).at(2), &board.at(3).at(2), &board.at(3).at(1), &board.at(3).at(0),newBlockInfo.heavy, newBlockInfo.colour);
+        block.reset(new LBlock{&board.at(2).at(2), &board.at(3).at(2), &board.at(3).at(1), &board.at(3).at(0),newBlockInfo.heavy, newBlockInfo.colour});
 		level->clearHeavy();
-		return block;
+
     } else if (convertColour(newBlockInfo.colour) == 'O'){
-        unique_ptr<Block> block = make_unique<OBlock>(&board.at(2).at(0), &board.at(2).at(1), &board.at(3).at(0), &board.at(3).at(1),newBlockInfo.heavy, newBlockInfo.colour);
+        block.reset(new OBlock{&board.at(2).at(0), &board.at(2).at(1), &board.at(3).at(0), &board.at(3).at(1),newBlockInfo.heavy, newBlockInfo.colour});
 		level->clearHeavy();
-		return block;
+
     } else if (convertColour(newBlockInfo.colour) == 'S'){
-        unique_ptr<Block> block = make_unique<SBlock>(&board.at(3).at(0), &board.at(3).at(1), &board.at(2).at(1), &board.at(2).at(2),newBlockInfo.heavy, newBlockInfo.colour);
+        block.reset(new SBlock{&board.at(3).at(0), &board.at(3).at(1), &board.at(2).at(1), &board.at(2).at(2),newBlockInfo.heavy, newBlockInfo.colour});
 		level->clearHeavy();
-		return block;
+
     } else if (convertColour(newBlockInfo.colour) == 'Z'){
-        unique_ptr<Block> block = make_unique<JBlock>(&board.at(2).at(0), &board.at(2).at(1), &board.at(3).at(1), &board.at(3).at(2),newBlockInfo.heavy, newBlockInfo.colour);
+        block.reset(new ZBlock{&board.at(2).at(0), &board.at(2).at(1), &board.at(3).at(1), &board.at(3).at(2),newBlockInfo.heavy, newBlockInfo.colour});
 		level->clearHeavy();
-		return block;
+
     } else if (convertColour(newBlockInfo.colour) == 'T'){
-        unique_ptr<Block> block = make_unique<JBlock>(&board.at(2).at(0), &board.at(2).at(1), &board.at(2).at(2), &board.at(3).at(1),newBlockInfo.heavy, newBlockInfo.colour);
+        block.reset(new TBlock{&board.at(2).at(0), &board.at(2).at(1), &board.at(2).at(2), &board.at(3).at(1),newBlockInfo.heavy, newBlockInfo.colour});
 		level->clearHeavy();
-		return block;
-    }*/
-        for (int i = 0; i < 4; ++i) {
-            block->getCells().at(i)->setColour(newBlockInfo.colour);
-            block->getCells().at(i)->setCurrBlock(true);
-        }
+    }
+    for (int i = 0; i < 4; ++i) {
+        block->getCells().at(i)->setColour(newBlockInfo.colour);
+        block->getCells().at(i)->setCurrBlock(true);
+    }
     Colour nextBlockColour = level->getNextBlock();
     textDisplay->updateNextBlock(NextBlock{nextBlockColour, boardnum});
 #ifdef DEBUG

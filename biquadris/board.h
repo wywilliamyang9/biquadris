@@ -21,6 +21,13 @@
 #include <iostream>
 #include <sstream>
 #include "IBlock.h" 
+#include "JBlock.h"
+#include "LBlock.h"
+#include "OBlock.h"
+#include "TBlock.h"
+#include "SBlock.h"
+#include "ZBlock.h"
+
 class Block;
 
 
