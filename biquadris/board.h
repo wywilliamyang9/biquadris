@@ -20,16 +20,14 @@
 #include "cell.h"
 #include <iostream>
 #include <sstream>
-#include "IBlock.h" 
-#include "JBlock.h"
-#include "LBlock.h"
-#include "OBlock.h"
-#include "TBlock.h"
-#include "SBlock.h"
-#include "ZBlock.h"
-
+class IBlock; 
+class JBlock; 
+class LBlock; 
+class OBlock; 
+class SBlock; 
+class ZBlock; 
+class TBlock; 
 class Block;
-
 
 class Board {
     int boardnum;

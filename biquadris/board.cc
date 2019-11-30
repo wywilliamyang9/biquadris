@@ -3,6 +3,15 @@
 #include "board.h"
 #include "block.h"
 #include "subject.h"
+
+#include "IBlock.h" 
+#include "JBlock.h"
+#include "LBlock.h"
+#include "OBlock.h"
+#include "TBlock.h"
+#include "SBlock.h"
+#include "ZBlock.h"
+
 using namespace std;
 
 Level* Board::getLevelptr() {
@@ -531,46 +540,97 @@ unique_ptr<Block> Board::createBlock() {
         unique_null.reset();
         return unique_null;
     }
-    unique_ptr<Block> block;
+
+    //unique_ptr<Block> block;
     // if there is, spawn the block.
     if (convertColour(newBlockInfo.colour) == 'I'){
-        block.reset(new IBlock{&board.at(3).at(0), &board.at(3).at(1), &board.at(3).at(2), &board.at(3).at(3), newBlockInfo.heavy, newBlockInfo.colour});
+        unique_ptr<Block> block = make_unique<IBlock>(&board.at(3).at(0), &board.at(3).at(1), &board.at(3).at(2), &board.at(3).at(3), newBlockInfo.heavy, newBlockInfo.colour);
         level->clearHeavy();
+        for (int i = 0; i < 4; ++i) {
+            block->getCells().at(i)->setColour(newBlockInfo.colour);
+            block->getCells().at(i)->setCurrBlock(true);
+        }
+        Colour nextBlockColour = level->getNextBlock();
+        textDisplay->updateNextBlock(NextBlock{nextBlockColour, boardnum});
+        return block;
+
     } 
     else if (convertColour(newBlockInfo.colour) == 'J'){
-        block.reset(new JBlock{&board.at(2).at(0), &board.at(3).at(0), &board.at(3).at(1), &board.at(3).at(2), newBlockInfo.heavy, newBlockInfo.colour});
+        unique_ptr<Block> block = make_unique<JBlock>(&board.at(2).at(0), &board.at(3).at(0), &board.at(3).at(1), &board.at(3).at(2), newBlockInfo.heavy, newBlockInfo.colour);
         level->clearHeavy();
+        for (int i = 0; i < 4; ++i) {
+            block->getCells().at(i)->setColour(newBlockInfo.colour);
+            block->getCells().at(i)->setCurrBlock(true);
+        }
+        Colour nextBlockColour = level->getNextBlock();
+        textDisplay->updateNextBlock(NextBlock{nextBlockColour, boardnum});
+        return block;
 
     } else if (convertColour(newBlockInfo.colour) == 'L'){
-        block.reset(new LBlock{&board.at(2).at(2), &board.at(3).at(2), &board.at(3).at(1), &board.at(3).at(0), newBlockInfo.heavy, newBlockInfo.colour});
+        unique_ptr<Block> block = make_unique<LBlock>(&board.at(2).at(2), &board.at(3).at(2), &board.at(3).at(1), &board.at(3).at(0), newBlockInfo.heavy, newBlockInfo.colour);
 		level->clearHeavy();
+        for (int i = 0; i < 4; ++i) {
+            block->getCells().at(i)->setColour(newBlockInfo.colour);
+            block->getCells().at(i)->setCurrBlock(true);
+        }
+        Colour nextBlockColour = level->getNextBlock();
+        textDisplay->updateNextBlock(NextBlock{nextBlockColour, boardnum});
+        return block;
 
     } else if (convertColour(newBlockInfo.colour) == 'O'){
-        block.reset(new OBlock{&board.at(2).at(0), &board.at(2).at(1), &board.at(3).at(0), &board.at(3).at(1), newBlockInfo.heavy, newBlockInfo.colour});
+        unique_ptr<Block> block = make_unique<OBlock>(&board.at(2).at(0), &board.at(2).at(1), &board.at(3).at(0), &board.at(3).at(1), newBlockInfo.heavy, newBlockInfo.colour);
 		level->clearHeavy();
+        for (int i = 0; i < 4; ++i) {
+            block->getCells().at(i)->setColour(newBlockInfo.colour);
+            block->getCells().at(i)->setCurrBlock(true);
+        }
+        Colour nextBlockColour = level->getNextBlock();
+        textDisplay->updateNextBlock(NextBlock{nextBlockColour, boardnum});
+        return block;
 
     } else if (convertColour(newBlockInfo.colour) == 'S'){
-        block.reset(new SBlock{&board.at(3).at(0), &board.at(3).at(1), &board.at(2).at(1), &board.at(2).at(2), newBlockInfo.heavy, newBlockInfo.colour});
+        unique_ptr<Block> block = make_unique<SBlock>(&board.at(3).at(0), &board.at(3).at(1), &board.at(2).at(1), &board.at(2).at(2), newBlockInfo.heavy, newBlockInfo.colour);
 		level->clearHeavy();
+        for (int i = 0; i < 4; ++i) {
+            block->getCells().at(i)->setColour(newBlockInfo.colour);
+            block->getCells().at(i)->setCurrBlock(true);
+        }
+        Colour nextBlockColour = level->getNextBlock();
+        textDisplay->updateNextBlock(NextBlock{nextBlockColour, boardnum});
+        return block;
 
     } else if (convertColour(newBlockInfo.colour) == 'Z'){
-        block.reset(new ZBlock{&board.at(2).at(0), &board.at(2).at(1), &board.at(3).at(1), &board.at(3).at(2), newBlockInfo.heavy, newBlockInfo.colour});
+        unique_ptr<Block> block = make_unique<ZBlock>(&board.at(2).at(0), &board.at(2).at(1), &board.at(3).at(1), &board.at(3).at(2), newBlockInfo.heavy, newBlockInfo.colour);
 		level->clearHeavy();
+        for (int i = 0; i < 4; ++i) {
+            block->getCells().at(i)->setColour(newBlockInfo.colour);
+            block->getCells().at(i)->setCurrBlock(true);
+        }
+                Colour nextBlockColour = level->getNextBlock();
+        textDisplay->updateNextBlock(NextBlock{nextBlockColour, boardnum});
+        return block;
 
-    } else if (convertColour(newBlockInfo.colour) == 'T'){
-        block.reset(new TBlock{&board.at(2).at(0), &board.at(2).at(1), &board.at(2).at(2), &board.at(3).at(1), newBlockInfo.heavy, newBlockInfo.colour});
-		level->clearHeavy();
+    } else /*(convertColour(newBlockInfo.colour) == 'T')*/{
+        unique_ptr<Block> block = make_unique<TBlock>(&board.at(2).at(0), &board.at(2).at(1), &board.at(2).at(2), &board.at(3).at(1), newBlockInfo.heavy, newBlockInfo.colour);
+		level->clearHeavy();   
+        for (int i = 0; i < 4; ++i) {
+            block->getCells().at(i)->setColour(newBlockInfo.colour);
+            block->getCells().at(i)->setCurrBlock(true);
+        }
+        Colour nextBlockColour = level->getNextBlock();
+        textDisplay->updateNextBlock(NextBlock{nextBlockColour, boardnum});
+        return block;
+
     }
-    for (int i = 0; i < 4; ++i) {
+    /*for (int i = 0; i < 4; ++i) {
         block->getCells().at(i)->setColour(newBlockInfo.colour);
         block->getCells().at(i)->setCurrBlock(true);
-    }
-    Colour nextBlockColour = level->getNextBlock();
-    textDisplay->updateNextBlock(NextBlock{nextBlockColour, boardnum});
+    }*/
+
 #ifdef DEBUG
     cout << "Board::createBlock ends" << endl;
 #endif
-    return block;
+   // return Block;
 
 }
 
