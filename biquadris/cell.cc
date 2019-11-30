@@ -19,7 +19,9 @@ void Cell::setInfo(const Info& info) {
 void Cell::setCurrBlock(bool b){
     currBlock = b;
 }
+
 bool Cell::getCurrBlock(){return currBlock;}
+
 void Cell::blindCell() {
     blinded = true;
     notifyObservers();
