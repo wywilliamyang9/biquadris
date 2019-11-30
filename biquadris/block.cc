@@ -48,18 +48,18 @@ cout << this->getCells().at(3)->getinfo().coord.row << " " << this->getCells().a
 		vector<Cell*> newCells;
 		
 		for (int i = 0; i < 4; ++i) {
-			Cell* oldCell = cells.at(i);
-			Coordinates currCoord = oldCell->getinfo().coord;
-			Cell* newCell = &(playerBoard.getBoard().at(currCoord.row + 1).at(currCoord.col));
+			Coordinates oldCellCoord = cells.at(i)->getinfo().coord;
+			Cell* newCell = &(playerBoard.getBoard().at(oldCellCoord.row + 1).at(oldCellCoord.col));
 			// Change target cell (one cell down)
-			newCell->setColour(oldCell->getinfo().colour);
-			newCell->setCurrBlock(true);
-
-			// change current cell
-			oldCell->setColour(Colour::White);
-			oldCell->setCurrBlock(false);
-			// get new cell
 			newCells.emplace_back(newCell);
+		}
+		for (int i = 0; i < 4; ++i) {
+			cells.at(i)->setColour(Colour::White);
+			cells.at(i)->setCurrBlock(false);
+		}
+		for (int i = 0; i < 4; ++i) {
+			newCells.at(i)->setColour(colour);
+			newCells.at(i)->setCurrBlock(true);
 		}
 		cells = newCells;
 	}
