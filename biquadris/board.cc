@@ -30,13 +30,13 @@ currlvl {startLevel}, score{0} {
     } else if (currlvl == 1) {
         currlvl = 1;
 		level.reset(new Level1{ seed});
-    } /*else if (currlvl == 2) {
+    } else if (currlvl == 2) {
         currlvl = 2;
         level.reset(new Level2);
     } else if (currlvl == 3) {
         currlvl = 3;
         level.reset(new Level3);
-    } else {
+    } /*else {
         currlvl = 4;
         level.reset(new Level4);
 	}*/
