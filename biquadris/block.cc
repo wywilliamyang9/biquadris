@@ -1,3 +1,5 @@
+#define DEBUG
+
 #include "block.h"
 #include "board.h"
 
@@ -23,6 +25,15 @@ Block::Block(Cell* c1, Cell* c2, Cell* c3, Cell* c4,
 }
 
 void Block::moveDownByOne(Board& playerBoard) {
+#ifdef DEBUG
+cout << "movedownbyone starts" << endl;
+#endif	
+#ifdef DEBUG
+cout << this->getCells().at(0)->getinfo().coord.row << " " << this->getCells().at(0)->getinfo().coord.col << endl;
+cout << this->getCells().at(1)->getinfo().coord.row << " " << this->getCells().at(1)->getinfo().coord.col << endl;
+cout << this->getCells().at(2)->getinfo().coord.row << " " << this->getCells().at(2)->getinfo().coord.col << endl;
+cout << this->getCells().at(3)->getinfo().coord.row << " " << this->getCells().at(3)->getinfo().coord.col << endl;
+#endif
 	bool canMove = 1;
 
 	for (int i = 0; i < 4; ++i) {
@@ -52,6 +63,12 @@ void Block::moveDownByOne(Board& playerBoard) {
 		}
 		cells = newCells;
 	}
+#ifdef DEBUG
+cout << this->getCells().at(0)->getinfo().coord.row << " " << this->getCells().at(0)->getinfo().coord.col << endl;
+cout << this->getCells().at(1)->getinfo().coord.row << " " << this->getCells().at(1)->getinfo().coord.col << endl;
+cout << this->getCells().at(2)->getinfo().coord.row << " " << this->getCells().at(2)->getinfo().coord.col << endl;
+cout << this->getCells().at(3)->getinfo().coord.row << " " << this->getCells().at(3)->getinfo().coord.col << endl;
+#endif
 }
 
 void Block::moveDown(Board& playerBoard) {
