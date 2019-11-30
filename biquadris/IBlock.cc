@@ -41,6 +41,7 @@ void IBlock::CWRotate(Board & playerBoard) {
         cells = newCells;
         state = 2;
     } else if (state == 2) {
+
         Info i0 = cells.at(0)->getinfo();
         // check if rotation is legit
         if (i0.coord.col+3 > 17) return;
