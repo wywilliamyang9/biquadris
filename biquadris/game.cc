@@ -37,7 +37,11 @@ td{ new TextDisplay{} } {
 }
 
 void Game::updateInfo() {
+#ifdef DEBUG
+    cout << "Game::updateInfo() starts"<<endl;
+#endif
 	scores.at(0) = board1->getScore();
+
 	scores.at(1) = board2->getScore();
 	if (scores[0] > scores[2]) {
 		scores[2] = scores[0];
@@ -49,6 +53,9 @@ void Game::updateInfo() {
 	levels[1] = board2->getLevel();
     td->updateScore(scores);
     td->updateLevel(levels);
+#ifdef DEBUG
+    cout << "Game::updateInfo() ends"<<endl;
+#endif
 }
 
 void Game::play(){
@@ -56,6 +63,9 @@ void Game::play(){
     cout << "Game::play() starts"<<endl;
 #endif
     Board* currplayer = board1.get();
+    updateInfo();
+    td->print();
+
     while (true) {
         string gamestate = currplayer->play();
         if (gamestate == "restart!"){

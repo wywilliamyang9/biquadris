@@ -37,8 +37,11 @@ currlvl {startLevel}, score{0} {
 			for (int j = 0; j < 11; ++j) { // column
             Cell newCell {i,j, boardnum};
             //if (!textOnly) newCell.attach(graphicDisplay);
-            newCell.attach(td); // subject <Info>
-            newRow.emplace_back(newCell);
+            newCell.attach(textDisplay); // subject <Info>
+           /* #ifdef DEBUG
+            cout << "attached" << endl;
+            #endif
+*/            newRow.emplace_back(newCell);
         }
         board.emplace_back (newRow);
     }
@@ -96,6 +99,7 @@ string Board::play(){
     cout << "Board::play() starts"<<endl;
 #endif
 	currBlock = createBlock();
+    textDisplay->print();
 	if (!currBlock) return "lost!";
 	string moveResult = moveBlock();
     if (moveResult == "continue!"){
@@ -151,6 +155,9 @@ bool Board::placeBlock() {
 */
 // moves the block until it drops
 string Board::moveBlock() {
+#ifdef DEBUG
+    cout << "Board::moveBlock() starts"<<endl;
+#endif
     string cmd;
     char cmdCount;
     while (cin >> cmd) {
@@ -204,6 +211,7 @@ string Board::moveBlock() {
                 return "restart!";
             }
         }
+        textDisplay->print();
     }
     return "eof!";
 }
@@ -384,19 +392,25 @@ bool Board::newBlockCheck(Colour colour) {
 
 	
 unique_ptr<Block> Board::createBlock() {
+#ifdef DEBUG
+    cout << "Board::createBlock starts" << endl;
+#endif
     BlockInfo newBlockInfo = level->generateNextBlock();
     // checks if there is enough space to allocate the block.
     if (!newBlockCheck(newBlockInfo.colour)){
+        #ifdef DEBUG
+        cout << "Board::createBlock - lost!" << endl;
+        #endif
         unique_ptr<Block> unique_null = make_unique<IBlock>(&board.at(3).at(0), &board.at(3).at(1), &board.at(3).at(2), &board.at(3).at(3), newBlockInfo.heavy, newBlockInfo.colour);
         unique_null.reset();
         return unique_null;
     }
 
     // if there is, spawn the block.
-    if (convertColour(newBlockInfo.colour) == 'I'){
+    //if (convertColour(newBlockInfo.colour) == 'I'){
         unique_ptr<Block> block = make_unique<IBlock>(&board.at(3).at(0), &board.at(3).at(1), &board.at(3).at(2), &board.at(3).at(3), newBlockInfo.heavy, newBlockInfo.colour);
-        return block;
-    } /*else if (convertColour(newBlockInfo.colour) == 'J'){
+    //} 
+    /*else if (convertColour(newBlockInfo.colour) == 'J'){
         unique_ptr<Block> block = make_unique<JBlock>(&board.at(2).at(0), &board.at(3).at(0), &board.at(3).at(1), &board.at(3).at(2), newBlockInfo.heavy, newBlockInfo.colour);
         level->clearHeavy();
         return block;
@@ -423,6 +437,11 @@ unique_ptr<Block> Board::createBlock() {
     }*/
     Colour nextBlockColour = level->getNextBlock();
     textDisplay->updateNextBlock(NextBlock{nextBlockColour, boardnum});
+#ifdef DEBUG
+    cout << "Board::createBlock ends" << endl;
+#endif
+    return block;
+
 }
 
 vector<vector<Cell>>& Board::getBoard() {
