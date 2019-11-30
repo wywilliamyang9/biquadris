@@ -29,13 +29,13 @@ currlvl {startLevel}, score{0}, currBlock{nullptr} {
 		level.reset(new Level0{seed, scriptFile});
     } else if (currlvl == 1) {
         currlvl = 1;
-		level.reset(new Level1{ seed});
+		level.reset(new Level1{seed});
     } else if (currlvl == 2) {
         currlvl = 2;
-        level.reset(new Level2);
+        level.reset(new Level2{seed});
     } else if (currlvl == 3) {
         currlvl = 3;
-        level.reset(new Level3);
+        level.reset(new Level3{seed});
     } /*else {
         currlvl = 4;
         level.reset(new Level4);
