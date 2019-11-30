@@ -4,7 +4,6 @@
 #include <string>
 #include "subject.h"
 #include "blockInfo.h"
-class Block;
 class Level {
 protected:
 
@@ -22,7 +21,6 @@ public:
 	void addHeavy(); // when special action "Heavy" is applied
 	void clearHeavy(); // sets heavy to 0
 	int getLevel(); // returns current level
-	Block* createBlock(Colour type);
 	virtual BlockInfo generateNextBlock() = 0; // spawn next block
 	Colour getNextBlock();
 	virtual void setSequence(std::string filename) = 0;
