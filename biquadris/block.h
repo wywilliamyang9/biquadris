@@ -15,6 +15,7 @@ protected:
 	int state;
 
     public:
+    ~Block()=default;
     Block (Cell*, Cell*, Cell*, Cell*,
          int heavy, Colour);
 
@@ -27,7 +28,7 @@ protected:
     void moveRight(Board &);
 	void moveDownByOne(Board&);
     void drop(Board &);
-    virtual void CWRotate(Board &) = 0;
-    virtual void CounterCWRotate(Board &) = 0;
+    virtual void CWRotate(Board &) ;
+    virtual void CounterCWRotate(Board &) ;
 };
 #endif
