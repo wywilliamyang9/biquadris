@@ -83,6 +83,6 @@ void ZBlock::CWRotate(Board & playerBoard) {
     for (int i = 0; i < heavy; ++i) moveDownByOne(playerBoard);
 }
 
-void SBlock::CounterCWRotate(Board &playerBoard) {
+void ZBlock::CounterCWRotate(Board &playerBoard) {
     CWRotate(playerBoard);
 }
