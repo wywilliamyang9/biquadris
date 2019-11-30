@@ -296,13 +296,29 @@ int Board::clearRows() {
 }
 
 bool Board::dropCheck() {
+#ifdef DEBUG
+cout << "Board::dropCheck() starts" << endl;
+#endif
     for (int j = 0; j < 4; ++j) {
+
         Info currInfo = currBlock->getCells().at(j)->getinfo();
+#ifdef DEBUG
+cout << currInfo.coord.row << currInfo.coord.col << endl;
+#endif
+#ifdef DEBUG
+cout << "checkpoint 1" << endl;
+#endif
         if (currInfo.coord.col == 17) return true;
+        #ifdef DEBUG
+cout << "checkpoint 2" << endl;
+#endif
         if (board.at(currInfo.coord.row).at(currInfo.coord.col+1).getinfo().colour
             != Colour::White) {
             return true;
         }
+        #ifdef DEBUG
+cout << "checkpoint 3" << endl;
+#endif
     }
     return false;
 }
