@@ -312,7 +312,7 @@ cout << "checkpoint 1" << endl;
         #ifdef DEBUG
 cout << "checkpoint 2" << endl;
 #endif
-        if (board.at(currInfo.coord.row).at(currInfo.coord.col+1).getinfo().colour
+        if (board.at(currInfo.coord.row+1).at(currInfo.coord.col).getinfo().colour
             != Colour::White) {
             return true;
         }

@@ -19,6 +19,8 @@ class Cell : public Subject {
     Info getinfo() const override;
     void setInfo (const Info&);
     void setCurrBlock(bool);
+    bool getCurrBlock();
+    void setColour(Colour);
     Colour getColour();
 
     void blindCell();
