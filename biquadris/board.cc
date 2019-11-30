@@ -186,12 +186,21 @@ string Board::moveBlock() {
 #endif                
                 // if the command is not valid, continue.
                 if (!(cmdDictionary->checkCMD(cmd))){
-                    ss.clear();
-                    ss << cmd;
+                    ss.str("");
 #ifdef DEBUG
     string s2 = ss.str();
-    cout << "ss: " << s2 << endl;
+    cout << "ss:" << s2 << "end"<< endl;
 #endif
+                    ss.str(cmd);
+                    ss.clear();
+#ifdef DEBUG
+    string s3 = ss.str();
+    cout << "ss:" << s3 << "end"<< endl;
+#endif
+/*#ifdef DEBUG
+    string s2 = ss.str();
+    cout << "ss: " << s2 << endl;
+#endif*/
                 } else {
                     break;
                 }
