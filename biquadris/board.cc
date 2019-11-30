@@ -365,14 +365,17 @@ bool Board::dropCheck() {
 void Board::levelUp() {
     if (currlvl == 0) {
         currlvl = 1;
-		level.reset(new Level1{ seed });
-    } /*else if (currlvl == 1) {
+		level.reset(new Level1{seed});
+        textDisplay->updateLevel(currlvl, boardnum);
+    }else if (currlvl == 1) {
         currlvl = 2;
-        level.reset(new Level2);
+        level.reset(new Level2{seed});
+        textDisplay->updateLevel(currlvl, boardnum);
     } else if (currlvl == 2) {
         currlvl = 3;
-        level.reset(new Level3);
-    } else if (currlvl == 3) {
+        level.reset(new Level3{seed});
+        textDisplay->updateLevel(currlvl, boardnum);
+    } /*else if (currlvl == 3) {
         currlvl = 4;
         level.reset(new Level4);
     } else {
@@ -385,16 +388,20 @@ void Board::levelDown() {
     if (currlvl == 1) {
         currlvl = 0;
         level.reset(new Level0{ seed, fileInput });
+        textDisplay->updateLevel(currlvl, boardnum);
     } else if (currlvl == 2) {
         currlvl = 1;
-        level.reset(new Level1{ seed});
-    } /*else if (currlvl == 3) {
+        level.reset(new Level1{seed});
+        textDisplay->updateLevel(currlvl, boardnum);
+    } else if (currlvl == 3) {
         currlvl = 2;
-        level.reset(new Level2);
+        level.reset(new Level2{seed});
+        textDisplay->updateLevel(currlvl, boardnum);
     } else if (currlvl == 4) {
-        currlvl = 4;
-        level.reset(new Level3);
-    } else {
+        currlvl = 3;
+        level.reset(new Level3{seed});
+        textDisplay->updateLevel(currlvl, boardnum);
+    } /*else {
         return;
     }*/
     return;
