@@ -163,6 +163,6 @@ string printBlock(char type, int line){
 
 void TextDisplay::printNextBlock() {
 	cout << "Next:         Next:" << endl;
-    cout << printBlock(nextblock[0], 1) << "             " << printBlock(nextblock[1], 1) << endl;
-    cout << printBlock(nextblock[0], 2) << "             " << printBlock(nextblock[1], 2) << endl;
+    cout << printBlock(nextblock[0], 1) << "          " << printBlock(nextblock[1], 1) << endl;
+    cout << printBlock(nextblock[0], 2) << "          " << printBlock(nextblock[1], 2) << endl;
 }
