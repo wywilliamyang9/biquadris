@@ -14,8 +14,8 @@ TextDisplay::TextDisplay(){
         vector<char> temp1;
         vector<char> temp2;
         for (int j = 0; j < gridWidth; ++j){
-            temp1.emplace_back('X');
-            temp2.emplace_back('X');
+            temp1.emplace_back(' ');
+            temp2.emplace_back(' ');
         }
         
         board1.emplace_back(temp1);
@@ -106,19 +106,18 @@ void TextDisplay::printScore() {
 
 void TextDisplay::printBoards() {
 	for (int i = 0; i < gridHeight; i++) {
-		for (int j = 0; j < ((gridWidth * 2) + 1); j++) {
+		for (int j = 0; j <= 25; j++) {
 			if (j < gridWidth) {
 				cout << board1[i][j];
-			} else if (j == gridWidth) {
+			} else if (j < 14) {
 				cout << " ";
 			} else {
-				cout << board2[i][j-gridWidth];
+				cout << board2[i][j-3-gridWidth];
 			}
 		}
 		cout << endl;
 	
-	}
-	
+	}	
 }
 
 string printBlock(char type, int line){
@@ -155,7 +154,7 @@ string printBlock(char type, int line){
 }
 
 void TextDisplay::printNextBlock() {
-	cout << "Next:       Next:" << endl;
+	cout << "Next:         Next:" << endl;
     cout << printBlock(nextblock[0], 1) << "             " << printBlock(nextblock[1], 1) << endl;
     cout << printBlock(nextblock[0], 2) << "             " << printBlock(nextblock[1], 2) << endl;
 }
