@@ -396,6 +396,9 @@ unique_ptr<Block> Board::createBlock() {
     cout << "Board::createBlock starts" << endl;
 #endif
     BlockInfo newBlockInfo = level->generateNextBlock();
+    #ifdef DEBUG
+    cout << "new block is " << newBlockInfo.heavy << convertColour(newBlockInfo.colour) << endl;
+    #endif
     // checks if there is enough space to allocate the block.
     if (!newBlockCheck(newBlockInfo.colour)){
         #ifdef DEBUG
@@ -410,6 +413,14 @@ unique_ptr<Block> Board::createBlock() {
     //if (convertColour(newBlockInfo.colour) == 'I'){
         unique_ptr<Block> block = make_unique<IBlock>(&board.at(3).at(0), &board.at(3).at(1), &board.at(3).at(2), &board.at(3).at(3), newBlockInfo.heavy, newBlockInfo.colour);
     //} 
+
+        #ifdef DEBUG
+        cout << block->getCells().at(0)->getinfo().coord.row << " " << block->getCells().at(0)->getinfo().coord.col << endl;
+        cout << block->getCells().at(1)->getinfo().coord.row << " " << block->getCells().at(1)->getinfo().coord.col << endl;
+        cout << block->getCells().at(2)->getinfo().coord.row << " " << block->getCells().at(2)->getinfo().coord.col << endl;
+        cout << block->getCells().at(3)->getinfo().coord.row << " " << block->getCells().at(3)->getinfo().coord.col << endl;
+    
+        #endif
     /*else if (convertColour(newBlockInfo.colour) == 'J'){
         unique_ptr<Block> block = make_unique<JBlock>(&board.at(2).at(0), &board.at(3).at(0), &board.at(3).at(1), &board.at(3).at(2), newBlockInfo.heavy, newBlockInfo.colour);
         level->clearHeavy();
@@ -435,6 +446,10 @@ unique_ptr<Block> Board::createBlock() {
 		level->clearHeavy();
 		return block;
     }*/
+        for (int i = 0; i < 4; ++i) {
+            block->getCells().at(i)->setColour(newBlockInfo.colour);
+            block->getCells().at(i)->setCurrBlock(true);
+        }
     Colour nextBlockColour = level->getNextBlock();
     textDisplay->updateNextBlock(NextBlock{nextBlockColour, boardnum});
 #ifdef DEBUG
