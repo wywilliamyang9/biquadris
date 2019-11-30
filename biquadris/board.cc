@@ -167,20 +167,33 @@ string Board::moveBlock() {
         cmdCount = '1';
         // check if there's a num at the front; process the num
         if (!(cmdDictionary->checkCMD(cmd))) {
+        #ifdef DEBUG
+    cout << "cmdDictionary check fails" << cmd << endl;
+#endif
             stringstream ss {cmd};
             ss >> cmdCount;
+            
             ss >> cmd;
             // if the command is not valid, continue.
             if (!(cmdDictionary->checkCMD(cmd))) continue;
         }
-
+        #ifdef DEBUG
+    cout << "cmdCounts is " << cmdCount << endl;
+#endif
+int cmdCountint = cmdCount - '0';
         // repeat the command for cmdCount times.
         // the following cmds are invalid: sequence,I,J,L,O,S,Z,T,Blind,Heavy,Force
-        for (int i = 0; i < cmdCount; i++) {
+        for (int i = 0; i < cmdCountint; i++) {
+#ifdef DEBUG
+            cout << "cmdCounts is " << cmdCountint << endl;
+#endif
+#ifdef DEBUG
+            cout << "i is " << i << endl;
+#endif
             if (cmdDictionary->interpretCMD(cmd) == Command::Left) {
                 currBlock->moveLeft(*this);
                 if (dropCheck()) {
-        #ifdef DEBUG
+#ifdef DEBUG
     cout << "dropCheck passes"<<endl;
 #endif
                     return "continue!";
@@ -196,6 +209,9 @@ string Board::moveBlock() {
 #endif
                     return "continue!";
                 }
+#ifdef DEBUG
+    cout << "Board::moveBlock() - else statment ends"<<endl;
+#endif
             } else if (cmdDictionary->interpretCMD(cmd) == Command::ClockWise) {
 				currBlock->CWRotate(*this);
                 if (dropCheck()) return "continue!";    
@@ -224,6 +240,9 @@ string Board::moveBlock() {
                 return "restart!";
             }
         }
+#ifdef DEBUG
+    cout << "1111111111111111111111111Board::moveBlock() - for loop ends"<<endl;
+#endif
         textDisplay->print();
     }
     return "eof!";
@@ -296,29 +315,14 @@ int Board::clearRows() {
 }
 
 bool Board::dropCheck() {
-#ifdef DEBUG
-cout << "Board::dropCheck() starts" << endl;
-#endif
     for (int j = 0; j < 4; ++j) {
 
         Info currInfo = currBlock->getCells().at(j)->getinfo();
-#ifdef DEBUG
-cout << currInfo.coord.row << currInfo.coord.col << endl;
-#endif
-#ifdef DEBUG
-cout << "checkpoint 1" << endl;
-#endif
-        if (currInfo.coord.col == 17) return true;
-        #ifdef DEBUG
-cout << "checkpoint 2" << endl;
-#endif
+        if (currInfo.coord.row == 17) return true;
         if (board.at(currInfo.coord.row+1).at(currInfo.coord.col).getinfo().colour
             != Colour::White) {
             return true;
         }
-        #ifdef DEBUG
-cout << "checkpoint 3" << endl;
-#endif
     }
     return false;
 }

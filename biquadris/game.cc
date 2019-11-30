@@ -84,7 +84,7 @@ void Game::play(){
         if (currplayer == board1.get()){
             currplayer = board2.get();
         } else {
-            currplayer == board1.get();
+            currplayer = board1.get();
         }
         updateInfo();
         td->print();
