@@ -10,6 +10,9 @@ using namespace std;
 
 Level3::Level3(int seed, bool readFromFile, std::string scriptFile) :
 	Level{ seed }, readFromFile{ readFromFile }{
+#ifdef DEBUG
+cout << "Level3 construction starts" << endl;
+#endif
 	if (readFromFile) {
 		this->scriptFile = scriptFile;
 		sequence.open(scriptFile);
@@ -23,23 +26,17 @@ Colour Level3::chooseNext() {
 	int num = rand() % 9;
 	if (num == 0 || num == 1) {
 		return convertString("S");
-	}
-	else if (num == 2 || num == 3) {
+	} else if (num == 2 || num == 3) {
 		return convertString("Z");
-	}
-	else if (num == 4) {
+	} else if (num == 4) {
 		return convertString("I");
-	}
-	else if (num == 5) {
+	} else if (num == 5) {
 		return convertString("J");
-	}
-	else if (num == 6) {
+	} else if (num == 6) {
 		return convertString("L");
-	}
-	else if (num == 7) {
+	} else if (num == 7) {
 		return convertString("O");
-	}
-	else if (num == 8) {
+	} else {
 		return convertString("T");
 	}
 }

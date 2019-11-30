@@ -1,3 +1,4 @@
+#define DEBUG
 #include "level1.h"
 #include "block.h"
 #include <fstream>
@@ -10,6 +11,9 @@ using namespace std;
 
 Level1::Level1(int seed, bool readFromFile, std::string scriptFile) :
 	Level{ seed }, readFromFile{ readFromFile }{
+#ifdef DEBUG
+cout << "Level1 construction starts" << endl;
+#endif
 	if (readFromFile) {
 		this->scriptFile = scriptFile;
 		sequence.open(scriptFile);

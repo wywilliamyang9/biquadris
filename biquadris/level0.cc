@@ -10,6 +10,9 @@ using namespace std;
 
 Level0::Level0(int seed, std::string scriptFile) :
 	Level{ seed }, scriptFile{ scriptFile }{
+#ifdef DEBUG
+cout << "Level0 construction starts" << endl;
+#endif
 	sequence.open(scriptFile);
 	string type;
 	sequence >> type;

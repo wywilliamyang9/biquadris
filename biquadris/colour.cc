@@ -15,7 +15,7 @@ char convertColour(Colour colour){
         return 'S';
     } else if (colour == Colour::Purple){
         return 'T';
-    } else if (colour == Colour::White){
+    } else {
         return ' ';
     }
 }
@@ -34,7 +34,7 @@ Colour convertString(std::string type){
         return Colour::Green;
     } else if (type == "T"){
         return Colour::Purple;
-    } else if (type == " "){
+    } else {
         return Colour::White;
     }
 }
