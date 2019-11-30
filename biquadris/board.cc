@@ -161,6 +161,9 @@ string Board::moveBlock() {
     string cmd;
     char cmdCount;
     while (cin >> cmd) {
+#ifdef DEBUG
+    cout << "Board::moveBlock() - whileLoop starts"<<endl;
+#endif
         cmdCount = '1';
         // check if there's a num at the front; process the num
         if (!(cmdDictionary->checkCMD(cmd))) {
@@ -176,13 +179,23 @@ string Board::moveBlock() {
         for (int i = 0; i < cmdCount; i++) {
             if (cmdDictionary->interpretCMD(cmd) == Command::Left) {
                 currBlock->moveLeft(*this);
-                if (dropCheck()) return "continue!";
+                if (dropCheck()) {
+        #ifdef DEBUG
+    cout << "dropCheck passes"<<endl;
+#endif
+                    return "continue!";
+                }
             } else if (cmdDictionary->interpretCMD(cmd) == Command::Right) {
 				currBlock->moveRight(*this);
                 if (dropCheck()) return "continue!";
             } else if (cmdDictionary->interpretCMD(cmd) == Command::Down) {
 				currBlock->moveDown(*this);
-                if (dropCheck()) return "continue!";
+                if (dropCheck()) {
+                        #ifdef DEBUG
+    cout << "dropCheck passes"<<endl;
+#endif
+                    return "continue!";
+                }
             } else if (cmdDictionary->interpretCMD(cmd) == Command::ClockWise) {
 				currBlock->CWRotate(*this);
                 if (dropCheck()) return "continue!";    
