@@ -27,7 +27,7 @@ class TextDisplay : public Observer {
     void updateNextBlock(NextBlock nextBlockInfo);
     void updateScore(std::vector<int> scores);
     void updateLevel(std::vector<int> levels);
-
+    void updateLevel(int newLevel, int boardnum)
     void print();
 };
 

@@ -69,6 +69,14 @@ void TextDisplay::updateLevel(vector<int> newLevels){
     levels[1] = newLevels[1];
 }
 
+void TextDisplay::updateLevel(int newLevel, int boardnum){
+    if (boardnum == 1){
+        levels[0] = newLevel;
+    } else if (boardnum) {
+        levels[1] = newLevel;
+    }
+}
+
 
 void TextDisplay::print() {
 #ifdef DEBUG
