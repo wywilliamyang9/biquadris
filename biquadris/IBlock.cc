@@ -38,8 +38,8 @@ void IBlock::CWRotate(Board & playerBoard) {
             &(playerBoard.getBoard().at(i3.coord.row).at(i3.coord.col-3)));
 
         for (int i = 0; i < 4; ++i) {
-            cells.at(i).setCurrBlock(false);
-            newCells.at(i).setCurrBlock(true);
+            cells.at(i)->setCurrBlock(false);
+            newCells.at(i)->setCurrBlock(true);
         }
         cells.clear();
         cells = newCells;
@@ -81,8 +81,8 @@ void IBlock::CWRotate(Board & playerBoard) {
             &(playerBoard.getBoard().at(i3.coord.row).at(i3.coord.col+3)));
         
         for (int i = 0; i < 4; ++i) {
-            cells.at(i).setCurrBlock(false);
-            newCells.at(i).setCurrBlock(true);
+            cells.at(i)->setCurrBlock(false);
+            newCells.at(i)->setCurrBlock(true);
         }    
         cells.clear();
         cells = newCells;

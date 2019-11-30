@@ -34,8 +34,8 @@ void TBlock::CWRotate(Board & playerBoard) {
         newCells.emplace_back(
             playerBoard.getBoard().at(i3.coord.row+1).at(i3.coord.col-1));
         for (int i = 0; i < 4; ++i) {
-            cells.at(i).setCurrBlock(false);
-            newCells.at(i).setCurrBlock(true);
+            cells.at(i)->setCurrBlock(false);
+            newCells.at(i)->setCurrBlock(true);
         }
         cells.clear();
         cells = newCells;
@@ -75,8 +75,8 @@ void TBlock::CWRotate(Board & playerBoard) {
         newCells.emplace_back(
             playerBoard.getBoard().at(i3.coord.row).at(i3.coord.col+1));
         for (int i = 0; i < 4; ++i) {
-            cells.at(i).setCurrBlock(false);
-            newCells.at(i).setCurrBlock(true);
+            cells.at(i)->setCurrBlock(false);
+            newCells.at(i)->setCurrBlock(true);
         }
         cells.clear();
         cells = newCells;
@@ -110,8 +110,8 @@ void TBlock::CWRotate(Board & playerBoard) {
         newCells.emplace_back(
             playerBoard.getBoard().at(i3.coord.row).at(i3.coord.col));
         for (int i = 0; i < 4; ++i) {
-            cells.at(i).setCurrBlock(false);
-            newCells.at(i).setCurrBlock(true);
+            cells.at(i)->setCurrBlock(false);
+            newCells.at(i)->setCurrBlock(true);
         }
         cells.clear();
         cells = newCells;
@@ -150,8 +150,8 @@ void TBlock::CWRotate(Board & playerBoard) {
         newCells.emplace_back(
             playerBoard.getBoard().at(i3.coord.row+1).at(i3.coord.col));
         for (int i = 0; i < 4; ++i) {
-            cells.at(i).setCurrBlock(false);
-            newCells.at(i).setCurrBlock(true);
+            cells.at(i)->setCurrBlock(false);
+            newCells.at(i)->setCurrBlock(true);
         }
         cells.clear();
         cells = newCells;
@@ -193,8 +193,8 @@ void LBlock::CounterCWRotate(Board &playerBoard) {
         newCells.emplace_back(
             playerBoard.getBoard().at(i3.coord.row-1).at(i3.coord.col));
         for (int i = 0; i < 4; ++i) {
-            cells.at(i).setCurrBlock(false);
-            newCells.at(i).setCurrBlock(true);
+            cells.at(i)->setCurrBlock(false);
+            newCells.at(i)->setCurrBlock(true);
         }
         cells.clear();
         cells = newCells;
@@ -231,8 +231,8 @@ void LBlock::CounterCWRotate(Board &playerBoard) {
         newCells.emplace_back(
             playerBoard.getBoard().at(i3.coord.row+1).at(i3.coord.col+1));
         for (int i = 0; i < 4; ++i) {
-            cells.at(i).setCurrBlock(false);
-            newCells.at(i).setCurrBlock(true);
+            cells.at(i)->setCurrBlock(false);
+            newCells.at(i)->setCurrBlock(true);
         }
         cells.clear();
         cells = newCells;
@@ -268,8 +268,8 @@ void LBlock::CounterCWRotate(Board &playerBoard) {
         newCells.emplace_back(
             playerBoard.getBoard().at(i3.coord.row).at(i3.coord.col-1));
         for (int i = 0; i < 4; ++i) {
-            cells.at(i).setCurrBlock(false);
-            newCells.at(i).setCurrBlock(true);
+            cells.at(i)->setCurrBlock(false);
+            newCells.at(i)->setCurrBlock(true);
         }
         cells.clear();
         cells = newCells;
@@ -306,8 +306,8 @@ void LBlock::CounterCWRotate(Board &playerBoard) {
         newCells.emplace_back(
             playerBoard.getBoard().at(i3.coord.row).at(i3.coord.col));
         for (int i = 0; i < 4; ++i) {
-            cells.at(i).setCurrBlock(false);
-            newCells.at(i).setCurrBlock(true);
+            cells.at(i)->setCurrBlock(false);
+            newCells.at(i)->setCurrBlock(true);
         }
         cells.clear();
         cells = newCells;
