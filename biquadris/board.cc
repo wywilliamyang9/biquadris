@@ -164,29 +164,49 @@ string Board::moveBlock() {
 #ifdef DEBUG
     cout << "Board::moveBlock() - whileLoop starts"<<endl;
 #endif
-        cmdCount = '1';
+        cmdCount = '0';
+        int cmdCountint = 0;
+        bool enteredloop = false;
         // check if there's a num at the front; process the num
         if (!(cmdDictionary->checkCMD(cmd))) {
-        #ifdef DEBUG
+#ifdef DEBUG
     cout << "cmdDictionary check fails" << cmd << endl;
 #endif
             stringstream ss {cmd};
-            ss >> cmdCount;
-            
-            ss >> cmd;
-            // if the command is not valid, continue.
-            if (!(cmdDictionary->checkCMD(cmd))) continue;
-        }
-        #ifdef DEBUG
-    cout << "cmdCounts is " << cmdCount << endl;
+            while(ss >> cmdCount){
+                ss >> cmd;
+#ifdef DEBUG
+    cout << "cmdCount is " << cmdCount << endl;
+#endif                
+                enteredloop = true;
+                cmdCountint = (cmdCountint * 10) + (cmdCount - '0');
+#ifdef DEBUG
+    cout << "int is " << cmdCountint << endl;
+    cout << "cmd: " << cmd << endl;
+#endif                
+                // if the command is not valid, continue.
+                if (!(cmdDictionary->checkCMD(cmd))){
+                    ss.clear();
+                    ss << cmd;
+#ifdef DEBUG
+    string s2 = ss.str();
+    cout << "ss: " << s2 << endl;
 #endif
-int cmdCountint = cmdCount - '0';
+                } else {
+                    break;
+                }
+            }
+        }
+        if(!enteredloop){
+            cmdCountint = 1;
+        }
+#ifdef DEBUG
+    cout << "cmdCountint is " << cmdCountint << endl;
+#endif
         // repeat the command for cmdCount times.
         // the following cmds are invalid: sequence,I,J,L,O,S,Z,T,Blind,Heavy,Force
         for (int i = 0; i < cmdCountint; i++) {
-#ifdef DEBUG
-            cout << "cmdCounts is " << cmdCountint << endl;
-#endif
+
 #ifdef DEBUG
             cout << "i is " << i << endl;
 #endif
@@ -241,7 +261,7 @@ int cmdCountint = cmdCount - '0';
             }
         }
 #ifdef DEBUG
-    cout << "1111111111111111111111111Board::moveBlock() - for loop ends"<<endl;
+    cout << "Board::moveBlock() - for loop ends"<<endl;
 #endif
         textDisplay->print();
     }
