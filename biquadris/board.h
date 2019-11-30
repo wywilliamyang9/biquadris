@@ -3,7 +3,8 @@
 #include "level.h"
 #include "level0.h"
 #include "level1.h"
-
+#include "level2.h"
+#include "level3.h"
 //#include "graphicDisplay.h"
 #include "subject.h"
 #include "observer.h"

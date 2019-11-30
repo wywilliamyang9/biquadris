@@ -1,6 +1,6 @@
 #include "cell.h"
 Cell::Cell(int r,int c, int boardnum): blinded{false},
-colour {Colour::White}, boardnum{boardnum}{
+colour {Colour::White}, boardnum{boardnum}, currBlock{false}{
     coordinates = Coordinates{r,c};
 }
 

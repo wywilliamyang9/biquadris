@@ -243,7 +243,12 @@ string Board::moveBlock() {
 #endif
             } else if (cmdDictionary->interpretCMD(cmd) == Command::ClockWise) {
 				currBlock->CWRotate(*this);
-                if (dropCheck()) return "continue!";    
+                if (dropCheck()){
+                    #ifdef DEBUG
+    cout << "dropCheck passes"<<endl;
+#endif
+return "continue!";    
+                }
             } else if (cmdDictionary->interpretCMD(cmd) == Command::CounterClockWise) {
 				currBlock->CounterCWRotate(*this);
                 if (dropCheck()) return "continue!";     
@@ -345,11 +350,12 @@ int Board::clearRows() {
 
 bool Board::dropCheck() {
     for (int j = 0; j < 4; ++j) {
-
         Info currInfo = currBlock->getCells().at(j)->getinfo();
         if (currInfo.coord.row == 17) return true;
         if (board.at(currInfo.coord.row+1).at(currInfo.coord.col).getinfo().colour
-            != Colour::White) {
+            != Colour::White
+            && !(board.at(currInfo.coord.row+1).
+            at(currInfo.coord.col).getCurrBlock())) {
             return true;
         }
     }
@@ -474,6 +480,7 @@ unique_ptr<Block> Board::createBlock() {
     // if there is, spawn the block.
     //if (convertColour(newBlockInfo.colour) == 'I'){
         unique_ptr<Block> block = make_unique<IBlock>(&board.at(3).at(0), &board.at(3).at(1), &board.at(3).at(2), &board.at(3).at(3), newBlockInfo.heavy, newBlockInfo.colour);
+        
     //} 
 
         #ifdef DEBUG
