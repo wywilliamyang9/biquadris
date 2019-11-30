@@ -1,5 +1,7 @@
 #include "TBlock.h"
 #include "board.h"
+#include "cell.h"
+
 using namespace std;
 
 TBlock::TBlock (Cell* c1, Cell* c2, Cell* c3, Cell* c4,

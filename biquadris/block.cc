@@ -2,6 +2,7 @@
 #define DEBUG2
 #include "block.h"
 #include "board.h"
+#include "cell.h"
 
 using namespace std;
 

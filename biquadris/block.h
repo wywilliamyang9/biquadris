@@ -3,9 +3,8 @@
 #include <vector>
 #include "colour.h"
 #include "coordinates.h"
-#include "cell.h"
 //#include "board.h"
-
+class Cell;
 class Board;
 class Block {
 protected:

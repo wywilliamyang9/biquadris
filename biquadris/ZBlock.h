@@ -1,7 +1,6 @@
 #ifndef _ZBLOCK_
 #define _ZBLOCK_
 #include "block.h"
-#include "cell.h"
 
 class Board;
 class ZBlock : public Block {

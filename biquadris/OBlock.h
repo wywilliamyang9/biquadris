@@ -1,8 +1,7 @@
 #ifndef _OBLOCK_
 #define _OBLOCK_
 #include "block.h"
-#include "cell.h"
-
+class Cell;
 class Board;
 class OBlock : public Block {
 	public:

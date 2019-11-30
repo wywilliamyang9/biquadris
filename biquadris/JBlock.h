@@ -1,8 +1,7 @@
 #ifndef _JBLOCK_
 #define _JBLOCK_
 #include "block.h"
-#include "cell.h"
-
+class Cell;
 class Board;
 class JBlock : public Block {
 public:

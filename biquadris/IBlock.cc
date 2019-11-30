@@ -1,5 +1,7 @@
 #include "IBlock.h"
 #include "board.h"
+#include "cell.h"
+
 using namespace std;
 
 IBlock::IBlock (Cell* c1, Cell* c2, Cell* c3, Cell* c4,

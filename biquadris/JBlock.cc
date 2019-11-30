@@ -1,5 +1,7 @@
 #include "JBlock.h"
 #include "board.h"
+#include "cell.h"
+
 using namespace std;
 
 JBlock::JBlock (Cell* c1, Cell* c2, Cell* c3, Cell* c4,
