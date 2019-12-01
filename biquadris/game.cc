@@ -98,6 +98,7 @@ void Game::reset(){
     scores[1] = 0;
     levels[0] = startLevel;
     levels[1] = startLevel;
+    td->print();
 }
 
 
