@@ -108,6 +108,9 @@ string Board::play(){
     cout << "Board::play() starts"<<endl;
 #endif
     BlockInfo newBlockInfo = level->generateNextBlock();
+#ifdef DEBUG
+    cout << newBlockCheck(newBlockInfo.colour)<<endl;
+#endif    
     if (!newBlockCheck(newBlockInfo.colour)){
         #ifdef DEBUG
         cout << "Board::createBlock - lost!" << endl;
@@ -319,6 +322,9 @@ return "continue!";
 }
 
 int Board::clearRows() {
+#ifdef DEBUG
+    cout << "clearRows"<<endl;
+#endif
     int rowsCleared = 0;
     // scans from top
     for (int i = 0; i < 18; ++i) {

@@ -92,8 +92,8 @@ void Game::play(){
 }
 
 void Game::reset(){
-    board1.reset(new Board(1,&*td, /*gd,*/ textOnly, seed, scriptFile1, startLevel));
-    board2.reset(new Board(2,&*td, /*gd,*/ textOnly, seed, scriptFile2, startLevel));
+    board1.reset(new Board(1,td.get(), /*gd,*/ textOnly, seed, scriptFile1, startLevel));
+    board2.reset(new Board(2,td.get(), /*gd,*/ textOnly, seed, scriptFile2, startLevel));
     scores[0] = 0;
     scores[1] = 0;
     levels[0] = startLevel;
