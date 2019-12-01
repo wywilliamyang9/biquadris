@@ -6,13 +6,12 @@
 #include <iostream>
 #include <memory>
 #include <iostream>
-class TextDisplay;
-class Observer;
-class GraphicalDisplay;
-
+#include "observer.h"
+#include "textDisplay.h"
+#include "graphicalDisplay.h"
 class Game{
     std::unique_ptr<TextDisplay> td;
-    std::unique_ptr<Observer> gd;
+    std::unique_ptr<GraphicalDisplay> gd;
     //Observer<State> observers;
 
     std::unique_ptr<Board> board1;

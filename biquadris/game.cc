@@ -20,7 +20,7 @@ td{new TextDisplay{}} {
 	//td = make_unique(new TextDisplay());
 	//attach(&(*td));
 	if (!textOnly){
-		gd= make_unique(new GraphicalDisplay);
+		gd= make_unique<GraphicalDisplay>();
 		//attach(gd);
 	}
     
@@ -124,5 +124,4 @@ void Game::reset(){
     levels[1] = startLevel;
     td->print();
 }
-
 

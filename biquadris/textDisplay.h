@@ -1,5 +1,5 @@
-#ifndef _GRAPHICDISPLAY_
-#define _GRAPHICDISPLAY_
+#ifndef _TEXTDISPLAY_
+#define _TEXTDISPLAY_
 //#include "window.h"
 #include "subject.h"
 #include "coordinates.h"
