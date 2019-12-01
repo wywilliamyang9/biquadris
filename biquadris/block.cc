@@ -41,10 +41,11 @@ cout << this->getCells().at(3)->getinfo().coord.row << " " << this->getCells().a
 
 	for (int i = 0; i < 4; ++i) {
 		Coordinates curCoord = cells.at(i)->getinfo().coord;
-		if (playerBoard.getBoard().at(curCoord.row + 1).at(curCoord.col).getinfo().colour
+		if (curCoord.row == 17 ||
+			(playerBoard.getBoard().at(curCoord.row + 1).at(curCoord.col).getinfo().colour
 			!= Colour::White
 			&& playerBoard.getBoard().at(curCoord.row + 1).at(curCoord.col).getCurrBlock()
-			== false) canMove = 0;
+			== false)) canMove = 0;
 	}
 
 	if (canMove) {

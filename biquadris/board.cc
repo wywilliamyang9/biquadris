@@ -77,32 +77,52 @@ void Board::processSpecialActions() {
 #ifdef DEBUG
     cout << "specialActions size is: " << specialActions.size() << endl;
 #endif
-    while (!(specialActions.size())) {
+    while (specialActions.size()) {
 		if (specialActions.back() == SpecialAction::Heavy) {
 #ifdef DEBUG
     cout << "new action is heavy action" << endl;
 #endif
             level->addHeavy();
+            specialActions.pop_back();
         } else if  (specialActions.back() == SpecialAction::Blind) {
+#ifdef DEBUG
+    cout << "new action is blind action" << endl;
+#endif
             for (int i = 2; i < 12; ++i) {
 		        for (int j = 2; j < 9; ++j) {
 			    board.at(i).at(j).blindCell();
                 }
             }
+            specialActions.pop_back();
+
 		} else if  (specialActions.back() == SpecialAction::ForceI) {
             level->forceBlock(convertString("I"));
+            specialActions.pop_back();
+
 		}  else if  (specialActions.back() == SpecialAction::ForceJ) {
             level->forceBlock(convertString("J"));
+            specialActions.pop_back();
+
 		} else if  (specialActions.back() == SpecialAction::ForceL) {
             level->forceBlock(convertString("L"));
+            specialActions.pop_back();         
+
 		} else if  (specialActions.back() == SpecialAction::ForceO) {
             level->forceBlock(convertString("O"));
+                specialActions.pop_back();
+
 		} else if  (specialActions.back() == SpecialAction::ForceS) {
             level->forceBlock(convertString("S"));
+                specialActions.pop_back();
+
 		} else if  (specialActions.back() == SpecialAction::ForceZ) {
             level->forceBlock(convertString("Z"));
+                specialActions.pop_back();
+
 		} else if  (specialActions.back() == SpecialAction::ForceT) {
             level->forceBlock(convertString("T"));
+                specialActions.pop_back();
+
 		} 
     }
 }
@@ -116,6 +136,7 @@ string Board::play(){
 #ifdef DEBUG
     cout << "Board::play() starts"<<endl;
 #endif
+    processSpecialActions();
     BlockInfo newBlockInfo = level->generateNextBlock();
   
     if (!newBlockCheck(newBlockInfo.colour)){
@@ -151,6 +172,13 @@ string Board::play(){
     textDisplay->print();
 	if (!currBlock) return "lost!";
 	string moveResult = moveBlock();
+    
+    // undo blind
+    for (int i = 0; i < 18;++i) {
+        for (int j = 0; j < 11; ++j) {
+            board.at(i).at(j).unblindCell();
+        }
+    }
     if (moveResult == "continue!"){
         setScore(level->calculateScore(clearRows()));
         return "continue!";
