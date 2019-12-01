@@ -5,7 +5,6 @@
 #include <iostream>
 #include "colour.h"
 #include <vector>
-#include "board.h"
 using namespace std;
 
 TextDisplay::TextDisplay(){
