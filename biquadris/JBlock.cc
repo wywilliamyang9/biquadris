@@ -40,15 +40,17 @@ void JBlock::CWRotate(Board & playerBoard) {
             &(playerBoard.getBoard().at(i3.coord.row).at(i3.coord.col-2)));
         for (int i = 0; i < 4; ++i) {
             cells.at(i)->setCurrBlock(false);
+        }    
+        for (int i = 0; i < 4; ++i) {
             newCells.at(i)->setCurrBlock(true);
-        }
+        }   
         cells.clear();
         cells = newCells;
         state = 2;
     } else if (state == 2) {
         Info i0 = cells.at(0)->getinfo();
         // check if rotation is legit
-        if (i0.coord.col == 17) return;
+        if (i0.coord.col == 10) return;
 
         // if rotation is legit.
         playerBoard.getBoard().at(i0.coord.row+2).at(i0.coord.col+1).
@@ -81,8 +83,10 @@ void JBlock::CWRotate(Board & playerBoard) {
             &(playerBoard.getBoard().at(i3.coord.row-1).at(i3.coord.col)));
         for (int i = 0; i < 4; ++i) {
             cells.at(i)->setCurrBlock(false);
+        }    
+        for (int i = 0; i < 4; ++i) {
             newCells.at(i)->setCurrBlock(true);
-        }
+        }   
         cells.clear();
         cells = newCells;
         state = 3;
@@ -116,15 +120,17 @@ void JBlock::CWRotate(Board & playerBoard) {
             &(playerBoard.getBoard().at(i3.coord.row-1).at(i3.coord.col+1)));
         for (int i = 0; i < 4; ++i) {
             cells.at(i)->setCurrBlock(false);
+        }    
+        for (int i = 0; i < 4; ++i) {
             newCells.at(i)->setCurrBlock(true);
-        }
+        }   
         cells.clear();
         cells = newCells;
         state = 4; 
     } else if (state == 4) {
         Info i0 = cells.at(0)->getinfo();
         // check if rotation is legit
-        if (i0.coord.col == 16) return;
+        if (i0.coord.col == 9) return;
 
         playerBoard.getBoard().at(i0.coord.row-1).at(i0.coord.col).
         setColour(i0.colour);
@@ -157,8 +163,10 @@ void JBlock::CWRotate(Board & playerBoard) {
             &(playerBoard.getBoard().at(i3.coord.row+2).at(i3.coord.col+1)));
         for (int i = 0; i < 4; ++i) {
             cells.at(i)->setCurrBlock(false);
+        }    
+        for (int i = 0; i < 4; ++i) {
             newCells.at(i)->setCurrBlock(true);
-        }
+        }   
         cells.clear();
         cells = newCells;
         state = 1; 
@@ -200,15 +208,17 @@ void JBlock::CounterCWRotate(Board &playerBoard) {
             &(playerBoard.getBoard().at(i3.coord.row-2).at(i3.coord.col-1)));
         for (int i = 0; i < 4; ++i) {
             cells.at(i)->setCurrBlock(false);
+        }    
+        for (int i = 0; i < 4; ++i) {
             newCells.at(i)->setCurrBlock(true);
-        }
+        }   
         cells.clear();
         cells = newCells;
         state = 4;
     } else if (state == 2) {
         Info i0 = cells.at(0)->getinfo();
         // check if rotation is legit
-        if (i0.coord.col == 17) return;
+        if (i0.coord.col == 10) return;
 
         // if rotation is legit.
         playerBoard.getBoard().at(i0.coord.row+1).at(i0.coord.col-1).
@@ -241,8 +251,10 @@ void JBlock::CounterCWRotate(Board &playerBoard) {
             &(playerBoard.getBoard().at(i3.coord.row).at(i3.coord.col-2)));
         for (int i = 0; i < 4; ++i) {
             cells.at(i)->setCurrBlock(false);
+        }    
+        for (int i = 0; i < 4; ++i) {
             newCells.at(i)->setCurrBlock(true);
-        }
+        }   
         cells.clear();
         cells = newCells;
         state = 1;
@@ -278,15 +290,17 @@ void JBlock::CounterCWRotate(Board &playerBoard) {
             &(playerBoard.getBoard().at(i3.coord.row+1).at(i3.coord.col)));
         for (int i = 0; i < 4; ++i) {
             cells.at(i)->setCurrBlock(false);
+        }    
+        for (int i = 0; i < 4; ++i) {
             newCells.at(i)->setCurrBlock(true);
-        }
+        }   
         cells.clear();
         cells = newCells;
         state = 2; 
     } else if (state == 4) { 
         Info i0 = cells.at(0)->getinfo();
         // check if rotation is legit
-        if (i0.coord.col == 16) return;
+        if (i0.coord.col == 9) return;
 
         playerBoard.getBoard().at(i0.coord.row).at(i0.coord.col+2).
         setColour(i0.colour);
@@ -316,8 +330,10 @@ void JBlock::CounterCWRotate(Board &playerBoard) {
             &(playerBoard.getBoard().at(i3.coord.row+1).at(i3.coord.col-1)));
         for (int i = 0; i < 4; ++i) {
             cells.at(i)->setCurrBlock(false);
+        }    
+        for (int i = 0; i < 4; ++i) {
             newCells.at(i)->setCurrBlock(true);
-        }
+        }   
         cells.clear();
         cells = newCells;
         state = 3; 

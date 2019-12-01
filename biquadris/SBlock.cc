@@ -35,15 +35,17 @@ void SBlock::CWRotate(Board & playerBoard) {
             &(playerBoard.getBoard().at(i3.coord.row+1).at(i3.coord.col-1)));
         for (int i = 0; i < 4; ++i) {
             cells.at(i)->setCurrBlock(false);
+        }    
+        for (int i = 0; i < 4; ++i) {
             newCells.at(i)->setCurrBlock(true);
-        }
+        }  
         cells.clear();
         cells = newCells;
         state = 2;
     } else if (state == 2) {
         Info i0 = cells.at(0)->getinfo();
         // check if rotation is legit
-        if (i0.coord.col == 17) return;
+        if (i0.coord.col == 10) return;
 
         // if rotation is legit.
         Info i3 = cells.at(3)->getinfo();
@@ -64,17 +66,19 @@ void SBlock::CWRotate(Board & playerBoard) {
 
         vector<Cell*> newCells;
         newCells.emplace_back(
-            &(playerBoard.getBoard().at(i0.coord.row-1).at(i0.coord.col+1)));
+            &(playerBoard.getBoard().at(i0.coord.row+2).at(i0.coord.col)));
         newCells.emplace_back(
-            &(playerBoard.getBoard().at(i1.coord.row).at(i1.coord.col)));
+            &(playerBoard.getBoard().at(i1.coord.row+1).at(i1.coord.col+1)));
         newCells.emplace_back(
-            &(playerBoard.getBoard().at(i2.coord.row+1).at(i2.coord.col+1)));
+            &(playerBoard.getBoard().at(i2.coord.row).at(i2.coord.col)));
         newCells.emplace_back(
-            &(playerBoard.getBoard().at(i3.coord.row+2).at(i3.coord.col)));
+            &(playerBoard.getBoard().at(i3.coord.row-1).at(i3.coord.col+1)));
         for (int i = 0; i < 4; ++i) {
             cells.at(i)->setCurrBlock(false);
+        }    
+        for (int i = 0; i < 4; ++i) {
             newCells.at(i)->setCurrBlock(true);
-        }
+        }  
         cells.clear();
         cells = newCells;
         state = 1;
