@@ -40,9 +40,9 @@ void Game::updateInfo() {
 #ifdef DEBUG
     cout << "Game::updateInfo() starts"<<endl;
 #endif
-	scores.at(0) = board1->getScore();
+	scores.at(0) += board1->getScore();
 
-	scores.at(1) = board2->getScore();
+	scores.at(1) += board2->getScore();
 	if (scores[0] > scores[2]) {
 		scores[2] = scores[0];
 	}
