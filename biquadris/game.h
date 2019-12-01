@@ -5,11 +5,14 @@
 #include <vector>
 #include <iostream>
 #include <memory>
-#include "textDisplay.h"
 #include <iostream>
+class TextDisplay;
+class Observer;
+class GraphicalDisplay;
+
 class Game{
     std::unique_ptr<TextDisplay> td;
-    //std::unique_ptr<GraphicalDisplay> gd;
+    std::unique_ptr<Observer> gd;
     //Observer<State> observers;
 
     std::unique_ptr<Board> board1;

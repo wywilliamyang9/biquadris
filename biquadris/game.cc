@@ -3,6 +3,9 @@
 #include "game.h"
 #include <memory>
 #include <vector>
+
+#include "textDisplay.h"
+#include "graphicalDisplay.h"
 #include <string>
 #include "board.h"
 
@@ -10,19 +13,19 @@ using namespace std;
 
 Game::Game(bool textOnly, int seed, string scriptFile1, string scriptFile2, int startLevel)
 :textOnly{textOnly}, seed{seed}, scriptFile1{scriptFile1}, scriptFile2{scriptFile2}, startLevel{startLevel},
-td{ new TextDisplay{} } {
+td{new TextDisplay{}} {
 #ifdef DEBUG
     cout << "Game ctor starts"<<endl;
 #endif
 	//td = make_unique(new TextDisplay());
 	//attach(&(*td));
-	/*if (!textOnly){
-		gd = new GraphicalDisplay();
-		attach(gd);
-	}*/
+	if (!textOnly){
+		gd= make_unique(new GraphicalDisplay);
+		//attach(gd);
+	}
     
-	board1.reset(new Board{ 1,td.get(), /*gd,*/ textOnly, seed, scriptFile1, startLevel });
-	board2.reset(new Board{2,td.get(), /*gd,*/ textOnly, seed, scriptFile2, startLevel});
+	board1.reset(new Board{ 1,td.get(), gd.get(), textOnly, seed, scriptFile1, startLevel });
+	board2.reset(new Board{2,td.get(), gd.get(), textOnly, seed, scriptFile2, startLevel});
     board1->setOpponent(&*board2);
     board2->setOpponent(&*board1);
     for(int i = 0; i < 3; i++){
@@ -53,6 +56,8 @@ void Game::updateInfo() {
 	levels[1] = board2->getLevel();
     td->updateScore(scores);
     td->updateLevel(levels);
+    gd->updateScore(scores);
+    gd->updateLevel(levels);
 #ifdef DEBUG
     cout << "Game::updateInfo() ends"<<endl;
 #endif
@@ -110,8 +115,9 @@ void Game::play(){
 
 void Game::reset(){
     td.reset(new TextDisplay);
-    board1.reset(new Board(1,td.get(), /*gd,*/ textOnly, seed, scriptFile1, startLevel));
-    board2.reset(new Board(2,td.get(), /*gd,*/ textOnly, seed, scriptFile2, startLevel));
+    gd.reset(new GraphicalDisplay);
+    board1.reset(new Board(1,td.get(), gd.get(), textOnly, seed, scriptFile1, startLevel));
+    board2.reset(new Board(2,td.get(), gd.get(), textOnly, seed, scriptFile2, startLevel));
     scores[0] = 0;
     scores[1] = 0;
     levels[0] = startLevel;

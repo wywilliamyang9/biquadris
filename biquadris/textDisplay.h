@@ -7,7 +7,8 @@
 #include <vector>
 #include "nextBlock.h"
 #include "observer.h"
-class Board;
+
+class Block;
 class TextDisplay : public Observer {
     std::vector<std::vector<char>> board1;
     std::vector<std::vector<char>> board2;
@@ -24,10 +25,10 @@ class TextDisplay : public Observer {
     public:
     TextDisplay();
     void notify(Subject &whoNotified) override;
-    void updateNextBlock(NextBlock nextBlockInfo);
-    void updateScore(std::vector<int> scores);
-    void updateLevel(std::vector<int> levels);
-    void updateLevel(int newLevel, int boardnum);
+    void updateNextBlock(NextBlock nextBlockInfo) override;
+    void updateScore(std::vector<int> scores)override;
+    void updateLevel(std::vector<int> levels)override;
+    void updateLevel(int newLevel, int boardnum)override;
     void print();
 };
 

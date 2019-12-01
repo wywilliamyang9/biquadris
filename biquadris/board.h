@@ -5,7 +5,6 @@
 #include "level1.h"
 #include "level2.h"
 #include "level3.h"
-//#include "graphicDisplay.h"
 #include "subject.h"
 #include "observer.h"
 #include "specialAction.h"
@@ -16,12 +15,13 @@
 #include "info.h"
 #include "colour.h"
 #include "nextBlock.h"
-#include "textDisplay.h"
 #include "cell.h"
 #include <iostream>
 #include <sstream>
 #include "block.h"
 
+class TextDisplay;
+class GraphicalDisplay;
 /*
 #include "IBlock.h" 
 #include "JBlock.h"
@@ -31,7 +31,6 @@
 #include "SBlock.h"
 #include "ZBlock.h"
 */
-
 class IBlock; 
 class JBlock; 
 class LBlock; 
@@ -47,7 +46,7 @@ class Board {
     std::vector<std::vector<Cell>> board;
     std::vector<SpecialAction> specialActions;
     std::unique_ptr<Level> level;
-    //GraphicDisplay* graphicDisplay;
+    Observer* graphicDisplay;
     TextDisplay* textDisplay;
     std::string fileInput;
     int currlvl;
@@ -67,7 +66,7 @@ class Board {
     void setScore(int);
     std::vector<std::vector<Cell>>& getBoard();
 
-    Board(int boardnum, TextDisplay *td,/* GraphicDisplay *gd,*/ bool textOnly, int seed,
+    Board(int boardnum, TextDisplay *td, Observer *gd, bool textOnly, int seed,
     std::string scriptFile, int startLevel);
     void setOpponent(Board*);
     

@@ -8,7 +8,7 @@
 #include "nextBlock.h"
 #include "observer.h"
 
-class Board;
+class Block;
 class GraphicalDisplay : public Observer {
     Xwindow window;
     const int displaywidth = 675;
@@ -28,10 +28,10 @@ class GraphicalDisplay : public Observer {
     public:
     GraphicalDisplay();
     void notify(Subject &whoNotified) override;
-    void updateNextBlock(NextBlock nextBlockInfo);
-    void updateScore(std::vector<int> scores);
-    void updateLevel(std::vector<int> levels);
-    void updateLevel(int newLevel, int boardnum);
+    void updateNextBlock(NextBlock nextBlockInfo) override;
+    void updateScore(std::vector<int> scores) override;
+    void updateLevel(std::vector<int> levels) override;
+    void updateLevel(int newLevel, int boardnum) override;
     void display();
 };
 
