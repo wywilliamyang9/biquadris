@@ -69,8 +69,8 @@ void Game::play(){
     while (true) {
         string gamestate = currplayer->play();
         if (gamestate == "restart!"){
-            currplayer = board1.get();
             reset();
+            currplayer = board2.get();
         } else if (gamestate == "lost!"){
             if (currplayer == board1.get()){
                 cout << "Player 2 wins" << endl;

@@ -277,7 +277,7 @@ string Board::moveBlock() {
             }
 
         }
-        cout << "cmd not found is :" << cmdnotFound << endl;
+        //cout << "cmd not found is :" << cmdnotFound << endl;
         if (cmdnotFound) continue;
 
         if(!enteredloop){
