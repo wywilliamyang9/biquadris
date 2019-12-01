@@ -35,6 +35,7 @@ CommandInterpreter::CommandInterpreter() {
     cmdDictionary["counterclockwis"] = Command::CounterClockWise;
     cmdDictionary["counterclockwise"] = Command::CounterClockWise;
 
+
     cmdDictionary["dr"] = Command::Drop;
     cmdDictionary["dro"] = Command::Drop;
     cmdDictionary["drop"] = Command::Drop;

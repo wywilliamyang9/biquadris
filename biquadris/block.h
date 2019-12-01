@@ -26,7 +26,6 @@ protected:
     void moveLeft(Board&);
     void moveRight(Board &);
 	void moveDownByOne(Board&);
-    void drop(Board &);
     virtual void CWRotate(Board &) ;
     virtual void CounterCWRotate(Board &) ;
 };

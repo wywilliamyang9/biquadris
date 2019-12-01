@@ -200,57 +200,51 @@ string Board::moveBlock() {
     string cmd;
     char cmdCount;
     while (cin >> cmd) {
-#ifdef DEBUG
-    cout << "Board::moveBlock() - whileLoop starts"<<endl;
-#endif
         cmdCount = '0';
+        bool cmdnotFound = false;
         int cmdCountint = 0;
         bool enteredloop = false;
         // check if there's a num at the front; process the num
         if (!(cmdDictionary->checkCMD(cmd))) {
 #ifdef DEBUG
-    cout << "cmdDictionary check fails" << cmd << endl;
+            cout << "enters checkCMD"  << endl;
 #endif
             stringstream ss {cmd};
             while(ss >> cmdCount){
-                ss >> cmd;
+    
+                ss >> cmd;     
 #ifdef DEBUG
-    cout << "cmdCount is " << cmdCount << endl;
-#endif                
+            cout << cmd << endl;
+#endif
+//n,I,J,L,O,S,Z,T,b,h,f
+
+                if ((cmd != "n" && cmd != "I" && cmd != "J" && cmd != "L" && cmd != "O"
+                && cmd != "S" && cmd != "Z" && cmd != "T" && cmd != "b" && cmd != "h"
+                 && cmd != "f"&&  cmd.length() == 1)||cmd == ""){
+                    //enteredloop = false;
+                    cmdnotFound = true;
+                    break;
+                }
                 enteredloop = true;
                 cmdCountint = (cmdCountint * 10) + (cmdCount - '0');
-#ifdef DEBUG
-    cout << "int is " << cmdCountint << endl;
-    cout << "cmd: " << cmd << endl;
-#endif                
                 // if the command is not valid, continue.
-                if (!(cmdDictionary->checkCMD(cmd))){
+                if (!(cmdDictionary->checkCMD(cmd))) {
                     ss.str("");
-#ifdef DEBUG
-    string s2 = ss.str();
-    cout << "ss:" << s2 << "end"<< endl;
-#endif
                     ss.str(cmd);
                     ss.clear();
-#ifdef DEBUG
-    string s3 = ss.str();
-    cout << "ss:" << s3 << "end"<< endl;
-#endif
-/*#ifdef DEBUG
-    string s2 = ss.str();
-    cout << "ss: " << s2 << endl;
-#endif*/
+
                 } else {
                     break;
                 }
             }
+
         }
+        cout << "cmd not found is :" << cmdnotFound << endl;
+        if (cmdnotFound) continue;
+
         if(!enteredloop){
             cmdCountint = 1;
         }
-#ifdef DEBUG
-    cout << "cmdCountint is " << cmdCountint << endl;
-#endif
         // repeat the command for cmdCount times.
         // the following cmds are invalid: sequence,I,J,L,O,S,Z,T,Blind,Heavy,Force
         for (int i = 0; i < cmdCountint; i++) {
@@ -292,7 +286,10 @@ return "continue!";
 				currBlock->CounterCWRotate(*this);
                 if (dropCheck()) return "continue!";     
             } else if (cmdDictionary->interpretCMD(cmd) == Command::Drop) {
-                currBlock->drop(*this);
+                while (true) {
+                    if (dropCheck()) break;
+                    currBlock->moveDown(*this);
+                }
                 return "continue!";
             } else if (cmdDictionary->interpretCMD(cmd) == Command::LevelUp) {
                 levelUp();

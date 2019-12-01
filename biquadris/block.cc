@@ -155,9 +155,6 @@ cout << "go down check: i is " << i << endl;
 	}
 }
 
-void Block::drop(Board& playerBoard) {
-	for (int i = 0; i < 20; ++i) moveDownByOne(playerBoard);
-}
 
 void Block::CWRotate(Board &b){}
 void Block::CounterCWRotate(Board &b){}
