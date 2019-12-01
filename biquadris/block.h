@@ -4,9 +4,12 @@
 #include "colour.h"
 #include "coordinates.h"
 //#include "board.h"
+#include "info.h"
+#include "observer.h"
 class Cell;
 class Board;
-class Block {
+class Subject;
+class Block :: Observer {
 protected:
 	std::vector<Cell*> cells;
 	int heavy;
@@ -29,5 +32,6 @@ protected:
 	void moveDownByOne(Board&);
     virtual void CWRotate(Board &)=0 ;
     virtual void CounterCWRotate(Board &)=0 ;
+    void notify (Subject &caller) override ;
 };
 #endif

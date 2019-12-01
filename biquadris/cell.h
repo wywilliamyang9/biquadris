@@ -12,10 +12,12 @@ class Cell : public Subject {
     Coordinates coordinates;
     int boardnum;
     bool currBlock;
-
+    bool cleared;
     public:
     Cell(int r,int c, int boardnum);
 
+    void setCleared(bool);
+    bool getCleared();
     Info getinfo() const override;
     void setInfo (const Info&);
     void setCurrBlock(bool);

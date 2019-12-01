@@ -376,7 +376,10 @@ int Board::clearRows() {
             
 #ifdef DEBUG
     cout << i << "row is full"<<endl;
-#endif
+#endif  
+            for (int m = 0 ; m < 11; ++m) {
+                board.at(i).at(m).
+            }
             // from current row to row 1 (not row 0), move cells down by 1
             for (int k = i; k > 0; --k) {
                 for (int l = 0; l < 11; ++l) {
@@ -386,6 +389,7 @@ int Board::clearRows() {
 #endif
                 }
             }
+
             i++;
             // makes row 0 blank
             rowsCleared++;
