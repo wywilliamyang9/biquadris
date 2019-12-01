@@ -5,7 +5,7 @@ char convertColour(Colour colour){
         return 'Z';
     } else if (colour == Colour::Orange){
         return 'L';
-    } else if (colour == Colour::LightBlue){
+    } else if (colour == Colour::Cyan){
         return 'I';
     } else if (colour == Colour::Blue){
         return 'J';
@@ -25,7 +25,7 @@ Colour convertString(std::string type){
     } else if (type == "L"){
         return Colour::Orange;
     } else if (type == "I"){
-        return Colour::LightBlue;
+        return Colour::Cyan;
     } else if (type == "J"){
         return Colour::Blue;
     } else if (type == "O"){
