@@ -37,15 +37,17 @@ void ZBlock::CWRotate(Board & playerBoard) {
             &(playerBoard.getBoard().at(i3.coord.row).at(i3.coord.col-2)));
         for (int i = 0; i < 4; ++i) {
             cells.at(i)->setCurrBlock(false);
+        }    
+        for (int i = 0; i < 4; ++i) {
             newCells.at(i)->setCurrBlock(true);
-        }
+        }  
         cells.clear();
         cells = newCells;
         state = 2;
     } else if (state == 2) {
         Info i0 = cells.at(0)->getinfo();
         // check if rotation is legit
-        if (i0.coord.col == 17) return;
+        if (i0.coord.col == 11) return;
 
         // if rotation is legit.
         Info i3 = cells.at(3)->getinfo();
@@ -75,8 +77,10 @@ void ZBlock::CWRotate(Board & playerBoard) {
             &(playerBoard.getBoard().at(i3.coord.row).at(i3.coord.col+2)));
         for (int i = 0; i < 4; ++i) {
             cells.at(i)->setCurrBlock(false);
+        }    
+        for (int i = 0; i < 4; ++i) {
             newCells.at(i)->setCurrBlock(true);
-        }
+        }  
         cells.clear();
         cells = newCells;
         state = 1;

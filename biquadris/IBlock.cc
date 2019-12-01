@@ -41,8 +41,10 @@ void IBlock::CWRotate(Board & playerBoard) {
 
         for (int i = 0; i < 4; ++i) {
             cells.at(i)->setCurrBlock(false);
+        }    
+        for (int i = 0; i < 4; ++i) {
             newCells.at(i)->setCurrBlock(true);
-        }
+        }   
         cells.clear();
         cells = newCells;
         state = 2;
@@ -50,7 +52,7 @@ void IBlock::CWRotate(Board & playerBoard) {
 
         Info i0 = cells.at(0)->getinfo();
         // check if rotation is legit
-        if (i0.coord.col+3 > 17) return;
+        if (i0.coord.col== 7) return;
 
         // if rotation is legit.
         Info i3 = cells.at(3)->getinfo();
@@ -84,8 +86,10 @@ void IBlock::CWRotate(Board & playerBoard) {
         
         for (int i = 0; i < 4; ++i) {
             cells.at(i)->setCurrBlock(false);
-            newCells.at(i)->setCurrBlock(true);
         }    
+        for (int i = 0; i < 4; ++i) {
+            newCells.at(i)->setCurrBlock(true);
+        }   
         cells.clear();
         cells = newCells;
         state = 1;
