@@ -3,6 +3,7 @@
 #include "block.h"
 #include "board.h"
 #include "cell.h"
+#include "subject.h"
 
 using namespace std;
 
@@ -159,3 +160,10 @@ cout << "go down check: i is " << i << endl;
 
 void Block::CWRotate(Board &b){}
 void Block::CounterCWRotate(Board &b){}
+
+void setSpawnLevel(int i) spawnLevel = i;
+int getSpawnLevel() return spawnLevel;
+
+void notify (Subject &caller) {
+	caller
+}

@@ -3,15 +3,18 @@
 #include <vector>
 #include "colour.h"
 #include "coordinates.h"
+#include "observer.h"
 //#include "board.h"
 class Cell;
 class Board;
-class Block {
+class Subject;
+class Block : public Observer{
 protected:
 	std::vector<Cell*> cells;
 	int heavy;
 	Colour colour;
 	int state;
+    int spawnLevel;
 
     public:
     ~Block()=default;
@@ -21,6 +24,10 @@ protected:
     std::vector<Cell*> getCells();
     void setCells(const std::vector<Cell*>);
     Colour getColour();
+
+    void setSpawnLevel(int);
+    int getSpawnLevel();
+    void notify(Subject &caller) override;
 
     void moveDown(Board& playerBoard);
     void moveLeft(Board&);
