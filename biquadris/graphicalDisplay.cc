@@ -1,11 +1,10 @@
 //#define DEBUG
-
+#include "window.h"
 #include "graphicalDisplay.h"
 #include "info.h"
 #include <iostream>
 #include "colour.h"
 #include <vector>
-#include "board.h"
 using namespace std;
 
 GraphicalDisplay::GraphicalDisplay(){
@@ -35,7 +34,7 @@ void GraphicalDisplay::notify(Subject &whoNotified) {
     cout << "GraphicalDisplay::notify() starts"<<endl;
 #endif
     // if called upon a row clear, return.
-    if (caller.getCleared()) return;
+    if (whoNotified.getCleared()) return;
     
     Info currinfo{whoNotified.getinfo()};
     if (currinfo.boardnum == 1){
@@ -88,9 +87,7 @@ void GraphicalDisplay::display() {
 	displayLevel();
     displayHighScore();
 	displayScore();
-	cout << "-----------   -----------" << endl;
 	displayBoards();
-	cout << "-----------   -----------" << endl;
 	displayNextBlock();
     
 #ifdef DEBUG
@@ -99,21 +96,30 @@ void GraphicalDisplay::display() {
 }
 
 void GraphicalDisplay::displayLevel() {
-	cout << "LEVEL: " << levels[0];
-	cout << "      ";
-    cout << "LEVEL: " << levels[1] << endl;
+    window.fillRectangle(25, 25, 100, 25, Xwindow::White);
+	string level = "LEVEL: " + levels[0];
+    window.drawString(25, 25, level);
+    window.fillRectangle(375, 25, 100, 25, Xwindow::White);
+    level =  "LEVEL: " + levels[1];
+    window.drawString(375, 25, level);
 }
 
-void GraphicalDisplay::displayHighScore() {
-	cout << "HISCORE: " << scores[3];
-	cout << "    ";
-	cout << "HISCORE: " << scores[3] << endl;
+void GraphicalDisplay::displayHighScore() {	
+    window.fillRectangle(25, 50, 100, 25, Xwindow::White);
+    string hiscore = "HISCORE: " + scores[3];
+    window.drawString(25, 50, hiscore);
+    window.fillRectangle(375, 50, 100, 25, Xwindow::White);
+    hiscore =  "HISCORE: " + scores[3];
+    window.drawString(375, 50, hiscore);
 }
 
 void GraphicalDisplay::displayScore() {
-	cout << "SCORE: " << scores[0];
-	cout << "      ";
-	cout << "SCORE: " << scores[1] << endl;
+    window.fillRectangle(25, 75, 100, 25, Xwindow::White);
+    string score = "SCORE: " + scores[0];
+    window.drawString(25, 75, score);
+    window.fillRectangle(375, 75, 100, 25, Xwindow::White);
+    score =  "SCORE: " + scores[1];
+    window.drawString(375, 75, score);
 }
 
 void GraphicalDisplay::displayBoards() {

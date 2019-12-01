@@ -10,8 +10,9 @@
 
 class Board;
 class GraphicalDisplay : public Observer {
-    const int displaywidth = 675
-    
+    Xwindow window;
+    const int displaywidth = 675;
+    const int displayheight = 650;
     std::vector<std::vector<char>> board1;
     std::vector<std::vector<char>> board2;
     const int gridWidth = 11;
