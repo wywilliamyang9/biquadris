@@ -217,9 +217,6 @@ void TBlock::CounterCWRotate(Board &playerBoard) {
         if (i0.coord.col == 11) return;
 
         // if rotation is legit.
-        playerBoard.getBoard().at(i0.coord.row+1).at(i0.coord.col-1).
-        setColour(i0.colour);
-        cells.at(0)->setColour(Colour::White);
 
         Info i1 = cells.at(1)->getinfo();
 
@@ -232,6 +229,10 @@ void TBlock::CounterCWRotate(Board &playerBoard) {
         playerBoard.getBoard().at(i3.coord.row+1).at(i3.coord.col+1).
         setColour(i3.colour);
         cells.at(3)->setColour(Colour::White);
+        
+        playerBoard.getBoard().at(i0.coord.row+1).at(i0.coord.col-1).
+        setColour(i0.colour);
+        cells.at(0)->setColour(Colour::White);
 
         vector<Cell*> newCells;
         newCells.emplace_back(

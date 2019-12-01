@@ -177,7 +177,7 @@ void LBlock::CWRotate(Board & playerBoard) {
 void LBlock::CounterCWRotate(Board &playerBoard) {
     if (state == 1) {
         Info i0 = cells.at(0)->getinfo();
-		playerBoard.getBoard().at(i0.coord.row-1).at(i0.coord.col-1).
+		playerBoard.getBoard().at(i0.coord.row-1).at(i0.coord.col-2).
         setColour(i0.colour);
         cells.at(0)->setColour(Colour::White);
 
@@ -198,7 +198,7 @@ void LBlock::CounterCWRotate(Board &playerBoard) {
 
         vector<Cell*> newCells;
         newCells.emplace_back(
-            &(playerBoard.getBoard().at(i0.coord.row-1).at(i0.coord.col-1)));
+            &(playerBoard.getBoard().at(i0.coord.row-1).at(i0.coord.col-2)));
         newCells.emplace_back(
             &(playerBoard.getBoard().at(i1.coord.row-2).at(i1.coord.col-1)));
         newCells.emplace_back(
@@ -268,16 +268,15 @@ void LBlock::CounterCWRotate(Board &playerBoard) {
         setColour(i1.colour); 
         cells.at(1)->setColour(Colour::White);
 
-        Info i3 = cells.at(3)->getinfo();
-        playerBoard.getBoard().at(i3.coord.row).at(i3.coord.col-1).
-        setColour(i3.colour);
-        cells.at(3)->setColour(Colour::White);
-
         Info i2 = cells.at(2)->getinfo();
-        playerBoard.getBoard().at(i2.coord.row-1).at(i2.coord.col-2).
+        playerBoard.getBoard().at(i2.coord.row).at(i2.coord.col-1).
         setColour(i2.colour);
         cells.at(2)->setColour(Colour::White);
 
+        Info i3 = cells.at(3)->getinfo();
+        playerBoard.getBoard().at(i3.coord.row-1).at(i3.coord.col-2).
+        setColour(i3.colour);
+        cells.at(3)->setColour(Colour::White);
         vector<Cell*> newCells;
         newCells.emplace_back(
             &(playerBoard.getBoard().at(i0.coord.row).at(i0.coord.col+1)));
