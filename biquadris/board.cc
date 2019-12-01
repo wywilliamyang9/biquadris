@@ -13,7 +13,6 @@
 #include "ZBlock.h"
 
 using namespace std;
-
 Level* Board::getLevelptr() {
 	return &(*level);
 }
