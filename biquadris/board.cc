@@ -108,9 +108,7 @@ string Board::play(){
     cout << "Board::play() starts"<<endl;
 #endif
     BlockInfo newBlockInfo = level->generateNextBlock();
-#ifdef DEBUG
-    cout << newBlockCheck(newBlockInfo.colour)<<endl;
-#endif    
+  
     if (!newBlockCheck(newBlockInfo.colour)){
         #ifdef DEBUG
         cout << "Board::createBlock - lost!" << endl;
@@ -145,13 +143,13 @@ string Board::play(){
 	if (!currBlock) return "lost!";
 	string moveResult = moveBlock();
     if (moveResult == "continue!"){
+        setScore(level->calculateScore(clearRows()));
         return "continue!";
     } else if (moveResult == "restart!") {
         return "restart!";
     } else {
         return "eof!";
     }
-    setScore(level->calculateScore(clearRows()));
     return "continue!";
 }
 
@@ -327,19 +325,31 @@ int Board::clearRows() {
 #endif
     int rowsCleared = 0;
     // scans from top
-    for (int i = 0; i < 18; ++i) {
+    for (int i = 17; i >= 0; --i) {
+        
         int fullCount = 0;
         for (int j = 0; j < 11; ++j) {
             // if the value is not empty, fullCount ++
             if (board.at(i).at(j).getinfo().colour != Colour::White) fullCount++; 
         }
+#ifdef DEBUG
+    cout << i<< " row is " << fullCount<<endl;
+#endif
         if (fullCount == 11) {
+            
+#ifdef DEBUG
+    cout << i << "row is full"<<endl;
+#endif
             // from current row to row 1 (not row 0), move cells down by 1
             for (int k = i; k > 0; --k) {
                 for (int l = 0; l < 11; ++l) {
-                    board.at(k).at(l).setInfo(board.at(k).at(l-1).getinfo());
+                    board.at(k).at(l).setColour(board.at(k-1).at(l).getColour());
+#ifdef DEBUG
+   // cout << k<<l<< "info is:"<< board.at(k).at(l).getinfo().colour <<endl;
+#endif
                 }
             }
+            i++;
             // makes row 0 blank
             rowsCleared++;
         }
