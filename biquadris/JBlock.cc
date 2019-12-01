@@ -31,13 +31,13 @@ void JBlock::CWRotate(Board & playerBoard) {
         
         vector<Cell*> newCells;
         newCells.emplace_back(
-            playerBoard.getBoard().at(i0.coord.row-1).at(i0.coord.col+1));
+            &(playerBoard.getBoard().at(i0.coord.row-1).at(i0.coord.col+1)));
         newCells.emplace_back(
-            playerBoard.getBoard().at(i1.coord.row-2).at(i1.coord.col));
+            &(playerBoard.getBoard().at(i1.coord.row-2).at(i1.coord.col)));
         newCells.emplace_back(
-            playerBoard.getBoard().at(i2.coord.row-1).at(i2.coord.col-1));
+            &(playerBoard.getBoard().at(i2.coord.row-1).at(i2.coord.col-1)));
         newCells.emplace_back(
-            playerBoard.getBoard().at(i3.coord.row).at(i3.coord.col-2));
+            &(playerBoard.getBoard().at(i3.coord.row).at(i3.coord.col-2)));
         for (int i = 0; i < 4; ++i) {
             cells.at(i)->setCurrBlock(false);
             newCells.at(i)->setCurrBlock(true);
@@ -72,13 +72,13 @@ void JBlock::CWRotate(Board & playerBoard) {
 
         vector<Cell*> newCells;
         newCells.emplace_back(
-            playerBoard.getBoard().at(i0.coord.row+2).at(i0.coord.col+1));
+            &(playerBoard.getBoard().at(i0.coord.row+2).at(i0.coord.col+1)));
         newCells.emplace_back(
-            playerBoard.getBoard().at(i1.coord.row+1).at(i1.coord.col+2));
+            &(playerBoard.getBoard().at(i1.coord.row+1).at(i1.coord.col+2)));
         newCells.emplace_back(
-            playerBoard.getBoard().at(i2.coord.row).at(i2.coord.col+1));
+            &(playerBoard.getBoard().at(i2.coord.row).at(i2.coord.col+1)));
         newCells.emplace_back(
-            playerBoard.getBoard().at(i3.coord.row-1).at(i3.coord.col));
+            &(playerBoard.getBoard().at(i3.coord.row-1).at(i3.coord.col)));
         for (int i = 0; i < 4; ++i) {
             cells.at(i)->setCurrBlock(false);
             newCells.at(i)->setCurrBlock(true);
@@ -107,13 +107,13 @@ void JBlock::CWRotate(Board & playerBoard) {
 
         vector<Cell*> newCells;
         newCells.emplace_back(
-            playerBoard.getBoard().at(i0.coord.row).at(i0.coord.col-2));
+            &(playerBoard.getBoard().at(i0.coord.row).at(i0.coord.col-2)));
         newCells.emplace_back( // up until here.
-            playerBoard.getBoard().at(i1.coord.row+1).at(i1.coord.col-1));
+            &(playerBoard.getBoard().at(i1.coord.row+1).at(i1.coord.col-1)));
         newCells.emplace_back(
-            playerBoard.getBoard().at(i2.coord.row).at(i2.coord.col));
+            &(playerBoard.getBoard().at(i2.coord.row).at(i2.coord.col)));
         newCells.emplace_back(
-            playerBoard.getBoard().at(i3.coord.row-1).at(i3.coord.col+1));
+            &(playerBoard.getBoard().at(i3.coord.row-1).at(i3.coord.col+1)));
         for (int i = 0; i < 4; ++i) {
             cells.at(i)->setCurrBlock(false);
             newCells.at(i)->setCurrBlock(true);
@@ -148,13 +148,13 @@ void JBlock::CWRotate(Board & playerBoard) {
 
         vector<Cell*> newCells;
         newCells.emplace_back(
-            playerBoard.getBoard().at(i0.coord.row-1).at(i0.coord.col));
+            &(playerBoard.getBoard().at(i0.coord.row-1).at(i0.coord.col)));
         newCells.emplace_back( // up until here.
-            playerBoard.getBoard().at(i1.coord.row).at(i1.coord.col-1));
+            &(playerBoard.getBoard().at(i1.coord.row).at(i1.coord.col-1)));
         newCells.emplace_back(
-            playerBoard.getBoard().at(i2.coord.row+1).at(i2.coord.col));
+            &(playerBoard.getBoard().at(i2.coord.row+1).at(i2.coord.col)));
         newCells.emplace_back(
-            playerBoard.getBoard().at(i3.coord.row+2).at(i3.coord.col+1));
+            &(playerBoard.getBoard().at(i3.coord.row+2).at(i3.coord.col+1)));
         for (int i = 0; i < 4; ++i) {
             cells.at(i)->setCurrBlock(false);
             newCells.at(i)->setCurrBlock(true);
@@ -191,13 +191,13 @@ void JBlock::CounterCWRotate(Board &playerBoard) {
 
         vector<Cell*> newCells;
         newCells.emplace_back(
-            playerBoard.getBoard().at(i0.coord.row+1).at(i0.coord.col));
+            &(playerBoard.getBoard().at(i0.coord.row+1).at(i0.coord.col)));
         newCells.emplace_back(
-            playerBoard.getBoard().at(i1.coord.row).at(i1.coord.col+1));
+            &(playerBoard.getBoard().at(i1.coord.row).at(i1.coord.col+1)));
         newCells.emplace_back(
-            playerBoard.getBoard().at(i2.coord.row-1).at(i2.coord.col));
+            &(playerBoard.getBoard().at(i2.coord.row-1).at(i2.coord.col)));
         newCells.emplace_back(
-            playerBoard.getBoard().at(i3.coord.row-2).at(i3.coord.col-1));
+            &(playerBoard.getBoard().at(i3.coord.row-2).at(i3.coord.col-1)));
         for (int i = 0; i < 4; ++i) {
             cells.at(i)->setCurrBlock(false);
             newCells.at(i)->setCurrBlock(true);
@@ -232,13 +232,13 @@ void JBlock::CounterCWRotate(Board &playerBoard) {
 
         vector<Cell*> newCells;
         newCells.emplace_back(
-            playerBoard.getBoard().at(i0.coord.row+1).at(i0.coord.col-1));
+            &(playerBoard.getBoard().at(i0.coord.row+1).at(i0.coord.col-1)));
         newCells.emplace_back(
-            playerBoard.getBoard().at(i1.coord.row-2).at(i1.coord.col));
+            &(playerBoard.getBoard().at(i1.coord.row-2).at(i1.coord.col)));
         newCells.emplace_back(
-            playerBoard.getBoard().at(i2.coord.row-1).at(i2.coord.col-1));
+            &(playerBoard.getBoard().at(i2.coord.row-1).at(i2.coord.col-1)));
         newCells.emplace_back(
-            playerBoard.getBoard().at(i3.coord.row).at(i3.coord.col-2));
+            &(playerBoard.getBoard().at(i3.coord.row).at(i3.coord.col-2)));
         for (int i = 0; i < 4; ++i) {
             cells.at(i)->setCurrBlock(false);
             newCells.at(i)->setCurrBlock(true);
@@ -269,13 +269,13 @@ void JBlock::CounterCWRotate(Board &playerBoard) {
 
         vector<Cell*> newCells;
         newCells.emplace_back(
-            playerBoard.getBoard().at(i0.coord.row-2).at(i0.coord.col-1));
+            &(playerBoard.getBoard().at(i0.coord.row-2).at(i0.coord.col-1)));
         newCells.emplace_back( // up until here.
-            playerBoard.getBoard().at(i1.coord.row-1).at(i1.coord.col-2));
+            &(playerBoard.getBoard().at(i1.coord.row-1).at(i1.coord.col-2)));
         newCells.emplace_back(
-            playerBoard.getBoard().at(i2.coord.row).at(i2.coord.col-1));
+            &(playerBoard.getBoard().at(i2.coord.row).at(i2.coord.col-1)));
         newCells.emplace_back(
-            playerBoard.getBoard().at(i3.coord.row+1).at(i3.coord.col));
+            &(playerBoard.getBoard().at(i3.coord.row+1).at(i3.coord.col)));
         for (int i = 0; i < 4; ++i) {
             cells.at(i)->setCurrBlock(false);
             newCells.at(i)->setCurrBlock(true);
@@ -307,13 +307,13 @@ void JBlock::CounterCWRotate(Board &playerBoard) {
 
         vector<Cell*> newCells;
         newCells.emplace_back(
-            playerBoard.getBoard().at(i0.coord.row).at(i0.coord.col+2));
+            &(playerBoard.getBoard().at(i0.coord.row).at(i0.coord.col+2)));
         newCells.emplace_back( // up until here.
-            playerBoard.getBoard().at(i1.coord.row-1).at(i1.coord.col+1));
+            &(playerBoard.getBoard().at(i1.coord.row-1).at(i1.coord.col+1)));
         newCells.emplace_back(
-            playerBoard.getBoard().at(i2.coord.row).at(i2.coord.col));
+            &(playerBoard.getBoard().at(i2.coord.row).at(i2.coord.col)));
         newCells.emplace_back(
-            playerBoard.getBoard().at(i3.coord.row+1).at(i3.coord.col-1));
+            &(playerBoard.getBoard().at(i3.coord.row+1).at(i3.coord.col-1)));
         for (int i = 0; i < 4; ++i) {
             cells.at(i)->setCurrBlock(false);
             newCells.at(i)->setCurrBlock(true);
