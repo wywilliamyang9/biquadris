@@ -54,7 +54,7 @@ class Board {
     Colour nextBlockColour;
     CommandInterpreter cmdDic;
     std::unique_ptr<CommandInterpreter> cmdDictionary;
-    Block* currBlock;
+    std::unique_ptr<Block> currBlock;
     Colour currColour;
     int seed;
     int textOnly;

@@ -19,12 +19,15 @@ Colour Block::getColour() {
 }
 
 Block::Block(Cell* c1, Cell* c2, Cell* c3, Cell* c4,
-	int heavy, Colour colour) : heavy{ heavy },
-	colour{ colour }, state{ 1 } {
+	int heavy, Colour colour,int spawnLevel) : heavy{ heavy },
+	colour{ colour }, state{ 1 },spawnLevel{spawnLevel} {
 	cells.emplace_back(c1);
 	cells.emplace_back(c2);
 	cells.emplace_back(c3);
 	cells.emplace_back(c4);
+}
+int Block::getSpawnLevel(){
+	return spawnLevel;
 }
 
 void Block::moveDownByOne(Board& playerBoard) {
@@ -157,5 +160,5 @@ cout << "go down check: i is " << i << endl;
 }
 
 
-void Block::CWRotate(Board &b){}
-void Block::CounterCWRotate(Board &b){}
+//void Block::CWRotate(Board &b){}
+//void Block::CounterCWRotate(Board &b){}

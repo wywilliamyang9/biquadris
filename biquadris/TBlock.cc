@@ -5,7 +5,7 @@
 using namespace std;
 
 TBlock::TBlock (Cell* c1, Cell* c2, Cell* c3, Cell* c4,
-int heavy, Colour colour): Block{c1,c2,c3,c4,heavy,colour} {}
+int heavy, Colour colour,int spawnLevel): Block{c1,c2,c3,c4,heavy,colour,spawnLevel} {}
 
 void TBlock::CWRotate(Board & playerBoard) {
     if (state == 1) {
