@@ -71,8 +71,17 @@ void Board::setOpponent (Board* newOpponent) {
 }
 
 void Board::processSpecialActions() {
+#ifdef DEBUG
+    cout << "processSpecialActions starts" << endl;
+#endif
+#ifdef DEBUG
+    cout << "specialActions size is: " << specialActions.size() << endl;
+#endif
     while (!(specialActions.size())) {
 		if (specialActions.back() == SpecialAction::Heavy) {
+#ifdef DEBUG
+    cout << "new action is heavy action" << endl;
+#endif
             level->addHeavy();
         } else if  (specialActions.back() == SpecialAction::Blind) {
             for (int i = 2; i < 12; ++i) {
@@ -402,14 +411,7 @@ int Board::clearRows() {
 
 bool Board::dropCheck() {
 
-#ifdef DEBUG
-    for (int i = 0; i < 18; ++i) {
-        for (int j = 0; j < 11; ++j) {
-            cout << board.at(i).at(j).getCurrBlock();
-        }
-        cout << endl;
-    }
-#endif
+
     for (int j = 0; j < 4; ++j) {
         Info currInfo = currBlock->getCells().at(j)->getinfo();
         if (currInfo.coord.row == 17) {
