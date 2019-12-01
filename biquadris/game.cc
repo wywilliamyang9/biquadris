@@ -1,4 +1,4 @@
-#define DEBUG
+//#define DEBUG
 
 #include "game.h"
 #include <memory>
@@ -73,9 +73,26 @@ void Game::play(){
             reset();
         } else if (gamestate == "lost!"){
             if (currplayer == board1.get()){
-                cout << "Player 2 wins";
+                cout << "Player 2 wins" << endl;
+                cout << "Player 2 wins" << endl;
+                cout << "Player 2 wins" << endl;
+                cout << "Player 2 wins" << endl;
+                cout << "Player 2 wins" << endl;
+                cout << "Player 2 wins" << endl;
+                cout << "Player 2 wins" << endl;
+                cout << "Player 2 wins" << endl;
+                cout << "Player 2 wins" << endl;
             } else {
-				cout << "Player 1 wins";
+				cout << "Player 1 wins" << endl;
+				cout << "Player 1 wins" << endl;
+				cout << "Player 1 wins" << endl;
+				cout << "Player 1 wins" << endl;
+				cout << "Player 1 wins" << endl;
+				cout << "Player 1 wins" << endl;
+				cout << "Player 1 wins" << endl;
+				cout << "Player 1 wins" << endl;
+				cout << "Player 1 wins" << endl;
+				cout << "Player 1 wins" << endl;
             }
             reset();
         } else if (gamestate == "eof!"){
@@ -92,6 +109,7 @@ void Game::play(){
 }
 
 void Game::reset(){
+    td.reset(new TextDisplay);
     board1.reset(new Board(1,td.get(), /*gd,*/ textOnly, seed, scriptFile1, startLevel));
     board2.reset(new Board(2,td.get(), /*gd,*/ textOnly, seed, scriptFile2, startLevel));
     scores[0] = 0;

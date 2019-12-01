@@ -1,5 +1,5 @@
 //#define DEBUG
-#define DEBUG2
+//#define DEBUG2
 #include "block.h"
 #include "board.h"
 #include "cell.h"
