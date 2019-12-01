@@ -371,9 +371,20 @@ return "continue!";
 }
 
 int Board::clearRows() {
+
 #ifdef DEBUG
-    cout << "clearRows"<<endl;
+    cout << "clearRows starts"<<endl;
+    cout << "blocks size is :" << blocks.size()<<endl;
+    cout << "they are: ";
+    for (int i = 0; i < blocks.size(); ++i) {
+        cout << convertColour(blocks.at(i)->getCells().at(1)->getinfo().colour);
+    }
+    cout << endl;
 #endif
+    for (int i = 0; i < 4; ++i) {
+        currBlock->getCells().at(i)->attach(currBlock.get());
+    }
+
     blocks.emplace_back(move(currBlock));
     int rowsCleared = 0;
     // scans from top
@@ -393,6 +404,9 @@ int Board::clearRows() {
             
             for (int m = 0; m < 11; ++m) {
                 board.at(i).at(m).setCleared(true);
+#ifdef DEBUG
+    cout << i << m << board.at(i).at(m).getCleared()<<endl;
+#endif  
                 board.at(i).at(m).notifyObservers();
                 board.at(i).at(m).setCleared(false);
             }
@@ -404,6 +418,15 @@ int Board::clearRows() {
                     --i;
                 }
             }
+#ifdef DEBUG
+    cout << "emptyblocks cleared"<<endl;
+    cout << "blocks size is :" << blocks.size()<<endl;
+    cout << "they are: ";
+    for (int i = 0; i < blocks.size(); ++i) {
+        cout << convertColour(blocks.at(i)->getCells().at(0)->getinfo().colour);
+        cout << " " << blocks.at(i)->getCells().size() << " ";
+    }
+#endif
 #ifdef DEBUG
     cout << i << "row is full"<<endl;
 #endif
@@ -418,9 +441,32 @@ int Board::clearRows() {
             }
             // newcode ------------------------
             // update blocks' cells
-            for (int i = 0; i < blocks.size(); ++i) {
-                blocks.at(i)->referenceBelow(*this);
+
+#ifdef DEBUG
+    cout << "checkpoint"<<endl;
+#endif
+            for (int nn = 0; nn < blocks.size(); ++nn) {
+#ifdef DEBUG
+    cout << "checking: "<< convertColour(blocks.at(nn)->getCells().at(0)->getinfo().colour) << endl;
+#endif          
+                bool below = 0;
+                for (int kk = 0; kk < blocks.at(nn)->getCells().size(); ++kk) {
+#ifdef DEBUG
+cout << blocks.at(nn)->getCells().at(kk)->getinfo().coord.row << endl;
+#endif
+                    if (blocks.at(nn)->getCells().at(kk)->getinfo().coord.row >= i) {
+                        below = 1;
+    #ifdef DEBUG
+    cout << "below modified"<< endl;
+#endif
+                    }
+                }
+                if (below) continue;
+                blocks.at(nn)->referenceBelow(*this);
             }
+#ifdef DEBUG
+    cout << "checkpoint2"<<endl;
+#endif
             i++;
             // makes row 0 blank
             rowsCleared++;

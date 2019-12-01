@@ -26,10 +26,6 @@ Block::Block(Cell* c1, Cell* c2, Cell* c3, Cell* c4,
 	cells.emplace_back(c2);
 	cells.emplace_back(c3);
 	cells.emplace_back(c4);
-	c1->attach(this);
-	c2->attach(this);
-	c3->attach(this);
-	c4->attach(this);
 }
 
 void Block::moveDownByOne(Board& playerBoard) {
@@ -169,7 +165,11 @@ void Block::setSpawnLevel(int i) {spawnLevel = i;}
 int Block::getSpawnLevel() {return spawnLevel;}
 
 void Block::notify (Subject &caller) {
+cout << "Block notified1" << endl;
+cout <<  caller.getCleared() << endl;
+
 	if (!caller.getCleared()) return;
+cout << "Block notified2" << endl;
 	Coordinates callerCoord = caller.getinfo().coord;
 	for (int i = 0; i < cells.size(); ++i) {
 		if (callerCoord.row == cells.at(i)->getinfo().coord.row
@@ -185,7 +185,7 @@ void Block::referenceBelow(Board& playerBoard){
 	vector<Cell*> newCells;
 	for (int i = 0; i < cells.size(); ++i) {
 		Coordinates oldCoord = cells.at(i)->getinfo().coord;
-		newCells.emplace_back(&playerBoard.getBoard().at(oldCoord.row+1).at(oldCoord.col));
+		newCells.emplace_back(&(playerBoard.getBoard().at(oldCoord.row+1).at(oldCoord.col)));
 	}
 	cells.clear();
 	cells = newCells;
