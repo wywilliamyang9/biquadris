@@ -3,7 +3,7 @@
 #include "block.h"
 #include "board.h"
 #include "cell.h"
-
+#include "subject.h"
 using namespace std;
 
 
@@ -162,3 +162,14 @@ cout << "go down check: i is " << i << endl;
 
 //void Block::CWRotate(Board &b){}
 //void Block::CounterCWRotate(Board &b){}
+void Block::notify (Subject &caller) {
+	Coordinates cellCoord = caller.getinfo().coord;
+	for(int i = 0; i < cells.size(); ++i) {
+		if (cellCoord.row == cells.at(i)->getinfo().coord.row
+		&& cellCoord.col == cells.at(i)->getinfo().coord.col) {
+			cells.erase(i);
+			i--;
+		} 
+	}
+}
+
