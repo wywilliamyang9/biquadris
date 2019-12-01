@@ -6,7 +6,7 @@ class Board;
 class IBlock : public Block {
 public:
 	IBlock(Cell*, Cell*, Cell*, Cell*,
-		int heavy, Colour,int);
+		int heavy, Colour);
 
 	void CWRotate(Board&)override;
 	void CounterCWRotate(Board&)override;

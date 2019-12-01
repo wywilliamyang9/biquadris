@@ -5,7 +5,7 @@
 using namespace std;
 
 IBlock::IBlock (Cell* c1, Cell* c2, Cell* c3, Cell* c4,
-int heavy, Colour colour,int spawnLevel): Block{c1,c2,c3,c4,heavy,colour,spawnLevel} {}
+int heavy, Colour colour): Block{c1,c2,c3,c4,heavy,colour} {}
 
 void IBlock::CWRotate(Board & playerBoard) {
     if (state == 1) {

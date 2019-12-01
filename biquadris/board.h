@@ -59,8 +59,6 @@ class Board {
     Colour currColour;
     int seed;
     int textOnly;
-    // new things
-    std::vector<std::unique_ptr<Block>>
 
     public:
 	Level* getLevelptr();
@@ -75,7 +73,7 @@ class Board {
     
     void processSpecialActions(); // applies specialActions
     void addSpecialAction(SpecialAction);
-    
+
     std::string play();
 	//std::unique_ptr<Block> createBlock();
     IBlock* createIBlock(const BlockInfo&);
