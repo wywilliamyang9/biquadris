@@ -52,7 +52,7 @@ void IBlock::CWRotate(Board & playerBoard) {
 
         Info i0 = cells.at(0)->getinfo();
         // check if rotation is legit
-        if (i0.coord.col== 7) return;
+        if (i0.coord.col >= 8) return;
 
         // if rotation is legit.
         Info i3 = cells.at(3)->getinfo();

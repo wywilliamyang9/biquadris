@@ -45,7 +45,7 @@ void SBlock::CWRotate(Board & playerBoard) {
     } else if (state == 2) {
         Info i0 = cells.at(0)->getinfo();
         // check if rotation is legit
-        if (i0.coord.col == 10) return;
+        if (i0.coord.col == 9) return;
 
         // if rotation is legit.
         Info i3 = cells.at(3)->getinfo();
