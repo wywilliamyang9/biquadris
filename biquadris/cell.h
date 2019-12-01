@@ -12,9 +12,9 @@ class Cell : public Subject {
     Coordinates coordinates;
     int boardnum;
     bool currBlock;
-
     public:
     Cell(int r,int c, int boardnum);
+
 
     Info getinfo() const override;
     void setInfo (const Info&);

@@ -17,3 +17,15 @@ void Subject::notifyObservers() {
 
 Info Subject::getinfo() const { return state; }
 
+void Subject::dettach(Observer *o) {
+  for (int i = 0; i < observers.size(); ++i) {
+    if (observers.at(i) == o) {
+      observers.erase (observers.begin() + i);
+      return;
+    }
+  }
+  cout << "dettach failed! " << endl;
+}
+
+void Subject::setCleared(bool b) {cleared = b;}
+bool Subject::getCleared() {return cleared;}

@@ -59,7 +59,7 @@ class Board {
     Colour currColour;
     int seed;
     int textOnly;
-
+    std::vector<std::unique_ptr<Block>> blocks;
     public:
 	Level* getLevelptr();
 
