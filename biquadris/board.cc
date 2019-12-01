@@ -541,6 +541,10 @@ int Board::getLevel(){
 }
 
 bool Board::newBlockCheck(Colour colour) {
+#ifdef DEBUG
+    cout << "newBlockCheck starts" << convertColour(colour)<<endl;
+#endif
+
     if (convertColour(colour) == 'I') {
 		if (board.at(3).at(0).getColour() != Colour::White
 			|| board.at(3).at(1).getColour() != Colour::White
@@ -563,10 +567,25 @@ bool Board::newBlockCheck(Colour colour) {
 			return false;
 		}
     } else if (convertColour(colour) == 'O') {
+#ifdef DEBUG
+    cout << "checkpoint1 " << convertColour(colour)<<endl;
+for (int i = 0; i < 18; ++i) {
+    for (int j = 0; j < 11; ++j) {
+        cout << convertColour(board.at(i).at(j).getColour());
+
+    }
+    cout << endl;
+
+}
+
+#endif
 		if (board.at(2).at(0).getColour() != Colour::White
 			|| board.at(2).at(1).getColour() != Colour::White
 			|| board.at(3).at(1).getColour() != Colour::White
 			|| board.at(3).at(0).getColour() != Colour::White) {
+#ifdef DEBUG
+    cout << "checkpoint2 " << convertColour(colour)<<endl;
+#endif
 			return false;
 		}
     } else if (convertColour(colour) == 'S') {
