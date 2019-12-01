@@ -20,8 +20,9 @@
 #include "cell.h"
 #include <iostream>
 #include <sstream>
-/*
 #include "block.h"
+
+/*
 #include "IBlock.h" 
 #include "JBlock.h"
 #include "LBlock.h"
@@ -38,7 +39,7 @@ class OBlock;
 class SBlock; 
 class ZBlock; 
 class TBlock; 
-class Block;
+//class Block;
 
 class Board {
     int boardnum;
