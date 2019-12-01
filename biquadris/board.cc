@@ -413,7 +413,7 @@ int Board::clearRows() {
             // clear empty blocks.
             for (int i = 0; i < blocks.size(); ++i) {
                 if (blocks.at(i)->getCells().size() == 0) {
-                    score += blocks.at(i)->getSpawnLevel();
+                    score += (blocks.at(i)->getSpawnLevel()+1)*(blocks.at(i)->getSpawnLevel()+1);
                     blocks.erase(blocks.begin()+i);
                     --i;
                 }

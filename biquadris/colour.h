@@ -4,9 +4,9 @@
 
 enum class Colour {
 	Red, Orange, Yellow,
-	Green, Blue, Purple, LightBlue, White    
+	Green, Blue, Purple, Cyan, White    
 };
-//LightBlue = I
+//Cyan = I
 //Blue = J
 //Orange = L
 //Yellow = O
