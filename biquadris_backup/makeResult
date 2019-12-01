@@ -1,0 +1,2 @@
+g++ -std=c++14 -Wall -MMD   -c -o block.o block.cc
+<builtin>: recipe for target 'block.o' failed

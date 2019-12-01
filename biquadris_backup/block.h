@@ -3,18 +3,15 @@
 #include <vector>
 #include "colour.h"
 #include "coordinates.h"
-#include "observer.h"
 //#include "board.h"
 class Cell;
 class Board;
-class Subject;
-class Block : public Observer{
+class Block {
 protected:
 	std::vector<Cell*> cells;
 	int heavy;
 	Colour colour;
 	int state;
-    int spawnLevel;
 
     public:
     ~Block()=default;
@@ -31,11 +28,5 @@ protected:
 	void moveDownByOne(Board&);
     virtual void CWRotate(Board &) ;
     virtual void CounterCWRotate(Board &) ;
-
-// new code
-    void setSpawnLevel(int);
-    int getSpawnLevel();
-    void notify(Subject &caller) override;
-    void referenceBelow(); // called upon row clear, cells will own cells down by 1.
 };
 #endif

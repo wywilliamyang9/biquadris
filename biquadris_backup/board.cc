@@ -371,23 +371,9 @@ int Board::clearRows() {
         }
 #ifdef DEBUG
     cout << i<< " row is " << fullCount<<endl;
-#endif  
-        // new code -----------------------------------------
+#endif
         if (fullCount == 11) {
-            // set rowclear first
-            for (int m = 0; m < 11; ++m) {
-                board.at(i).at(m).setCleared(true);
-                board.at(i).at(m).notifyObservers();
-                board.at(i).at(m).setCleared(false);
-            }
-            // clear empty blocks.
-            for (int i = 0; i < blocks.size(); ++i) {
-                if (blocks.at(i)->getCells().size() == 0) {
-                    score += blocks.at(i).getSpawnLevel();
-                    blocks.erase(blocks.begin()+i)；
-                    --i;
-                }
-            }
+            
 #ifdef DEBUG
     cout << i << "row is full"<<endl;
 #endif
@@ -399,11 +385,6 @@ int Board::clearRows() {
    // cout << k<<l<< "info is:"<< board.at(k).at(l).getinfo().colour <<endl;
 #endif
                 }
-            }
-            // newcode ------------------------
-            // update blocks' cells
-            for (int i = 0; i < blocks.size(); ++i) {
-                blocks.at(i)->
             }
             i++;
             // makes row 0 blank

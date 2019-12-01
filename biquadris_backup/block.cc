@@ -3,7 +3,6 @@
 #include "block.h"
 #include "board.h"
 #include "cell.h"
-#include "subject.h"
 
 using namespace std;
 
@@ -160,29 +159,3 @@ cout << "go down check: i is " << i << endl;
 
 void Block::CWRotate(Board &b){}
 void Block::CounterCWRotate(Board &b){}
-
-void setSpawnLevel(int i) spawnLevel = i;
-int getSpawnLevel() return spawnLevel;
-
-void notify (Subject &caller) {
-	if (!caller.getCleared) return;
-	Coordinates callerCoord = caller.getinfo().coord;
-	for (int i = 0; i < cells.size(); ++i) {
-		if (callerCoord.row == cells.at(i)->getinfo().coord.row
-		&& (callerCoord.col == cells.at(i)->getinfo().coord.col)) {
-			cells.erase(cells.begin()+i);
-			--i;
-		}
-	}
-}
-
-void Block::referenceBelow(Board& playerBoard){
-	vector<Cell*> newCells;
-	for (int i = 0; i < cells.size(); ++i) {
-		Coordinates oldCoord = cells.at(i)->getinfo().coord;
-		newCells.emplace_back(board.at(oldCoord.row+1).at(oldCoord.col))；
-	}
-	cells.clear();
-	cells = newCells;
-}
-
