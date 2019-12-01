@@ -138,7 +138,7 @@ void LBlock::CWRotate(Board & playerBoard) {
         // do nothing for cell 2.
         Info i2 = cells.at(2)->getinfo();
         playerBoard.getBoard().at(i2.coord.row+1).at(i2.coord.col).
-        setColour(i3.colour);
+        setColour(i2.colour);
         cells.at(2)->setColour(Colour::White);
 
         Info i3 = cells.at(3)->getinfo();

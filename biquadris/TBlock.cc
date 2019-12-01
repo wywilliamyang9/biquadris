@@ -163,7 +163,7 @@ void TBlock::CWRotate(Board & playerBoard) {
     for (int i = 0; i < heavy; ++i) moveDownByOne(playerBoard);
 }
 
-void LBlock::CounterCWRotate(Board &playerBoard) {
+void TBlock::CounterCWRotate(Board &playerBoard) {
     if (state == 1) {
         Info i0 = cells.at(0)->getinfo();
 		playerBoard.getBoard().at(i0.coord.row+1).at(i0.coord.col).
