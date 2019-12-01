@@ -1,4 +1,4 @@
-#define DEBUG
+//#define DEBUG
 //#define DEBUG2
 #include "board.h"
 #include "subject.h"

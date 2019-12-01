@@ -1,4 +1,4 @@
-#define DEBUG
+//#define DEBUG
 #include "level1.h"
 #include <fstream>
 #include "colour.h"
