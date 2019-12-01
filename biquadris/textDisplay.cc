@@ -31,12 +31,11 @@ TextDisplay::TextDisplay(){
 }
 
 void TextDisplay::notify(Subject &whoNotified) {
-#ifdef DEBUG
-    cout << "TextDisplay::notify() starts"<<endl;
-#endif
     // if called upon a row clear, return.
-    if (caller.getCleared()) return;
-    
+    if (whoNotified.getCleared()) return;
+#ifdef DEBUG
+    cout << "TextDisplay::notify() notified!"<<endl;
+#endif
     Info currinfo{whoNotified.getinfo()};
     if (currinfo.boardnum == 1){
         if (currinfo.blinded){

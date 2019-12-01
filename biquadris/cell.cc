@@ -39,6 +39,3 @@ void Cell::setColour(Colour colour) {
 Colour Cell::getColour() {
 	return colour;
 }
-
-void Cell::setCleared(bool b) cleard = b;
-bool Cell::getCleared() return cleared;

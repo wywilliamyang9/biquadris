@@ -19,7 +19,7 @@ protected:
     public:
     ~Block()=default;
     Block (Cell*, Cell*, Cell*, Cell*,
-         int heavy, Colour);
+         int heavy, Colour,int);
 
     std::vector<Cell*> getCells();
     void setCells(const std::vector<Cell*>);
@@ -36,6 +36,6 @@ protected:
     void setSpawnLevel(int);
     int getSpawnLevel();
     void notify(Subject &caller) override;
-    void referenceBelow(); // called upon row clear, cells will own cells down by 1.
+    void referenceBelow(Board&); // called upon row clear, cells will own cells down by 1.
 };
 #endif

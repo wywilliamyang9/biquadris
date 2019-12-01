@@ -1,5 +1,5 @@
-//#define DEBUG
-//#define DEBUG2
+#define DEBUG
+#define DEBUG2
 #include "board.h"
 #include "subject.h"
 
@@ -136,6 +136,7 @@ string Board::play(){
 #ifdef DEBUG
     cout << "Board::play() starts"<<endl;
 #endif
+
     processSpecialActions();
     BlockInfo newBlockInfo = level->generateNextBlock();
   
@@ -232,7 +233,20 @@ bool Board::placeBlock() {
 */
 // moves the block until it drops
 string Board::moveBlock() {
+
+
+
 #ifdef DEBUG
+    cout << "Board::moveBlock() starts"<<endl;
+#endif
+
+#ifdef DEBUG
+for (int i = 0; i < 18; i++) {
+    for (int j = 0; j < 11; j++) {
+        cout << convertColour(board.at(i).at(j).getinfo().colour);
+    }
+    cout << endl;
+}
     cout << "Board::moveBlock() starts"<<endl;
 #endif
     string cmd;
@@ -360,6 +374,7 @@ int Board::clearRows() {
 #ifdef DEBUG
     cout << "clearRows"<<endl;
 #endif
+    blocks.emplace_back(move(currBlock));
     int rowsCleared = 0;
     // scans from top
     for (int i = 17; i >= 0; --i) {
@@ -375,6 +390,7 @@ int Board::clearRows() {
         // new code -----------------------------------------
         if (fullCount == 11) {
             // set rowclear first
+            
             for (int m = 0; m < 11; ++m) {
                 board.at(i).at(m).setCleared(true);
                 board.at(i).at(m).notifyObservers();
@@ -383,8 +399,8 @@ int Board::clearRows() {
             // clear empty blocks.
             for (int i = 0; i < blocks.size(); ++i) {
                 if (blocks.at(i)->getCells().size() == 0) {
-                    score += blocks.at(i).getSpawnLevel();
-                    blocks.erase(blocks.begin()+i)；
+                    score += blocks.at(i)->getSpawnLevel();
+                    blocks.erase(blocks.begin()+i);
                     --i;
                 }
             }
@@ -403,7 +419,7 @@ int Board::clearRows() {
             // newcode ------------------------
             // update blocks' cells
             for (int i = 0; i < blocks.size(); ++i) {
-                blocks.at(i)->
+                blocks.at(i)->referenceBelow(*this);
             }
             i++;
             // makes row 0 blank
@@ -633,7 +649,7 @@ for (int i = 0; i < 18; ++i) {
 }
 
 IBlock* Board::createIBlock(const BlockInfo& newBlockInfo) {
-    IBlock* block = new IBlock{&board.at(3).at(0), &board.at(3).at(1), &board.at(3).at(2), &board.at(3).at(3), newBlockInfo.heavy, newBlockInfo.colour};
+    IBlock* block = new IBlock{&board.at(3).at(0), &board.at(3).at(1), &board.at(3).at(2), &board.at(3).at(3), newBlockInfo.heavy, newBlockInfo.colour,currlvl};
     //unique_ptr<IBlock> block = make_unique<IBlock>(&board.at(3).at(0), &board.at(3).at(1), &board.at(3).at(2), &board.at(3).at(3), newBlockInfo.heavy, newBlockInfo.colour);
     level->clearHeavy();
     for (int i = 0; i < 4; ++i) {
@@ -645,7 +661,7 @@ IBlock* Board::createIBlock(const BlockInfo& newBlockInfo) {
     return block;
 }
 JBlock* Board::createJBlock(const BlockInfo& newBlockInfo) {
-    JBlock* block = new JBlock{&board.at(2).at(0), &board.at(3).at(0), &board.at(3).at(1), &board.at(3).at(2), newBlockInfo.heavy, newBlockInfo.colour};
+    JBlock* block = new JBlock{&board.at(2).at(0), &board.at(3).at(0), &board.at(3).at(1), &board.at(3).at(2), newBlockInfo.heavy, newBlockInfo.colour,currlvl};
     //unique_ptr<JBlock> block = make_unique<JBlock>(&board.at(2).at(0), &board.at(3).at(0), &board.at(3).at(1), &board.at(3).at(2), newBlockInfo.heavy, newBlockInfo.colour);
     level->clearHeavy();
     for (int i = 0; i < 4; ++i) {
@@ -657,7 +673,7 @@ JBlock* Board::createJBlock(const BlockInfo& newBlockInfo) {
     return block;
 }
 LBlock* Board::createLBlock(const BlockInfo& newBlockInfo) {
-    LBlock* block = new LBlock{&board.at(2).at(2), &board.at(3).at(2), &board.at(3).at(1), &board.at(3).at(0), newBlockInfo.heavy, newBlockInfo.colour};
+    LBlock* block = new LBlock{&board.at(2).at(2), &board.at(3).at(2), &board.at(3).at(1), &board.at(3).at(0), newBlockInfo.heavy, newBlockInfo.colour,currlvl};
     //unique_ptr<LBlock> block = make_unique<LBlock>(&board.at(2).at(2), &board.at(3).at(2), &board.at(3).at(1), &board.at(3).at(0), newBlockInfo.heavy, newBlockInfo.colour);
     level->clearHeavy();
     for (int i = 0; i < 4; ++i) {
@@ -670,7 +686,7 @@ LBlock* Board::createLBlock(const BlockInfo& newBlockInfo) {
 }
 
 SBlock* Board::createSBlock(const BlockInfo& newBlockInfo) {
-    SBlock* block = new SBlock{&board.at(3).at(0), &board.at(3).at(1), &board.at(2).at(1), &board.at(2).at(2), newBlockInfo.heavy, newBlockInfo.colour};
+    SBlock* block = new SBlock{&board.at(3).at(0), &board.at(3).at(1), &board.at(2).at(1), &board.at(2).at(2), newBlockInfo.heavy, newBlockInfo.colour,currlvl};
     //unique_ptr<SBlock> block = make_unique<SBlock>(&board.at(3).at(0), &board.at(3).at(1), &board.at(2).at(1), &board.at(2).at(2), newBlockInfo.heavy, newBlockInfo.colour);
     level->clearHeavy();
     for (int i = 0; i < 4; ++i) {
@@ -683,7 +699,7 @@ SBlock* Board::createSBlock(const BlockInfo& newBlockInfo) {
 }
 
 ZBlock* Board::createZBlock(const BlockInfo& newBlockInfo) {
-    ZBlock* block = new ZBlock{&board.at(2).at(0), &board.at(2).at(1), &board.at(3).at(1), &board.at(3).at(2), newBlockInfo.heavy, newBlockInfo.colour};
+    ZBlock* block = new ZBlock{&board.at(2).at(0), &board.at(2).at(1), &board.at(3).at(1), &board.at(3).at(2), newBlockInfo.heavy, newBlockInfo.colour,currlvl};
     //unique_ptr<ZBlock> block = make_unique<ZBlock>(&board.at(2).at(0), &board.at(2).at(1), &board.at(3).at(1), &board.at(3).at(2), newBlockInfo.heavy, newBlockInfo.colour);
     level->clearHeavy();
     for (int i = 0; i < 4; ++i) {
@@ -696,7 +712,7 @@ ZBlock* Board::createZBlock(const BlockInfo& newBlockInfo) {
 }
 
 OBlock* Board::createOBlock(const BlockInfo& newBlockInfo) {
-    OBlock* block = new OBlock{&board.at(2).at(0), &board.at(2).at(1), &board.at(3).at(0), &board.at(3).at(1), newBlockInfo.heavy, newBlockInfo.colour};
+    OBlock* block = new OBlock{&board.at(2).at(0), &board.at(2).at(1), &board.at(3).at(0), &board.at(3).at(1), newBlockInfo.heavy, newBlockInfo.colour,currlvl};
     //unique_ptr<OBlock> block = make_unique<OBlock>(&board.at(2).at(0), &board.at(2).at(1), &board.at(3).at(0), &board.at(3).at(1), newBlockInfo.heavy, newBlockInfo.colour);
     level->clearHeavy();
     for (int i = 0; i < 4; ++i) {
@@ -708,7 +724,7 @@ OBlock* Board::createOBlock(const BlockInfo& newBlockInfo) {
     return block;
 }
 TBlock* Board::createTBlock(const BlockInfo& newBlockInfo) {
-    TBlock* block = new TBlock{&board.at(2).at(0), &board.at(2).at(1), &board.at(2).at(2), &board.at(3).at(1), newBlockInfo.heavy, newBlockInfo.colour};
+    TBlock* block = new TBlock{&board.at(2).at(0), &board.at(2).at(1), &board.at(2).at(2), &board.at(3).at(1), newBlockInfo.heavy, newBlockInfo.colour,currlvl};
     //unique_ptr<TBlock> block = make_unique<TBlock>(&board.at(2).at(0), &board.at(2).at(1), &board.at(2).at(2), &board.at(3).at(1), newBlockInfo.heavy, newBlockInfo.colour);level
     level->clearHeavy();   
     for (int i = 0; i < 4; ++i) {

@@ -20,12 +20,16 @@ Colour Block::getColour() {
 }
 
 Block::Block(Cell* c1, Cell* c2, Cell* c3, Cell* c4,
-	int heavy, Colour colour) : heavy{ heavy },
-	colour{ colour }, state{ 1 } {
+	int heavy, Colour colour,int currlvl) : heavy{ heavy },
+	colour{ colour }, state{ 1 },spawnLevel{currlvl} {
 	cells.emplace_back(c1);
 	cells.emplace_back(c2);
 	cells.emplace_back(c3);
 	cells.emplace_back(c4);
+	c1->attach(this);
+	c2->attach(this);
+	c3->attach(this);
+	c4->attach(this);
 }
 
 void Block::moveDownByOne(Board& playerBoard) {
@@ -161,15 +165,16 @@ cout << "go down check: i is " << i << endl;
 void Block::CWRotate(Board &b){}
 void Block::CounterCWRotate(Board &b){}
 
-void setSpawnLevel(int i) spawnLevel = i;
-int getSpawnLevel() return spawnLevel;
+void Block::setSpawnLevel(int i) {spawnLevel = i;}
+int Block::getSpawnLevel() {return spawnLevel;}
 
-void notify (Subject &caller) {
-	if (!caller.getCleared) return;
+void Block::notify (Subject &caller) {
+	if (!caller.getCleared()) return;
 	Coordinates callerCoord = caller.getinfo().coord;
 	for (int i = 0; i < cells.size(); ++i) {
 		if (callerCoord.row == cells.at(i)->getinfo().coord.row
 		&& (callerCoord.col == cells.at(i)->getinfo().coord.col)) {
+			cells.at(i)->dettach(this);
 			cells.erase(cells.begin()+i);
 			--i;
 		}
@@ -180,7 +185,7 @@ void Block::referenceBelow(Board& playerBoard){
 	vector<Cell*> newCells;
 	for (int i = 0; i < cells.size(); ++i) {
 		Coordinates oldCoord = cells.at(i)->getinfo().coord;
-		newCells.emplace_back(board.at(oldCoord.row+1).at(oldCoord.col))；
+		newCells.emplace_back(&playerBoard.getBoard().at(oldCoord.row+1).at(oldCoord.col));
 	}
 	cells.clear();
 	cells = newCells;
