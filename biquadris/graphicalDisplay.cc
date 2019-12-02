@@ -143,10 +143,10 @@ void GraphicalDisplay::displayLevel() {
 
 void GraphicalDisplay::displayHighScore() {	
     window.fillRectangle(25, 50, 100, 25, Xwindow::White);
-    string hiscore = "HISCORE: " + to_string(scores[3]);
+    string hiscore = "HISCORE: " + to_string(scores[2]);
     window.drawString(25, 50, hiscore);
     window.fillRectangle(375, 50, 100, 25, Xwindow::White);
-    hiscore =  "HISCORE: " + to_string(scores[3]);
+    hiscore =  "HISCORE: " + to_string(scores[2]);
     window.drawString(375, 50, hiscore);
 }
 
@@ -162,51 +162,62 @@ void GraphicalDisplay::displayScore() {
 void GraphicalDisplay::displayBoards() {
 	for (int i = 0; i < 18; i++) {
         for (int j = 0; j < 11; j++) {
-            window.fillRectangle(25 + j * 25, 75 + i * 25, 25, 25, board1[i][j]);
+            window.fillRectangle(25 + j * 25, 80 + i * 25, 25, 25, board1[i][j]);
         }
     }
     for (int i = 0; i < 18; i++) {
         for (int j = 0; j < 11; j++) {
-            window.fillRectangle(25 + j * 25+350, 75 + i * 25, 25, 25, board2[i][j]);
+            window.fillRectangle(j * 25 + 375, 80 + i * 25, 25, 25, board2[i][j]);
         }
     }
 }
 
-string displayBlock(char type, int line){
-    if (type == 'J' && line == 1){
-        return "J   ";
-    } else if (type == 'J' && line == 2){
-        return "JJJ ";
-    } else if (type == 'I' && line == 1){
-        return "    ";
-    } else if (type == 'I' && line == 2){
-        return "IIII";
-    } else if (type == 'L' && line == 1){
-        return "  L ";
-    } else if (type == 'L' && line == 2){
-        return "LLL ";
-    } else if (type == 'O' && line == 1){
-        return "OO  ";
-    } else if (type == 'O' && line == 2){
-        return "OO  ";
-    } else if (type == 'S' && line == 1){
-        return " SS ";
-    } else if (type == 'S' && line == 2){
-        return "SS  ";
-    } else if (type == 'Z' && line == 1){
-        return "ZZ  ";
-    } else if (type == 'Z' && line == 2){
-        return " ZZ ";
-    } else if (type == 'T' && line == 1){
-        return "TTT ";
-    } else if (type == 'T' && line == 2){
-        return " T  ";
+void GraphicalDisplay::displayBlock(char type, int boardnum){
+    int num = 25;
+    if (boardnum == 2){
+        num = 375;
     }
-	return "";
+    if (type == 'I'){
+        window.fillRectangle(10 + num, 25 + 550, 25,25, converttoXColour(convertChar(type)));
+        window.fillRectangle(35 + num, 25 + 550, 25,25, converttoXColour(convertChar(type)));
+        window.fillRectangle(60 + num, 25 + 550, 25,25, converttoXColour(convertChar(type)));
+        window.fillRectangle(85 + num, 25 + 550, 25,25, converttoXColour(convertChar(type)));
+    } else if (type == 'J'){
+        window.fillRectangle(10 + num, 12 + 550, 25,25, converttoXColour(convertChar(type)));
+        window.fillRectangle(10 + num, 37 + 550, 25,25, converttoXColour(convertChar(type)));
+        window.fillRectangle(35 + num, 37 + 550, 25,25, converttoXColour(convertChar(type)));
+        window.fillRectangle(60 + num, 37 + 550, 25,25, converttoXColour(convertChar(type)));
+    } else if (type == 'L'){
+        window.fillRectangle(60 + num, 12 + 550, 25,25, converttoXColour(convertChar(type)));
+        window.fillRectangle(10 + num, 37 + 550, 25,25, converttoXColour(convertChar(type)));
+        window.fillRectangle(35 + num, 37 + 550, 25,25, converttoXColour(convertChar(type)));
+        window.fillRectangle(60 + num, 37 + 550, 25,25, converttoXColour(convertChar(type)));
+    } else if (type == 'O'){
+        window.fillRectangle(10 + num, 12 + 550, 25,25, converttoXColour(convertChar(type)));
+        window.fillRectangle(35 + num, 12 + 550, 25,25, converttoXColour(convertChar(type)));
+        window.fillRectangle(10 + num, 37 + 550, 25,25, converttoXColour(convertChar(type)));
+        window.fillRectangle(35 + num, 37 + 550, 25,25, converttoXColour(convertChar(type)));
+    } else if (type == 'Z'){
+        window.fillRectangle(10 + num, 12 + 550, 25,25, converttoXColour(convertChar(type)));
+        window.fillRectangle(35 + num, 12 + 550, 25,25, converttoXColour(convertChar(type)));
+        window.fillRectangle(35 + num, 37 + 550, 25,25, converttoXColour(convertChar(type)));
+        window.fillRectangle(60 + num, 37 + 550, 25,25, converttoXColour(convertChar(type)));
+    } else if (type == 'S'){
+        window.fillRectangle(35 + num, 12 + 550, 25,25, converttoXColour(convertChar(type)));
+        window.fillRectangle(60 + num, 12 + 550, 25,25, converttoXColour(convertChar(type)));
+        window.fillRectangle(10 + num, 37 + 550, 25,25, converttoXColour(convertChar(type)));
+        window.fillRectangle(35 + num, 37 + 550, 25,25, converttoXColour(convertChar(type)));
+    } else if (type == 'T'){
+        window.fillRectangle(10 + num, 12 + 550, 25,25, converttoXColour(convertChar(type)));
+        window.fillRectangle(35 + num, 12 + 550, 25,25, converttoXColour(convertChar(type)));
+        window.fillRectangle(60 + num, 12 + 550, 25,25, converttoXColour(convertChar(type)));
+        window.fillRectangle(35 + num, 37 + 550, 25,25, converttoXColour(convertChar(type)));
+    }
 }
 
 void GraphicalDisplay::displayNextBlock() {
-	cout << "Next:         Next:" << endl;
-    cout << displayBlock(nextblock[0], 1) << "          " << displayBlock(nextblock[1], 1) << endl;
-    cout << displayBlock(nextblock[0], 2) << "          " << displayBlock(nextblock[1], 2) << endl;
+    window.fillRectangle(10, 550, 125, 75, Xwindow::White);
+    window.fillRectangle(375, 550, 125, 75, Xwindow::White);
+    displayBlock(nextblock[0], 1);
+    displayBlock(nextblock[1], 2);
 }

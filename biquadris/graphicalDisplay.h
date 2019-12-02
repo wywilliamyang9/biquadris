@@ -24,6 +24,7 @@ class GraphicalDisplay : public Observer {
     void displayHighScore();
     void displayScore();
     void displayBoards();
+    void displayBlock(char type, int boardnum);
     void displayNextBlock();
     public:
     GraphicalDisplay();

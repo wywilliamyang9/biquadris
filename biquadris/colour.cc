@@ -1,5 +1,7 @@
 #include "colour.h"
 
+using namespace std;
+
 char convertColour(Colour colour){
     if (colour == Colour::Red){
         return 'Z';
@@ -21,7 +23,8 @@ char convertColour(Colour colour){
         return ' ';
     }
 }
-Colour convertString(std::string type){
+
+Colour convertString(string type){
     if (type == "Z"){
         return Colour::Red;
     } else if (type == "L"){
@@ -42,4 +45,27 @@ Colour convertString(std::string type){
         return Colour::White;
     }
 }
+
+Colour convertChar(char type){
+    if (type == 'Z'){
+        return Colour::Red;
+    } else if (type == 'L'){
+        return Colour::Orange;
+    } else if (type == 'I'){
+        return Colour::Cyan;
+    } else if (type == 'J'){
+        return Colour::Blue;
+    } else if (type == 'O'){
+        return Colour::Yellow;
+    } else if (type == 'S'){
+        return Colour::Green;
+    } else if (type == 'T'){
+        return Colour::Purple;
+    } else if (type == '*'){
+        return Colour::Brown;
+    } else {
+        return Colour::White;
+    }
+}
+
 
