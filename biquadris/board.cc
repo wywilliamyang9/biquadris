@@ -152,18 +152,46 @@ string Board::play(){
 
     if (convertColour(newBlockInfo.colour) == 'I') {
         currBlock.reset(createIBlock(newBlockInfo));
+        int num = rand()%5;
+        for(int i = 0; i < num; i++){
+            currBlock->CWRotate(*this);
+        }
     } else if (convertColour(newBlockInfo.colour) == 'L') {
-        currBlock.reset(createLBlock(newBlockInfo));
+        currBlock.reset(createLBlock(newBlockInfo));        
+        int num = rand()%5;
+        for(int i = 0; i < num; i++){
+            currBlock->CWRotate(*this);
+        }
     } else if (convertColour(newBlockInfo.colour) == 'J') {
         currBlock.reset(createJBlock(newBlockInfo));
+        int num = rand()%5;
+        for(int i = 0; i < num; i++){
+            currBlock->CWRotate(*this);
+        }
     }else if (convertColour(newBlockInfo.colour) == 'O') {
         currBlock.reset(createOBlock(newBlockInfo));
+        int num = rand()%5;
+        for(int i = 0; i < num; i++){
+            currBlock->CWRotate(*this);
+        }
     }else if (convertColour(newBlockInfo.colour) == 'S') {
         currBlock.reset(createSBlock(newBlockInfo));
+        int num = rand()%5;
+        for(int i = 0; i < num; i++){
+            currBlock->CWRotate(*this);
+        }
     }else if (convertColour(newBlockInfo.colour) == 'Z') {
         currBlock.reset(createZBlock(newBlockInfo));
+        int num = rand()%5;
+        for(int i = 0; i < num; i++){
+            currBlock->CWRotate(*this);
+        }
     }else if (convertColour(newBlockInfo.colour) == 'T') {
         currBlock.reset(createTBlock(newBlockInfo));
+        int num = rand()%5;
+        for(int i = 0; i < num; i++){
+            currBlock->CWRotate(*this);
+        }
     }
 
 #ifdef DEBUG
