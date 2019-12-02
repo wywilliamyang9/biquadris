@@ -53,7 +53,7 @@ class Board {
     TextDisplay* textDisplay;
     std::string fileInput;
     int currlvl;
-    int score;
+    int score = 0;
     Colour nextBlockColour;
     CommandInterpreter cmdDic;
     std::unique_ptr<CommandInterpreter> cmdDictionary;

@@ -129,6 +129,5 @@ void Game::reset(){
     levels[1] = startLevel;
     td->print();
     if (!textOnly) gd->display();
-
 }
 
