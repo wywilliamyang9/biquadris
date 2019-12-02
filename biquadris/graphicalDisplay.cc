@@ -4,6 +4,7 @@
 #include "info.h"
 #include <iostream>
 #include "colour.h"
+#include <string>
 #include <vector>
 using namespace std;
 
@@ -133,28 +134,28 @@ void GraphicalDisplay::display() {
 
 void GraphicalDisplay::displayLevel() {
     window.fillRectangle(25, 25, 100, 25, Xwindow::White);
-	string level = "LEVEL: " + levels[0];
+	string level = "LEVEL: " + to_string(levels[0]);
     window.drawString(25, 25, level);
     window.fillRectangle(375, 25, 100, 25, Xwindow::White);
-    level =  "LEVEL: " + levels[1];
+    level =  "LEVEL: " + to_string(levels[1]);
     window.drawString(375, 25, level);
 }
 
 void GraphicalDisplay::displayHighScore() {	
     window.fillRectangle(25, 50, 100, 25, Xwindow::White);
-    string hiscore = "HISCORE: " + scores[3];
+    string hiscore = "HISCORE: " + to_string(scores[3]);
     window.drawString(25, 50, hiscore);
     window.fillRectangle(375, 50, 100, 25, Xwindow::White);
-    hiscore =  "HISCORE: " + scores[3];
+    hiscore =  "HISCORE: " + to_string(scores[3]);
     window.drawString(375, 50, hiscore);
 }
 
 void GraphicalDisplay::displayScore() {
     window.fillRectangle(25, 75, 100, 25, Xwindow::White);
-    string score = "SCORE: " + scores[0];
+    string score = "SCORE: " + to_string(scores[0]);
     window.drawString(25, 75, score);
     window.fillRectangle(375, 75, 100, 25, Xwindow::White);
-    score =  "SCORE: " + scores[1];
+    score =  "SCORE: " + to_string(scores[1]);
     window.drawString(375, 75, score);
 }
 
