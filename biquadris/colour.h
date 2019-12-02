@@ -4,7 +4,7 @@
 
 enum class Colour {
 	Red, Orange, Yellow,
-	Green, Blue, Purple, Cyan, White    
+	Green, Blue, Purple, Cyan, White, Brown
 };
 //Cyan = I
 //Blue = J

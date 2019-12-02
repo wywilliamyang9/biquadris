@@ -135,6 +135,7 @@ void GraphicalDisplay::displayScore() {
 }
 
 void GraphicalDisplay::displayBoards() {
+    const gridSize = 
 	for (int i = 0; i < gridHeight; i++) {
 		for (int j = 0; j <= 25; j++) {
 			if (j < gridWidth) {

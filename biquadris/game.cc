@@ -56,8 +56,10 @@ void Game::updateInfo() {
 	levels[1] = board2->getLevel();
     td->updateScore(scores);
     td->updateLevel(levels);
-    gd->updateScore(scores);
-    gd->updateLevel(levels);
+    if (!textOnly) {
+        gd->updateScore(scores);
+        gd->updateLevel(levels);
+    }
 #ifdef DEBUG
     cout << "Game::updateInfo() ends"<<endl;
 #endif
@@ -70,6 +72,7 @@ void Game::play(){
     Board* currplayer = board1.get();
     updateInfo();
     td->print();
+    if (!textOnly) gd->display();
 
     while (true) {
         string gamestate = currplayer->play();
@@ -110,6 +113,8 @@ void Game::play(){
         }
         updateInfo();
         td->print();
+        if (!textOnly) gd->display();
+
     }
 }
 
@@ -123,5 +128,7 @@ void Game::reset(){
     levels[0] = startLevel;
     levels[1] = startLevel;
     td->print();
+    if (!textOnly) gd->display();
+
 }
 

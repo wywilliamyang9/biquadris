@@ -20,7 +20,7 @@ Level* Board::getLevelptr() {
 }
 
 // default ctor, requires manual set of opponent and filestream.
-Board::Board(int boardnum, TextDisplay *td, Observer *gd, bool textOnly, int seed,
+Board::Board(int boardnum, TextDisplay *td, GraphicalDisplay *gd, bool textOnly, int seed,
     string scriptFile, int startLevel) : boardnum{boardnum}, seed {seed}, 
     cmdDictionary{new CommandInterpreter}, graphicDisplay {gd}, textDisplay {td}, fileInput {scriptFile}, textOnly{textOnly},
 currlvl {startLevel}, score{0}, currBlock{nullptr} {
@@ -172,6 +172,7 @@ string Board::play(){
     #endif
 
     textDisplay->print();
+    if (!textOnly) graphicDisplay->display();
 	if (!currBlock) return "lost!";
 	string moveResult = moveBlock();
     
@@ -367,6 +368,8 @@ return "continue!";
     cout << "Board::moveBlock() - for loop ends"<<endl;
 #endif
         textDisplay->print();
+        if (!textOnly) graphicDisplay->display();
+
     }
     return "eof!";
 }
@@ -418,7 +421,7 @@ int Board::clearRows() {
                     blocks.erase(blocks.begin()+i);
                     --i;
                     textDisplay->updateScore(score, boardnum);
-                    graphicDisplay->updateScore(score, boardnum);
+                    if (!textOnly)graphicDisplay->updateScore(score, boardnum);
                 }
             }
 #ifdef DEBUG
@@ -566,26 +569,26 @@ void Board::levelUp() {
         currlvl = 1;
 		level.reset(new Level1{seed});
         textDisplay->updateLevel(currlvl, boardnum);
-        graphicDisplay->updateLevel(currlvl, boardnum);
+        if (!textOnly)graphicDisplay->updateLevel(currlvl, boardnum);
         Colour nextBlockColour = level->getNextBlock();
         textDisplay->updateNextBlock(NextBlock{nextBlockColour, boardnum});
-        graphicDisplay->updateNextBlock(NextBlock{nextBlockColour, boardnum});
+        if (!textOnly)graphicDisplay->updateNextBlock(NextBlock{nextBlockColour, boardnum});
     }else if (currlvl == 1) {
         currlvl = 2;
         level.reset(new Level2{seed});
         textDisplay->updateLevel(currlvl, boardnum);
-        graphicDisplay->updateLevel(currlvl, boardnum);
+        if (!textOnly)graphicDisplay->updateLevel(currlvl, boardnum);
         Colour nextBlockColour = level->getNextBlock();
         textDisplay->updateNextBlock(NextBlock{nextBlockColour, boardnum});
-        graphicDisplay->updateNextBlock(NextBlock{nextBlockColour, boardnum});
+        if (!textOnly)graphicDisplay->updateNextBlock(NextBlock{nextBlockColour, boardnum});
     } else if (currlvl == 2) {
         currlvl = 3;
         level.reset(new Level3{seed});
         textDisplay->updateLevel(currlvl, boardnum);
-        graphicDisplay->updateLevel(currlvl, boardnum);
+        if (!textOnly)graphicDisplay->updateLevel(currlvl, boardnum);
         Colour nextBlockColour = level->getNextBlock();
         textDisplay->updateNextBlock(NextBlock{nextBlockColour, boardnum});
-        graphicDisplay->updateNextBlock(NextBlock{nextBlockColour, boardnum});
+        if (!textOnly)graphicDisplay->updateNextBlock(NextBlock{nextBlockColour, boardnum});
     } /*else if (currlvl == 3) {
         currlvl = 4;
         level.reset(new Level4);
@@ -600,34 +603,34 @@ void Board::levelDown() {
         currlvl = 0;
         level.reset(new Level0{ seed, fileInput });
         textDisplay->updateLevel(currlvl, boardnum);
-        graphicDisplay->updateLevel(currlvl, boardnum);
+        if (!textOnly)graphicDisplay->updateLevel(currlvl, boardnum);
         Colour nextBlockColour = level->getNextBlock();
         textDisplay->updateNextBlock(NextBlock{nextBlockColour, boardnum});
-        graphicDisplay->updateNextBlock(NextBlock{nextBlockColour, boardnum});
+        if (!textOnly)graphicDisplay->updateNextBlock(NextBlock{nextBlockColour, boardnum});
     } else if (currlvl == 2) {
         currlvl = 1;
         level.reset(new Level1{seed});
         textDisplay->updateLevel(currlvl, boardnum);
-        graphicDisplay->updateLevel(currlvl, boardnum);
+        if (!textOnly)graphicDisplay->updateLevel(currlvl, boardnum);
         Colour nextBlockColour = level->getNextBlock();
         textDisplay->updateNextBlock(NextBlock{nextBlockColour, boardnum});
-        graphicDisplay->updateNextBlock(NextBlock{nextBlockColour, boardnum});
+        if (!textOnly)graphicDisplay->updateNextBlock(NextBlock{nextBlockColour, boardnum});
     } else if (currlvl == 3) {
         currlvl = 2;
         level.reset(new Level2{seed});
         textDisplay->updateLevel(currlvl, boardnum);
-        graphicDisplay->updateLevel(currlvl, boardnum);
+        if (!textOnly)graphicDisplay->updateLevel(currlvl, boardnum);
         Colour nextBlockColour = level->getNextBlock();
         textDisplay->updateNextBlock(NextBlock{nextBlockColour, boardnum});
-        graphicDisplay->updateNextBlock(NextBlock{nextBlockColour, boardnum});
+        if (!textOnly)graphicDisplay->updateNextBlock(NextBlock{nextBlockColour, boardnum});
     } else if (currlvl == 4) {
         currlvl = 3;
         level.reset(new Level3{seed});
         textDisplay->updateLevel(currlvl, boardnum);
-        graphicDisplay->updateLevel(currlvl, boardnum);
+        if (!textOnly)graphicDisplay->updateLevel(currlvl, boardnum);
         Colour nextBlockColour = level->getNextBlock();
         textDisplay->updateNextBlock(NextBlock{nextBlockColour, boardnum});
-        graphicDisplay->updateNextBlock(NextBlock{nextBlockColour, boardnum});
+        if (!textOnly)graphicDisplay->updateNextBlock(NextBlock{nextBlockColour, boardnum});
     } /*else {
         return;
     }*/
@@ -721,7 +724,7 @@ IBlock* Board::createIBlock(const BlockInfo& newBlockInfo) {
     }
     Colour nextBlockColour = level->getNextBlock();
     textDisplay->updateNextBlock(NextBlock{nextBlockColour, boardnum});
-    graphicDisplay->updateNextBlock(NextBlock{nextBlockColour, boardnum});
+    if (!textOnly)if (!textOnly)graphicDisplay->updateNextBlock(NextBlock{nextBlockColour, boardnum});
     return block;
 }
 JBlock* Board::createJBlock(const BlockInfo& newBlockInfo) {
@@ -734,7 +737,7 @@ JBlock* Board::createJBlock(const BlockInfo& newBlockInfo) {
     }
     Colour nextBlockColour = level->getNextBlock();
     textDisplay->updateNextBlock(NextBlock{nextBlockColour, boardnum});
-    graphicDisplay->updateNextBlock(NextBlock{nextBlockColour, boardnum});
+    if (!textOnly)if (!textOnly)graphicDisplay->updateNextBlock(NextBlock{nextBlockColour, boardnum});
     return block;
 }
 LBlock* Board::createLBlock(const BlockInfo& newBlockInfo) {
@@ -747,7 +750,7 @@ LBlock* Board::createLBlock(const BlockInfo& newBlockInfo) {
     }
     Colour nextBlockColour = level->getNextBlock();
     textDisplay->updateNextBlock(NextBlock{nextBlockColour, boardnum});
-    graphicDisplay->updateNextBlock(NextBlock{nextBlockColour, boardnum});
+    if (!textOnly) if (!textOnly)graphicDisplay->updateNextBlock(NextBlock{nextBlockColour, boardnum});
     return block;
 }
 
@@ -761,7 +764,7 @@ SBlock* Board::createSBlock(const BlockInfo& newBlockInfo) {
     }
     Colour nextBlockColour = level->getNextBlock();
     textDisplay->updateNextBlock(NextBlock{nextBlockColour, boardnum});
-    graphicDisplay->updateNextBlock(NextBlock{nextBlockColour, boardnum});
+    if (!textOnly)if (!textOnly)graphicDisplay->updateNextBlock(NextBlock{nextBlockColour, boardnum});
     return block;
 }
 
@@ -775,7 +778,7 @@ ZBlock* Board::createZBlock(const BlockInfo& newBlockInfo) {
     }
             Colour nextBlockColour = level->getNextBlock();
     textDisplay->updateNextBlock(NextBlock{nextBlockColour, boardnum});
-    graphicDisplay->updateNextBlock(NextBlock{nextBlockColour, boardnum});
+    if (!textOnly)if (!textOnly)graphicDisplay->updateNextBlock(NextBlock{nextBlockColour, boardnum});
     return block;
 }
 
@@ -789,7 +792,7 @@ OBlock* Board::createOBlock(const BlockInfo& newBlockInfo) {
     }
     Colour nextBlockColour = level->getNextBlock();
     textDisplay->updateNextBlock(NextBlock{nextBlockColour, boardnum});
-    graphicDisplay->updateNextBlock(NextBlock{nextBlockColour, boardnum});
+    if (!textOnly) if (!textOnly)graphicDisplay->updateNextBlock(NextBlock{nextBlockColour, boardnum});
     return block;
 }
 TBlock* Board::createTBlock(const BlockInfo& newBlockInfo) {
@@ -802,7 +805,7 @@ TBlock* Board::createTBlock(const BlockInfo& newBlockInfo) {
     }
     Colour nextBlockColour = level->getNextBlock();
     textDisplay->updateNextBlock(NextBlock{nextBlockColour, boardnum});
-    graphicDisplay->updateNextBlock(NextBlock{nextBlockColour, boardnum});
+    if (!textOnly)if (!textOnly)graphicDisplay->updateNextBlock(NextBlock{nextBlockColour, boardnum});
     return block;
 }
 /*

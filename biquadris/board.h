@@ -46,7 +46,7 @@ class Board {
     std::vector<std::vector<Cell>> board;
     std::vector<SpecialAction> specialActions;
     std::unique_ptr<Level> level;
-    Observer* graphicDisplay;
+    GraphicalDisplay* graphicDisplay;
     TextDisplay* textDisplay;
     std::string fileInput;
     int currlvl;
@@ -66,7 +66,7 @@ class Board {
     void setScore(int);
     std::vector<std::vector<Cell>>& getBoard();
 
-    Board(int boardnum, TextDisplay *td, Observer *gd, bool textOnly, int seed,
+    Board(int boardnum, TextDisplay *td, GraphicalDisplay *gd, bool textOnly, int seed,
     std::string scriptFile, int startLevel);
     void setOpponent(Board*);
     
