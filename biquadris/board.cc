@@ -417,6 +417,8 @@ int Board::clearRows() {
                     score += (blocks.at(i)->getSpawnLevel()+1)*(blocks.at(i)->getSpawnLevel()+1);
                     blocks.erase(blocks.begin()+i);
                     --i;
+                    textDisplay->updateScore(score, boardnum);
+                    graphicDisplay->updateScore(score, boardnum);
                 }
             }
 #ifdef DEBUG

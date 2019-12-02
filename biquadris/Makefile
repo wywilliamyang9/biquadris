@@ -5,7 +5,7 @@ OBJECTS = block.o level0.o board.o window.o graphicalDisplay.o level.o level2.o 
 DEPENDS = ${OBJECTS:.o=.d}
 
 ${EXEC}: ${OBJECTS}
-	${CXX} ${CXXFLAGS} ${OBJECTS} -o ${EXEC}
+	${CXX} ${CXXFLAGS} ${OBJECTS} -o ${EXEC} -lX11
 
 -include ${DEPENDS}
 

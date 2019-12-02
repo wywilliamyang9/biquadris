@@ -194,5 +194,6 @@ void Block::referenceBelow(Board& playerBoard){
 
 void Block::updateNextBlock(NextBlock nextBlockInfo){}
 void Block::updateScore(std::vector<int> scores){}
+void Block::updateScore(int newScore, int boardnum){}
 void Block::updateLevel(std::vector<int> levels){}
 void Block::updateLevel(int newLevel, int boardnum){}

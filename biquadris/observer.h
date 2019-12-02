@@ -10,6 +10,7 @@ class Observer {
     virtual ~Observer() = default;
     virtual void updateNextBlock(NextBlock nextBlockInfo) = 0;
     virtual void updateScore(std::vector<int> scores) = 0;
+    virtual void updateScore(int newScore, int boardnum) = 0;
     virtual void updateLevel(std::vector<int> levels) = 0;
     virtual void updateLevel(int newLevel, int boardnum) = 0;
 };

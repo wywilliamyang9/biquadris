@@ -66,6 +66,18 @@ void GraphicalDisplay::updateScore(vector<int> newScores){
     scores[2] = newScores[2];
 }
 
+
+void GraphicalDisplay::updateScore(int newScore, int boardnum){
+    if (boardnum == 1){
+        scores[0] = newScore;
+    } else if (boardnum) {
+        scores[1] = newScore;
+    }
+    if (newScore > scores[2]){
+        scores[2] = newScore;
+    }
+}
+
 void GraphicalDisplay::updateLevel(vector<int> newLevels){
     levels[0] = newLevels[0];
     levels[1] = newLevels[1];

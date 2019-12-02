@@ -38,6 +38,7 @@ protected:
     void notify(Subject &caller) override;
     void updateNextBlock(NextBlock nextBlockInfo) override;
     void updateScore(std::vector<int> scores) override;
+    void updateScore(int newScore, int boardnum) override;
     void updateLevel(std::vector<int> levels) override;
     void updateLevel(int newLevel, int boardnum) override;
     void referenceBelow(Board&); // called upon row clear, cells will own cells down by 1.
