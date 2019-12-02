@@ -306,16 +306,9 @@ for (int i = 0; i < 18; i++) {
         // repeat the command for cmdCount times.
         // the following cmds are invalid: sequence,I,J,L,O,S,Z,T,Blind,Heavy,Force
         for (int i = 0; i < cmdCountint; i++) {
-
-#ifdef DEBUG
-            cout << "i is " << i << endl;
-#endif
             if (cmdDictionary->interpretCMD(cmd) == Command::Left) {
                 currBlock->moveLeft(*this);
                 if (dropCheck()) {
-#ifdef DEBUG
-    cout << "dropCheck passes"<<endl;
-#endif
                     return "continue!";
                 }
             } else if (cmdDictionary->interpretCMD(cmd) == Command::Right) {
@@ -324,21 +317,12 @@ for (int i = 0; i < 18; i++) {
             } else if (cmdDictionary->interpretCMD(cmd) == Command::Down) {
 				currBlock->moveDown(*this);
                 if (dropCheck()) {
-                        #ifdef DEBUG
-    cout << "dropCheck passes"<<endl;
-#endif
                     return "continue!";
                 }
-#ifdef DEBUG
-    cout << "Board::moveBlock() - else statment ends"<<endl;
-#endif
             } else if (cmdDictionary->interpretCMD(cmd) == Command::ClockWise) {
 				currBlock->CWRotate(*this);
                 if (dropCheck()){
-                    #ifdef DEBUG
-    cout << "dropCheck passes"<<endl;
-#endif
-return "continue!";    
+                    return "continue!";    
                 }
             } else if (cmdDictionary->interpretCMD(cmd) == Command::CounterClockWise) {
 				currBlock->CounterCWRotate(*this);
@@ -368,12 +352,8 @@ return "continue!";
                 return "restart!";
             }
         }
-#ifdef DEBUG
-    cout << "Board::moveBlock() - for loop ends"<<endl;
-#endif
         textDisplay->print();
         if (!textOnly) graphicDisplay->display();
-
     }
     return "eof!";
 }
