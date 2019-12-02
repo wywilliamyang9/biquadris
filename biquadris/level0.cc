@@ -1,3 +1,4 @@
+#define DEBUG
 #include "level0.h"
 #include <fstream>
 
@@ -19,8 +20,16 @@ cout << "Level0 construction starts" << endl;
 
 	string currString;
 	while (fs >> currString) {
-		sequence = sequence + currString;
+#ifdef DEBUG
+cout << "currString is" << currString  << endl;
+#endif
+		sequence = sequence + " " + currString;
 	}
+#ifdef DEBUG
+cout << "sequence is" << sequence  << endl;
+cout << "sequence is" << sequence  << endl;
+
+#endif
 }
 
 BlockInfo Level0::generateNextBlock() {
@@ -31,7 +40,7 @@ BlockInfo Level0::generateNextBlock() {
 	if (sequence == "") {
 		fstream fs{scriptFile};
 		while (fs >> currString) {
-			sequence = sequence + currString;
+			sequence = sequence + " "  + currString;
 		}
 	}
 
@@ -41,7 +50,7 @@ BlockInfo Level0::generateNextBlock() {
 	
 	sequence = "";
 	while (ss >> currString) {
-		sequence = sequence + currString;
+		sequence = sequence + " " + currString;
 	}
 	return BlockInfo{ heavy,currBlock, false};
 }

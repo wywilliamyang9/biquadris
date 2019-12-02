@@ -21,8 +21,10 @@ cout << "Level1 construction starts" << endl;
 
 		string currString;
 		while (fs >> currString) {
-			sequence = sequence + currString;
+			sequence = sequence + " " + currString;
 		}
+	} else {
+		nextBlock = chooseNext();
 	}
 }
 
@@ -55,7 +57,7 @@ BlockInfo Level1::generateNextBlock() {
 		if (sequence == "") {
 			fstream fs{scriptFile};
 			while (fs >> currString) {
-				sequence = sequence + currString;
+				sequence = sequence + " " + currString;
 			}
 		}
 
@@ -65,7 +67,7 @@ BlockInfo Level1::generateNextBlock() {
 		
 		sequence = "";
 		while (ss >> currString) {
-			sequence = sequence + currString;
+			sequence = sequence + " " + currString;
 		}
 	}
 	else {
@@ -85,7 +87,7 @@ void Level1::setSequence(std::string filename) {
 	string currString;
 	sequence = "";
 	while (fs >> currString) {
-		sequence = sequence + currString;
+		sequence = sequence + " " + currString;
 	}
 }
 
