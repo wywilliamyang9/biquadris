@@ -13,7 +13,7 @@ Level0::Level0(int seed, std::string scriptFile, int level) :
 #ifdef DEBUG
 cout << "Level0 construction starts" << endl;
 #endif
-	fstream fs{scriptFile};
+	ifstream fs{scriptFile};
 	string type;
 	fs >> type;
 	nextBlock = convertString(type);
@@ -31,6 +31,12 @@ cout << "sequence is " << sequence  << endl;
 cout << "sequence is " << sequence  << endl;
 
 #endif
+	fs.close();
+#ifdef DEBUG
+
+cout << "fs is " << fs.is_open()  << endl;
+
+#endif
 	
 }
 
@@ -40,7 +46,7 @@ BlockInfo Level0::generateNextBlock() {
 	string currString;
 
 	if (sequence == "") {
-		fstream fs{scriptFile};
+		ifstream fs{scriptFile};
 		while (fs >> currString) {
 			sequence = sequence + " "  + currString;
 		}
@@ -68,8 +74,10 @@ void Level0::setSequence(std::string filename) {
 	string currString;
 	sequence = "";
 	while (fs >> currString) {
-		sequence = sequence + currString;
+		sequence = sequence + " " + currString;
 	}
+	fs.close();
+
 }
 
 int Level0::calculateScore(int rowsCleared) {

@@ -27,5 +27,6 @@ public:
 	virtual int calculateScore(int rowsCleared) = 0; // calculates got score
 
 	virtual void setRandom() = 0;
+	virtual ~Level();
 };
 #endif
