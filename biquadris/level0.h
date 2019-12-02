@@ -5,11 +5,12 @@
 #include <string>
 #include <fstream>
 #include "colour.h"
+#include <sstream>
 
 
 class Level0 : public Level {
 	std::string scriptFile;
-	std::fstream sequence;
+	std::string sequence;
 public:
 	Level0(int seed, std::string scriptFile, int level);
 	BlockInfo generateNextBlock() override;

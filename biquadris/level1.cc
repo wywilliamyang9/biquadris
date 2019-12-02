@@ -9,16 +9,20 @@ using namespace std;
 
 
 Level1::Level1(int seed, int level,bool readFromFile, std::string scriptFile) :
-	Level{ seed, level }, readFromFile{ readFromFile }{
+	Level{ seed, level },  scriptFile{scriptFile},readFromFile{ readFromFile },sequence {""}{
 #ifdef DEBUG
 cout << "Level1 construction starts" << endl;
 #endif
 	if (readFromFile) {
-		this->scriptFile = scriptFile;
-		sequence.open(scriptFile);
+		fstream fs{scriptFile};
 		string type;
-		sequence >> type;
+		fs >> type;
 		nextBlock = convertString(type);
+
+		string currString;
+		while (fs >> currString) {
+			sequence = sequence + currString;
+		}
 	}
 }
 
@@ -44,30 +48,45 @@ Colour Level1::chooseNext() {
 BlockInfo Level1::generateNextBlock() {
 	currBlock = nextBlock;
 	if (readFromFile) {
+		currBlock = nextBlock;
 		string type;
-		if (!(sequence >> type)) {
-			sequence.clear();
-			//sequence.seekg(0, sequence.beg);
-			sequence.close();
-			sequence.open(scriptFile);
-			sequence >> type;
+		string currString;
+
+		if (sequence == "") {
+			fstream fs{scriptFile};
+			while (fs >> currString) {
+				sequence = sequence + currString;
+			}
 		}
+
+		stringstream ss {sequence};
+		ss >> type;
 		nextBlock = convertString(type);
+		
+		sequence = "";
+		while (ss >> currString) {
+			sequence = sequence + currString;
+		}
 	}
 	else {
 		nextBlock = chooseNext();
 	}
-	return BlockInfo{ heavy, currBlock, false };
+	return BlockInfo{ heavy, currBlock, false};
 }
 
 void Level1::setSequence(std::string filename) {
-	if (sequence.is_open()) sequence.close();
-	readFromFile = true;
 	scriptFile = filename;
-	sequence.open(filename);
+
+	fstream fs{scriptFile};
 	string type;
-	sequence >> type;
+	fs >> type;
 	nextBlock = convertString(type);
+
+	string currString;
+	sequence = "";
+	while (fs >> currString) {
+		sequence = sequence + currString;
+	}
 }
 
 int Level1::calculateScore(int rowsCleared) {
@@ -80,6 +99,4 @@ void Level1::setRandom() {
 	readFromFile = false;
 }
 
-Level1::~Level1() {
-	if (sequence.is_open()) sequence.close();
-}
+Level1::~Level1() {}

@@ -5,11 +5,12 @@
 #include <string>
 #include <fstream>
 #include "colour.h"
+#include <sstream>
 
 class Level2 : public Level {
 	std::string scriptFile;
 	bool readFromFile;
-	std::fstream sequence;
+	std::string sequence;
 
 public:
 	Level2(int seed, int level,bool readFromFile = false, std::string scriptFile = "");

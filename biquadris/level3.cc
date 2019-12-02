@@ -8,16 +8,20 @@ using namespace std;
 
 
 Level3::Level3(int seed, int level,bool readFromFile, std::string scriptFile) :
-	Level{ seed, level}, readFromFile{ readFromFile }{
+	Level{ seed, level}, scriptFile{scriptFile},readFromFile{ readFromFile },sequence {""}{
 #ifdef DEBUG
 cout << "Level3 construction starts" << endl;
 #endif
 	if (readFromFile) {
-		this->scriptFile = scriptFile;
-		sequence.open(scriptFile);
+		fstream fs{scriptFile};
 		string type;
-		sequence >> type;
+		fs >> type;
 		nextBlock = convertString(type);
+
+		string currString;
+		while (fs >> currString) {
+			sequence = sequence + currString;
+		}
 	}
 }
 
@@ -43,15 +47,25 @@ Colour Level3::chooseNext() {
 BlockInfo Level3::generateNextBlock() {
 	currBlock = nextBlock;
 	if (readFromFile) {
+		currBlock = nextBlock;
 		string type;
-		if (!(sequence >> type)) {
-			sequence.clear();
-			//sequence.seekg(0, sequence.beg);
-			sequence.close();
-			sequence.open(scriptFile);
-			sequence >> type;
+		string currString;
+
+		if (sequence == "") {
+			fstream fs{scriptFile};
+			while (fs >> currString) {
+				sequence = sequence + currString;
+			}
 		}
+
+		stringstream ss {sequence};
+		ss >> type;
 		nextBlock = convertString(type);
+		
+		sequence = "";
+		while (ss >> currString) {
+			sequence = sequence + currString;
+		}
 	}
 	else {
 		nextBlock = chooseNext();
@@ -61,13 +75,18 @@ BlockInfo Level3::generateNextBlock() {
 }
 
 void Level3::setSequence(std::string filename) {
-	if (sequence.is_open()) sequence.close();
-	readFromFile = true;
 	scriptFile = filename;
-	sequence.open(filename);
+
+	fstream fs{scriptFile};
 	string type;
-	sequence >> type;
+	fs >> type;
 	nextBlock = convertString(type);
+
+	string currString;
+	sequence = "";
+	while (fs >> currString) {
+		sequence = sequence + currString;
+	}
 }
 
 int Level3::calculateScore(int rowsCleared) {
@@ -80,6 +99,4 @@ void Level3::setRandom() {
 	readFromFile = false;
 }
 
-Level3::~Level3(){
-	if (sequence.is_open()) sequence.close();
-}
+Level3::~Level3(){}

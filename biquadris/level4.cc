@@ -8,16 +8,20 @@ using namespace std;
 
 
 Level4::Level4(int seed, int level,bool readFromFile, std::string scriptFile) :
-	Level{ seed, level }, readFromFile{ readFromFile }, dotCount {0}{
+	Level{ seed, level }, scriptFile{scriptFile},readFromFile{ readFromFile },sequence {""}, dotCount {0}{
 #ifdef DEBUG
 cout << "Level4 construction starts" << endl;
 #endif
 	if (readFromFile) {
-		this->scriptFile = scriptFile;
-		sequence.open(scriptFile);
+		fstream fs{scriptFile};
 		string type;
-		sequence >> type;
+		fs >> type;
 		nextBlock = convertString(type);
+
+		string currString;
+		while (fs >> currString) {
+			sequence = sequence + currString;
+		}
 	}
 }
 
@@ -43,15 +47,25 @@ Colour Level4::chooseNext() {
 BlockInfo Level4::generateNextBlock() {
 	currBlock = nextBlock;
 	if (readFromFile) {
+		currBlock = nextBlock;
 		string type;
-		if (!(sequence >> type)) {
-			sequence.clear();
-			//sequence.seekg(0, sequence.beg);
-			sequence.close();
-			sequence.open(scriptFile);
-			sequence >> type;
+		string currString;
+
+		if (sequence == "") {
+			fstream fs{scriptFile};
+			while (fs >> currString) {
+				sequence = sequence + currString;
+			}
 		}
+
+		stringstream ss {sequence};
+		ss >> type;
 		nextBlock = convertString(type);
+		
+		sequence = "";
+		while (ss >> currString) {
+			sequence = sequence + currString;
+		}
 	}
 	else {
 		nextBlock = chooseNext();
@@ -66,13 +80,18 @@ BlockInfo Level4::generateNextBlock() {
 }
 
 void Level4::setSequence(std::string filename) {
-	if (sequence.is_open()) sequence.close();
-	readFromFile = true;
 	scriptFile = filename;
-	sequence.open(filename);
+
+	fstream fs{scriptFile};
 	string type;
-	sequence >> type;
+	fs >> type;
 	nextBlock = convertString(type);
+
+	string currString;
+	sequence = "";
+	while (fs >> currString) {
+		sequence = sequence + currString;
+	}
 }
 
 int Level4::calculateScore(int rowsCleared) {
@@ -88,5 +107,4 @@ void Level4::setRandom() {
 void Level4::dotCountAddOne() {dotCount++;}
 
 Level4::~Level4(){
-	if (sequence.is_open()) sequence.close();
 }

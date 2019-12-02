@@ -8,37 +8,57 @@ using namespace std;
 
 
 Level0::Level0(int seed, std::string scriptFile, int level) :
-	Level{ seed, level }, scriptFile{ scriptFile }, sequence {scriptFile} {
+	Level{ seed, level }, scriptFile{ scriptFile }, sequence {""}{
 #ifdef DEBUG
 cout << "Level0 construction starts" << endl;
 #endif
-	//sequence.open(scriptFile);
+	fstream fs{scriptFile};
 	string type;
-	sequence >> type;
+	fs >> type;
 	nextBlock = convertString(type);
+
+	string currString;
+	while (fs >> currString) {
+		sequence = sequence + currString;
+	}
 }
 
 BlockInfo Level0::generateNextBlock() {
 	currBlock = nextBlock;
 	string type;
-	if (!(sequence >> type)) {
-		sequence.clear();
-		//sequence.seekg(0, sequence.beg);
-		sequence.close();
-		sequence.open(scriptFile);
-		sequence >> type;
+	string currString;
+
+	if (sequence == "") {
+		fstream fs{scriptFile};
+		while (fs >> currString) {
+			sequence = sequence + currString;
+		}
 	}
+
+	stringstream ss {sequence};
+	ss >> type;
 	nextBlock = convertString(type);
+	
+	sequence = "";
+	while (ss >> currString) {
+		sequence = sequence + currString;
+	}
 	return BlockInfo{ heavy,currBlock, false};
 }
 
 void Level0::setSequence(std::string filename) {
 	scriptFile = filename;
-	sequence.close();
-	sequence.open(filename);
+
+	fstream fs{scriptFile};
 	string type;
-	sequence >> type;
+	fs >> type;
 	nextBlock = convertString(type);
+
+	string currString;
+	sequence = "";
+	while (fs >> currString) {
+		sequence = sequence + currString;
+	}
 }
 
 int Level0::calculateScore(int rowsCleared) {
@@ -49,6 +69,4 @@ int Level0::calculateScore(int rowsCleared) {
 
 void Level0::setRandom() {}
 
-Level0::~Level0(){
-	sequence.close();
-}
+Level0::~Level0(){}
