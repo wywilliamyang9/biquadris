@@ -80,4 +80,7 @@ int Level0::calculateScore(int rowsCleared) {
 
 void Level0::setRandom() {}
 
-Level0::~Level0(){}
+Level0::~Level0(){
+	sequence = "";
+	scriptFile = "";
+}

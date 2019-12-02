@@ -100,4 +100,7 @@ void Level2::setRandom() {
 	readFromFile = false;
 }
 
-Level2::~Level2(){}
+Level2::~Level2(){
+	sequence = "";
+	scriptFile = "";
+}
