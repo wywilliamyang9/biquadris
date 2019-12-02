@@ -55,7 +55,6 @@ class Board {
     int currlvl;
     int score = 0;
     Colour nextBlockColour;
-    CommandInterpreter cmdDic;
     std::unique_ptr<CommandInterpreter> cmdDictionary;
     std::unique_ptr<Block> currBlock;
     Colour currColour;

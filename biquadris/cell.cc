@@ -1,8 +1,6 @@
 #include "cell.h"
-Cell::Cell(int r,int c, int boardnum): blinded{false},
-colour {Colour::White}, boardnum{boardnum}, currBlock{false}{
-    coordinates = Coordinates{r,c};
-}
+Cell::Cell(int r,int c, int boardnum): colour {Colour::White},blinded{false},
+coordinates {Coordinates{r,c}}, boardnum{boardnum}, currBlock{false}{}
 
 Info Cell::getinfo() const {
     return Info {coordinates, colour, blinded, boardnum};

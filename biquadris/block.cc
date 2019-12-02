@@ -172,7 +172,7 @@ cout <<  caller.getCleared() << endl;
 	if (!caller.getCleared()) return;
 cout << "Block notified2" << endl;
 	Coordinates callerCoord = caller.getinfo().coord;
-	for (int i = 0; i < cells.size(); ++i) {
+	for (int i = 0; (unsigned)i < cells.size(); ++i) {
 		if (callerCoord.row == cells.at(i)->getinfo().coord.row
 		&& (callerCoord.col == cells.at(i)->getinfo().coord.col)) {
 			cells.at(i)->dettach(this);
@@ -184,7 +184,7 @@ cout << "Block notified2" << endl;
 
 void Block::referenceBelow(Board& playerBoard){
 	vector<Cell*> newCells;
-	for (int i = 0; i < cells.size(); ++i) {
+	for (int i = 0; (unsigned)i < cells.size(); ++i) {
 		Coordinates oldCoord = cells.at(i)->getinfo().coord;
 		newCells.emplace_back(&(playerBoard.getBoard().at(oldCoord.row+1).at(oldCoord.col)));
 	}

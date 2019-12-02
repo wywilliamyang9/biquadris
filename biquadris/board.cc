@@ -21,9 +21,10 @@ Level* Board::getLevelptr() {
 
 // default ctor, requires manual set of opponent and filestream.
 Board::Board(int boardnum, TextDisplay *td, GraphicalDisplay *gd, bool textOnly, int seed,
-    string scriptFile, int startLevel) : boardnum{boardnum}, seed {seed}, 
-    cmdDictionary{new CommandInterpreter}, graphicDisplay {gd}, textDisplay {td}, fileInput {scriptFile}, textOnly{textOnly},
-currlvl {startLevel}, score{0}, currBlock{nullptr} {
+    string scriptFile, int startLevel) : boardnum{boardnum}, opponent {nullptr}, level {nullptr},
+     graphicDisplay {gd}, textDisplay {td}, fileInput {scriptFile},currlvl {startLevel}, score{0}, 
+     nextBlockColour {Colour::White},cmdDictionary{new CommandInterpreter}, currBlock {nullptr}, currColour {Colour::White},
+     seed {seed}, textOnly{textOnly} {
     if (startLevel == 0) {
         currlvl = 0;
 		level.reset(new Level0{seed, scriptFile});
@@ -48,10 +49,7 @@ currlvl {startLevel}, score{0}, currBlock{nullptr} {
             Cell newCell {i,j, boardnum};
             if (!textOnly) newCell.attach(graphicDisplay);
             newCell.attach(textDisplay); // subject <Info>
-           /* #ifdef DEBUG
-            cout << "attached" << endl;
-            #endif
-*/            newRow.emplace_back(newCell);
+            newRow.emplace_back(newCell);
         }
         board.emplace_back (newRow);
     }
@@ -196,52 +194,8 @@ string Board::play(){
     }
     return "continue!";
 }
-
-// level checks win/lose conditions upon spawn.
-/*
-bool Board::spawnBlock() {
-	if (!newBlockCheck(nextBlockColour)) return false;
-	currBlock.reset(Block{})
-    // generateNextBlock gives the new block
-    BlockInfo newBlockInfo = level->generateNextBlock();
-
-    // checks if the new block can be placed on the board
-    if (!(placeBlock())) return false;
-    nextBlockColour = level->getNextBlock();
-    notifyObservers();   
-    return true;
-}
-/*
-bool Board::placeBlock() {
-    vector<Cell>.at& ).at(l)ock->getCells();
-    for (int i = 0; i < 4; ++i) {
-        int row = cells.at(i).getinfo().coordinates.row;
-        int col = cells.at(i).getinfo().coordinates.col;
-        if (board.at(row).at(col).getinfo().colour != Colour::White){
-            return false;
-        }
-    }
-
-    // if it passes the check
-    cells.clear();
-    for (int i = 0; i < 4; ++i) {
-        int row = cells.at(i).getinfo().coordinates.row;
-        int col = cells.at(i).getinfo().coordinates.col;
-        Cell & onBoardCell = board.at(row).at(col);
-        onBoardCell.setInfo(Coordinates{row, col},
-        currBlock.getColour(), onBoardCell.getinfo().blinded,
-        onBoardCell.getinfo().boardnum);
-        onBoardCell.setCurrBlock(true);
-        cells.emplace_back (onBoardCell);
-    }
-    return true;
-}
-*/
 // moves the block until it drops
 string Board::moveBlock() {
-
-
-
 #ifdef DEBUG
     cout << "Board::moveBlock() starts"<<endl;
 #endif
