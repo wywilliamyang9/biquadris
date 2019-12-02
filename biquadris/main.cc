@@ -45,4 +45,3 @@ int main(int argc, char *argv[]){
     unique_ptr<Game> game = make_unique<Game>(textOnly, seed, scriptFile1, scriptFile1, startLevel);
     game->play();
 }
-cd

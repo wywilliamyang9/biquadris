@@ -353,7 +353,7 @@ int Board::clearRows() {
                 board.at(i).at(m).setCleared(false);
             }
             // clear empty blocks.
-            for (int i = 0; i < blocks.size(); ++i) {
+            for (int i = 0; (unsigned)i < blocks.size(); ++i) {
                 if (blocks.at(i)->getCells().size() == 0) {
                     score += (blocks.at(i)->getSpawnLevel()+1)*(blocks.at(i)->getSpawnLevel()+1);
                     blocks.erase(blocks.begin()+i);
@@ -389,12 +389,12 @@ int Board::clearRows() {
 #ifdef DEBUG
     cout << "checkpoint"<<endl;
 #endif
-            for (int nn = 0; nn < blocks.size(); ++nn) {
+            for (int nn = 0; (unsigned)nn < blocks.size(); ++nn) {
 #ifdef DEBUG
     cout << "checking: "<< convertColour(blocks.at(nn)->getCells().at(0)->getinfo().colour) << endl;
 #endif          
                 bool below = 0;
-                for (int kk = 0; kk < blocks.at(nn)->getCells().size(); ++kk) {
+                for (int kk = 0; (unsigned)kk < blocks.at(nn)->getCells().size(); ++kk) {
 #ifdef DEBUG
 cout << blocks.at(nn)->getCells().at(kk)->getinfo().coord.row << endl;
 #endif
