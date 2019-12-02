@@ -16,6 +16,7 @@ public:
 	void setSequence(std::string filename) override;
 	int calculateScore(int rowsCleared) override;
 	void setRandom() override;
+	~Level0();
 };
 
 

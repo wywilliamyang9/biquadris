@@ -32,6 +32,7 @@ BlockInfo Level0::generateNextBlock() {
 
 void Level0::setSequence(std::string filename) {
 	scriptFile = filename;
+	sequence.close();
 	sequence.open(filename);
 	string type;
 	sequence >> type;
@@ -45,3 +46,7 @@ int Level0::calculateScore(int rowsCleared) {
 }
 
 void Level0::setRandom() {}
+
+Level0::~Level0(){
+	sequence.close();
+}
