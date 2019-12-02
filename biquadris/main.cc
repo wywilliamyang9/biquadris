@@ -1,6 +1,7 @@
 #include "game.h"
 #include <iostream>
 #include <string>
+#include <memory>
 using namespace std;
 
 int main(int argc, char *argv[]){
@@ -40,6 +41,7 @@ int main(int argc, char *argv[]){
             i++;
         }
     }
-    Game* game = new Game(textOnly, seed, scriptFile1, scriptFile1, startLevel);
-    game->play();
+    //std::unique_ptr<Game> game = make_unique<Game>(textOnly, seed, scriptFile1, scriptFile1, startLevel);
+    Game game {textOnly, seed, scriptFile1, scriptFile1, startLevel};
+    game.play();
 }
