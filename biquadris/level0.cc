@@ -1,4 +1,4 @@
-#define DEBUG
+//#define DEBUG
 #include "level0.h"
 #include <fstream>
 
@@ -9,7 +9,7 @@ using namespace std;
 
 
 Level0::Level0(int seed, std::string scriptFile, int level) :
-	Level{ seed, level }, scriptFile{ scriptFile }, sequence {""}{
+	Level{ seed, level }, scriptFile{ scriptFile }{
 #ifdef DEBUG
 cout << "Level0 construction starts" << endl;
 #endif
@@ -31,6 +31,7 @@ cout << "sequence is " << sequence  << endl;
 cout << "sequence is " << sequence  << endl;
 
 #endif
+	
 }
 
 BlockInfo Level0::generateNextBlock() {

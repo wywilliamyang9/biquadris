@@ -27,7 +27,7 @@ int main(int argc, char *argv[]){
             if (!(temp >> scriptFile1)){
             }
             i++;
-        } else if (tmparg == "-seed"){
+        } else if (tmparg == "-scriptfile2"){
             string tmp = argv[i+1];
             stringstream temp(tmp);
             if (!(temp >> scriptFile2)){
