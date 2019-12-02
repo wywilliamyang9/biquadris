@@ -1,4 +1,4 @@
-//#define DEBUG
+#define DEBUG
 
 #include "game.h"
 #include <memory>

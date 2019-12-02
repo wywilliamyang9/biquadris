@@ -60,6 +60,13 @@ void TextDisplay::updateNextBlock(NextBlock nextBlockInfo){
 }
 
 void TextDisplay::updateScore(vector<int> newScores){
+#ifdef DEBUG
+    cout << "TextDisplay::updateScore() starts!"<<endl;
+#endif
+#ifdef DEBUG
+    cout << "TextDisplay::updateScore() new scores sizse is : "<<newScores.size()<<endl;
+    cout << "They are " << newScore.at(0) << newScore.at(1) << newScore.at(2) << endl;
+#endif
     scores[0] = newScores[0];
     scores[1] = newScores[1];
     scores[2] = newScores[2];
@@ -114,9 +121,12 @@ void TextDisplay::printLevel() {
 }
 
 void TextDisplay::printHighScore() {
-	cout << "HISCORE: " << scores[3];
+#ifdef DEBUG
+    cout << "TextDisplay::printHighScore() starts!"<<endl;
+#endif
+	cout << "HISCORE: " << scores[2];
 	cout << "    ";
-	cout << "HISCORE: " << scores[3] << endl;
+	cout << "HISCORE: " << scores[2] << endl;
 }
 
 void TextDisplay::printScore() {
