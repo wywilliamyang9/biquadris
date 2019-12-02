@@ -1,5 +1,5 @@
-#define DEBUG
-#define DEBUG2
+//#define DEBUG
+//#define DEBUG2
 #include "board.h"
 #include "subject.h"
 
@@ -36,10 +36,10 @@ currlvl {startLevel}, score{0}, currBlock{nullptr} {
     } else if (currlvl == 3) {
         currlvl = 3;
         level.reset(new Level3{seed});
-    } /*else {
+    } else {
         currlvl = 4;
-        level.reset(new Level4);
-	}*/
+        level.reset(new Level4{seed});
+	}
 
 
     for (int i = 0; i < 18; ++i) { // row
@@ -593,12 +593,17 @@ void Board::levelUp() {
         Colour nextBlockColour = level->getNextBlock();
         textDisplay->updateNextBlock(NextBlock{nextBlockColour, boardnum});
         if (!textOnly)graphicDisplay->updateNextBlock(NextBlock{nextBlockColour, boardnum});
-    } /*else if (currlvl == 3) {
+    }  else if (currlvl == 3) {
         currlvl = 4;
-        level.reset(new Level4);
+        level.reset(new Level4{seed});
+        textDisplay->updateLevel(currlvl, boardnum);
+        if (!textOnly)graphicDisplay->updateLevel(currlvl, boardnum);
+        Colour nextBlockColour = level->getNextBlock();
+        textDisplay->updateNextBlock(NextBlock{nextBlockColour, boardnum});
+        if (!textOnly)graphicDisplay->updateNextBlock(NextBlock{nextBlockColour, boardnum});
     } else {
         return;
-    }*/
+    }
     return;
 }
 
@@ -814,8 +819,11 @@ TBlock* Board::createTBlock(const BlockInfo& newBlockInfo) {
 }
 DotBlock* Board::createDotBlock() {
     int row = 0;
-    for (int i = 17; i <= 0; ++i) {
-        if (board.at(i).at(5).getinfo().colour == Colour::White) row = i;
+    for (int i = 17; i >= 0; --i) {
+        if (board.at(i).at(5).getinfo().colour == Colour::White){
+            row = i;
+            break;
+        }
     }
 
     DotBlock* block = new DotBlock{&board.at(row).at(5)};

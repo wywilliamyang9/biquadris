@@ -5,6 +5,7 @@
 #include "level1.h"
 #include "level2.h"
 #include "level3.h"
+#include "level4.h"
 #include "subject.h"
 #include "observer.h"
 #include "specialAction.h"

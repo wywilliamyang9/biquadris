@@ -4,8 +4,7 @@
 
 using namespace std;
 
-DotBlock::DotBlock (Cell* c1): heavy{heavy},colour{Colour::Brown}, state{1}
-spawnLevel{4} {
+DotBlock::DotBlock (Cell* c1) : Block{} {
     cells.emplace_back(c1);
 }
 

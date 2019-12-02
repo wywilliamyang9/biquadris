@@ -20,7 +20,7 @@ protected:
     ~Block()=default;
     Block (Cell*, Cell*, Cell*, Cell*,
          int heavy, Colour,int);
-
+    Block();
     std::vector<Cell*> getCells();
     void setCells(const std::vector<Cell*>);
     Colour getColour();

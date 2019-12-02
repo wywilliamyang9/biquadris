@@ -7,6 +7,7 @@
 
 using namespace std;
 
+Block::Block(): heavy {0}, colour {Colour::Brown}, state{1}, spawnLevel{4}{}
 
 vector<Cell*> Block::getCells() {
 	return cells;
