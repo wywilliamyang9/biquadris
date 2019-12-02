@@ -109,4 +109,6 @@ void Level4::setRandom() {
 void Level4::dotCountAddOne() {dotCount++;}
 
 Level4::~Level4(){
+	sequence = "";
+	scriptFile = "";
 }
