@@ -50,7 +50,7 @@ int converttoXColour(Colour colour){
     } else if (colour == Colour::Brown){
         return Xwindow::Brown;
     } else {
-        return ' ';
+        return Xwindow::Black;
     }
 }
 
