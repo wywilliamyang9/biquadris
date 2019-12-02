@@ -26,8 +26,9 @@ cout << "currString is" << currString  << endl;
 		sequence = sequence + " " + currString;
 	}
 #ifdef DEBUG
-cout << "sequence is" << sequence  << endl;
-cout << "sequence is" << sequence  << endl;
+
+cout << "sequence is " << sequence  << endl;
+cout << "sequence is " << sequence  << endl;
 
 #endif
 }
