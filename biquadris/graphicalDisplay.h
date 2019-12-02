@@ -13,8 +13,8 @@ class GraphicalDisplay : public Observer {
     Xwindow window;
     const int displaywidth = 675;
     const int displayheight = 650;
-    std::vector<std::vector<char>> board1;
-    std::vector<std::vector<char>> board2;
+    std::vector<std::vector<int>> board1;
+    std::vector<std::vector<int>> board2;
     const int gridWidth = 11;
     const int gridHeight = 18;
     std::vector<int> scores;

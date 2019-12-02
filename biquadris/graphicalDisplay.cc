@@ -10,11 +10,11 @@ using namespace std;
 GraphicalDisplay::GraphicalDisplay(){
     //theDisplay.clear();
     for (int i = 0; i < gridHeight; ++i){
-        vector<char> temp1;
-        vector<char> temp2;
+        vector<int> temp1;
+        vector<int> temp2;
         for (int j = 0; j < gridWidth; ++j){
-            temp1.emplace_back(' ');
-            temp2.emplace_back(' ');
+            temp1.emplace_back(Xwindow::White);
+            temp2.emplace_back(Xwindow::White);
         }
         
         board1.emplace_back(temp1);
@@ -29,6 +29,28 @@ GraphicalDisplay::GraphicalDisplay(){
 	}
 }
 
+int converttoXColour(Colour colour){
+    if (colour == Colour::Red){
+        return Xwindow::Red;
+    } else if (colour == Colour::Orange){
+        return Xwindow::Orange;
+    } else if (colour == Colour::Cyan){
+        return Xwindow::Cyan;
+    } else if (colour == Colour::Blue){
+        return Xwindow::Blue;
+    } else if (colour == Colour::Yellow){
+        return Xwindow::Yellow;
+    } else if (colour == Colour::Green){
+        return Xwindow::Green;
+    } else if (colour == Colour::Purple){
+        return Xwindow::Purple;
+    } else if (colour == Colour::Brown){
+        return Xwindow::Brown;
+    } else {
+        return ' ';
+    }
+}
+
 void GraphicalDisplay::notify(Subject &whoNotified) {
 #ifdef DEBUG
     cout << "GraphicalDisplay::notify() starts"<<endl;
@@ -41,13 +63,13 @@ void GraphicalDisplay::notify(Subject &whoNotified) {
         if (currinfo.blinded){
             board1[currinfo.coord.row][currinfo.coord.col] = '?';
         } else {
-            board1[currinfo.coord.row][currinfo.coord.col] = convertColour(currinfo.colour);
+            board1[currinfo.coord.row][currinfo.coord.col] = converttoXColour(currinfo.colour);
         }
     } else if (currinfo.boardnum == 2){
         if (currinfo.blinded){
             board2[currinfo.coord.row][currinfo.coord.col] = '?';
         } else {
-            board2[currinfo.coord.row][currinfo.coord.col] = convertColour(currinfo.colour);
+            board2[currinfo.coord.row][currinfo.coord.col] = converttoXColour(currinfo.colour);
         }
     }
 }
@@ -90,7 +112,6 @@ void GraphicalDisplay::updateLevel(int newLevel, int boardnum){
         levels[1] = newLevel;
     }
 }
-
 
 void GraphicalDisplay::display() {
 #ifdef DEBUG
@@ -135,20 +156,16 @@ void GraphicalDisplay::displayScore() {
 }
 
 void GraphicalDisplay::displayBoards() {
-    const gridSize = 
-	for (int i = 0; i < gridHeight; i++) {
-		for (int j = 0; j <= 25; j++) {
-			if (j < gridWidth) {
-				cout << board1[i][j];
-			} else if (j < 14) {
-				cout << " ";
-			} else {
-				cout << board2[i][j-3-gridWidth];
-			}
-		}
-		cout << endl;
-	
-	}	
+	for (int i = 0; i < 18; i++) {
+        for (int j = 0; j < 11; j++) {
+            window.fillRectangle(25 + j * 25, 75 + i * 25, 25, 25, board1[j][17 - i]);
+        }
+    }
+    for (int i = 0; i < 18; i++) {
+        for (int j = 0; j < 11; j++) {
+            window.fillRectangle(25 + j * 25+350, 75 + i * 25, 25, 25, board2[j][17 - i]);
+        }
+    }
 }
 
 string displayBlock(char type, int line){
