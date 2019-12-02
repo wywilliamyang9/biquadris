@@ -1,4 +1,4 @@
-#define DEBUG
+//#define DEBUG
 #include "window.h"
 #include "graphicalDisplay.h"
 #include "info.h"

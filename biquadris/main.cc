@@ -42,6 +42,7 @@ int main(int argc, char *argv[]){
         }
     }
     //std::unique_ptr<Game> game = make_unique<Game>(textOnly, seed, scriptFile1, scriptFile1, startLevel);
-    Game game {textOnly, seed, scriptFile1, scriptFile1, startLevel};
-    game.play();
+    unique_ptr<Game> game = make_unique<Game>(textOnly, seed, scriptFile1, scriptFile1, startLevel);
+    game->play();
 }
+cd
