@@ -158,12 +158,12 @@ void GraphicalDisplay::displayScore() {
 void GraphicalDisplay::displayBoards() {
 	for (int i = 0; i < 18; i++) {
         for (int j = 0; j < 11; j++) {
-            window.fillRectangle(25 + j * 25, 75 + i * 25, 25, 25, board1[j][17 - i]);
+            window.fillRectangle(25 + j * 25, 75 + i * 25, 25, 25, board1[i][j]);
         }
     }
     for (int i = 0; i < 18; i++) {
         for (int j = 0; j < 11; j++) {
-            window.fillRectangle(25 + j * 25+350, 75 + i * 25, 25, 25, board2[j][17 - i]);
+            window.fillRectangle(25 + j * 25+350, 75 + i * 25, 25, 25, board2[i][j]);
         }
     }
 }
