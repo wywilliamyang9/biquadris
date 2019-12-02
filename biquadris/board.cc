@@ -387,7 +387,11 @@ int Board::clearRows() {
                     blocks.erase(blocks.begin()+i);
                     --i;
                     textDisplay->updateScore(score, boardnum);
-                    if (!textOnly)graphicDisplay->updateScore(score, boardnum);
+                    textDisplay->print();
+                    if (!textOnly) {
+                        graphicDisplay->updateScore(score, boardnum);
+                        graphicDisplay->display();
+                    }
                 }
             }
 #ifdef DEBUG

@@ -26,3 +26,5 @@ int Level::getLevel() {
 Colour Level::getNextBlock() {
 	return nextBlock;
 }
+
+Level::~Level() {}
