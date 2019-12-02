@@ -5,8 +5,7 @@ class Cell;
 class Board;
 class DotBlock : public Block {
 public:
-	JBlock(Cell*, Cell*, Cell*, Cell*,
-		int heavy, Colour,int);
+	DotBlock(Cell*);
 
 	void CWRotate(Board&)override;
 	void CounterCWRotate(Board&)override;

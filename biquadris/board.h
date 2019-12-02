@@ -30,6 +30,7 @@ class GraphicalDisplay;
 #include "TBlock.h"
 #include "SBlock.h"
 #include "ZBlock.h"
+#include "DotBlock.h"
 */
 class IBlock; 
 class JBlock; 
@@ -38,6 +39,7 @@ class OBlock;
 class SBlock; 
 class ZBlock; 
 class TBlock; 
+class DotBlock;
 //class Block;
 
 class Board {
@@ -82,6 +84,7 @@ class Board {
     SBlock* createSBlock(const BlockInfo&);
     TBlock* createTBlock(const BlockInfo&);
     ZBlock* createZBlock(const BlockInfo&);
+    DotBlock* createDotBlock();
 
 	bool newBlockCheck(Colour colour);
     //bool placeBlock(); // place the newly spawned block

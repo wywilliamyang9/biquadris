@@ -55,7 +55,7 @@ BlockInfo Level1::generateNextBlock() {
 	else {
 		nextBlock = chooseNext();
 	}
-	return BlockInfo{ heavy, currBlock };
+	return BlockInfo{ heavy, currBlock, false };
 }
 
 void Level1::setSequence(std::string filename) {
