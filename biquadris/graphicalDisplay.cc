@@ -13,8 +13,8 @@ GraphicalDisplay::GraphicalDisplay(){
         vector<int> temp1;
         vector<int> temp2;
         for (int j = 0; j < gridWidth; ++j){
-            temp1.emplace_back(Xwindow::White);
-            temp2.emplace_back(Xwindow::White);
+            temp1.emplace_back(Xwindow::Black);
+            temp2.emplace_back(Xwindow::Black);
         }
         
         board1.emplace_back(temp1);
