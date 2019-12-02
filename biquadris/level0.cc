@@ -7,12 +7,12 @@
 using namespace std;
 
 
-Level0::Level0(int seed, std::string scriptFile) :
-	Level{ seed }, scriptFile{ scriptFile }{
+Level0::Level0(int seed, std::string scriptFile, int level) :
+	Level{ seed, level }, scriptFile{ scriptFile }, sequence {scriptFile} {
 #ifdef DEBUG
 cout << "Level0 construction starts" << endl;
 #endif
-	sequence.open(scriptFile);
+	//sequence.open(scriptFile);
 	string type;
 	sequence >> type;
 	nextBlock = convertString(type);
@@ -23,7 +23,9 @@ BlockInfo Level0::generateNextBlock() {
 	string type;
 	if (!(sequence >> type)) {
 		sequence.clear();
-		sequence.seekg(0, sequence.beg);
+		//sequence.seekg(0, sequence.beg);
+		sequence.close();
+		sequence.open(scriptFile);
 		sequence >> type;
 	}
 	nextBlock = convertString(type);

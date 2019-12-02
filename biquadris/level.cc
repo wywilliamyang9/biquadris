@@ -4,7 +4,8 @@
 
 using namespace std;
 
-Level::Level(int seed) : seed{ seed } {
+Level::Level(int seed, int level) : level{level}, seed{ seed },
+nextBlock {Colour::White},currBlock {Colour::White}{
 	srand(seed);
 }
 void Level::clearHeavy() {

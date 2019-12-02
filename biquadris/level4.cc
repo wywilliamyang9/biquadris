@@ -7,8 +7,8 @@
 using namespace std;
 
 
-Level4::Level4(int seed, bool readFromFile, std::string scriptFile) :
-	Level{ seed }, readFromFile{ readFromFile }, dotCount {0}{
+Level4::Level4(int seed, int level,bool readFromFile, std::string scriptFile) :
+	Level{ seed, level }, readFromFile{ readFromFile }, dotCount {0}{
 #ifdef DEBUG
 cout << "Level4 construction starts" << endl;
 #endif
@@ -46,7 +46,9 @@ BlockInfo Level4::generateNextBlock() {
 		string type;
 		if (!(sequence >> type)) {
 			sequence.clear();
-			sequence.seekg(0, sequence.beg);
+			//sequence.seekg(0, sequence.beg);
+			sequence.close();
+			sequence.open(scriptFile);
 			sequence >> type;
 		}
 		nextBlock = convertString(type);
@@ -64,6 +66,7 @@ BlockInfo Level4::generateNextBlock() {
 }
 
 void Level4::setSequence(std::string filename) {
+	if (sequence.is_open()) sequence.close();
 	readFromFile = true;
 	scriptFile = filename;
 	sequence.open(filename);
@@ -82,5 +85,8 @@ void Level4::setRandom() {
 	readFromFile = false;
 }
 
-
 void Level4::dotCountAddOne() {dotCount++;}
+
+Level4::~Level4(){
+	if (sequence.is_open()) sequence.close();
+}

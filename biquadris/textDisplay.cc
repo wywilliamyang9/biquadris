@@ -60,6 +60,13 @@ void TextDisplay::updateNextBlock(NextBlock nextBlockInfo){
 }
 
 void TextDisplay::updateScore(vector<int> newScores){
+#ifdef DEBUG
+    cout << "TextDisplay::updateScore() starts!"<<endl;
+#endif
+#ifdef DEBUG
+    cout << "TextDisplay::updateScore() new scores sizse is : "<<newScores.size()<<endl;
+    cout << "They are " << newScore.at(0) << newScore.at(1) << newScore.at(2) << endl;
+#endif
     scores[0] = newScores[0];
     scores[1] = newScores[1];
     scores[2] = newScores[2];
@@ -114,9 +121,12 @@ void TextDisplay::printLevel() {
 }
 
 void TextDisplay::printHighScore() {
-	cout << "HISCORE: " << scores[3];
+#ifdef DEBUG
+    cout << "TextDisplay::printHighScore() starts!"<<endl;
+#endif
+	cout << "HISCORE: " << scores[2];
 	cout << "    ";
-	cout << "HISCORE: " << scores[3] << endl;
+	cout << "HISCORE: " << scores[2] << endl;
 }
 
 void TextDisplay::printScore() {
@@ -127,13 +137,13 @@ void TextDisplay::printScore() {
 
 void TextDisplay::printBoards() {
 	for (int i = 0; i < gridHeight; i++) {
-		for (int j = 0; j <= 25; j++) {
+		for (int j = 0; j < 25; j++) {
 			if (j < gridWidth) {
-				cout << board1[i][j];
+				cout << board1.at(i).at(j);
 			} else if (j < 14) {
 				cout << " ";
 			} else {
-				cout << board2[i][j-3-gridWidth];
+				cout << board2.at(i).at(j-3-gridWidth);
 			}
 		}
 		cout << endl;

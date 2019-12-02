@@ -7,8 +7,8 @@
 using namespace std;
 
 
-Level2::Level2(int seed, bool readFromFile, std::string scriptFile) :
-	Level{ seed }, readFromFile{ readFromFile }{
+Level2::Level2(int seed,int level, bool readFromFile, std::string scriptFile) :
+	Level{ seed, level}, readFromFile{ readFromFile }{
 #ifdef DEBUG
 cout << "Level2 construction starts" << endl;
 #endif
@@ -46,7 +46,9 @@ BlockInfo Level2::generateNextBlock() {
 		string type;
 		if (!(sequence >> type)) {
 			sequence.clear();
-			sequence.seekg(0, sequence.beg);
+			//sequence.seekg(0, sequence.beg);
+			sequence.close();
+			sequence.open(scriptFile);
 			sequence >> type;
 		}
 		nextBlock = convertString(type);
@@ -58,6 +60,7 @@ BlockInfo Level2::generateNextBlock() {
 }
 
 void Level2::setSequence(std::string filename) {
+	if (sequence.is_open()) sequence.close();
 	readFromFile = true;
 	scriptFile = filename;
 	sequence.open(filename);
@@ -76,3 +79,6 @@ void Level2::setRandom() {
 	readFromFile = false;
 }
 
+Level2::~Level2(){
+	if (sequence.is_open()) sequence.close();
+}

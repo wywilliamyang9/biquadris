@@ -12,13 +12,14 @@ class Level4 : public Level {
 	std::fstream sequence;
 	int dotCount;
 public:
-	Level4(int seed, bool readFromFile = false, std::string scriptFile = "");
+	Level4(int seed,int level, bool readFromFile = false, std::string scriptFile = "");
 	Colour chooseNext();
 	BlockInfo generateNextBlock() override;
 	void setSequence(std::string filename) override;
 	int calculateScore(int rowsCleared) override;
 	void setRandom() override;
 	void dotCountAddOne();
+	~Level4();
 };
 
 #endif
