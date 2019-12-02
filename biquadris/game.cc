@@ -1,4 +1,4 @@
-//#define DEBUG
+#define DEBUG
 
 #include "game.h"
 #include <memory>
@@ -119,6 +119,10 @@ void Game::play(){
 }
 
 void Game::reset(){
+#ifdef DEBUG
+    cout << "Game reset starts"<<endl;
+#endif
+
     td.reset(new TextDisplay);
     if(!textOnly)gd.reset(new GraphicalDisplay);
     board1.reset(new Board(1,td.get(), gd.get(), textOnly, seed, scriptFile1, startLevel));
