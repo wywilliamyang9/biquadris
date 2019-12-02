@@ -42,4 +42,5 @@ int main(int argc, char *argv[]){
     }
     Game* game = new Game(textOnly, seed, scriptFile1, scriptFile1, startLevel);
     game->play();
+    delete game;
 }
