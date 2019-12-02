@@ -18,7 +18,7 @@ void Subject::notifyObservers() {
 Info Subject::getinfo() const { return state; }
 
 void Subject::dettach(Observer *o) {
-  for (int i = 0; i < observers.size(); ++i) {
+  for (int i = 0; (unsigned)i < observers.size(); ++i) {
     if (observers.at(i) == o) {
       observers.erase (observers.begin() + i);
       return;
