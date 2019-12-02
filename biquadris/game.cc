@@ -43,9 +43,15 @@ void Game::updateInfo() {
 #ifdef DEBUG
     cout << "Game::updateInfo() starts"<<endl;
 #endif
+#ifdef DEBUG
+    cout << "Game::updateInfo() score was " << scores.at(0)<<scores.at(1) << scores.at(2)<<endl;
+#endif
 	scores.at(0) += board1->getScore();
 
 	scores.at(1) += board2->getScore();
+#ifdef DEBUG
+    cout << "Game::updateInfo() updates scores " << scores.at(0)<<scores.at(1) << scores.at(2)<<endl;
+#endif
 	if (scores[0] > scores[2]) {
 		scores[2] = scores[0];
 	}
@@ -112,6 +118,9 @@ void Game::play(){
             currplayer = board1.get();
         }
         updateInfo();
+#ifdef DEBUG
+    cout << "Game::play() updates scores " << scores.at(0)<<scores.at(1) << scores.at(2)<<endl;
+#endif
         td->print();
         if (!textOnly) gd->display();
 
@@ -133,5 +142,8 @@ void Game::reset(){
     levels[1] = startLevel;
     td->print();
     if (!textOnly) gd->display();
+#ifdef DEBUG
+    cout << "Game::reset() updates scores " << scores.at(0)<<scores.at(1) << scores.at(2)<<endl;
+#endif
 }
 
