@@ -137,13 +137,13 @@ void TextDisplay::printScore() {
 
 void TextDisplay::printBoards() {
 	for (int i = 0; i < gridHeight; i++) {
-		for (int j = 0; j <= 25; j++) {
+		for (int j = 0; j < 25; j++) {
 			if (j < gridWidth) {
-				cout << board1[i][j];
+				cout << board1.at(i).at(j);
 			} else if (j < 14) {
 				cout << " ";
 			} else {
-				cout << board2[i][j-3-gridWidth];
+				cout << board2.at(i).at(j-3-gridWidth);
 			}
 		}
 		cout << endl;

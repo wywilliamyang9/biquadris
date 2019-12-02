@@ -16,7 +16,7 @@ protected:
 	Colour currBlock;
 	
 public:
-	Level(int seed);
+	Level(int seed, int level);
 	void forceBlock(Colour type); // when special action "Force" is applied
 	void addHeavy(); // when special action "Heavy" is applied
 	void clearHeavy(); // sets heavy to 0
