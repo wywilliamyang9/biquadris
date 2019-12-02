@@ -1,4 +1,4 @@
-#include "level3.h"
+#include "level4.h"
 #include <fstream>
 #include "colour.h"
 #include "blockInfo.h"
@@ -7,10 +7,10 @@
 using namespace std;
 
 
-Level3::Level3(int seed, bool readFromFile, std::string scriptFile) :
-	Level{ seed }, readFromFile{ readFromFile }{
+Level4::Level4(int seed, bool readFromFile, std::string scriptFile) :
+	Level{ seed }, readFromFile{ readFromFile }, dotCount {0}{
 #ifdef DEBUG
-cout << "Level3 construction starts" << endl;
+cout << "Level4 construction starts" << endl;
 #endif
 	if (readFromFile) {
 		this->scriptFile = scriptFile;
@@ -21,7 +21,7 @@ cout << "Level3 construction starts" << endl;
 	}
 }
 
-Colour Level3::chooseNext() {
+Colour Level4::chooseNext() {
 	int num = rand() % 9;
 	if (num == 0 || num == 1) {
 		return convertString("S");
@@ -40,7 +40,7 @@ Colour Level3::chooseNext() {
 	}
 }
 
-BlockInfo Level3::generateNextBlock() {
+BlockInfo Level4::generateNextBlock() {
 	currBlock = nextBlock;
 	if (readFromFile) {
 		string type;
@@ -55,10 +55,15 @@ BlockInfo Level3::generateNextBlock() {
 		nextBlock = chooseNext();
 	}
 	heavy++;
-	return BlockInfo{ heavy, currBlock, false};
+	bool spawnDot = false;
+	if (!(dotCount % 5)) {
+		spawnDot = true;
+	}
+	dotCountAddOne();
+	return BlockInfo{ heavy, currBlock, spawnDot};
 }
 
-void Level3::setSequence(std::string filename) {
+void Level4::setSequence(std::string filename) {
 	readFromFile = true;
 	scriptFile = filename;
 	sequence.open(filename);
@@ -67,13 +72,15 @@ void Level3::setSequence(std::string filename) {
 	nextBlock = convertString(type);
 }
 
-int Level3::calculateScore(int rowsCleared) {
+int Level4::calculateScore(int rowsCleared) {
 	int linesClearScore = rowsCleared + level;
 	linesClearScore = linesClearScore * linesClearScore;
 	return linesClearScore;
 }
 
-void Level3::setRandom() {
+void Level4::setRandom() {
 	readFromFile = false;
 }
 
+
+void Level4::dotCountAddOne() {dotCount++;}

@@ -5,5 +5,6 @@
 struct BlockInfo {
     int heavy;
     Colour colour;
+    bool spawnDot;
 };
 #endif

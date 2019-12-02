@@ -13,7 +13,7 @@
 #include "TBlock.h"
 #include "SBlock.h"
 #include "ZBlock.h"
-
+#include "DotBlock.h"
 using namespace std;
 Level* Board::getLevelptr() {
 	return &(*level);
@@ -140,7 +140,11 @@ string Board::play(){
 
     processSpecialActions();
     BlockInfo newBlockInfo = level->generateNextBlock();
-  
+    if (newBlockInfo.spawnDot) {
+        unique_ptr<Block> newDotBlock;
+        newDotBlock.reset(createDotBlock());
+        blocks.emplace_back(move(newDotBlock));
+    }
     if (!newBlockCheck(newBlockInfo.colour)){
         #ifdef DEBUG
         cout << "Board::createBlock - lost!" << endl;
@@ -404,7 +408,7 @@ int Board::clearRows() {
 #endif  
         // new code -----------------------------------------
         if (fullCount == 11) {
-            // set rowclear first
+            // set  first
             
             for (int m = 0; m < 11; ++m) {
                 board.at(i).at(m).setCleared(true);
@@ -724,7 +728,7 @@ IBlock* Board::createIBlock(const BlockInfo& newBlockInfo) {
     }
     Colour nextBlockColour = level->getNextBlock();
     textDisplay->updateNextBlock(NextBlock{nextBlockColour, boardnum});
-    if (!textOnly)if (!textOnly)graphicDisplay->updateNextBlock(NextBlock{nextBlockColour, boardnum});
+    if (!textOnly)graphicDisplay->updateNextBlock(NextBlock{nextBlockColour, boardnum});
     return block;
 }
 JBlock* Board::createJBlock(const BlockInfo& newBlockInfo) {
@@ -737,7 +741,7 @@ JBlock* Board::createJBlock(const BlockInfo& newBlockInfo) {
     }
     Colour nextBlockColour = level->getNextBlock();
     textDisplay->updateNextBlock(NextBlock{nextBlockColour, boardnum});
-    if (!textOnly)if (!textOnly)graphicDisplay->updateNextBlock(NextBlock{nextBlockColour, boardnum});
+    if (!textOnly)graphicDisplay->updateNextBlock(NextBlock{nextBlockColour, boardnum});
     return block;
 }
 LBlock* Board::createLBlock(const BlockInfo& newBlockInfo) {
@@ -750,7 +754,7 @@ LBlock* Board::createLBlock(const BlockInfo& newBlockInfo) {
     }
     Colour nextBlockColour = level->getNextBlock();
     textDisplay->updateNextBlock(NextBlock{nextBlockColour, boardnum});
-    if (!textOnly) if (!textOnly)graphicDisplay->updateNextBlock(NextBlock{nextBlockColour, boardnum});
+    if (!textOnly) graphicDisplay->updateNextBlock(NextBlock{nextBlockColour, boardnum});
     return block;
 }
 
@@ -764,7 +768,7 @@ SBlock* Board::createSBlock(const BlockInfo& newBlockInfo) {
     }
     Colour nextBlockColour = level->getNextBlock();
     textDisplay->updateNextBlock(NextBlock{nextBlockColour, boardnum});
-    if (!textOnly)if (!textOnly)graphicDisplay->updateNextBlock(NextBlock{nextBlockColour, boardnum});
+    if (!textOnly)graphicDisplay->updateNextBlock(NextBlock{nextBlockColour, boardnum});
     return block;
 }
 
@@ -778,7 +782,7 @@ ZBlock* Board::createZBlock(const BlockInfo& newBlockInfo) {
     }
             Colour nextBlockColour = level->getNextBlock();
     textDisplay->updateNextBlock(NextBlock{nextBlockColour, boardnum});
-    if (!textOnly)if (!textOnly)graphicDisplay->updateNextBlock(NextBlock{nextBlockColour, boardnum});
+    if (!textOnly)graphicDisplay->updateNextBlock(NextBlock{nextBlockColour, boardnum});
     return block;
 }
 
@@ -792,7 +796,7 @@ OBlock* Board::createOBlock(const BlockInfo& newBlockInfo) {
     }
     Colour nextBlockColour = level->getNextBlock();
     textDisplay->updateNextBlock(NextBlock{nextBlockColour, boardnum});
-    if (!textOnly) if (!textOnly)graphicDisplay->updateNextBlock(NextBlock{nextBlockColour, boardnum});
+    if (!textOnly) graphicDisplay->updateNextBlock(NextBlock{nextBlockColour, boardnum});
     return block;
 }
 TBlock* Board::createTBlock(const BlockInfo& newBlockInfo) {
@@ -805,7 +809,18 @@ TBlock* Board::createTBlock(const BlockInfo& newBlockInfo) {
     }
     Colour nextBlockColour = level->getNextBlock();
     textDisplay->updateNextBlock(NextBlock{nextBlockColour, boardnum});
-    if (!textOnly)if (!textOnly)graphicDisplay->updateNextBlock(NextBlock{nextBlockColour, boardnum});
+    if (!textOnly)graphicDisplay->updateNextBlock(NextBlock{nextBlockColour, boardnum});
+    return block;
+}
+DotBlock* Board::createDotBlock() {
+    int row = 0;
+    for (int i = 17; i <= 0; ++i) {
+        if (board.at(i).at(5).getinfo().colour == Colour::White) row = i;
+    }
+
+    DotBlock* block = new DotBlock{&board.at(row).at(5)};
+    block->getCells().at(0)->setColour(Colour::Brown);
+    block->getCells().at(0)->attach(block);
     return block;
 }
 /*
