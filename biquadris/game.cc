@@ -124,7 +124,7 @@ void Game::reset(){
 #endif
 
     td.reset(new TextDisplay);
-    gd.reset(new GraphicalDisplay);
+    if(!textOnly)gd.reset(new GraphicalDisplay);
     board1.reset(new Board(1,td.get(), gd.get(), textOnly, seed, scriptFile1, startLevel));
     board2.reset(new Board(2,td.get(), gd.get(), textOnly, seed, scriptFile2, startLevel));
     scores[0] = 0;
@@ -133,6 +133,5 @@ void Game::reset(){
     levels[1] = startLevel;
     td->print();
     if (!textOnly) gd->display();
-
 }
 
