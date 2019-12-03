@@ -4,21 +4,28 @@
 #include "board.h"
 #include "subject.h"
 
+// blocks
 #include "block.h"
 #include "IBlock.h" 
 #include "JBlock.h"
 #include "LBlock.h"
 #include "OBlock.h"
-#include "textDisplay.h"
-#include "graphicalDisplay.h"
 #include "TBlock.h"
 #include "SBlock.h"
 #include "ZBlock.h"
 #include "DotBlock.h"
+
+// display classes
+#include "textDisplay.h"
+#include "graphicalDisplay.h"
+
+// enum Class & information structs
+#include "info.h"
+#include "colour.h"
+#include "nextBlock.h"
+#include "coordinates.h"
+
 using namespace std;
-Level* Board::getLevelptr() {
-	return &(*level);
-}
 
 // default ctor, requires manual set of opponent and filestream.
 Board::Board(int boardnum, TextDisplay *td, GraphicalDisplay *gd, bool textOnly, int seed,
