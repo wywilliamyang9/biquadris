@@ -21,8 +21,8 @@ seed{seed}, scriptFile1{scriptFile1}, scriptFile2{scriptFile2}, startLevel{start
 		gd.reset( new GraphicalDisplay{special});
 	}
     
-	board1.reset(new Board{1,td.get(), gd.get(), textOnly, seed, scriptFile1, startLevel});
-	board2.reset(new Board{2,td.get(), gd.get(), textOnly, seed, scriptFile2, startLevel});
+	board1.reset(new Board{1,td.get(), gd.get(), textOnly, seed, scriptFile1, startLevel, special});
+	board2.reset(new Board{2,td.get(), gd.get(), textOnly, seed, scriptFile2, startLevel, special});
     board1->setOpponent(board2.get());
     board2->setOpponent(board1.get());
     for(int i = 0; i < 3; i++){
@@ -131,8 +131,8 @@ void Game::reset(){
 
     td.reset(new TextDisplay{special});
     if(!textOnly)gd.reset(new GraphicalDisplay{special});
-    board1.reset(new Board(1,td.get(), gd.get(), textOnly, seed, scriptFile1, startLevel));
-    board2.reset(new Board(2,td.get(), gd.get(), textOnly, seed, scriptFile2, startLevel));
+    board1.reset(new Board(1,td.get(), gd.get(), textOnly, seed, scriptFile1, startLevel, special));
+    board2.reset(new Board(2,td.get(), gd.get(), textOnly, seed, scriptFile2, startLevel, special));
     scores[0] = 0;
     scores[1] = 0;
     levels[0] = startLevel;

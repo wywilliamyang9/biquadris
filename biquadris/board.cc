@@ -1,6 +1,6 @@
 //#define DEBUG
 //#define DEBUG2
-#define DEBUG3
+//#define DEBUG3
 #include "board.h"
 #include "subject.h"
 
@@ -22,10 +22,10 @@ Level* Board::getLevelptr() {
 
 // default ctor, requires manual set of opponent and filestream.
 Board::Board(int boardnum, TextDisplay *td, GraphicalDisplay *gd, bool textOnly, int seed,
-    string scriptFile, int startLevel) : boardnum{boardnum}, opponent {nullptr}, level {nullptr},
+    string scriptFile, int startLevel, bool special) : boardnum{boardnum}, opponent {nullptr}, level {nullptr},
      graphicDisplay {gd}, textDisplay {td}, fileInput {scriptFile},currlvl {startLevel}, score{0}, 
      nextBlockColour {Colour::White},cmdDictionary{new CommandInterpreter}, currBlock {nullptr}, currColour {Colour::White},
-     seed {seed}, textOnly{textOnly} {
+     seed {seed}, textOnly{textOnly}, special{special} {
     if (startLevel == 0) {
         currlvl = 0;
 		level.reset(new Level0{seed, scriptFile, 0});
@@ -433,47 +433,49 @@ for (int i = 0; i < 18; i++) {
                     currBlock->CWRotate(*this);
                 }
             } else if (cmdDictionary->interpretCMD(cmd) == Command::Hold) {
-                if (heldBlockColour == Colour::White){
-                    heldBlockColour = currBlock->getColour();
-                    for(int i = 0; i < 4; i++){
-                        currBlock->getCells().at(i)->setCurrBlock(false);
-                        currBlock->getCells().at(i)->setColour(Colour::White);
-                        currBlock->getCells().at(i)->dettach(currBlock.get());
-                    }
-                } else {
-                    level->forceBlock(heldBlockColour);
-                    heldBlockColour = currBlock->getColour();
-                    for(int i = 0; i < 4; i++){
-                        currBlock->getCells().at(i)->setCurrBlock(false);
-                        currBlock->getCells().at(i)->setColour(Colour::White);
-                        currBlock->getCells().at(i)->dettach(currBlock.get());
-                    }
+                if (special){
+                    if (heldBlockColour == Colour::White){
+                        heldBlockColour = currBlock->getColour();
+                        for(int i = 0; i < 4; i++){
+                            currBlock->getCells().at(i)->setCurrBlock(false);
+                            currBlock->getCells().at(i)->setColour(Colour::White);
+                            currBlock->getCells().at(i)->dettach(currBlock.get());
+                        }
+                    } else {
+                        level->forceBlock(heldBlockColour);
+                        heldBlockColour = currBlock->getColour();
+                        for(int i = 0; i < 4; i++){
+                            currBlock->getCells().at(i)->setCurrBlock(false);
+                            currBlock->getCells().at(i)->setColour(Colour::White);
+                            currBlock->getCells().at(i)->dettach(currBlock.get());
+                        }
 
-                }                    
-                BlockInfo newBlockInfo = level->generateNextBlock(); 
-                if (newBlockInfo.colour == convertChar('I')){
-                    currBlock.reset(createIBlock(newBlockInfo));
-                } else if (newBlockInfo.colour == convertChar('J')){
-                    currBlock.reset(createJBlock(newBlockInfo));
-                } else if (newBlockInfo.colour == convertChar('L')){
-                    currBlock.reset(createLBlock(newBlockInfo));
-                } else if (newBlockInfo.colour == convertChar('O')){
-                    currBlock.reset(createOBlock(newBlockInfo));
-                } else if (newBlockInfo.colour == convertChar('S')){
-                    currBlock.reset(createSBlock(newBlockInfo));
-                } else if (newBlockInfo.colour == convertChar('Z')){
-                    currBlock.reset(createZBlock(newBlockInfo));
-                } else if (newBlockInfo.colour == convertChar('T')){
-                    currBlock.reset(createTBlock(newBlockInfo));
+                    }                    
+                    BlockInfo newBlockInfo = level->generateNextBlock(); 
+                    if (newBlockInfo.colour == convertChar('I')){
+                        currBlock.reset(createIBlock(newBlockInfo));
+                    } else if (newBlockInfo.colour == convertChar('J')){
+                        currBlock.reset(createJBlock(newBlockInfo));
+                    } else if (newBlockInfo.colour == convertChar('L')){
+                        currBlock.reset(createLBlock(newBlockInfo));
+                    } else if (newBlockInfo.colour == convertChar('O')){
+                        currBlock.reset(createOBlock(newBlockInfo));
+                    } else if (newBlockInfo.colour == convertChar('S')){
+                        currBlock.reset(createSBlock(newBlockInfo));
+                    } else if (newBlockInfo.colour == convertChar('Z')){
+                        currBlock.reset(createZBlock(newBlockInfo));
+                    } else if (newBlockInfo.colour == convertChar('T')){
+                        currBlock.reset(createTBlock(newBlockInfo));
+                    }
+                    int num = rand()%4;
+                    for(int i = 0; i < num; i++){
+                        currBlock->CWRotate(*this);
+                    }            
+                    textDisplay->print();
+                    if (!textOnly) graphicDisplay->display();
+                    textDisplay->updateHeldBlock(NextBlock{heldBlockColour, boardnum});
+                    if (!textOnly)graphicDisplay->updateHeldBlock(NextBlock{heldBlockColour, boardnum});
                 }
-                int num = rand()%4;
-                for(int i = 0; i < num; i++){
-                    currBlock->CWRotate(*this);
-                }            
-                textDisplay->print();
-                if (!textOnly) graphicDisplay->display();
-                textDisplay->updateHeldBlock(NextBlock{heldBlockColour, boardnum});
-                if (!textOnly)graphicDisplay->updateHeldBlock(NextBlock{heldBlockColour, boardnum});
             }
         }
         textDisplay->print();
@@ -631,8 +633,13 @@ cout << blocks.at(nn)->getCells().at(kk)->getinfo().coord.row << endl;
                 opponent->addSpecialAction(SpecialAction::Heavy);
                 break;
             } else if (cmdDictionary->interpretCMD(cmd) == Command::Shuffle) {
-                opponent->addSpecialAction(SpecialAction::Shuffle);
-                break;
+                if (special){
+                    opponent->addSpecialAction(SpecialAction::Shuffle);
+                    break;
+                } else {
+                cout << "Invalid Action, select a Special Action." << endl;
+                continue;
+                }
             } else {
                 cout << "Invalid Action, select a Special Action." << endl;
                 continue;
