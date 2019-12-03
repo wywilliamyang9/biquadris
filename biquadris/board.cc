@@ -152,19 +152,19 @@ string Board::play(){
 
     if (convertColour(newBlockInfo.colour) == 'I') {
         currBlock.reset(createIBlock(newBlockInfo));
-        int num = rand()%1;
+        int num = rand()%2;
         for(int i = 0; i < num; i++){
             currBlock->CWRotate(*this);
         }
     } else if (convertColour(newBlockInfo.colour) == 'L') {
         currBlock.reset(createLBlock(newBlockInfo));        
-        int num = rand()%3;
+        int num = rand()%4;
         for(int i = 0; i < num; i++){
             currBlock->CWRotate(*this);
         }
     } else if (convertColour(newBlockInfo.colour) == 'J') {
         currBlock.reset(createJBlock(newBlockInfo));
-        int num = rand()%3;
+        int num = rand()%4;
         for(int i = 0; i < num; i++){
             currBlock->CWRotate(*this);
         }
@@ -172,19 +172,19 @@ string Board::play(){
         currBlock.reset(createOBlock(newBlockInfo));
     }else if (convertColour(newBlockInfo.colour) == 'S') {
         currBlock.reset(createSBlock(newBlockInfo));
-        int num = rand()%1;
+        int num = rand()%2;
         for(int i = 0; i < num; i++){
             currBlock->CWRotate(*this);
         }
     }else if (convertColour(newBlockInfo.colour) == 'Z') {
         currBlock.reset(createZBlock(newBlockInfo));
-        int num = rand()%1;
+        int num = rand()%2;
         for(int i = 0; i < num; i++){
             currBlock->CWRotate(*this);
         }
     }else if (convertColour(newBlockInfo.colour) == 'T') {
         currBlock.reset(createTBlock(newBlockInfo));
-        int num = rand()%3;
+        int num = rand()%4;
         for(int i = 0; i < num; i++){
             currBlock->CWRotate(*this);
         }
@@ -337,7 +337,7 @@ for (int i = 0; i < 18; i++) {
                 }
                 BlockInfo newBlockInfo = level->generateNextBlock();
                 currBlock.reset(createIBlock(newBlockInfo));
-                int num = rand()%1;
+                int num = rand()%2;
                 for(int i = 0; i < num; i++){
                     currBlock->CWRotate(*this);
                 }
@@ -350,7 +350,7 @@ for (int i = 0; i < 18; i++) {
                 }
                 BlockInfo newBlockInfo = level->generateNextBlock();
                 currBlock.reset(createJBlock(newBlockInfo));
-                int num = rand()%3;
+                int num = rand()%4;
                 for(int i = 0; i < num; i++){
                     currBlock->CWRotate(*this);
                 }
@@ -363,7 +363,7 @@ for (int i = 0; i < 18; i++) {
                 }
                 BlockInfo newBlockInfo = level->generateNextBlock();
                 currBlock.reset(createLBlock(newBlockInfo));        
-                int num = rand()%3;
+                int num = rand()%4;
                 for(int i = 0; i < num; i++){
                     currBlock->CWRotate(*this);
                 }
@@ -385,7 +385,7 @@ for (int i = 0; i < 18; i++) {
                 }
                 BlockInfo newBlockInfo = level->generateNextBlock();
                 currBlock.reset(createSBlock(newBlockInfo));
-                int num = rand()%1;
+                int num = rand()%2;
                 for(int i = 0; i < num; i++){
                     currBlock->CWRotate(*this);
                 }
@@ -398,7 +398,7 @@ for (int i = 0; i < 18; i++) {
                 }
                 BlockInfo newBlockInfo = level->generateNextBlock();
                 currBlock.reset(createZBlock(newBlockInfo));
-                int num = rand()%1;
+                int num = rand()%2;
                 for(int i = 0; i < num; i++){
                     currBlock->CWRotate(*this);
                 }
@@ -411,7 +411,7 @@ for (int i = 0; i < 18; i++) {
                 }
                 BlockInfo newBlockInfo = level->generateNextBlock(); 
                 currBlock.reset(createTBlock(newBlockInfo));
-                int num = rand()%3;
+                int num = rand()%4;
                 for(int i = 0; i < num; i++){
                     currBlock->CWRotate(*this);
                 }
