@@ -328,6 +328,93 @@ for (int i = 0; i < 18; i++) {
             } else if (cmdDictionary->interpretCMD(cmd) == Command::Restart) {
                 // when it returns false, game knows it needs to restart
                 return "restart!";
+            } else if (cmdDictionary->interpretCMD(cmd) == Command::I) {
+                level->forceBlock(convertString("I"));
+                for(int i = 0; i < 4; i++){
+                    currBlock->getCells().at(i)->setCurrBlock(false);
+                    currBlock->getCells().at(i)->setColour(Colour::White);
+                    currBlock->getCells().at(i)->dettach(currBlock.get());
+                }
+                BlockInfo newBlockInfo = level->generateNextBlock();
+                currBlock.reset(createIBlock(newBlockInfo));
+                int num = rand()%1;
+                for(int i = 0; i < num; i++){
+                    currBlock->CWRotate(*this);
+                }
+            } else if (cmdDictionary->interpretCMD(cmd) == Command::J) {
+                level->forceBlock(convertString("J")); 
+                for(int i = 0; i < 4; i++){
+                    currBlock->getCells().at(i)->setCurrBlock(false);
+                    currBlock->getCells().at(i)->setColour(Colour::White);
+                    currBlock->getCells().at(i)->dettach(currBlock.get());
+                }
+                BlockInfo newBlockInfo = level->generateNextBlock();
+                currBlock.reset(createJBlock(newBlockInfo));
+                int num = rand()%3;
+                for(int i = 0; i < num; i++){
+                    currBlock->CWRotate(*this);
+                }
+            } else if (cmdDictionary->interpretCMD(cmd) == Command::L) {
+                level->forceBlock(convertString("L"));
+                for(int i = 0; i < 4; i++){
+                    currBlock->getCells().at(i)->setCurrBlock(false);
+                    currBlock->getCells().at(i)->setColour(Colour::White);
+                    currBlock->getCells().at(i)->dettach(currBlock.get());
+                }
+                BlockInfo newBlockInfo = level->generateNextBlock();
+                currBlock.reset(createLBlock(newBlockInfo));        
+                int num = rand()%3;
+                for(int i = 0; i < num; i++){
+                    currBlock->CWRotate(*this);
+                }
+            } else if (cmdDictionary->interpretCMD(cmd) == Command::O) {
+                level->forceBlock(convertString("O"));
+                for(int i = 0; i < 4; i++){
+                    currBlock->getCells().at(i)->setCurrBlock(false);
+                    currBlock->getCells().at(i)->setColour(Colour::White);
+                    currBlock->getCells().at(i)->dettach(currBlock.get());
+                }
+                BlockInfo newBlockInfo = level->generateNextBlock();
+                currBlock.reset(createOBlock(newBlockInfo));
+            } else if (cmdDictionary->interpretCMD(cmd) == Command::S) {
+                level->forceBlock(convertString("S"));
+                for(int i = 0; i < 4; i++){
+                    currBlock->getCells().at(i)->setCurrBlock(false);
+                    currBlock->getCells().at(i)->setColour(Colour::White);
+                    currBlock->getCells().at(i)->dettach(currBlock.get());
+                }
+                BlockInfo newBlockInfo = level->generateNextBlock();
+                currBlock.reset(createSBlock(newBlockInfo));
+                int num = rand()%1;
+                for(int i = 0; i < num; i++){
+                    currBlock->CWRotate(*this);
+                }
+            } else if (cmdDictionary->interpretCMD(cmd) == Command::Z) {
+                level->forceBlock(convertString("Z"));
+                for(int i = 0; i < 4; i++){
+                    currBlock->getCells().at(i)->setCurrBlock(false);
+                    currBlock->getCells().at(i)->setColour(Colour::White);
+                    currBlock->getCells().at(i)->dettach(currBlock.get());
+                }
+                BlockInfo newBlockInfo = level->generateNextBlock();
+                currBlock.reset(createZBlock(newBlockInfo));
+                int num = rand()%1;
+                for(int i = 0; i < num; i++){
+                    currBlock->CWRotate(*this);
+                }
+            } else if (cmdDictionary->interpretCMD(cmd) == Command::T) {
+                level->forceBlock(convertString("T"));
+                for(int i = 0; i < 4; i++){
+                    currBlock->getCells().at(i)->setCurrBlock(false);
+                    currBlock->getCells().at(i)->setColour(Colour::White);
+                    currBlock->getCells().at(i)->dettach(currBlock.get());
+                }
+                BlockInfo newBlockInfo = level->generateNextBlock(); 
+                currBlock.reset(createTBlock(newBlockInfo));
+                int num = rand()%3;
+                for(int i = 0; i < num; i++){
+                    currBlock->CWRotate(*this);
+                }
             }
         }
         textDisplay->print();
