@@ -72,12 +72,19 @@ CommandInterpreter::CommandInterpreter() {
     cmdDictionary["sequence"] = Command::Sequence;
 
     cmdDictionary["I"] = Command::I;
+    cmdDictionary["i"] = Command::I;
     cmdDictionary["J"] = Command::J;
+    cmdDictionary["j"] = Command::J;
     cmdDictionary["L"] = Command::L;
+    cmdDictionary["l"] = Command::L;
     cmdDictionary["O"] = Command::O;
+    cmdDictionary["o"] = Command::O;
     cmdDictionary["S"] = Command::S;
+    cmdDictionary["s"] = Command::S;
     cmdDictionary["Z"] = Command::Z;
+    cmdDictionary["z"] = Command::Z;
     cmdDictionary["T"] = Command::T;
+    cmdDictionary["t"] = Command::T;
 
     cmdDictionary["re"] = Command::Restart;
     cmdDictionary["res"] = Command::Restart;

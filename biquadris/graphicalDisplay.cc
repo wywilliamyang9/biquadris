@@ -50,6 +50,8 @@ int converttoXColour(Colour colour){
         return Xwindow::Purple;
     } else if (colour == Colour::Brown){
         return Xwindow::Brown;
+    } else if (colour == Colour::Fuchia){
+        return Xwindow::Fuchia;
     } else {
         return Xwindow::Black;
     }
@@ -65,13 +67,13 @@ void GraphicalDisplay::notify(Subject &whoNotified) {
     Info currinfo{whoNotified.getinfo()};
     if (currinfo.boardnum == 1){
         if (currinfo.blinded){
-            board1[currinfo.coord.row][currinfo.coord.col] = '?';
+            board1[currinfo.coord.row][currinfo.coord.col] = converttoXColour(Colour::Fuchia);
         } else {
             board1[currinfo.coord.row][currinfo.coord.col] = converttoXColour(currinfo.colour);
         }
     } else if (currinfo.boardnum == 2){
         if (currinfo.blinded){
-            board2[currinfo.coord.row][currinfo.coord.col] = '?';
+            board2[currinfo.coord.row][currinfo.coord.col] = converttoXColour(Colour::Fuchia);
         } else {
             board2[currinfo.coord.row][currinfo.coord.col] = converttoXColour(currinfo.colour);
         }

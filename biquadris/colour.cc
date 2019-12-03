@@ -19,6 +19,8 @@ char convertColour(Colour colour){
         return 'T';
     } else if (colour == Colour::Brown){
         return '*';
+    } else if (colour == Colour::Fuchia){
+        return '?';
     } else {
         return ' ';
     }
@@ -41,6 +43,8 @@ Colour convertString(string type){
         return Colour::Purple;
     } else if (type == "*"){
         return Colour::Brown;
+    } else if (type == "?"){
+        return Colour::Fuchia;
     } else {
         return Colour::White;
     }
@@ -63,6 +67,8 @@ Colour convertChar(char type){
         return Colour::Purple;
     } else if (type == '*'){
         return Colour::Brown;
+    } else if (type == '?'){
+        return Colour::Fuchia;
     } else {
         return Colour::White;
     }
