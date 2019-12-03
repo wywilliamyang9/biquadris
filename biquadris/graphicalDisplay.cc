@@ -218,8 +218,8 @@ void GraphicalDisplay::displayBlock(char type, int boardnum){
 }
 
 void GraphicalDisplay::displayNextBlock() {
-    window.fillRectangle(10, 550, 125, 75, Xwindow::White);
-    window.fillRectangle(375, 550, 125, 75, Xwindow::White);
+    window.fillRectangle(10, 550, 125, 75, Xwindow::Black);
+    window.fillRectangle(375, 550, 125, 75, Xwindow::Black);
     displayBlock(nextblock[0], 1);
     displayBlock(nextblock[1], 2);
 }

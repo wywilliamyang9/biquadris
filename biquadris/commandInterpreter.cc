@@ -2,15 +2,19 @@
 using namespace std;
 
 CommandInterpreter::CommandInterpreter() {
+    cmdDictionary["c"] = Command::Left;
     cmdDictionary["lef"] = Command::Left;
     cmdDictionary["left"] = Command::Left;
+    cmdDictionary["b"] = Command::Right;
     cmdDictionary["ri"] = Command::Right;
     cmdDictionary["rig"] = Command::Right;
     cmdDictionary["righ"] = Command::Right;
     cmdDictionary["right"] = Command::Right;
+    cmdDictionary["v"] = Command::Down;
     cmdDictionary["do"] = Command::Down;
     cmdDictionary["dow"] = Command::Down;
     cmdDictionary["down"] = Command::Down;
+    cmdDictionary["f"] = Command::ClockWise;
     cmdDictionary["cl"] = Command::ClockWise;
     cmdDictionary["clo"] = Command::ClockWise;
     cmdDictionary["cloc"] = Command::ClockWise;
@@ -19,6 +23,7 @@ CommandInterpreter::CommandInterpreter() {
     cmdDictionary["clockwi"] = Command::ClockWise;
     cmdDictionary["clockwis"] = Command::ClockWise;
     cmdDictionary["clockwise"] = Command::ClockWise;
+    cmdDictionary["g"] = Command::CounterClockWise;
     cmdDictionary["co"] = Command::CounterClockWise;
     cmdDictionary["cou"] = Command::CounterClockWise;
     cmdDictionary["coun"] = Command::CounterClockWise;
@@ -34,7 +39,6 @@ CommandInterpreter::CommandInterpreter() {
     cmdDictionary["counterclockwi"] = Command::CounterClockWise;
     cmdDictionary["counterclockwis"] = Command::CounterClockWise;
     cmdDictionary["counterclockwise"] = Command::CounterClockWise;
-
 
     cmdDictionary["dr"] = Command::Drop;
     cmdDictionary["dro"] = Command::Drop;
@@ -110,6 +114,10 @@ CommandInterpreter::CommandInterpreter() {
     cmdDictionary["for"] = Command::Force;
     cmdDictionary["forc"] = Command::Force;
     cmdDictionary["force"] = Command::Force;
+
+    cmdDictionary["ho"] = Command::Heavy;
+    cmdDictionary["hol"] = Command::Heavy;
+    cmdDictionary["hold"] = Command::Heavy;
 }
 
 void CommandInterpreter::addNewCMD(string s,Command cmd){
