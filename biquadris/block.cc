@@ -158,10 +158,6 @@ cout << "go down check: i is " << i << endl;
 	}
 }
 
-
-void Block::CWRotate(Board &b){}
-void Block::CounterCWRotate(Board &b){}
-
 void Block::setSpawnLevel(int i) {spawnLevel = i;}
 int Block::getSpawnLevel() {return spawnLevel;}
 

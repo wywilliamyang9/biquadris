@@ -29,8 +29,8 @@ protected:
     void moveLeft(Board&);
     void moveRight(Board &);
 	void moveDownByOne(Board&);
-    virtual void CWRotate(Board &) ;
-    virtual void CounterCWRotate(Board &) ;
+    virtual void CWRotate(Board &) = 0;
+    virtual void CounterCWRotate(Board &) = 0;
 
 // new code
     void setSpawnLevel(int);
