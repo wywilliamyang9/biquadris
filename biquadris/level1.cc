@@ -91,13 +91,6 @@ void Level1::setSequence(std::string filename) {
 	}
 }
 
-int Level1::calculateScore(int rowsCleared) {
-	if (rowsCleared == 0) return 0;
-	int linesClearScore = rowsCleared + level;
-	linesClearScore = linesClearScore * linesClearScore;
-	return linesClearScore;
-}
-
 void Level1::setRandom() {
 	readFromFile = false;
 }

@@ -22,9 +22,9 @@ public:
 	int getLevel(); // returns current level
 	virtual BlockInfo generateNextBlock() = 0; // spawn next block
 	Colour getNextBlock();
-	virtual void setSequence(std::string filename) = 0;
-	virtual int calculateScore(int rowsCleared) = 0; // calculates got score
+	int calculateScore(int rowsCleared); // calculates got score
 
+	virtual void setSequence(std::string filename) = 0;
 	virtual void setRandom() = 0;
 	virtual ~Level();
 };

@@ -14,6 +14,7 @@ enum class Colour {
 //Purple = T
 //Red = Z
 //White = empty
+//Brown = dot
 char convertColour(Colour colour);
 Colour convertString(std::string type);
 Colour convertChar(char type);

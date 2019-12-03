@@ -26,14 +26,15 @@ class Game{
     int startLevel;
     bool special;
 
+	void updateInfo();
+    void reset();
+    
     public:
     Game(bool textOnly, int seed, std::string scriptFile1, std::string scriptFile2, int startLevel, bool special);
     // sets scores
-	void updateInfo();
     ~Game() = default;
     void setScores(int player, int score); // set score
     void play(); // play until game ends; returns winner name
-    void reset();
 };
 
 
