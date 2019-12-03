@@ -447,31 +447,8 @@ for (int i = 0; i < 18; i++) {
                         currBlock->getCells().at(i)->setColour(Colour::White);
                         currBlock->getCells().at(i)->dettach(currBlock.get());
                     }
-                    BlockInfo newBlockInfo = level->generateNextBlock(); 
-                    if (newBlockInfo.colour == convertChar('I')){
-                        currBlock.reset(createIBlock(newBlockInfo));
-                    } else if (newBlockInfo.colour == convertChar('J')){
-                        currBlock.reset(createJBlock(newBlockInfo));
-                    } else if (newBlockInfo.colour == convertChar('L')){
-                        currBlock.reset(createLBlock(newBlockInfo));
-                    } else if (newBlockInfo.colour == convertChar('O')){
-                        currBlock.reset(createOBlock(newBlockInfo));
-                    } else if (newBlockInfo.colour == convertChar('S')){
-                        currBlock.reset(createSBlock(newBlockInfo));
-                    } else if (newBlockInfo.colour == convertChar('Z')){
-                        currBlock.reset(createZBlock(newBlockInfo));
-                    } else if (newBlockInfo.colour == convertChar('T')){
-                        currBlock.reset(createTBlock(newBlockInfo));
-                    }
-                    int num = rand()%4;
-                    for(int i = 0; i < num; i++){
-                        currBlock->CWRotate(*this);
-                    }            
-                    textDisplay->print();
-                    if (!textOnly) graphicDisplay->display();
-                    textDisplay->updateHeldBlock(NextBlock{heldBlockColour, boardnum});
-                    if (!textOnly)graphicDisplay->updateHeldBlock(NextBlock{heldBlockColour, boardnum});
-                }
+
+                }                    
                 BlockInfo newBlockInfo = level->generateNextBlock(); 
                 if (newBlockInfo.colour == convertChar('I')){
                     currBlock.reset(createIBlock(newBlockInfo));
@@ -488,6 +465,25 @@ for (int i = 0; i < 18; i++) {
                 } else if (newBlockInfo.colour == convertChar('T')){
                     currBlock.reset(createTBlock(newBlockInfo));
                 }
+<<<<<<< HEAD
+                BlockInfo newBlockInfo = level->generateNextBlock(); 
+                if (newBlockInfo.colour == convertChar('I')){
+                    currBlock.reset(createIBlock(newBlockInfo));
+                } else if (newBlockInfo.colour == convertChar('J')){
+                    currBlock.reset(createJBlock(newBlockInfo));
+                } else if (newBlockInfo.colour == convertChar('L')){
+                    currBlock.reset(createLBlock(newBlockInfo));
+                } else if (newBlockInfo.colour == convertChar('O')){
+                    currBlock.reset(createOBlock(newBlockInfo));
+                } else if (newBlockInfo.colour == convertChar('S')){
+                    currBlock.reset(createSBlock(newBlockInfo));
+                } else if (newBlockInfo.colour == convertChar('Z')){
+                    currBlock.reset(createZBlock(newBlockInfo));
+                } else if (newBlockInfo.colour == convertChar('T')){
+                    currBlock.reset(createTBlock(newBlockInfo));
+                }
+=======
+>>>>>>> f17913cb4d7bdb88716c06f8130dd12a3c9effbf
                 int num = rand()%4;
                 for(int i = 0; i < num; i++){
                     currBlock->CWRotate(*this);

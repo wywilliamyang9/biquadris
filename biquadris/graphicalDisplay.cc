@@ -187,13 +187,13 @@ void GraphicalDisplay::displayBoards() {
 }
 
 void GraphicalDisplay::displayBlock(char type, int boardnum, bool held){
-    int num = 25;
+    int num = 15;
     if (boardnum == 2){
-        num = 375;
+        num = 385;
     }
     int num2 = 0;
     if (held){
-        num2 = 125;
+        num2 = 135;
     }
     if (type == 'I'){
         window.fillRectangle(10 + num + num2, 25 + 550, 25,25, converttoXColour(convertChar(type)));
@@ -234,15 +234,15 @@ void GraphicalDisplay::displayBlock(char type, int boardnum, bool held){
 }
 
 void GraphicalDisplay::displayNextBlock() {
-    window.fillRectangle(10, 550, 125, 75, Xwindow::Black);
-    window.fillRectangle(375, 550, 125, 75, Xwindow::Black);
+    window.fillRectangle(10, 550, 135, 75, Xwindow::Black);
+    window.fillRectangle(375, 550, 135, 75, Xwindow::Black);
     displayBlock(nextblock[0], 1, false);
     displayBlock(nextblock[1], 2, false);
 }
 
 void GraphicalDisplay::displayHeldBlock() {
-    window.fillRectangle(145, 550, 125, 75, Xwindow::White);
-    window.fillRectangle(500, 550, 125, 75, Xwindow::White);
+    window.fillRectangle(155, 550, 125, 75, Xwindow::White);
+    window.fillRectangle(510, 550, 125, 75, Xwindow::White);
     displayBlock(heldblock[0], 1, true);
     displayBlock(heldblock[1], 2, true);
 }
