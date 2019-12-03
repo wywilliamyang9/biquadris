@@ -166,7 +166,7 @@ void TextDisplay::printBoards() {
 	}	
 }
 
-string printBlock(char type, int line){
+string Textdisplay::printBlock(char type, int line){
     if (type == 'J' && line == 1){
         return "J   ";
     } else if (type == 'J' && line == 2){

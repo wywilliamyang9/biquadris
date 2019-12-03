@@ -23,6 +23,7 @@ class TextDisplay : public Observer {
     void printHighScore();
     void printScore();
     void printBoards();
+    string printBlock(char type, int line);
     void printNextBlock();
     void printHeldBlock();
     public:
