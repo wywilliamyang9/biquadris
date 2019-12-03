@@ -6,9 +6,9 @@
 #include <iostream>
 #include <memory>
 #include <iostream>
-#include "observer.h"
 #include "textDisplay.h"
 #include "graphicalDisplay.h"
+
 class Game{
     std::unique_ptr<TextDisplay> td;
     std::unique_ptr<GraphicalDisplay> gd;

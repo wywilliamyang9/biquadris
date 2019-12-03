@@ -1,4 +1,5 @@
 #include "cell.h"
+
 Cell::Cell(int r,int c, int boardnum): colour {Colour::White},blinded{false},
 coordinates {Coordinates{r,c}}, boardnum{boardnum}, currBlock{false}{}
 

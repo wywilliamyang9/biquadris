@@ -2,7 +2,6 @@
 #define _LEVEL_
 #include "colour.h"
 #include <string>
-#include "subject.h"
 #include "blockInfo.h"
 class Level {
 protected:

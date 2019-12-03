@@ -3,7 +3,6 @@
 #include "coordinates.h"
 #include "info.h"
 #include "colour.h"
-#include "observer.h"
 #include "subject.h"
 
 class Cell : public Subject {
