@@ -132,6 +132,7 @@ void Board::processSpecialActions() {
                         false, boardnum});
                 }     
             }
+            specialActions.pop_back();
         } 
     }
 }
