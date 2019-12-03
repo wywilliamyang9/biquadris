@@ -1,5 +1,5 @@
 //#define DEBUG
-#define DEBUG2
+//#define DEBUG2
 #include "textDisplay.h"
 #include "info.h"
 #include <iostream>

@@ -63,6 +63,7 @@ class Board {
     int seed;
     int textOnly;
     std::vector<std::unique_ptr<Block>> blocks;
+    bool special;
     public:
 	Level* getLevelptr();
 
@@ -71,7 +72,7 @@ class Board {
     std::vector<std::vector<Cell>>& getBoard();
 
     Board(int boardnum, TextDisplay *td, GraphicalDisplay *gd, bool textOnly, int seed,
-    std::string scriptFile, int startLevel);
+    std::string scriptFile, int startLevel, bool special);
     void setOpponent(Board*);
     
     void processSpecialActions(); // applies specialActions
