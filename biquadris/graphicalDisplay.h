@@ -1,13 +1,14 @@
 #ifndef _GRAPHICDISPLAY_
 #define _GRAPHICDISPLAY_
+#include <string>
+#include <vector>
+
 #include "window.h"
 #include "subject.h"
+#include "observer.h"
 #include "coordinates.h"
 #include "info.h"
-#include <vector>
 #include "nextBlock.h"
-#include "observer.h"
-#include <string>
 
 class Block;
 class GraphicalDisplay : public Observer {
