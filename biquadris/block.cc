@@ -166,11 +166,7 @@ void Block::setSpawnLevel(int i) {spawnLevel = i;}
 int Block::getSpawnLevel() {return spawnLevel;}
 
 void Block::notify (Subject &caller) {
-cout << "Block notified1" << endl;
-cout <<  caller.getCleared() << endl;
-
 	if (!caller.getCleared()) return;
-cout << "Block notified2" << endl;
 	Coordinates callerCoord = caller.getinfo().coord;
 	for (int i = 0; (unsigned)i < cells.size(); ++i) {
 		if (callerCoord.row == cells.at(i)->getinfo().coord.row

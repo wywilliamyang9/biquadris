@@ -3,6 +3,7 @@
 
 enum SpecialAction {
     Heavy, Blind,
-    ForceI, ForceJ, ForceL, ForceO, ForceS, ForceT, ForceZ
+    ForceI, ForceJ, ForceL, ForceO, ForceS, ForceT, ForceZ,
+    Shuffle
 };
 #endif

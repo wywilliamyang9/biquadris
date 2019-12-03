@@ -20,7 +20,8 @@
 #include <iostream>
 #include <sstream>
 #include "block.h"
-
+#include <algorithm>
+#include "coordinates.h"
 class TextDisplay;
 class GraphicalDisplay;
 /*

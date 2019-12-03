@@ -118,6 +118,13 @@ CommandInterpreter::CommandInterpreter() {
     cmdDictionary["ho"] = Command::Hold;
     cmdDictionary["hol"] = Command::Hold;
     cmdDictionary["hold"] = Command::Hold;
+
+    cmdDictionary["sh"] = Command::Shuffle;
+    cmdDictionary["shu"] = Command::Shuffle;
+    cmdDictionary["shuf"] = Command::Shuffle;
+    cmdDictionary["shuff"] = Command::Shuffle;
+    cmdDictionary["shuffl"] = Command::Shuffle;
+    cmdDictionary["shuffle"] = Command::Shuffle;
 }
 
 void CommandInterpreter::addNewCMD(string s,Command cmd){

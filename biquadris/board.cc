@@ -123,7 +123,16 @@ void Board::processSpecialActions() {
             level->forceBlock(convertString("T"));
                 specialActions.pop_back();
 
-		} 
+		} else if (specialActions.back() == SpecialAction::Shuffle) {
+            for (int i = 0; i < 18; ++i) {
+                std::random_shuffle(board.at(i).begin(),board.at(i).end());
+                for (int j = 0; j < 11; ++j) {
+                    board.at(i).at(j).setInfo(Info{
+                        Coordinates {i,j}, board.at(i).at(j).getinfo().colour,
+                        false, boardnum});
+                }     
+            }
+        } 
     }
 }
 
@@ -430,16 +439,6 @@ for (int i = 0; i < 18; i++) {
                         currBlock->getCells().at(i)->setColour(Colour::White);
                         currBlock->getCells().at(i)->dettach(currBlock.get());
                     }
-                    BlockInfo newBlockInfo = level->generateNextBlock(); 
-                    currBlock.reset(createTBlock(newBlockInfo));
-                    int num = rand()%4;
-                    for(int i = 0; i < num; i++){
-                        currBlock->CWRotate(*this);
-                    }            
-                    textDisplay->print();
-                    if (!textOnly) graphicDisplay->display();
-                    textDisplay->updateHeldBlock(NextBlock{heldBlockColour, boardnum});
-                    if (!textOnly)graphicDisplay->updateHeldBlock(NextBlock{heldBlockColour, boardnum});
                 } else {
                     level->forceBlock(heldBlockColour);
                     heldBlockColour = currBlock->getColour();
@@ -473,6 +472,30 @@ for (int i = 0; i < 18; i++) {
                     textDisplay->updateHeldBlock(NextBlock{heldBlockColour, boardnum});
                     if (!textOnly)graphicDisplay->updateHeldBlock(NextBlock{heldBlockColour, boardnum});
                 }
+                BlockInfo newBlockInfo = level->generateNextBlock(); 
+                if (newBlockInfo.colour == convertChar('I')){
+                    currBlock.reset(createIBlock(newBlockInfo));
+                } else if (newBlockInfo.colour == convertChar('J')){
+                    currBlock.reset(createJBlock(newBlockInfo));
+                } else if (newBlockInfo.colour == convertChar('L')){
+                    currBlock.reset(createLBlock(newBlockInfo));
+                } else if (newBlockInfo.colour == convertChar('O')){
+                    currBlock.reset(createOBlock(newBlockInfo));
+                } else if (newBlockInfo.colour == convertChar('S')){
+                    currBlock.reset(createSBlock(newBlockInfo));
+                } else if (newBlockInfo.colour == convertChar('Z')){
+                    currBlock.reset(createZBlock(newBlockInfo));
+                } else if (newBlockInfo.colour == convertChar('T')){
+                    currBlock.reset(createTBlock(newBlockInfo));
+                }
+                int num = rand()%4;
+                for(int i = 0; i < num; i++){
+                    currBlock->CWRotate(*this);
+                }            
+                textDisplay->print();
+                if (!textOnly) graphicDisplay->display();
+                textDisplay->updateHeldBlock(NextBlock{heldBlockColour, boardnum});
+                if (!textOnly)graphicDisplay->updateHeldBlock(NextBlock{heldBlockColour, boardnum});
             }
         }
         textDisplay->print();
@@ -628,6 +651,9 @@ cout << blocks.at(nn)->getCells().at(kk)->getinfo().coord.row << endl;
                 break;
             } else if (cmdDictionary->interpretCMD(cmd) == Command::Heavy) {
                 opponent->addSpecialAction(SpecialAction::Heavy);
+                break;
+            } else if (cmdDictionary->interpretCMD(cmd) == Command::Shuffle) {
+                opponent->addSpecialAction(SpecialAction::Shuffle);
                 break;
             } else {
                 cout << "Invalid Action, select a Special Action." << endl;
