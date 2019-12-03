@@ -1,5 +1,6 @@
 //#define DEBUG
 //#define DEBUG2
+#define DEBUG3
 #include "board.h"
 #include "subject.h"
 
@@ -209,7 +210,13 @@ string Board::play(){
         }
     }
     if (moveResult == "continue!"){
-        setScore(level->calculateScore(clearRows()));
+        //setScore(level->calculateScore(clearRows()));
+#ifdef DEBUG3
+    int i = level->calculateScore(clearRows());
+    cout << "new score is : " <<i << endl;
+    setScore (i);
+    cout << ""<<endl;
+#endif
         return "continue!";
     } else if (moveResult == "restart!") {
         return "restart!";
@@ -466,6 +473,9 @@ int Board::clearRows() {
             // clear empty blocks.
             for (int i = 0; (unsigned)i < blocks.size(); ++i) {
                 if (blocks.at(i)->getCells().size() == 0) {
+#ifdef DEBUG3
+    cout << "BlockCleared!!!"<<endl;
+#endif
                     score += (blocks.at(i)->getSpawnLevel()+1)*(blocks.at(i)->getSpawnLevel()+1);
                     blocks.erase(blocks.begin()+i);
                     --i;
