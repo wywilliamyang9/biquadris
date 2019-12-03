@@ -135,28 +135,28 @@ void GraphicalDisplay::display() {
 }
 
 void GraphicalDisplay::displayLevel() {
-    window.fillRectangle(25, 25, 100, 25, Xwindow::White);
+    window.fillRectangle(0, 0, 350, 50, Xwindow::White);
 	string level = "LEVEL: " + to_string(levels[0]);
     window.drawString(25, 25, level);
-    window.fillRectangle(375, 25, 100, 25, Xwindow::White);
+    window.fillRectangle(375, 0, 350, 50, Xwindow::White);
     level =  "LEVEL: " + to_string(levels[1]);
     window.drawString(375, 25, level);
 }
 
 void GraphicalDisplay::displayHighScore() {	
-    window.fillRectangle(25, 50, 100, 25, Xwindow::White);
+    window.fillRectangle(25, 50, 350, 25, Xwindow::White);
     string hiscore = "HISCORE: " + to_string(scores[2]);
     window.drawString(25, 50, hiscore);
-    window.fillRectangle(375, 50, 100, 25, Xwindow::White);
+    window.fillRectangle(375, 50, 350, 25, Xwindow::White);
     hiscore =  "HISCORE: " + to_string(scores[2]);
     window.drawString(375, 50, hiscore);
 }
 
 void GraphicalDisplay::displayScore() {
-    window.fillRectangle(25, 75, 100, 25, Xwindow::White);
+    window.fillRectangle(25, 75, 350, 25, Xwindow::White);
     string score = "SCORE: " + to_string(scores[0]);
     window.drawString(25, 75, score);
-    window.fillRectangle(375, 75, 100, 25, Xwindow::White);
+    window.fillRectangle(375, 75, 350, 25, Xwindow::White);
     score =  "SCORE: " + to_string(scores[1]);
     window.drawString(375, 75, score);
 }
