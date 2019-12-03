@@ -156,7 +156,7 @@ cout << "go down check: i is " << i << endl;
 		cells = newCells;
 		for (int i = 0; i < heavy; ++i) moveDownByOne(playerBoard);
 	}
-}
+}	
 
 void Block::setSpawnLevel(int i) {spawnLevel = i;}
 int Block::getSpawnLevel() {return spawnLevel;}
