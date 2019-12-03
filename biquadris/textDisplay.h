@@ -5,6 +5,7 @@
 #include "coordinates.h"
 #include "info.h"
 #include <vector>
+#include <string>
 #include "nextBlock.h"
 #include "observer.h"
 
@@ -23,7 +24,7 @@ class TextDisplay : public Observer {
     void printHighScore();
     void printScore();
     void printBoards();
-    string printBlock(char type, int line);
+    std::string printBlock(char type, int line);
     void printNextBlock();
     void printHeldBlock();
     public:
