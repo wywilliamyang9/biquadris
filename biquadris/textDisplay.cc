@@ -1,5 +1,5 @@
 //#define DEBUG
-
+#define DEBUG2
 #include "textDisplay.h"
 #include "info.h"
 #include <iostream>
@@ -7,7 +7,7 @@
 #include <vector>
 using namespace std;
 
-TextDisplay::TextDisplay(){
+TextDisplay::TextDisplay(bool printheld): printheld{printheld}{
     //theDisplay.clear();
     for (int i = 0; i < gridHeight; ++i){
         vector<char> temp1;
@@ -26,6 +26,7 @@ TextDisplay::TextDisplay(){
     for(int i = 0; i < 2; i++){
 		levels.emplace_back(0);
         nextblock.emplace_back('A');
+        heldblock.emplace_back('A');
 	}
 }
 
@@ -48,6 +49,17 @@ void TextDisplay::notify(Subject &whoNotified) {
         } else {
             board2[currinfo.coord.row][currinfo.coord.col] = convertColour(currinfo.colour);
         }
+    }
+}
+
+void TextDisplay::updateHeldBlock(NextBlock heldBlockInfo){
+    #ifdef DEBUG
+    cout << "TextDisplay::updateHeldBlock"<<endl;
+#endif
+    if (heldBlockInfo.boardnum == 1){
+        heldblock[0] = convertColour(heldBlockInfo.colour);
+    } else if (heldBlockInfo.boardnum == 2){
+        heldblock[1] = convertColour(heldBlockInfo.colour);
     }
 }
 
@@ -109,6 +121,9 @@ void TextDisplay::print() {
 	printBoards();
 	cout << "-----------   -----------" << endl;
 	printNextBlock();
+    if (printheld){
+        printHeldBlock();
+    }
 #ifdef DEBUG
     cout << "TextDisplay::print() ends"<<endl;
 #endif
@@ -189,3 +204,10 @@ void TextDisplay::printNextBlock() {
     cout << printBlock(nextblock[0], 1) << "          " << printBlock(nextblock[1], 1) << endl;
     cout << printBlock(nextblock[0], 2) << "          " << printBlock(nextblock[1], 2) << endl;
 }
+
+void TextDisplay::printHeldBlock() {
+	cout << "Held:         Held:" << endl;
+    cout << printBlock(heldblock[0], 1) << "          " << printBlock(heldblock[1], 1) << endl;
+    cout << printBlock(heldblock[0], 2) << "          " << printBlock(heldblock[1], 2) << endl;
+}
+

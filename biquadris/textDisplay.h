@@ -17,14 +17,18 @@ class TextDisplay : public Observer {
     std::vector<int> scores;
     std::vector<int> levels;
     std::vector<char> nextblock;
+    std::vector<char> heldblock;
+    bool printheld;
     void printLevel();
     void printHighScore();
     void printScore();
     void printBoards();
     void printNextBlock();
+    void printHeldBlock();
     public:
-    TextDisplay();
+    TextDisplay(bool printheld = false);
     void notify(Subject &whoNotified) override;
+    void updateHeldBlock(NextBlock heldBlockInfo);
     void updateNextBlock(NextBlock nextBlockInfo) override;
     void updateScore(std::vector<int> scores)override;
     void updateScore(int newScore, int boardnum) override;

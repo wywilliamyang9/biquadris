@@ -11,14 +11,14 @@
 
 using namespace std;
 
-Game::Game(bool textOnly, int seed, string scriptFile1, string scriptFile2, int startLevel)
-:td{new TextDisplay{}},gd{nullptr}, board1{nullptr},board2{nullptr}, textOnly{textOnly},
-seed{seed}, scriptFile1{scriptFile1}, scriptFile2{scriptFile2}, startLevel{startLevel} {
+Game::Game(bool textOnly, int seed, string scriptFile1, string scriptFile2, int startLevel, bool special)
+:td{new TextDisplay{special}},gd{nullptr}, board1{nullptr},board2{nullptr}, textOnly{textOnly},
+seed{seed}, scriptFile1{scriptFile1}, scriptFile2{scriptFile2}, startLevel{startLevel}, special{special}{
 #ifdef DEBUG
     cout << "Game ctor starts"<<endl;
 #endif
 	if (!textOnly){
-		gd.reset( new GraphicalDisplay{});
+		gd.reset( new GraphicalDisplay{special});
 	}
     
 	board1.reset(new Board{1,td.get(), gd.get(), textOnly, seed, scriptFile1, startLevel});
@@ -129,8 +129,8 @@ void Game::reset(){
     cout << "Game reset starts"<<endl;
 #endif
 
-    td.reset(new TextDisplay);
-    if(!textOnly)gd.reset(new GraphicalDisplay);
+    td.reset(new TextDisplay{special});
+    if(!textOnly)gd.reset(new GraphicalDisplay{special});
     board1.reset(new Board(1,td.get(), gd.get(), textOnly, seed, scriptFile1, startLevel));
     board2.reset(new Board(2,td.get(), gd.get(), textOnly, seed, scriptFile2, startLevel));
     scores[0] = 0;

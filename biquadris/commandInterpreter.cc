@@ -115,9 +115,9 @@ CommandInterpreter::CommandInterpreter() {
     cmdDictionary["forc"] = Command::Force;
     cmdDictionary["force"] = Command::Force;
 
-    cmdDictionary["ho"] = Command::Heavy;
-    cmdDictionary["hol"] = Command::Heavy;
-    cmdDictionary["hold"] = Command::Heavy;
+    cmdDictionary["ho"] = Command::Hold;
+    cmdDictionary["hol"] = Command::Hold;
+    cmdDictionary["hold"] = Command::Hold;
 }
 
 void CommandInterpreter::addNewCMD(string s,Command cmd){

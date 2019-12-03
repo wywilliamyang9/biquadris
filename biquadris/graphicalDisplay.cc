@@ -8,7 +8,7 @@
 #include <vector>
 using namespace std;
 
-GraphicalDisplay::GraphicalDisplay(){
+GraphicalDisplay::GraphicalDisplay(bool printheld): printheld{printheld}{
     //theDisplay.clear();
     for (int i = 0; i < gridHeight; ++i){
 #ifdef DEBUG
@@ -30,6 +30,7 @@ cout << "graphical display created" << endl;
     for(int i = 0; i < 2; i++){
 		levels.emplace_back(0);
         nextblock.emplace_back('A');
+        heldblock.emplace_back('A');
 	}
 }
 
@@ -77,6 +78,14 @@ void GraphicalDisplay::notify(Subject &whoNotified) {
         } else {
             board2[currinfo.coord.row][currinfo.coord.col] = converttoXColour(currinfo.colour);
         }
+    }
+}
+
+void GraphicalDisplay::updateHeldBlock(NextBlock heldBlockInfo){
+    if (heldBlockInfo.boardnum == 1){
+        heldblock[0] = convertColour(heldBlockInfo.colour);
+    } else if (heldBlockInfo.boardnum == 2){
+        heldblock[1] = convertColour(heldBlockInfo.colour);
     }
 }
 
@@ -128,6 +137,9 @@ void GraphicalDisplay::display() {
 	displayScore();
 	displayBoards();
 	displayNextBlock();
+    if (printheld){
+        displayHeldBlock();
+    }
     
 #ifdef DEBUG
     cout << "GraphicalDisplay::display() ends"<<endl;
@@ -174,52 +186,63 @@ void GraphicalDisplay::displayBoards() {
     }
 }
 
-void GraphicalDisplay::displayBlock(char type, int boardnum){
+void GraphicalDisplay::displayBlock(char type, int boardnum, bool held){
     int num = 25;
     if (boardnum == 2){
         num = 375;
     }
+    int num2 = 0;
+    if (held){
+        num2 = 125;
+    }
     if (type == 'I'){
-        window.fillRectangle(10 + num, 25 + 550, 25,25, converttoXColour(convertChar(type)));
-        window.fillRectangle(35 + num, 25 + 550, 25,25, converttoXColour(convertChar(type)));
-        window.fillRectangle(60 + num, 25 + 550, 25,25, converttoXColour(convertChar(type)));
-        window.fillRectangle(85 + num, 25 + 550, 25,25, converttoXColour(convertChar(type)));
+        window.fillRectangle(10 + num + num2, 25 + 550, 25,25, converttoXColour(convertChar(type)));
+        window.fillRectangle(35 + num + num2, 25 + 550, 25,25, converttoXColour(convertChar(type)));
+        window.fillRectangle(60 + num + num2, 25 + 550, 25,25, converttoXColour(convertChar(type)));
+        window.fillRectangle(85 + num + num2, 25 + 550, 25,25, converttoXColour(convertChar(type)));
     } else if (type == 'J'){
-        window.fillRectangle(10 + num, 12 + 550, 25,25, converttoXColour(convertChar(type)));
-        window.fillRectangle(10 + num, 37 + 550, 25,25, converttoXColour(convertChar(type)));
-        window.fillRectangle(35 + num, 37 + 550, 25,25, converttoXColour(convertChar(type)));
-        window.fillRectangle(60 + num, 37 + 550, 25,25, converttoXColour(convertChar(type)));
+        window.fillRectangle(10 + num + num2, 12 + 550, 25,25, converttoXColour(convertChar(type)));
+        window.fillRectangle(10 + num + num2, 37 + 550, 25,25, converttoXColour(convertChar(type)));
+        window.fillRectangle(35 + num + num2, 37 + 550, 25,25, converttoXColour(convertChar(type)));
+        window.fillRectangle(60 + num + num2, 37 + 550, 25,25, converttoXColour(convertChar(type)));
     } else if (type == 'L'){
-        window.fillRectangle(60 + num, 12 + 550, 25,25, converttoXColour(convertChar(type)));
-        window.fillRectangle(10 + num, 37 + 550, 25,25, converttoXColour(convertChar(type)));
-        window.fillRectangle(35 + num, 37 + 550, 25,25, converttoXColour(convertChar(type)));
-        window.fillRectangle(60 + num, 37 + 550, 25,25, converttoXColour(convertChar(type)));
+        window.fillRectangle(60 + num + num2, 12 + 550, 25,25, converttoXColour(convertChar(type)));
+        window.fillRectangle(10 + num + num2, 37 + 550, 25,25, converttoXColour(convertChar(type)));
+        window.fillRectangle(35 + num + num2, 37 + 550, 25,25, converttoXColour(convertChar(type)));
+        window.fillRectangle(60 + num + num2, 37 + 550, 25,25, converttoXColour(convertChar(type)));
     } else if (type == 'O'){
-        window.fillRectangle(10 + num, 12 + 550, 25,25, converttoXColour(convertChar(type)));
-        window.fillRectangle(35 + num, 12 + 550, 25,25, converttoXColour(convertChar(type)));
-        window.fillRectangle(10 + num, 37 + 550, 25,25, converttoXColour(convertChar(type)));
-        window.fillRectangle(35 + num, 37 + 550, 25,25, converttoXColour(convertChar(type)));
+        window.fillRectangle(10 + num + num2, 12 + 550, 25,25, converttoXColour(convertChar(type)));
+        window.fillRectangle(35 + num + num2, 12 + 550, 25,25, converttoXColour(convertChar(type)));
+        window.fillRectangle(10 + num + num2, 37 + 550, 25,25, converttoXColour(convertChar(type)));
+        window.fillRectangle(35 + num + num2, 37 + 550, 25,25, converttoXColour(convertChar(type)));
     } else if (type == 'Z'){
-        window.fillRectangle(10 + num, 12 + 550, 25,25, converttoXColour(convertChar(type)));
-        window.fillRectangle(35 + num, 12 + 550, 25,25, converttoXColour(convertChar(type)));
-        window.fillRectangle(35 + num, 37 + 550, 25,25, converttoXColour(convertChar(type)));
-        window.fillRectangle(60 + num, 37 + 550, 25,25, converttoXColour(convertChar(type)));
+        window.fillRectangle(10 + num + num2, 12 + 550, 25,25, converttoXColour(convertChar(type)));
+        window.fillRectangle(35 + num + num2, 12 + 550, 25,25, converttoXColour(convertChar(type)));
+        window.fillRectangle(35 + num + num2, 37 + 550, 25,25, converttoXColour(convertChar(type)));
+        window.fillRectangle(60 + num + num2, 37 + 550, 25,25, converttoXColour(convertChar(type)));
     } else if (type == 'S'){
-        window.fillRectangle(35 + num, 12 + 550, 25,25, converttoXColour(convertChar(type)));
-        window.fillRectangle(60 + num, 12 + 550, 25,25, converttoXColour(convertChar(type)));
-        window.fillRectangle(10 + num, 37 + 550, 25,25, converttoXColour(convertChar(type)));
-        window.fillRectangle(35 + num, 37 + 550, 25,25, converttoXColour(convertChar(type)));
+        window.fillRectangle(35 + num + num2, 12 + 550, 25,25, converttoXColour(convertChar(type)));
+        window.fillRectangle(60 + num + num2, 12 + 550, 25,25, converttoXColour(convertChar(type)));
+        window.fillRectangle(10 + num + num2, 37 + 550, 25,25, converttoXColour(convertChar(type)));
+        window.fillRectangle(35 + num + num2, 37 + 550, 25,25, converttoXColour(convertChar(type)));
     } else if (type == 'T'){
-        window.fillRectangle(10 + num, 12 + 550, 25,25, converttoXColour(convertChar(type)));
-        window.fillRectangle(35 + num, 12 + 550, 25,25, converttoXColour(convertChar(type)));
-        window.fillRectangle(60 + num, 12 + 550, 25,25, converttoXColour(convertChar(type)));
-        window.fillRectangle(35 + num, 37 + 550, 25,25, converttoXColour(convertChar(type)));
+        window.fillRectangle(10 + num + num2, 12 + 550, 25,25, converttoXColour(convertChar(type)));
+        window.fillRectangle(35 + num + num2, 12 + 550, 25,25, converttoXColour(convertChar(type)));
+        window.fillRectangle(60 + num + num2, 12 + 550, 25,25, converttoXColour(convertChar(type)));
+        window.fillRectangle(35 + num + num2, 37 + 550, 25,25, converttoXColour(convertChar(type)));
     }
 }
 
 void GraphicalDisplay::displayNextBlock() {
     window.fillRectangle(10, 550, 125, 75, Xwindow::Black);
     window.fillRectangle(375, 550, 125, 75, Xwindow::Black);
-    displayBlock(nextblock[0], 1);
-    displayBlock(nextblock[1], 2);
+    displayBlock(nextblock[0], 1, false);
+    displayBlock(nextblock[1], 2, false);
+}
+
+void GraphicalDisplay::displayHeldBlock() {
+    window.fillRectangle(145, 550, 125, 75, Xwindow::White);
+    window.fillRectangle(500, 550, 125, 75, Xwindow::White);
+    displayBlock(heldblock[0], 1, true);
+    displayBlock(heldblock[1], 2, true);
 }

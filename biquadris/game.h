@@ -13,7 +13,6 @@ class Game{
     std::unique_ptr<TextDisplay> td;
     std::unique_ptr<GraphicalDisplay> gd;
     //Observer<State> observers;
-
     std::unique_ptr<Board> board1;
     std::unique_ptr<Board> board2;
     // player scores: 0 is player1, 1 is player2, 2 is hi
@@ -25,9 +24,10 @@ class Game{
     std::string scriptFile1;
     std::string scriptFile2;
     int startLevel;
+    bool special;
 
     public:
-    Game(bool textOnly, int seed, std::string scriptFile1, std::string scriptFile2, int startLevel);
+    Game(bool textOnly, int seed, std::string scriptFile1, std::string scriptFile2, int startLevel, bool special);
     // sets scores
 	void updateInfo();
     ~Game() = default;

@@ -20,15 +20,19 @@ class GraphicalDisplay : public Observer {
     std::vector<int> scores;
     std::vector<int> levels;
     std::vector<char> nextblock;
+    std::vector<char> heldblock;
+    bool printheld;
     void displayLevel();
     void displayHighScore();
     void displayScore();
     void displayBoards();
-    void displayBlock(char type, int boardnum);
+    void displayBlock(char type, int boardnum, bool held);
     void displayNextBlock();
+    void displayHeldBlock();
     public:
-    GraphicalDisplay();
+    GraphicalDisplay(bool printheld = false);
     void notify(Subject &whoNotified) override;
+    void updateHeldBlock(NextBlock heldBlockInfo);
     void updateNextBlock(NextBlock nextBlockInfo) override;
     void updateScore(std::vector<int> scores) override;
     void updateScore(int newScore, int boardnum) override;

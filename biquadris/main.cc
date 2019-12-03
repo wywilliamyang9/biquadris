@@ -8,6 +8,7 @@ int main(int argc, char *argv[]){
     argc = argc - 1;
     int seed = 0;
     bool textOnly = false;
+    bool special = false;
     string scriptFile1 = "biquadris_sequence1.txt";
     string scriptFile2 = "biquadris_sequence2.txt";
     int startLevel = 0;
@@ -39,9 +40,11 @@ int main(int argc, char *argv[]){
             if (!(temp >> startLevel)){
             }
             i++;
+        } else if (tmparg == "-special"){
+            special = true;
         }
     }
     //std::unique_ptr<Game> game = make_unique<Game>(textOnly, seed, scriptFile1, scriptFile1, startLevel);
-    unique_ptr<Game> game = make_unique<Game>(textOnly, seed, scriptFile1, scriptFile2, startLevel);
+    unique_ptr<Game> game = make_unique<Game>(textOnly, seed, scriptFile1, scriptFile2, startLevel, special );
     game->play();
 }
