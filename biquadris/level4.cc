@@ -97,6 +97,7 @@ void Level4::setSequence(std::string filename) {
 }
 
 int Level4::calculateScore(int rowsCleared) {
+	if (rowsCleared == 0) return 0;
 	int linesClearScore = rowsCleared + level;
 	linesClearScore = linesClearScore * linesClearScore;
 	return linesClearScore;
