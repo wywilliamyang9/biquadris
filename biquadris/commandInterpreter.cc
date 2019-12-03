@@ -2,19 +2,15 @@
 using namespace std;
 
 CommandInterpreter::CommandInterpreter() {
-    cmdDictionary["c"] = Command::Left;
     cmdDictionary["lef"] = Command::Left;
     cmdDictionary["left"] = Command::Left;
-    cmdDictionary["b"] = Command::Right;
     cmdDictionary["ri"] = Command::Right;
     cmdDictionary["rig"] = Command::Right;
     cmdDictionary["righ"] = Command::Right;
     cmdDictionary["right"] = Command::Right;
-    cmdDictionary["v"] = Command::Down;
     cmdDictionary["do"] = Command::Down;
     cmdDictionary["dow"] = Command::Down;
     cmdDictionary["down"] = Command::Down;
-    cmdDictionary["f"] = Command::ClockWise;
     cmdDictionary["cl"] = Command::ClockWise;
     cmdDictionary["clo"] = Command::ClockWise;
     cmdDictionary["cloc"] = Command::ClockWise;
@@ -23,7 +19,6 @@ CommandInterpreter::CommandInterpreter() {
     cmdDictionary["clockwi"] = Command::ClockWise;
     cmdDictionary["clockwis"] = Command::ClockWise;
     cmdDictionary["clockwise"] = Command::ClockWise;
-    cmdDictionary["g"] = Command::CounterClockWise;
     cmdDictionary["co"] = Command::CounterClockWise;
     cmdDictionary["cou"] = Command::CounterClockWise;
     cmdDictionary["coun"] = Command::CounterClockWise;

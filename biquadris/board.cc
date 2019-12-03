@@ -220,7 +220,7 @@ string Board::play(){
         }
     }
     if (moveResult == "continue!"){
-        //setScore(level->calculateScore(clearRows()));
+        setScore(level->calculateScore(clearRows()));
 #ifdef DEBUG3
     int i = level->calculateScore(clearRows());
     cout << "new score is : " <<i << endl;
@@ -235,6 +235,15 @@ string Board::play(){
     }
     return "continue!";
 }
+
+void Board::clearCurrBlock(){
+    for(int i = 0; i < 4; i++){
+        currBlock->getCells().at(i)->setCurrBlock(false);
+        currBlock->getCells().at(i)->setColour(Colour::White);
+        currBlock->getCells().at(i)->dettach(currBlock.get());
+    }
+}
+
 // moves the block until it drops
 string Board::moveBlock() {
 #ifdef DEBUG
@@ -347,11 +356,7 @@ for (int i = 0; i < 18; i++) {
                 return "restart!";
             } else if (cmdDictionary->interpretCMD(cmd) == Command::I) {
                 level->forceBlock(convertString("I"));
-                for(int i = 0; i < 4; i++){
-                    currBlock->getCells().at(i)->setCurrBlock(false);
-                    currBlock->getCells().at(i)->setColour(Colour::White);
-                    currBlock->getCells().at(i)->dettach(currBlock.get());
-                }
+                clearCurrBlock();
                 BlockInfo newBlockInfo = level->generateNextBlock();
                 currBlock.reset(createIBlock(newBlockInfo));
                 int num = rand()%2;
@@ -360,11 +365,7 @@ for (int i = 0; i < 18; i++) {
                 }
             } else if (cmdDictionary->interpretCMD(cmd) == Command::J) {
                 level->forceBlock(convertString("J")); 
-                for(int i = 0; i < 4; i++){
-                    currBlock->getCells().at(i)->setCurrBlock(false);
-                    currBlock->getCells().at(i)->setColour(Colour::White);
-                    currBlock->getCells().at(i)->dettach(currBlock.get());
-                }
+                clearCurrBlock();
                 BlockInfo newBlockInfo = level->generateNextBlock();
                 currBlock.reset(createJBlock(newBlockInfo));
                 int num = rand()%4;
@@ -373,11 +374,7 @@ for (int i = 0; i < 18; i++) {
                 }
             } else if (cmdDictionary->interpretCMD(cmd) == Command::L) {
                 level->forceBlock(convertString("L"));
-                for(int i = 0; i < 4; i++){
-                    currBlock->getCells().at(i)->setCurrBlock(false);
-                    currBlock->getCells().at(i)->setColour(Colour::White);
-                    currBlock->getCells().at(i)->dettach(currBlock.get());
-                }
+                clearCurrBlock();
                 BlockInfo newBlockInfo = level->generateNextBlock();
                 currBlock.reset(createLBlock(newBlockInfo));        
                 int num = rand()%4;
@@ -386,20 +383,12 @@ for (int i = 0; i < 18; i++) {
                 }
             } else if (cmdDictionary->interpretCMD(cmd) == Command::O) {
                 level->forceBlock(convertString("O"));
-                for(int i = 0; i < 4; i++){
-                    currBlock->getCells().at(i)->setCurrBlock(false);
-                    currBlock->getCells().at(i)->setColour(Colour::White);
-                    currBlock->getCells().at(i)->dettach(currBlock.get());
-                }
+                clearCurrBlock();
                 BlockInfo newBlockInfo = level->generateNextBlock();
                 currBlock.reset(createOBlock(newBlockInfo));
             } else if (cmdDictionary->interpretCMD(cmd) == Command::S) {
                 level->forceBlock(convertString("S"));
-                for(int i = 0; i < 4; i++){
-                    currBlock->getCells().at(i)->setCurrBlock(false);
-                    currBlock->getCells().at(i)->setColour(Colour::White);
-                    currBlock->getCells().at(i)->dettach(currBlock.get());
-                }
+                clearCurrBlock();
                 BlockInfo newBlockInfo = level->generateNextBlock();
                 currBlock.reset(createSBlock(newBlockInfo));
                 int num = rand()%2;
@@ -408,11 +397,7 @@ for (int i = 0; i < 18; i++) {
                 }
             } else if (cmdDictionary->interpretCMD(cmd) == Command::Z) {
                 level->forceBlock(convertString("Z"));
-                for(int i = 0; i < 4; i++){
-                    currBlock->getCells().at(i)->setCurrBlock(false);
-                    currBlock->getCells().at(i)->setColour(Colour::White);
-                    currBlock->getCells().at(i)->dettach(currBlock.get());
-                }
+                clearCurrBlock();
                 BlockInfo newBlockInfo = level->generateNextBlock();
                 currBlock.reset(createZBlock(newBlockInfo));
                 int num = rand()%2;
@@ -421,11 +406,7 @@ for (int i = 0; i < 18; i++) {
                 }
             } else if (cmdDictionary->interpretCMD(cmd) == Command::T) {
                 level->forceBlock(convertString("T"));
-                for(int i = 0; i < 4; i++){
-                    currBlock->getCells().at(i)->setCurrBlock(false);
-                    currBlock->getCells().at(i)->setColour(Colour::White);
-                    currBlock->getCells().at(i)->dettach(currBlock.get());
-                }
+                clearCurrBlock();
                 BlockInfo newBlockInfo = level->generateNextBlock(); 
                 currBlock.reset(createTBlock(newBlockInfo));
                 int num = rand()%4;
@@ -436,21 +417,13 @@ for (int i = 0; i < 18; i++) {
                 if (special){
                     if (heldBlockColour == Colour::White){
                         heldBlockColour = currBlock->getColour();
-                        for(int i = 0; i < 4; i++){
-                            currBlock->getCells().at(i)->setCurrBlock(false);
-                            currBlock->getCells().at(i)->setColour(Colour::White);
-                            currBlock->getCells().at(i)->dettach(currBlock.get());
-                        }
+                
                     } else {
                         level->forceBlock(heldBlockColour);
                         heldBlockColour = currBlock->getColour();
-                        for(int i = 0; i < 4; i++){
-                            currBlock->getCells().at(i)->setCurrBlock(false);
-                            currBlock->getCells().at(i)->setColour(Colour::White);
-                            currBlock->getCells().at(i)->dettach(currBlock.get());
-                        }
 
-                    }                    
+                    }
+                    clearCurrBlock();                    
                     BlockInfo newBlockInfo = level->generateNextBlock(); 
                     if (newBlockInfo.colour == convertChar('I')){
                         currBlock.reset(createIBlock(newBlockInfo));

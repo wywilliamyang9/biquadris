@@ -84,6 +84,7 @@ void Game::play(){
             currplayer = board2.get();
         } else if (gamestate == "lost!"){
             if (currplayer == board1.get()){
+                if (!textOnly) gd->displayWinner("Player 2");
                 cout << "Player 2 wins" << endl;
                 cout << "Player 2 wins" << endl;
                 cout << "Player 2 wins" << endl;
@@ -94,6 +95,7 @@ void Game::play(){
                 cout << "Player 2 wins" << endl;
                 cout << "Player 2 wins" << endl;
             } else {
+                if (!textOnly) gd->displayWinner("Player 1");
 				cout << "Player 1 wins" << endl;
 				cout << "Player 1 wins" << endl;
 				cout << "Player 1 wins" << endl;
@@ -137,8 +139,8 @@ void Game::reset(){
     scores[1] = 0;
     levels[0] = startLevel;
     levels[1] = startLevel;
-    td->print();
-    if (!textOnly) gd->display();
+    //td->print();
+    //if (!textOnly) gd->display();
 #ifdef DEBUG
     cout << "Game::reset() updates scores " << scores.at(0)<<scores.at(1) << scores.at(2)<<endl;
 #endif

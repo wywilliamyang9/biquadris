@@ -7,6 +7,7 @@
 #include <vector>
 #include "nextBlock.h"
 #include "observer.h"
+#include <string>
 
 class Block;
 class GraphicalDisplay : public Observer {
@@ -38,6 +39,7 @@ class GraphicalDisplay : public Observer {
     void updateScore(int newScore, int boardnum) override;
     void updateLevel(std::vector<int> levels) override;
     void updateLevel(int newLevel, int boardnum) override;
+    void displayWinner(std::string winner);
     void display();
 };
 

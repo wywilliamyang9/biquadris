@@ -186,6 +186,13 @@ void GraphicalDisplay::displayBoards() {
     }
 }
 
+void GraphicalDisplay::displayWinner(string winner) {
+     window.fillRectangle(125, 200, 425, 275, Xwindow::White);
+    string winstr = "WINNER: " + winner;
+    window.drawString(280, 337, winstr);
+}
+
+
 void GraphicalDisplay::displayBlock(char type, int boardnum, bool held){
     int num = 15;
     if (boardnum == 2){

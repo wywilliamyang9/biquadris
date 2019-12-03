@@ -64,6 +64,8 @@ class Board {
     int textOnly;
     std::vector<std::unique_ptr<Block>> blocks;
     bool special;
+    void clearCurrBlock();
+
     public:
 	Level* getLevelptr();
 

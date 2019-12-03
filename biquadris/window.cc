@@ -80,7 +80,3 @@ void Xwindow::drawString(int x, int y, string msg) {
 	XDrawString(d, w, DefaultGC(d, s), x, y, msg.c_str(), msg.length());
 	XFlush(d);
 }
-
-void Xwindow::drawLine(int x1, int y1, int x2, int y2) {
-	    XDrawLine(d, w, gc, x1, y1, x2, y2);
-}

@@ -24,10 +24,6 @@ public:
 
 	// Draws a string
 	void drawString(int x, int y, std::string msg);
-
-	// Draws a line from (x1, y1) to (x2, y2)
-	void drawLine(int x1, int y1, int x2, int y2);
-
 };
 
 #endif
