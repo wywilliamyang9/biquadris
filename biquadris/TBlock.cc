@@ -10,18 +10,23 @@ int heavy, Colour colour,int spawnLevel): Block{c1,c2,c3,c4,heavy,colour,spawnLe
 void TBlock::CWRotate(Board & playerBoard) {
     if (state == 1) {
         Info i0 = cells.at(0)->getinfo();
+        Info i1 = cells.at(1)->getinfo();
+        Info i2 = cells.at(2)->getinfo();
+        Info i3 = cells.at(3)->getinfo();
+
+        bool canRotate = 1;
+        if (playerBoard.getBoard().at(i0.coord.row-1).at(i0.coord.col+1).
+        getColour() != Colour::White) canRotate = 0;
+        if (!canRotate) return;
+
 		playerBoard.getBoard().at(i0.coord.row-1).at(i0.coord.col+1).
         setColour(i0.colour);
         cells.at(0)->setColour(Colour::White);       
 
-        Info i1 = cells.at(1)->getinfo();
-
-        Info i3 = cells.at(3)->getinfo();
         playerBoard.getBoard().at(i3.coord.row-1).at(i3.coord.col-1).
         setColour(i3.colour); 
         cells.at(3)->setColour(Colour::White);
 
-        Info i2 = cells.at(2)->getinfo();
         playerBoard.getBoard().at(i2.coord.row+1).at(i2.coord.col-1).
         setColour(i2.colour); 
         cells.at(2)->setColour(Colour::White);
@@ -45,26 +50,35 @@ void TBlock::CWRotate(Board & playerBoard) {
         cells = newCells;
         state = 2;
     } else if (state == 2) {
+
         Info i0 = cells.at(0)->getinfo();
+        Info i2 = cells.at(2)->getinfo();
+        Info i1 = cells.at(1)->getinfo();
+        Info i3 = cells.at(3)->getinfo();
+
         // check if rotation is legit
         if (i0.coord.col == 10) return;
+
+        bool canRotate = 1;
+        if (playerBoard.getBoard().at(i2.coord.row).at(i2.coord.col-1).
+        getColour() != Colour::White) canRotate = 0;
+        if (playerBoard.getBoard().at(i0.coord.row+2).at(i0.coord.col+1).
+        getColour() != Colour::White) canRotate = 0;
+        if (!canRotate) return;
 
 		playerBoard.getBoard().at(i0.coord.row+2).at(i0.coord.col+1).
         setColour(i0.colour);
         cells.at(0)->setColour(Colour::White);
 
-        Info i2 = cells.at(2)->getinfo();
         playerBoard.getBoard().at(i2.coord.row).at(i2.coord.col-1).
         setColour(i2.colour); 
         cells.at(2)->setColour(Colour::White);
 
-        Info i1 = cells.at(1)->getinfo();
         playerBoard.getBoard().at(i1.coord.row+1).at(i1.coord.col).
         setColour(i1.colour); 
         cells.at(1)->setColour(Colour::White);
 
         // if rotation is legit.
-        Info i3 = cells.at(3)->getinfo();
         playerBoard.getBoard().at(i3.coord.row).at(i3.coord.col+1).
         setColour(i3.colour); 
         cells.at(3)->setColour(Colour::White);
@@ -89,19 +103,26 @@ void TBlock::CWRotate(Board & playerBoard) {
         state = 3;
     } else if (state == 3) {
         Info i3 = cells.at(3)->getinfo();
+        Info i2 = cells.at(2)->getinfo();
+        Info i1 = cells.at(1)->getinfo();
+        Info i0 = cells.at(0)->getinfo();
+
+        bool canRotate = 1;
+        if (playerBoard.getBoard().at(i1.coord.row-1).at(i1.coord.col-1).
+        getColour() != Colour::White) canRotate = 0;
+        if (playerBoard.getBoard().at(i2.coord.row-2).at(i2.coord.col).
+        getColour() != Colour::White) canRotate = 0;
+        if (!canRotate) return;
 
         // do not need to change cell 2
-        Info i2 = cells.at(2)->getinfo();
         playerBoard.getBoard().at(i2.coord.row-2).at(i2.coord.col).
         setColour(i2.colour); 
         cells.at(2)->setColour(Colour::White);
 
-        Info i1 = cells.at(1)->getinfo();
         playerBoard.getBoard().at(i1.coord.row-1).at(i1.coord.col-1).
         setColour(i1.colour); 
         cells.at(1)->setColour(Colour::White);
 
-        Info i0 = cells.at(0)->getinfo();
 		playerBoard.getBoard().at(i0.coord.row).at(i0.coord.col-2).
         setColour(i0.colour);
         cells.at(0)->setColour(Colour::White);
@@ -126,20 +147,28 @@ void TBlock::CWRotate(Board & playerBoard) {
         state = 4; 
     } else if (state == 4) {
         Info i0 = cells.at(0)->getinfo();
+        Info i1 = cells.at(1)->getinfo();
+        Info i2 = cells.at(2)->getinfo();
+        Info i3 = cells.at(3)->getinfo();
+
         // check if rotation is legit
         if (i0.coord.col == 9) return;
 
-        Info i3 = cells.at(3)->getinfo();
+        bool canRotate = 1;
+        if (playerBoard.getBoard().at(i3.coord.row+1).at(i3.coord.col).
+        getColour() != Colour::White) canRotate = 0;
+        if (playerBoard.getBoard().at(i2.coord.row+1).at(i2.coord.col+2).
+        getColour() != Colour::White) canRotate = 0;
+        if (!canRotate) return;
+
         playerBoard.getBoard().at(i3.coord.row+1).at(i3.coord.col).
         setColour(i3.colour);
         cells.at(3)->setColour(Colour::White);
 
-        Info i2 = cells.at(2)->getinfo();
         playerBoard.getBoard().at(i2.coord.row+1).at(i2.coord.col+2).
         setColour(i2.colour);
         cells.at(2)->setColour(Colour::White);
 
-        Info i1 = cells.at(1)->getinfo();
         playerBoard.getBoard().at(i1.coord.row).at(i1.coord.col+1).
         setColour(i1.colour); 
         cells.at(1)->setColour(Colour::White);
@@ -174,21 +203,29 @@ void TBlock::CWRotate(Board & playerBoard) {
 void TBlock::CounterCWRotate(Board &playerBoard) {
     if (state == 1) {
         Info i0 = cells.at(0)->getinfo();
+        Info i1 = cells.at(1)->getinfo();
+        Info i2 = cells.at(2)->getinfo();
+        Info i3 = cells.at(3)->getinfo();
+
+        bool canRotate = 1;
+        if (playerBoard.getBoard().at(i0.coord.row+1).at(i0.coord.col).
+        getColour() != Colour::White) canRotate = 0;
+        if (playerBoard.getBoard().at(i2.coord.row-1).at(i2.coord.col-2).
+        getColour() != Colour::White) canRotate = 0;
+        if (!canRotate) return;
+
 		playerBoard.getBoard().at(i0.coord.row+1).at(i0.coord.col).
         setColour(i0.colour);
         cells.at(0)->setColour(Colour::White);
 
-        Info i1 = cells.at(1)->getinfo();
         playerBoard.getBoard().at(i1.coord.row).at(i1.coord.col-1).
         setColour(i1.colour); 
         cells.at(1)->setColour(Colour::White);
         
-        Info i2 = cells.at(2)->getinfo();
         playerBoard.getBoard().at(i2.coord.row-1).at(i2.coord.col-2).
         setColour(i2.colour); 
         cells.at(2)->setColour(Colour::White);
 
-        Info i3 = cells.at(3)->getinfo();
         playerBoard.getBoard().at(i3.coord.row-1).at(i3.coord.col).
         setColour(i3.colour); 
         cells.at(3)->setColour(Colour::White);
@@ -217,15 +254,20 @@ void TBlock::CounterCWRotate(Board &playerBoard) {
         if (i0.coord.col == 10) return;
 
         // if rotation is legit.
-
         Info i1 = cells.at(1)->getinfo();
-
+        Info i3 = cells.at(3)->getinfo();
         Info i2 = cells.at(2)->getinfo();
+
+        bool canRotate = 1;
+        if (playerBoard.getBoard().at(i2.coord.row-1).at(i2.coord.col+1).
+        getColour() != Colour::White) canRotate = 0;
+        if (!canRotate) return;
+
+
         playerBoard.getBoard().at(i2.coord.row-1).at(i2.coord.col+1).
         setColour(i2.colour); 
         cells.at(2)->setColour(Colour::White);
 
-        Info i3 = cells.at(3)->getinfo();
         playerBoard.getBoard().at(i3.coord.row+1).at(i3.coord.col+1).
         setColour(i3.colour);
         cells.at(3)->setColour(Colour::White);
@@ -254,21 +296,29 @@ void TBlock::CounterCWRotate(Board &playerBoard) {
         state = 1;
     } else if (state == 3) {
         Info i0 = cells.at(0)->getinfo();
+        Info i3 = cells.at(3)->getinfo();
+        Info i1 = cells.at(1)->getinfo();
+        Info i2 = cells.at(2)->getinfo();
+
+        bool canRotate = 1;
+        if (playerBoard.getBoard().at(i3.coord.row).at(i3.coord.col-1).
+        getColour() != Colour::White) canRotate = 0;
+        if (playerBoard.getBoard().at(i0.coord.row-2).at(i0.coord.col-1).
+        getColour() != Colour::White) canRotate = 0;
+        if (!canRotate) return;
+
         playerBoard.getBoard().at(i0.coord.row-2).at(i0.coord.col-1).
         setColour(i0.colour);
         cells.at(0)->setColour(Colour::White);
 
-        Info i3 = cells.at(3)->getinfo();
         playerBoard.getBoard().at(i3.coord.row).at(i3.coord.col-1).
         setColour(i3.colour);
         cells.at(3)->setColour(Colour::White);
 
-        Info i1 = cells.at(1)->getinfo();
         playerBoard.getBoard().at(i1.coord.row-1).at(i1.coord.col).
         setColour(i1.colour); 
         cells.at(1)->setColour(Colour::White);
 
-        Info i2 = cells.at(2)->getinfo();
         playerBoard.getBoard().at(i2.coord.row).at(i2.coord.col+1).
         setColour(i2.colour);
         cells.at(2)->setColour(Colour::White);
@@ -293,25 +343,33 @@ void TBlock::CounterCWRotate(Board &playerBoard) {
         state = 2; 
     } else if (state == 4) { 
         Info i0 = cells.at(0)->getinfo();
+        Info i1 = cells.at(1)->getinfo();
+        Info i2 = cells.at(2)->getinfo();
+        Info i3 = cells.at(3)->getinfo();
+
         // check if rotation is legit
         if (i0.coord.col == 9) return;
+
+        bool canRotate = 1;
+        if (playerBoard.getBoard().at(i0.coord.row).at(i0.coord.col+2).
+        getColour() != Colour::White) canRotate = 0;
+        if (playerBoard.getBoard().at(i1.coord.row+1).at(i1.coord.col+1).
+        getColour() != Colour::White) canRotate = 0;
+        if (!canRotate) return;
 
         playerBoard.getBoard().at(i0.coord.row).at(i0.coord.col+2).
         setColour(i0.colour);
         cells.at(0)->setColour(Colour::White);
 
-        Info i1 = cells.at(1)->getinfo();
         playerBoard.getBoard().at(i1.coord.row+1).at(i1.coord.col+1).
         setColour(i1.colour); 
         cells.at(1)->setColour(Colour::White);
 
-        Info i2 = cells.at(2)->getinfo();
         playerBoard.getBoard().at(i2.coord.row+2).at(i2.coord.col).
         setColour(i2.colour);
         cells.at(2)->setColour(Colour::White);
 
         // do nothing for cell 2.
-        Info i3 = cells.at(3)->getinfo();
 
         vector<Cell*> newCells;
         newCells.emplace_back(
