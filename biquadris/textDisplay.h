@@ -29,11 +29,11 @@ class TextDisplay : public Observer {
     TextDisplay(bool printheld = false);
     void notify(Subject &whoNotified) override;
     void updateHeldBlock(NextBlock heldBlockInfo);
-    void updateNextBlock(NextBlock nextBlockInfo) override;
-    void updateScore(std::vector<int> scores)override;
-    void updateScore(int newScore, int boardnum) override;
-    void updateLevel(std::vector<int> levels)override;
-    void updateLevel(int newLevel, int boardnum)override;
+    void updateNextBlock(NextBlock nextBlockInfo);
+    void updateScore(std::vector<int> scores);
+    void updateScore(int newScore, int boardnum);
+    void updateLevel(std::vector<int> levels);
+    void updateLevel(int newLevel, int boardnum);
     void print();
 };
 
