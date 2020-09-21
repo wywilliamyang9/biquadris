@@ -4,6 +4,10 @@
 We designed and implemented Biquadris, a Latinization of the game Tetris. In the overview section of this README.md, we will introduce the overall structure of the program. We
 will introduce three major sections of the game, as well as their relationships with the minor sections. The program starts running from the main function. The main function is used to read the arguments for most of its parts. Near the end of the main function, it creates a Game object, passes the parameter it reads to the Game object. That being said, the responsibility of the main functions is limited to only read in the parameters. The control flow of the game is handled by the Game object it owns. After the construction of the Game object, it calls the play() method of the Game object.
 
+
+<img src="Demo1.jpg" width="600">
+
+
 ### Three major Sections
 
 The Game object is the first major section of the program. It is responsible for switching between the two players, and tracks information that is in a higher scope of what
